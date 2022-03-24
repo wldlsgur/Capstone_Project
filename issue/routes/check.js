@@ -15,18 +15,18 @@ router.get('/login', function(req, res){
     connection.connect ();
     connection.query(`SELECT pw FROM user WHERE id='${id}'`, function(err, result){
         if(err){
-            res.send(err);
+            res.status(400).send(err);
             return;
         }
         if(!result[0]){
-            res.send({res : false, msg : "존재하지 않는 아이디입니다"});
+            res.send({res : false, msg : "not found"});
             return;
         }
         if(result[0].pw === pw){
-            res.send({res : true, msg : "loginsuccess"});
+            res.send({res : true, msg : "success"});
         }
         else{
-            res.send({res : false, msg : "비밀번호가 틀렸습니다"});
+            res.send({res : false, msg : "failed"});
         }
     })
 });
