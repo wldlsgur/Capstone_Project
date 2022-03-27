@@ -1,7 +1,6 @@
 package com.example.issueproject.service
 
 import android.util.Log
-import com.example.issueproject.dto.LoginInfo
 import com.example.issueproject.dto.LoginResult
 import com.example.issueproject.dto.SignUpResult
 import com.example.issueproject.dto.SingUpInfo

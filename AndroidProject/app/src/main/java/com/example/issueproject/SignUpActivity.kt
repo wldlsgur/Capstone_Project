@@ -26,7 +26,6 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-
     fun SignUp(id: String, pw: String, name: String){
         val data = SingUpInfo(id, pw, name)
         ResponseService().SignUpService(data, object: RetrofitCallback<SignUpResult> {
@@ -37,9 +36,10 @@ class SignUpActivity : AppCompatActivity() {
             override fun onSuccess(code: Int, responseData: SignUpResult) {
                 Log.d(TAG, "onSuccess: $code")
                 if(responseData.msg == "success"){
-                    var intent = Intent(this@SignUpActivity, SelectActivity::class.java)
+                    var intent = Intent(this@SignUpActivity, MainActivity::class.java)
                     startActivity(intent)
                 }else if(responseData.msg == "failed"){
+
                 }
             }
 
