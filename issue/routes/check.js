@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./db');
+const db = require('../DB/db');
 
 router.get('/login', function(req, res){
     let id = req.query.id;
@@ -11,9 +11,7 @@ router.get('/login', function(req, res){
         return;
     }
 
-    let connection = db.connection ();
-    connection.connect ();
-    connection.query(`SELECT pw FROM user WHERE id='${id}'`, function(err, result){
+    db.query(`SELECT * FROM user WHERE id='${id}'`, function(err, result){
         if(err){
             res.status(400).send(err);
             return;
@@ -23,7 +21,7 @@ router.get('/login', function(req, res){
             return;
         }
         if(result[0].pw === pw){
-            res.send({res : true, msg : "success"});
+            res.send({res : true, msg : "success", job : result[0].job});
         }
         else{
             res.send({res : false, msg : "failed"});
