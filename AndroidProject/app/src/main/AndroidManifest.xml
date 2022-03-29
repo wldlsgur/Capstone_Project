@@ -13,10 +13,16 @@
         android:theme="@style/Theme.IssueProject"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".SignUpActivity"
+            android:name=".DayNoticAddActivity"
             android:exported="false" />
         <activity
-            android:name=".SelectActivity"
+            android:name=".DayNoticActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

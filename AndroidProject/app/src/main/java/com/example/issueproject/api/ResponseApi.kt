@@ -1,8 +1,6 @@
 package com.example.issueproject.api
 
-import com.example.issueproject.dto.LoginResult
-import com.example.issueproject.dto.SignUpResult
-import com.example.issueproject.dto.SingUpInfo
+import com.example.issueproject.dto.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -20,4 +18,16 @@ interface ResponseApi {
     fun SignUp(
         @Body signData: SingUpInfo
     ): Call<SignUpResult>
+
+    @POST("/create/schoolmanagement")
+    fun Addschoolmanagement(
+        @Body   schoolmanagementData: AddManagement
+    ): Call<AddManagementResult>
+
+    @GET("/schoolmanagement/info")
+    fun DayNoticInfo(
+        @Query("menu") menu: String,
+        @Query("school") school: String,
+        @Query("room") room: String,
+    ): Call<MutableList<AddManagement>>
 }

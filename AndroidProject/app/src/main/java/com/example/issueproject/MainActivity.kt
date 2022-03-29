@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.buttonSignUp.setOnClickListener {
             Log.d(TAG, "onCreate: clicksignup")
-            var intent1 = Intent(this, SignUpActivity::class.java)
-            startActivity(intent1)
+            var intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -56,8 +56,11 @@ class MainActivity : AppCompatActivity() {
                     Log.d(TAG, "res: true")
                     if(responseData.msg == "success"){
                         Log.d(TAG, "msg: success")
-                        var intent2 = Intent(this@MainActivity, SelectActivity::class.java)
-                        startActivity(intent2)
+                        var intent = Intent(this@MainActivity, MenuActivity::class.java).apply{
+                            putExtra("job", responseData.job)
+                        }
+
+                        startActivity(intent)
                     }
                 }
             }
