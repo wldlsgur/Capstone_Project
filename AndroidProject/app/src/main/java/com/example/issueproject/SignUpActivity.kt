@@ -22,6 +22,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.buttonSingUpCheck.setOnClickListener {
+//            if()
             SignUp(binding.editTextISignUpID.text.toString(), binding.editTextISignUpPW.text.toString(), binding.editTextISignUpName.text.toString())
         }
     }
