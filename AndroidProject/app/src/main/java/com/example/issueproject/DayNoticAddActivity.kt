@@ -1,12 +1,9 @@
 package com.example.issueproject
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.DatePicker
 import com.example.issueproject.databinding.ActivityDayNoticAddBinding
 import com.example.issueproject.dto.AddManagement
 import com.example.issueproject.dto.AddManagementResult
@@ -18,15 +15,13 @@ import java.util.*
 private const val TAG = "DayNoticAddActivity"
 class DayNoticAddActivity : AppCompatActivity() {
     var cal = Calendar.getInstance()
-    val dateSetListener = object : DatePickerDialog.OnDateSetListener {
-        override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int)
-        {
+    private val dateSetListener =
+        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             cal.set(Calendar.YEAR, year)
             cal.set(Calendar.MONTH, monthOfYear)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             updateDateInText()
         }
-    }
 
     private val binding by lazy{
         ActivityDayNoticAddBinding.inflate(layoutInflater)
@@ -51,21 +46,13 @@ class DayNoticAddActivity : AppCompatActivity() {
             var day = date.substring(9,12).toString()
             var school = binding.editTextAddSchool.text.toString()
             Log.d(TAG, "onCreate: ${year}-${month}-${day}")
-            var addManagement = AddManagement(
-                title,
-                content,
-                year,
-                month,
-                day,
-                school,
-                room,
-                menu
-            )
+
+            var addManagement = AddManagement(title, content, year, month, day, school, room, menu)
             insertaddManagement(addManagement)
 
         }
     }
-    fun showDatePicker(){
+    private fun showDatePicker(){
         DatePickerDialog(this,
             dateSetListener,
             cal.get(Calendar.YEAR),
@@ -73,13 +60,12 @@ class DayNoticAddActivity : AppCompatActivity() {
             cal.get(Calendar.DAY_OF_MONTH)).show()
     }
 
-    @SuppressLint("SimpleDateFormat")
-    fun updateDateInText(){
+    private fun updateDateInText(){
         var formatter = SimpleDateFormat("yyyy년 MM월 dd일")
         binding.textViewDate.text = formatter.format(cal.time)
     }
 
-    fun insertaddManagement(addManagement: AddManagement){
+    private fun insertaddManagement(addManagement: AddManagement){
         ResponseService().AddManagementService(addManagement, object: RetrofitCallback<AddManagementResult>{
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")

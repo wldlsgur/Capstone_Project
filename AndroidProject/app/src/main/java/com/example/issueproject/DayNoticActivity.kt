@@ -42,12 +42,8 @@ class DayNoticActivity : AppCompatActivity() {
         }
     }
 
-    fun ShowRecycler(menu: String, school: String, room: String) {
-        ResponseService().DayNoticInfoShow(
-            menu,
-            school,
-            room,
-            object : RetrofitCallback<MutableList<AddManagement>> {
+    private fun ShowRecycler(menu: String, school: String, room: String) {
+        ResponseService().DayNoticInfoShow(menu, school, room, object : RetrofitCallback<MutableList<AddManagement>> {
                 override fun onError(t: Throwable) {
                     Log.d(TAG, "onError: $t")
                 }
