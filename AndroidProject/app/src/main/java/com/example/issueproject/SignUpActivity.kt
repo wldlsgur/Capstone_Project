@@ -21,14 +21,27 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        var job = ""
+
+        binding.radioGroup.setOnCheckedChangeListener{ group, checkedid ->
+            when(checkedid){
+                R.id.radioButtonCaptain -> job = "원장"
+                R.id.radioButtonTeacher -> job = "교사"
+                R.id.radioButtonParrent -> job = "학부모"
+            }
+        }
+
         binding.buttonSingUpCheck.setOnClickListener {
-//            if()
-            SignUp(binding.editTextISignUpID.text.toString(), binding.editTextISignUpPW.text.toString(), binding.editTextISignUpName.text.toString())
+            var id = binding.editTextISignUpID.text.toString()
+            var pw = binding.editTextISignUpPW.text.toString()
+            var name = binding.editTextISignUpName.text.toString()
+
+            var signupinfo = SingUpInfo(id,pw,name,job)
+            SignUp(signupinfo)
         }
     }
 
-    fun SignUp(id: String, pw: String, name: String){
-        val data = SingUpInfo(id, pw, name)
+    fun SignUp(data: SingUpInfo){
         ResponseService().SignUpService(data, object: RetrofitCallback<SignUpResult> {
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")

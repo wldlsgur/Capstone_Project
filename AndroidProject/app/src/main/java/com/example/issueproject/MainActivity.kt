@@ -57,9 +57,11 @@ class MainActivity : AppCompatActivity() {
                     if(responseData.msg == "success"){
                         Log.d(TAG, "msg: success")
                         var intent = Intent(this@MainActivity, MenuActivity::class.java).apply{
+                            putExtra("id", id)
                             putExtra("job", responseData.job)
+                            Log.d(TAG, "id: $id")
+                            Log.d(TAG, "job: $responseData")
                         }
-
                         startActivity(intent)
                     }
                 }
