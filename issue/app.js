@@ -6,17 +6,16 @@ var logger = require('morgan');
 const multer = require('multer');
 
 const storage = multer.diskStorage({
-	job : req.params.job,
-	name : req.params.name,
-
 	destination: function (req, file, cb) {
-		if(this.job === "부모님"){
+		let job = req.params.job;
+	
+		if(job === "부모님"){
 			cb(null, 'uploads/parents');
 		}
-		else if(this.job === "선생님"){
+		else if(job === "선생님"){
 			cb(null, 'uploads/teacher');
 		}
-		else if(this.job === "원장"){
+		else if(job === "원장"){
 			cb(null, 'uploads/president');
 		}
 		else{
@@ -24,7 +23,8 @@ const storage = multer.diskStorage({
 		}
 	},
 	filename: function (req, file, cb) {
-		cb(null, this.job + '_' + this.name + '.jpg');
+		let name = req.params.name;
+		cb(null, name + '.jpg');
 	}
 })
 const upload = multer({ storage: storage })
