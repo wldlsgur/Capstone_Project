@@ -4,26 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".res.DayNotic.DayNoticActivity">
+    tools:context=".res.Notic.NoticActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Day_notic_RV"
+        android:id="@+id/Notic_RV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
-        tools:listitem="@layout/activity_day_notic_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonDaynoticAdd" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonNoticAdd" />
 
     <Button
-        android:id="@+id/buttonDaynoticAdd"
+        android:id="@+id/buttonNoticAdd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
-        android:text="추가"
+        android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

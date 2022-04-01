@@ -1,11 +1,12 @@
-package com.example.issueproject
+package com.example.issueproject.res.Notic
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.issueproject.R
 
-class DayNoticItemActivity : AppCompatActivity() {
+class NoticItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_day_notic_item)
+        setContentView(R.layout.activity_notic_item)
     }
 }

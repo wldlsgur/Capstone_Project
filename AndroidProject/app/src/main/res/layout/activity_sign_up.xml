@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity">
+    tools:context=".res.SignUpActivity">
 
     <Button
         android:id="@+id/buttonSingUpCheck"
@@ -79,30 +79,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="원장" />
+            android:text="원장님" />
 
         <RadioButton
             android:id="@+id/radioButtonParrent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="학부모" />
+            android:text="부모님" />
 
         <RadioButton
             android:id="@+id/radioButtonTeacher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="교사" />
+            android:text="선생님" />
     </RadioGroup>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="10dp"
         android:text="해당하는 것을 선택하세요"
-        app:layout_constraintTop_toBottomOf="@+id/editTextISignUpName"
-        tools:layout_editor_absoluteX="50dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextISignUpName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

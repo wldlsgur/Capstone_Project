@@ -1,10 +1,11 @@
-package com.example.issueproject
+package com.example.issueproject.res
 
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.issueproject.databinding.ActivityDayNoticAddBinding
+import com.example.issueproject.R
+import com.example.issueproject.databinding.ActivityAddNoticBinding
 import com.example.issueproject.dto.AddManagement
 import com.example.issueproject.dto.AddManagementResult
 import com.example.issueproject.retrofit.RetrofitCallback
@@ -12,8 +13,9 @@ import com.example.issueproject.service.ResponseService
 import java.text.SimpleDateFormat
 import java.util.*
 
-private const val TAG = "DayNoticAddActivity"
-class DayNoticAddActivity : AppCompatActivity() {
+private const val TAG = "AddNoticActivity"
+
+class AddNoticActivity : AppCompatActivity() {
     var cal = Calendar.getInstance()
     private val dateSetListener =
         DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
@@ -24,7 +26,7 @@ class DayNoticAddActivity : AppCompatActivity() {
         }
 
     private val binding by lazy{
-        ActivityDayNoticAddBinding.inflate(layoutInflater)
+        ActivityAddNoticBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +68,8 @@ class DayNoticAddActivity : AppCompatActivity() {
     }
 
     private fun insertaddManagement(addManagement: AddManagement){
-        ResponseService().AddManagementService(addManagement, object: RetrofitCallback<AddManagementResult>{
+        ResponseService().AddManagementService(addManagement, object:
+            RetrofitCallback<AddManagementResult> {
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }

@@ -1,16 +1,14 @@
-package com.example.issueproject
+package com.example.issueproject.res.DayNotic
 
 import DayNoticAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issueproject.databinding.ActivityDayNoticBinding
 import com.example.issueproject.dto.AddManagement
-import com.example.issueproject.dto.DayNoticInfo
-import com.example.issueproject.dto.LoginResult
+import com.example.issueproject.res.AddNoticActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
@@ -27,8 +25,8 @@ class DayNoticActivity : AppCompatActivity() {
         setContentView(binding.root)
         ShowRecycler("알림장","달서어린이집","햇님반")
 
-        binding.buttonTeacherAdd.setOnClickListener {
-            var intent = Intent(this, DayNoticAddActivity::class.java)
+        binding.buttonDaynoticAdd.setOnClickListener {
+            var intent = Intent(this, AddNoticActivity::class.java)
             startActivity(intent)
         }
     }

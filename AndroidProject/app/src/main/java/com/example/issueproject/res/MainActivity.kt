@@ -1,4 +1,4 @@
-package com.example.issueproject
+package com.example.issueproject.res
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

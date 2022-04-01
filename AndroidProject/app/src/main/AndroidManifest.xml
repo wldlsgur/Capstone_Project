@@ -13,19 +13,31 @@
         android:theme="@style/Theme.IssueProject"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".DayNoticAddActivity"
+            android:name=".res.AddNoticActivity"
             android:exported="false" />
         <activity
-            android:name=".DayNoticActivity"
+            android:name=".res.Notic.NoticItemActivity"
             android:exported="false" />
         <activity
-            android:name=".MenuActivity"
+            android:name=".res.Notic.NoticActivity"
             android:exported="false" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".res.SchoolAddActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".res.DayNotic.DayNoticAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.DayNotic.DayNoticActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,10 +1,10 @@
-package com.example.issueproject
+package com.example.issueproject.res
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivitySignUpBinding
 import com.example.issueproject.dto.SignUpResult
 import com.example.issueproject.dto.SingUpInfo
@@ -25,9 +25,9 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.radioGroup.setOnCheckedChangeListener{ group, checkedid ->
             when(checkedid){
-                R.id.radioButtonCaptain -> job = "원장"
-                R.id.radioButtonTeacher -> job = "교사"
-                R.id.radioButtonParrent -> job = "학부모"
+                R.id.radioButtonCaptain -> job = "원장님"
+                R.id.radioButtonTeacher -> job = "선생님"
+                R.id.radioButtonParrent -> job = "부모님"
             }
         }
 
