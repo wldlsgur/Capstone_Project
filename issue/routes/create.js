@@ -46,4 +46,24 @@ router.post('/schoolmanagement', function(req, res){
     })
 });
 
+router.post('/presidentinfo', function(req, res){
+	let id = req.body.id;
+	let school = req.body.school;
+	let room = req.body.room;
+	let presi_num = req.body.number;
+	let presi_image = req.body.image;
+	
+	if(!id || !school || !room || !presi_num || presi_image){
+		res.send("plz send require elements");
+		return;
+	} 
+	let query = `INSERT INTO presidentinfo VALUES('${id}', '${school}', '${room}', '${presi_num}', '${presi_image}')`;
+	db.query(query, function(err, result){
+		if(err){
+			res.status(400).send(err);
+			return;
+		}
+		res.send({res : true, msg : 'success'});
+	})
+});
 module.exports = router;

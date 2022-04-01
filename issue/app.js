@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 		else if(job === "선생님"){
 			cb(null, 'uploads/teacher');
 		}
-		else if(job === "원장"){
+		else if(job === "원장님"){
 			cb(null, 'uploads/president');
 		}
 		else{
