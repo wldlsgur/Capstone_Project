@@ -53,7 +53,7 @@ router.post('/presidentinfo', function(req, res){
 	let presi_num = req.body.number;
 	let presi_image = req.body.image;
 	
-	if(!id || !school || !room || !presi_num || presi_image){
+	if(!id || !school || !room || !presi_num || !presi_image){
 		res.send("plz send require elements");
 		return;
 	} 
