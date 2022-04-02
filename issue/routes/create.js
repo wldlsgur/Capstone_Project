@@ -66,4 +66,53 @@ router.post('/presidentinfo', function(req, res){
 		res.send({res : true, msg : 'success'});
 	})
 });
+
+router.post('/parentinfo', function(req, res){
+	let id = req.body.id;
+	let school = req.body.id;
+	let room = req.body.room;
+	let parent_num = req.body.number;
+	let child_name = req.body.name;
+	let child_age = req.body.age;
+	let child_image = req.body.image;
+	let spec = req.body.spec;
+	let check = req.body.check;
+
+	if(!id || !room || !parent_num || !child_name || !child_age || !child_image || !spec || !check){
+		res.send("plz send require elements");
+		return;
+	}
+	
+	let query = `INSERT INTO parentinfo VALUES('${id}', '${school}', '${room}', '${parent_num}', '${child_name}', '${child_age}', '${child_image}', '${spec}', '${check}')`;
+	db.query(query, function(err, result){
+		if(err){
+			res.status(400).send(err);
+			return;
+		}
+		res.send({res : true, msg : 'success'});
+	})
+});
+
+router.post('teacherinfo', function(req, res){
+	let id = req.body.id;
+	let school = req.body.school;
+	let room = req.body.room;
+	let teacher_num = req.body.number;
+	let teacher_image = req.body.image;
+	let check = req.body.check;
+
+	if(!id || !school || !room || !teacher_num || !teacher_image || !check){
+		res.send('plz send require elements');
+		return;
+	}
+
+	let query = `INSERT INTO teacherinfo VALUES('${id}', '${school}', '${room}', '${teacher_num}', '${teacher_image}', '${check}')`;
+	db.query(query, function(err, result){
+		if(err){
+			res.status(400).send(err);
+			return;
+		}
+		res.send({res : true, msg : 'success'});
+	})
+});
 module.exports = router;
