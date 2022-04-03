@@ -30,7 +30,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 let checkRouter = require('./routes/check');
 let createRouter = require('./routes/create');
 let schoolmanagementRouter = require('./routes/schoolmanagement');
