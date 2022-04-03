@@ -1,9 +1,11 @@
 package com.example.issueproject.res
 
 import android.app.DatePickerDialog
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.annotation.RequiresApi
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityAddNoticBinding
 import com.example.issueproject.dto.AddManagement
@@ -11,27 +13,27 @@ import com.example.issueproject.dto.AddManagementResult
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 private const val TAG = "AddNoticActivity"
 
 class AddNoticActivity : AppCompatActivity() {
-    var cal = Calendar.getInstance()
-    private val dateSetListener =
-        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            cal.set(Calendar.YEAR, year)
-            cal.set(Calendar.MONTH, monthOfYear)
-            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            updateDateInText()
-        }
+
 
     private val binding by lazy{
         ActivityAddNoticBinding.inflate(layoutInflater)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val current = LocalDate.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+        val formatted = current.format(formatter)
 
         binding.buttonDatePicker.setOnClickListener {
             showDatePicker()
@@ -42,10 +44,11 @@ class AddNoticActivity : AppCompatActivity() {
             var content = binding.editTextAddContent.text.toString()
             var room = binding.editTextAddGroup.text.toString()
             var menu = binding.editTextAddMenu.text.toString()
-            var date = binding.textViewDate.text.toString()
-            var year = date.substring(0,4).toString()
-            var month = date.substring(5,8).toString()
-            var day = date.substring(9,12).toString()
+//            var date = binding.textViewDate.text.toString()
+            var year = formatted.substring(0,3).toString()
+            var month = formatted.substring(4,5).toString()
+            var day = formatted.substring(6,7).toString()
+
             var school = binding.editTextAddSchool.text.toString()
             Log.d(TAG, "onCreate: ${year}-${month}-${day}")
 
@@ -54,6 +57,16 @@ class AddNoticActivity : AppCompatActivity() {
 
         }
     }
+
+    var cal = Calendar.getInstance()
+    private val dateSetListener =
+        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, monthOfYear)
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            updateDateInText()
+        }
+
     private fun showDatePicker(){
         DatePickerDialog(this,
             dateSetListener,

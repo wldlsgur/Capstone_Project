@@ -7,6 +7,14 @@ import com.example.issueproject.retrofit.RetrofitCallback
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import okhttp3.MultipartBody
+
+import okhttp3.MediaType
+
+import okhttp3.RequestBody
+
+
+
 
 private const val TAG = "ResponseService"
 class ResponseService {
@@ -98,4 +106,21 @@ class ResponseService {
 
         })
     }
+//    fun uploadimage() {
+//        val requestFile: RequestBody =
+//            RequestBody.create(MediaType.parse("multipart/form-data"), imageFile)
+//        val body = MultipartBody.Part.createFormData("uploaded_file", imageFileName, requestFile)
+//        val retrofitInterface: RetrofitInterface =
+//            ApiClient.getApiClient().create(RetrofitInterface::class.java)
+//        val call: Call<String> = retrofitInterface.request(body)
+//        call.enqueue(object : Callback<String?> {
+//            override fun onResponse(call: Call<String?>, response: Response<String?>) {
+//                Log.e("uploadChat()", "성공 : ")
+//            }
+//
+//            override fun onFailure(call: Call<String?>, t: Throwable) {
+//                Log.e("uploadChat()", "에러 : " + t.message)
+//            }
+//        })
+//    }
 }

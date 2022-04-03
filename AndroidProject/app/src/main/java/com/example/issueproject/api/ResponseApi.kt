@@ -1,11 +1,9 @@
 package com.example.issueproject.api
 
 import com.example.issueproject.dto.*
+import okhttp3.MultipartBody
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ResponseApi {
     @GET("/check/login")
@@ -30,4 +28,10 @@ interface ResponseApi {
         @Query("school") school: String,
         @Query("room") room: String,
     ): Call<MutableList<AddManagement>>
+
+    @Multipart
+    @POST("uploads/")
+    fun Upload(
+        @Part photo: MultipartBody.Part
+    )
 }
