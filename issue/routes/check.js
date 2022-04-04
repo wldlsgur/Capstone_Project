@@ -37,7 +37,7 @@ router.get('/sameid', function(req, res){
         return;
     }
 
-    let query = `SELECT * FROM user WHERE id='${id}`;
+    let query = `SELECT * FROM user WHERE id='${id}'`;
     db.query(query, function(err, result){
         if(err){
             res.status(400).send(err);
