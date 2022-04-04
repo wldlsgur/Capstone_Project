@@ -28,4 +28,26 @@ router.get('/login', function(req, res){
         }
     })
 });
+
+router.get('/sameid', function(req, res){
+    let id = req.query.id;
+
+    if(!id){
+        res.send('plz send require elements');
+        return;
+    }
+
+    let query = `SELECT * FROM user WHERE id='${id}'`;
+    db.query(query, function(err, result){
+        if(err){
+            res.status(400).send(err);
+            return;
+        }
+        if(!result[0]){
+            res.send({req : false, msg : 'not found'});
+            return;
+        }
+        res.send({res : true, msg : 'found'});
+    })
+})
 module.exports = router;

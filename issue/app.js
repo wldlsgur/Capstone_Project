@@ -7,19 +7,22 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		let job = req.params.job;
+		let destination = req.params.destination;
 	
-		if(job === "부모님"){
+		if(destination === "부모님"){
 			cb(null, 'uploads/parents');
 		}
-		else if(job === "선생님"){
+		else if(destination === "선생님"){
 			cb(null, 'uploads/teacher');
 		}
-		else if(job === "원장님"){
+		else if(destination === "원장님"){
 			cb(null, 'uploads/president');
 		}
+		else if(destination === "식단표"){
+			cb(null, 'uploads/food_menu');
+		}
 		else{
-			cb(null, 'uploads/foodlist');
+			cb(null, 'uploads/album');
 		}
 	},
 	filename: function (req, file, cb) {
@@ -34,6 +37,7 @@ let checkRouter = require('./routes/check');
 let createRouter = require('./routes/create');
 let schoolmanagementRouter = require('./routes/schoolmanagement');
 let uploadimageRouter = require('./routes/uploadimage');
+let parentinfoRouter = require('./routes/parentinfo');
 
 var app = express();
 
@@ -49,11 +53,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/image', express.static('uploads'));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/check', checkRouter);
 app.use('/create', createRouter);
 app.use('/schoolmanagement', schoolmanagementRouter);
-app.use('/uploadimage/:job/:name', upload.single('image'), uploadimageRouter);
+app.use('/parentinfo', parentinfoRouter);
+app.use('/uploadimage/:destination/:name', upload.single('image'), uploadimageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
