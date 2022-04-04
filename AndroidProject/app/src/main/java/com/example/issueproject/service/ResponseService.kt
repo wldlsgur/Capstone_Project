@@ -7,13 +7,8 @@ import com.example.issueproject.retrofit.RetrofitCallback
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import okhttp3.MultipartBody
 
-import okhttp3.MediaType
-
-import okhttp3.RequestBody
-
-
+import java.io.File
 
 
 private const val TAG = "ResponseService"
@@ -27,6 +22,24 @@ class ResponseService {
 
             override fun onResponse(call: Call<LoginResult>, response: Response<LoginResult>) {
                 Log.d(TAG, "onResponse: ..")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+        })
+    }
+    fun Sameid(userid: String, callback: RetrofitCallback<SignUpResult>){
+        RetrofitBuilder.api.sameid(userid).enqueue(object : Callback<SignUpResult>{
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onResponse: $t")
+            }
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "onResponse: ")
                 if (response.code() == 200){
                     if(response.body() != null){
                         Log.d(TAG, "onResponse: 200")
@@ -106,21 +119,12 @@ class ResponseService {
 
         })
     }
+
 //    fun uploadimage() {
-//        val requestFile: RequestBody =
-//            RequestBody.create(MediaType.parse("multipart/form-data"), imageFile)
-//        val body = MultipartBody.Part.createFormData("uploaded_file", imageFileName, requestFile)
-//        val retrofitInterface: RetrofitInterface =
-//            ApiClient.getApiClient().create(RetrofitInterface::class.java)
-//        val call: Call<String> = retrofitInterface.request(body)
-//        call.enqueue(object : Callback<String?> {
-//            override fun onResponse(call: Call<String?>, response: Response<String?>) {
-//                Log.e("uploadChat()", "성공 : ")
-//            }
+//        var file = File("${getExternalFilesDir(Environment.DIRECTORY_PICTURES)}/tempImg.png")
+//        var requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+//        var body = MultipartBody.Part.createFormData("file", file.name, requestFile)
 //
-//            override fun onFailure(call: Call<String?>, t: Throwable) {
-//                Log.e("uploadChat()", "에러 : " + t.message)
-//            }
-//        })
+//        RetrofitBuilder.api.Upload(body)
 //    }
 }

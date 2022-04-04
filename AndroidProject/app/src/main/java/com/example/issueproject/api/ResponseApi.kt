@@ -12,6 +12,12 @@ interface ResponseApi {
         @Query("pw") pw: String,
     ): Call<LoginResult>
 
+    @GET("/check/sameid")
+    fun sameid(
+        @Query("id") id: String
+    ): Call<SignUpResult>
+
+
     @POST("/create/user")
     fun SignUp(
         @Body signData: SingUpInfo
@@ -29,9 +35,10 @@ interface ResponseApi {
         @Query("room") room: String,
     ): Call<MutableList<AddManagement>>
 
-    @Multipart
-    @POST("uploads/")
-    fun Upload(
-        @Part photo: MultipartBody.Part
-    )
+
+//    @Multipart
+//    @POST("uploads/")
+//    fun Upload(
+//        @Part photo: MultipartBody.Part
+//    )
 }
