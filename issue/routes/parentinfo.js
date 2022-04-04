@@ -19,3 +19,5 @@ router.get('/group', function(req, res){
         res.send(result[0]);
     })
 })
+
+module.exports = router;
