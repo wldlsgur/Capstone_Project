@@ -57,7 +57,7 @@ router.post('/presidentinfo', function(req, res){
 		res.send("plz send require elements");
 		return;
 	} 
-	let query = `INSERT INTO presidentinfo VALUES('${id}', '${school}', '${room}', '${presi_num}', '${presi_image}')`;
+	let query = `INSERT INTO presidentinfo VALUES('${id}', '${school}', '${room}', '${presi_num}', '/image/president/${presi_image}.jpg')`;
 	db.query(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
@@ -82,7 +82,7 @@ router.post('/parentinfo', function(req, res){
 		return;
 	}
 	
-	let query = `INSERT INTO parentinfo VALUES('${id}', '${school}', '${room}', '${parent_num}', '${child_name}', '${child_age}', '${child_image}', '${spec}', false)`;
+	let query = `INSERT INTO parentinfo VALUES('${id}', '${school}', '${room}', '${parent_num}', '${child_name}', '${child_age}', '/image/parent/${child_image}.jpg', '${spec}', false)`;
 	db.query(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
@@ -104,7 +104,7 @@ router.post('teacherinfo', function(req, res){
 		return;
 	}
 
-	let query = `INSERT INTO teacherinfo VALUES('${id}', '${school}', '${room}', '${teacher_num}', '${teacher_image}', false)`;
+	let query = `INSERT INTO teacherinfo VALUES('${id}', '${school}', '${room}', '${teacher_num}', '/image/teacher/${teacher_image}.jpg', false)`;
 	db.query(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
