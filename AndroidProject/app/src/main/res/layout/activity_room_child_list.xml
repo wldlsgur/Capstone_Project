@@ -10,9 +10,9 @@
         android:id="@+id/textViewSchoolName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:text="반 이름 : "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

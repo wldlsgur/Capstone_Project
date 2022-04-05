@@ -5,7 +5,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.issueproject.R
 import com.example.issueproject.dto.AddManagement
-import com.example.issueproject.dto.DayNoticInfo
 
 class DayNoticAdapter(var list:MutableList<AddManagement>) : RecyclerView.Adapter<DayNoticAdapter.NoticeViewHolder>() {
 

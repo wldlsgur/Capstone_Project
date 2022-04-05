@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.issueproject.databinding.ActivityMenuBinding
 import com.example.issueproject.res.DayNotic.DayNoticActivity
+import com.example.issueproject.res.RoomManager.RoomChildListActivity
 
 class MenuActivity : AppCompatActivity() {
     private val binding by lazy{
@@ -46,9 +47,10 @@ class MenuActivity : AppCompatActivity() {
             var intent = Intent(this, ChildAddActivity::class.java)
             startActivity(intent)
         }
-//        binding.buttonRoomManager.setOnClickListener {
-//            var intent = Intent(this, )
-//        }
+        binding.buttonRoomManager.setOnClickListener {
+            var intent = Intent(this, RoomChildListActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 

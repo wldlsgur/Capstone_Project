@@ -49,10 +49,11 @@ interface ResponseApi {
         @Body parentInfo: ParentInfo
     ): Call<SignUpResult>
 
-    @GET("/school/allinfo")
+    @GET("/parentinfo/school/allinfo")
     fun RoomChildList(
         @Query("school") school: String
-    ): Call<MutableList<ParentInfo>>
+    ): Call<MutableList<RoomChildListResult>>
+
 //    @Multipart
 //    @POST("uploads/")
 //    fun Upload(

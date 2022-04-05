@@ -23,7 +23,7 @@ class ChildAddActivity : AppCompatActivity() {
         binding.buttonChildAdd.setOnClickListener {
             val id = "test"
             val school = "달서어린이집"
-            val room = "인혁반"
+            val room = "햇살반"
             val childage = binding.editTextChildAge.text.toString()
             val childname = binding.editTextChildName.text.toString()
             val childspec = binding.editTextChildSpec.text.toString()

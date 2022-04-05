@@ -157,17 +157,26 @@ class ResponseService {
             }
         })
     }
-    fun RoomChildListShow(school: String, callback: RetrofitCallback<MutableList<ParentInfo>>) {
-        RetrofitBuilder.api.RoomChildList(school).enqueue(object : Callback<MutableList<ParentInfo>>{
+    fun RoomChildListShow(school: String, callback: RetrofitCallback<MutableList<RoomChildListResult>>) {
+        RetrofitBuilder.api.RoomChildList(school).enqueue(object : Callback<MutableList<RoomChildListResult>>{
             override fun onResponse(
-                call: Call<MutableList<ParentInfo>>,
-                response: Response<MutableList<ParentInfo>>
+                call: Call<MutableList<RoomChildListResult>>,
+                response: Response<MutableList<RoomChildListResult>>
             ) {
-                TODO("Not yet implemented")
+                Log.d(TAG, "RoomChildListShow: ..")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
             }
 
-            override fun onFailure(call: Call<MutableList<ParentInfo>>, t: Throwable) {
-                TODO("Not yet implemented")
+            override fun onFailure(call: Call<MutableList<RoomChildListResult>>, t: Throwable) {
+                Log.d(TAG, "onFailure: $t")
+                callback.onError(t)
             }
 
         })

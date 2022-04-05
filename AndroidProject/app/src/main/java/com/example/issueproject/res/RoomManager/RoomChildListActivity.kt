@@ -1,12 +1,13 @@
 package com.example.issueproject.res.RoomManager
 
+import RoomChildListAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.issueproject.Adapter.RoomChildListAdapter
 import com.example.issueproject.databinding.ActivityRoomChildListBinding
 import com.example.issueproject.dto.ParentInfo
+import com.example.issueproject.dto.RoomChildListResult
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
@@ -21,10 +22,11 @@ class RoomChildListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        ShowRecycler("햇살어린이집")
+
+        ShowRecycler("달서어린이집")
     }
 
-    private fun initRecycler(list:MutableList<ParentInfo>){
+    private fun initRecycler(list:MutableList<RoomChildListResult>){
         RoomChildListAdapter = RoomChildListAdapter(list)
 
         binding.RoomChildListRV.apply {
@@ -34,12 +36,12 @@ class RoomChildListActivity : AppCompatActivity() {
     }
 
     private fun ShowRecycler(school: String) {
-        ResponseService().RoomChildListShow(school, object : RetrofitCallback<MutableList<ParentInfo>>{
+        ResponseService().RoomChildListShow(school, object : RetrofitCallback<MutableList<RoomChildListResult>>{
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
 
-            override fun onSuccess(code: Int, responseData: MutableList<ParentInfo>) {
+            override fun onSuccess(code: Int, responseData: MutableList<RoomChildListResult>) {
                 Log.d(TAG, "onSuccess: $responseData")
                 initRecycler(responseData)
             }
