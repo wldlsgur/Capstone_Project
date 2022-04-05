@@ -21,7 +21,7 @@ router.get('/login', function(req, res){
             return;
         }
         if(result[0].pw === pw){
-            res.send({res : true, msg : "success", job : result[0].job});
+            res.send({res : true, msg : "success"});
         }
         else{
             res.send({res : false, msg : "failed"});
