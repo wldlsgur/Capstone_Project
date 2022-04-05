@@ -22,11 +22,6 @@ interface ResponseApi {
         @Body signData: SingUpInfo
     ): Call<SignUpResult>
 
-    @GET("/info")
-    fun Getschoolroom(
-
-    )
-
     @POST("/create/schoolmanagement")
     fun Addschoolmanagement(
         @Body schoolmanagementData: AddManagement
@@ -53,6 +48,16 @@ interface ResponseApi {
     fun RoomChildList(
         @Query("school") school: String
     ): Call<MutableList<RoomChildListResult>>
+
+    @GET("/presidentinfo/allschool")
+    fun GetSchool(
+
+    ): Call<MutableList<GetSchool>>
+
+    @GET("/user/info/{id}")
+    fun GetUserInfo(
+        @Path("id") id: String
+    ): Call<UserInfo>
 
 //    @Multipart
 //    @POST("uploads/")

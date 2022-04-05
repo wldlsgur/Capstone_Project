@@ -183,6 +183,51 @@ class ResponseService {
 
     }
 
+    fun GetSchool(callback: RetrofitCallback<MutableList<GetSchool>>) {
+        RetrofitBuilder.api.GetSchool().enqueue(object : Callback<MutableList<GetSchool>>{
+            override fun onResponse(
+                call: Call<MutableList<GetSchool>>,
+                response: Response<MutableList<GetSchool>>
+            ) {
+                Log.d(TAG, "RoomChildListShow: ..")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<MutableList<GetSchool>>, t: Throwable) {
+                Log.d(TAG, "onFailure: $t")
+                callback.onError(t)
+            }
+
+        })
+    }
+    fun GetUserInfo(id: String, callback: RetrofitCallback<UserInfo>) {
+        RetrofitBuilder.api.GetUserInfo(id).enqueue(object : Callback<UserInfo>{
+            override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {
+                Log.d(TAG, "RoomChildListShow: ..")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<UserInfo>, t: Throwable) {
+                Log.d(TAG, "onFailure: $t")
+                callback.onError(t)
+            }
+
+        })
+    }
 //    fun uploadimage() {
 //        var file = File("${getExternalFilesDir(Environment.DIRECTORY_PICTURES)}/tempImg.png")
 //        var requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)

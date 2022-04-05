@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.issueproject.databinding.ActivityMainBinding
 import com.example.issueproject.dto.LoginResult
+import com.example.issueproject.dto.UserInfo
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
@@ -58,7 +59,6 @@ class MainActivity : AppCompatActivity() {
                         Log.d(TAG, "msg: success")
                         var intent = Intent(this@MainActivity, MenuActivity::class.java).apply{
                             putExtra("id", id)
-                            putExtra("job", responseData.job)
                             Log.d(TAG, "id: $id")
                             Log.d(TAG, "job: $responseData")
                         }

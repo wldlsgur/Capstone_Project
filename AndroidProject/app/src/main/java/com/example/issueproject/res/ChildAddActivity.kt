@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.issueproject.databinding.ActivityChildAddBinding
+import com.example.issueproject.dto.GetSchool
 import com.example.issueproject.dto.ParentInfo
 import com.example.issueproject.dto.SignUpResult
 import com.example.issueproject.retrofit.RetrofitCallback
@@ -15,10 +16,13 @@ class ChildAddActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityChildAddBinding.inflate(layoutInflater)
     }
+    val school = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        GetSchool()
 
         binding.buttonChildAdd.setOnClickListener {
             val id = "test"
@@ -51,6 +55,24 @@ class ChildAddActivity : AppCompatActivity() {
             override fun onFailure(code: Int) {
                 Log.d(TAG, "onFailure: $code")
             }
+        })
+    }
+
+    fun GetSchool(){
+        ResponseService().GetSchool(object : RetrofitCallback<MutableList<GetSchool>>{
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: MutableList<GetSchool>) {
+                Log.d(TAG, "onSuccess: $responseData")
+//                binding.spinnerSchool
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+            }
+
         })
     }
 }
