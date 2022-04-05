@@ -26,7 +26,7 @@
             <EditText
                 android:id="@+id/editTextAddContent"
                 android:layout_width="match_parent"
-                android:layout_height="456dp"
+                android:layout_height="420dp"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="내용을 작성해주세요"

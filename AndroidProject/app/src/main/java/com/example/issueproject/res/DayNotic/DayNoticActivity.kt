@@ -23,7 +23,7 @@ class DayNoticActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        ShowRecycler("알림장","달서어린이집","햇님반")
+        ShowRecycler("알림장","달서어린이집","인혁반")
 
         binding.buttonDaynoticAdd.setOnClickListener {
             var intent = Intent(this, AddNoticActivity::class.java)

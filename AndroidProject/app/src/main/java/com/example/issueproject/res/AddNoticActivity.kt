@@ -5,8 +5,6 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.annotation.RequiresApi
-import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityAddNoticBinding
 import com.example.issueproject.dto.AddManagement
 import com.example.issueproject.dto.AddManagementResult
@@ -21,19 +19,16 @@ private const val TAG = "AddNoticActivity"
 
 class AddNoticActivity : AppCompatActivity() {
 
-
     private val binding by lazy{
         ActivityAddNoticBinding.inflate(layoutInflater)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val current = LocalDate.now()
-        val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
-        val formatted = current.format(formatter)
+        val currentTime = System.currentTimeMillis()
+        convertTimestampToDate(currentTime)
 
         binding.buttonDatePicker.setOnClickListener {
             showDatePicker()
@@ -44,13 +39,13 @@ class AddNoticActivity : AppCompatActivity() {
             var content = binding.editTextAddContent.text.toString()
             var room = binding.editTextAddGroup.text.toString()
             var menu = binding.editTextAddMenu.text.toString()
-//            var date = binding.textViewDate.text.toString()
-            var year = formatted.substring(0,3).toString()
-            var month = formatted.substring(4,5).toString()
-            var day = formatted.substring(6,7).toString()
+            var date = binding.textViewDate.text.toString()
+            var year = date.substring(0,4)
+            var month = date.substring(6,8)
+            var day = date.substring(10,12)
 
             var school = binding.editTextAddSchool.text.toString()
-            Log.d(TAG, "onCreate: ${year}-${month}-${day}")
+            Log.d(TAG, "datetest: ${year}-${month}-${day}")
 
             var addManagement = AddManagement(title, content, year, month, day, school, room, menu)
             insertaddManagement(addManagement)
@@ -73,6 +68,16 @@ class AddNoticActivity : AppCompatActivity() {
             cal.get(Calendar.YEAR),
             cal.get(Calendar.MONTH),
             cal.get(Calendar.DAY_OF_MONTH)).show()
+    }
+    private fun convertTimestampToDate(timespamp: Long){
+        val sdf = SimpleDateFormat("yyyy년 MM월 dd일")
+        val date = sdf.format(timespamp)
+
+        binding.textViewDate.text = date
+        var year = date.substring(0,4)
+        var month = date.substring(6,8)
+        var day = date.substring(10,12)
+        Log.d(TAG, "datetest: ${year}-${month}-${day}")
     }
 
     private fun updateDateInText(){

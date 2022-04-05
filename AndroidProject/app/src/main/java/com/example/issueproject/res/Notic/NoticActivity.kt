@@ -26,7 +26,7 @@ class NoticActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notic)
-        ShowRecycler("알림장","달서어린이집","햇님반")
+        ShowRecycler("공지사항","달서어린이집","인혁반")
 
         binding.buttonNoticAdd.setOnClickListener {
             var intent = Intent(this, AddNoticActivity::class.java)

@@ -12,7 +12,7 @@ class NoticAdapter(var list:MutableList<AddManagement>) : RecyclerView.Adapter<N
         private val title: TextView = itemView.findViewById(R.id.textViewNotic_item_title)
         private val date: TextView = itemView.findViewById(R.id.textViewNotic_item_date)
         fun bindinfo(data:AddManagement){
-            date.text = "${data.year}년${data.month}월${data.day}일"
+            date.text = "${data.year}년 ${data.month}월 ${data.day}일"
             title.text = data.title
         }
     }
