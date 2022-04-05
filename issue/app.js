@@ -39,6 +39,7 @@ let createRouter = require('./routes/create');
 let schoolmanagementRouter = require('./routes/schoolmanagement');
 let uploadimageRouter = require('./routes/uploadimage');
 let parentinfoRouter = require('./routes/parentinfo');
+let presidentinfoRouter = require('./routes/presidentinfo');
 
 var app = express();
 
@@ -58,6 +59,7 @@ app.use('/check', checkRouter);
 app.use('/create', createRouter);
 app.use('/schoolmanagement', schoolmanagementRouter);
 app.use('/parentinfo', parentinfoRouter);
+app.use('/presidentinfo', presidentinfoRouter);
 app.use('/uploadimage/:target/:id/:name', upload.single('image'), uploadimageRouter);
 
 // catch 404 and forward to error handler
