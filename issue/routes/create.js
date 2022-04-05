@@ -57,7 +57,7 @@ router.post('/presidentinfo', function(req, res){
 		res.send("plz send require elements");
 		return;
 	} 
-	let query = `INSERT INTO presidentinfo VALUES('${id}', '${school}', '${room}', '${presi_num}', '${presi_image}')`;
+	let query = `INSERT INTO presidentinfo VALUES('${id}', '${school}', '${room}', '${presi_num}', '/image/president/${presi_image}.jpg')`;
 	db.query(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
@@ -69,21 +69,20 @@ router.post('/presidentinfo', function(req, res){
 
 router.post('/parentinfo', function(req, res){
 	let id = req.body.id;
-	let school = req.body.id;
+	let school = req.body.school;
 	let room = req.body.room;
 	let parent_num = req.body.number;
 	let child_name = req.body.name;
 	let child_age = req.body.age;
 	let child_image = req.body.image;
 	let spec = req.body.spec;
-	let check = req.body.check;
 
-	if(!id || !room || !parent_num || !child_name || !child_age || !child_image || !spec || !check){
+	if(!id || !room || !parent_num || !child_name || !child_age || !child_image || !spec){
 		res.send("plz send require elements");
 		return;
 	}
 	
-	let query = `INSERT INTO parentinfo VALUES('${id}', '${school}', '${room}', '${parent_num}', '${child_name}', '${child_age}', '${child_image}', '${spec}', '${check}')`;
+	let query = `INSERT INTO parentinfo VALUES('${id}', '${school}', '${room}', '${parent_num}', '${child_name}', '${child_age}', '/image/parent/${child_image}.jpg', '${spec}', false)`;
 	db.query(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
@@ -99,14 +98,13 @@ router.post('teacherinfo', function(req, res){
 	let room = req.body.room;
 	let teacher_num = req.body.number;
 	let teacher_image = req.body.image;
-	let check = req.body.check;
 
-	if(!id || !school || !room || !teacher_num || !teacher_image || !check){
+	if(!id || !school || !room || !teacher_num || !teacher_image){
 		res.send('plz send require elements');
 		return;
 	}
 
-	let query = `INSERT INTO teacherinfo VALUES('${id}', '${school}', '${room}', '${teacher_num}', '${teacher_image}', '${check}')`;
+	let query = `INSERT INTO teacherinfo VALUES('${id}', '${school}', '${room}', '${teacher_num}', '/image/teacher/${teacher_image}.jpg', false)`;
 	db.query(query, function(err, result){
 		if(err){
 			res.status(400).send(err);

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/:destination/:name', function(req, res){
+router.post('/:target/:id/:name', function(req, res){
 	res.send({res : true, msg : 'success'});
 });
 
