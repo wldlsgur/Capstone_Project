@@ -21,14 +21,14 @@ router.get('/info', function(req, res){
 })
 
 router.get('/school/allinfo', function(req, res){
-	let school = req.query.school;
+	let room = req.query.room;
 
-	if(!school){
+	if(!room){
 		res.send('plz send require elements');
 		return;
 	}
 
-	let query = `SELECT * FROM parentinfo WHERE school = '${school}'`;
+	let query = `SELECT * FROM parentinfo WHERE room = '${room}'`;
 	db.query(query, function(err, result){
 		if(err){
 			res.status(400).send(err);

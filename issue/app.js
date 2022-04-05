@@ -40,6 +40,7 @@ let schoolmanagementRouter = require('./routes/schoolmanagement');
 let uploadimageRouter = require('./routes/uploadimage');
 let parentinfoRouter = require('./routes/parentinfo');
 let presidentinfoRouter = require('./routes/presidentinfo');
+let userRouter = require('./routes/user');
 
 var app = express();
 
@@ -57,6 +58,7 @@ app.use('/image', express.static('uploads'));
 app.use('/', indexRouter);
 app.use('/check', checkRouter);
 app.use('/create', createRouter);
+app.use('/user', userRouter);
 app.use('/schoolmanagement', schoolmanagementRouter);
 app.use('/parentinfo', parentinfoRouter);
 app.use('/presidentinfo', presidentinfoRouter);
