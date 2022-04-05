@@ -119,7 +119,25 @@ class ResponseService {
 
         })
     }
-
+    fun CreatePresidentinfo(info: Presidentinfo, callback: RetrofitCallback<SignUpResult>) {
+        RetrofitBuilder.api.Presidentinfo(info).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "onResponse: ..")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: $t")
+                callback.onError(t)
+            }
+        })
+    }
 //    fun uploadimage() {
 //        var file = File("${getExternalFilesDir(Environment.DIRECTORY_PICTURES)}/tempImg.png")
 //        var requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)

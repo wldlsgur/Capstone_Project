@@ -17,15 +17,19 @@ interface ResponseApi {
         @Query("id") id: String
     ): Call<SignUpResult>
 
-
     @POST("/create/user")
     fun SignUp(
         @Body signData: SingUpInfo
     ): Call<SignUpResult>
 
+    @GET("/info")
+    fun Getschoolroom(
+
+    )
+
     @POST("/create/schoolmanagement")
     fun Addschoolmanagement(
-        @Body   schoolmanagementData: AddManagement
+        @Body schoolmanagementData: AddManagement
     ): Call<AddManagementResult>
 
     @GET("/schoolmanagement/info")
@@ -34,6 +38,11 @@ interface ResponseApi {
         @Query("school") school: String,
         @Query("room") room: String,
     ): Call<MutableList<AddManagement>>
+
+    @POST("/create//presidentinfo")
+    fun Presidentinfo(
+        @Body presidentinfo: Presidentinfo
+    ): Call<SignUpResult>
 
 
 //    @Multipart

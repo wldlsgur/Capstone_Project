@@ -15,6 +15,19 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        val id = intent.getStringExtra("id")
+        val job = intent.getStringExtra("job")
+        if(job == "원장님"){
+            binding.textViewSchool.text = "햇살어린이집"
+            binding.textViewName.text = "원장님"
+        }
+        else if(job == "선생님"){
+
+        }
+        else if(job == "부모님"){
+
+        }
+
         binding.buttonDayNotice.setOnClickListener {
             var intent = Intent(this, DayNoticActivity::class.java)
             startActivity(intent)
@@ -22,6 +35,11 @@ class MenuActivity : AppCompatActivity() {
 
         binding.buttonNotic.setOnClickListener {
             var intent = Intent(this, DayNoticActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.buttonMenuSchoolAdd.setOnClickListener {
+            var intent = Intent(this, SchoolAddActivity::class.java)
             startActivity(intent)
         }
     }
