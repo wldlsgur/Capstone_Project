@@ -42,6 +42,14 @@ class MenuActivity : AppCompatActivity() {
             var intent = Intent(this, SchoolAddActivity::class.java)
             startActivity(intent)
         }
+        binding.buttonMenuChildAdd.setOnClickListener {
+            var intent = Intent(this, ChildAddActivity::class.java)
+            startActivity(intent)
+        }
+//        binding.buttonRoomManager.setOnClickListener {
+//            var intent = Intent(this, )
+//        }
+
     }
 
 }

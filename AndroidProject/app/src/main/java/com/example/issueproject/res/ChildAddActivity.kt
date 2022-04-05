@@ -4,39 +4,39 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.issueproject.databinding.ActivitySchoolAddBinding
-import com.example.issueproject.dto.AddManagement
-import com.example.issueproject.dto.LoginResult
-import com.example.issueproject.dto.Presidentinfo
+import com.example.issueproject.databinding.ActivityChildAddBinding
+import com.example.issueproject.dto.ParentInfo
 import com.example.issueproject.dto.SignUpResult
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
-private const val TAG = "SchoolAddActivity"
-class SchoolAddActivity : AppCompatActivity() {
+private const val TAG = "ChildAddActivity"
+class ChildAddActivity : AppCompatActivity() {
     private val binding by lazy {
-        ActivitySchoolAddBinding.inflate(layoutInflater)
+        ActivityChildAddBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.buttonSchoolAdd.setOnClickListener {
-            Log.d(TAG, "onCreate: ")
+        binding.buttonChildAdd.setOnClickListener {
             val id = "test"
-            val school = binding.editTextSchoolName.text.toString()
-            val room = binding.editTextRoomName.text.toString()
-            val num = binding.editTextSchoolNum.text.toString()
+            val school = "달서어린이집"
+            val room = "인혁반"
+            val childage = binding.editTextChildAge.text.toString()
+            val childname = binding.editTextChildName.text.toString()
+            val childspec = binding.editTextChildSpec.text.toString()
+            val parentnum = binding.editTextParentNum.text.toString()
             val image = "default"
 
-            var presidentinfo = Presidentinfo(id, school, room, num, image)
-            SchoolAdd(presidentinfo)
+            var parentinfo = ParentInfo(id, school, room, parentnum, childname, childage, image, childspec)
+            ChildAdd(parentinfo)
         }
     }
 
-    fun SchoolAdd(info: Presidentinfo){
-        ResponseService().CreatePresidentinfo(info, object: RetrofitCallback<SignUpResult>{
+    fun ChildAdd(info: ParentInfo){
+        ResponseService().CreateParentinfo(info, object: RetrofitCallback<SignUpResult> {
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
@@ -44,14 +44,13 @@ class SchoolAddActivity : AppCompatActivity() {
             override fun onSuccess(code: Int, responseData: SignUpResult) {
                 Log.d(TAG, "onSuccess: $responseData")
                 if(responseData.msg == "success"){
-                    Toast.makeText(this@SchoolAddActivity, "성공", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ChildAddActivity, "성공", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(code: Int) {
                 Log.d(TAG, "onFailure: $code")
             }
-
         })
     }
 }

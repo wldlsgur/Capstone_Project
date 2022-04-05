@@ -13,6 +13,18 @@
         android:theme="@style/Theme.IssueProject"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".res.RoomManager.RoomChildListItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.RoomManager.RoomChildListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.ChildAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.ChieldAddActivity"
+            android:exported="false" />
+        <activity
             android:name=".res.AddNoticActivity"
             android:exported="false" />
         <activity

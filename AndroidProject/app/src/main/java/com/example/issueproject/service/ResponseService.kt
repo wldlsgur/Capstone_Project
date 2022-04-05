@@ -138,6 +138,42 @@ class ResponseService {
             }
         })
     }
+    fun CreateParentinfo(info: ParentInfo, callback: RetrofitCallback<SignUpResult>) {
+        RetrofitBuilder.api.ParentInfo(info).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "onResponse: ..")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: $t")
+                callback.onError(t)
+            }
+        })
+    }
+    fun RoomChildListShow(school: String, callback: RetrofitCallback<MutableList<ParentInfo>>) {
+        RetrofitBuilder.api.RoomChildList(school).enqueue(object : Callback<MutableList<ParentInfo>>{
+            override fun onResponse(
+                call: Call<MutableList<ParentInfo>>,
+                response: Response<MutableList<ParentInfo>>
+            ) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onFailure(call: Call<MutableList<ParentInfo>>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+    }
+
 //    fun uploadimage() {
 //        var file = File("${getExternalFilesDir(Environment.DIRECTORY_PICTURES)}/tempImg.png")
 //        var requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)

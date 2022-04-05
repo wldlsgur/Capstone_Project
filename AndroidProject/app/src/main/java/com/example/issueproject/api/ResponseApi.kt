@@ -39,12 +39,20 @@ interface ResponseApi {
         @Query("room") room: String,
     ): Call<MutableList<AddManagement>>
 
-    @POST("/create//presidentinfo")
+    @POST("/create/presidentinfo")
     fun Presidentinfo(
         @Body presidentinfo: Presidentinfo
     ): Call<SignUpResult>
 
+    @POST("/create/parentinfo")
+    fun ParentInfo(
+        @Body parentInfo: ParentInfo
+    ): Call<SignUpResult>
 
+    @GET("/school/allinfo")
+    fun RoomChildList(
+        @Query("school") school: String
+    ): Call<MutableList<ParentInfo>>
 //    @Multipart
 //    @POST("uploads/")
 //    fun Upload(
