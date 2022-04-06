@@ -8,7 +8,7 @@ router.post('/user', function(req, res){
 		req.body.id,
 		req.body.pw,
 		req.body.name,
-		req.body.job,
+		req.body.job
 	];
     if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3]){
         res.send("plz send require elements");
@@ -26,7 +26,7 @@ router.post('/schoolmanagement', function(req, res){
 		req.body.content,
 		req.body.month,
 		req.body.year,
-		req.body.day,
+		req.body.day
 	];
     if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4] || !data_array[5] || !data_array[6] || !data_array[7]){
 	res.send("plz send require elements");
@@ -42,7 +42,7 @@ router.post('/presidentinfo', function(req, res){
 		req.body.school,
 		req.body.room,
 		req.body.number,
-		image_url,
+		image_url
 	];
 	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4]){
 		res.send("plz send require elements");
@@ -64,7 +64,7 @@ router.post('/parentinfo', function(req, res){
 		req.body.spec,
 		false
 	];
-	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4] || !data_array[5] || !data_array[6] || !data_array[7] || !data_array[8]){
+	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4] || !data_array[5] || !data_array[6] || !data_array[7]){
 		res.send("plz send require elements");
 		return;
 	}
@@ -81,7 +81,7 @@ router.post('teacherinfo', function(req, res){
 		image_url,
 		false
 	];
-	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4] || !data_array[5]){
+	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4]){
 		res.send('plz send require elements');
 		return;
 	}
