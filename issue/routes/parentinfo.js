@@ -20,7 +20,7 @@ router.get('/info', function(req, res){
     })
 })
 
-router.get('/school/allinfo', function(req, res){
+router.get('/room/allinfo', function(req, res){
 	let room = req.query.room;
 
 	if(!room){
