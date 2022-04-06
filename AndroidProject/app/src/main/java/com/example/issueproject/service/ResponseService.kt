@@ -157,8 +157,8 @@ class ResponseService {
             }
         })
     }
-    fun RoomChildListShow(school: String, callback: RetrofitCallback<MutableList<RoomChildListResult>>) {
-        RetrofitBuilder.api.RoomChildList(school).enqueue(object : Callback<MutableList<RoomChildListResult>>{
+    fun RoomChildListShow(room: String, callback: RetrofitCallback<MutableList<RoomChildListResult>>) {
+        RetrofitBuilder.api.RoomChildList(room).enqueue(object : Callback<MutableList<RoomChildListResult>>{
             override fun onResponse(
                 call: Call<MutableList<RoomChildListResult>>,
                 response: Response<MutableList<RoomChildListResult>>

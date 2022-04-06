@@ -44,9 +44,9 @@ interface ResponseApi {
         @Body parentInfo: ParentInfo
     ): Call<SignUpResult>
 
-    @GET("/parentinfo/school/allinfo")
+    @GET("/parentinfo/room/allinfo")
     fun RoomChildList(
-        @Query("school") school: String
+        @Query("room") room: String
     ): Call<MutableList<RoomChildListResult>>
 
     @GET("/presidentinfo/allschool")
