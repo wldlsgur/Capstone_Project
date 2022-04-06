@@ -11,7 +11,6 @@ module.exports = {
             if(i != data.length-1) make_query += ',';
         }
         make_query += ')';
-	console.log(make_query, this.response);
         db.query(make_query, data, function(err, result){
             if(err){
                 return err;
