@@ -1,25 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../DB/db');
+const db_query = require('../function/query');
 
 router.post('/user', function(req, res){
-    let id = req.body.id;
-    let pw = req.body.pw;
-    let name = req.body.name;
-    let job = req.body.job;
-
-    if(!id || !pw || !name || !job){
+	let data_array = [
+		req.body.id,
+		req.body.pw,
+		req.body.name,
+		req.body.job,
+	]
+    if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3]){
         res.send("plz send require elements");
         return;
     }
-
-    db.query(`INSERT INTO user VALUES('${id}', '${pw}', '${name}', '${job}')`, function(err , result){
-        if(err){
-            res.status(400).send(err);
-            return;
-        }
-        res.send({res : true, msg : 'success'});
-    })
+	let result = db_query.insert('user', data_array);
+	res.send(result);
 });
 
 router.post('/schoolmanagement', function(req, res){
