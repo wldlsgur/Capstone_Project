@@ -14,7 +14,7 @@ router.post('/user', function(req, res){
         res.send("plz send require elements");
         return;
     }
-	res.json(db_query.insert('user', data_array));
+	res.send(db_query.insert('user', data_array));
 });
 
 router.post('/schoolmanagement', function(req, res){

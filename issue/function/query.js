@@ -16,8 +16,8 @@ module.exports = {
         db.query(make_query, data, function(err, result){
             if(err){
                 return err;
-            }
-            return this.response; 
+            } 
         })
+	return this.response;
     }
 }
