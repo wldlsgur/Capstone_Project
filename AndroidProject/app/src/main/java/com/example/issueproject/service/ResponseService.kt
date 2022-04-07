@@ -207,6 +207,33 @@ class ResponseService {
 
         })
     }
+
+
+    fun GetRoom(school: String, callback: RetrofitCallback<MutableList<GetRoom>>) {
+        RetrofitBuilder.api.GetRoom(school).enqueue(object : Callback<MutableList<GetRoom>>{
+            override fun onResponse(
+                call: Call<MutableList<GetRoom>>,
+                response: Response<MutableList<GetRoom>>
+            ) {
+                Log.d(TAG, "RoomChildListShow: ..")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<MutableList<GetRoom>>, t: Throwable) {
+                Log.d(TAG, "onFailure: $t")
+                callback.onError(t)
+            }
+
+        })
+    }
+
     fun GetUserInfo(id: String, callback: RetrofitCallback<UserInfo>) {
         RetrofitBuilder.api.GetUserInfo(id).enqueue(object : Callback<UserInfo>{
             override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {

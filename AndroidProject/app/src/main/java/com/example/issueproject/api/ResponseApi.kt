@@ -3,6 +3,7 @@ package com.example.issueproject.api
 import com.example.issueproject.dto.*
 import okhttp3.MultipartBody
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.http.*
 
 interface ResponseApi {
@@ -53,6 +54,11 @@ interface ResponseApi {
     fun GetSchool(
 
     ): Call<MutableList<GetSchool>>
+
+    @GET("/presidentinfo/allroom/{school}")
+    fun GetRoom(
+        @Path("school") school: String
+    ): Call<MutableList<GetRoom>>
 
     @GET("/user/info/{id}")
     fun GetUserInfo(

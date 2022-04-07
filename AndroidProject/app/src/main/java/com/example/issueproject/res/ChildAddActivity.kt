@@ -4,9 +4,12 @@ import android.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.issueproject.databinding.ActivityChildAddBinding
+import com.example.issueproject.dto.GetRoom
 import com.example.issueproject.dto.GetSchool
 import com.example.issueproject.dto.ParentInfo
 import com.example.issueproject.dto.SignUpResult
@@ -19,13 +22,26 @@ class ChildAddActivity : AppCompatActivity() {
         ActivityChildAddBinding.inflate(layoutInflater)
     }
     val school = ""
-
+    val itemList = mutableListOf<String>()
+    val RoomList = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         GetSchool()
+
+        binding.spinnerSchool.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selecttext = itemList[position]
+                GetRoom(selecttext)
+            }
+
+        }
 
         binding.buttonChildAdd.setOnClickListener {
             val id = "test"
@@ -62,28 +78,16 @@ class ChildAddActivity : AppCompatActivity() {
     }
 
     fun GetSchool(){
-        val itemList = mutableListOf<String>()
+
         ResponseService().GetSchool(object : RetrofitCallback<MutableList<GetSchool>>{
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
 
             override fun onSuccess(code: Int, responseData: MutableList<GetSchool>) {
-                Log.d(TAG, "onSuccess: ${responseData.size}")
-                Log.d(TAG, "onSuccess: ${responseData[0].school}")
-                Log.d(TAG, "onSuccess: ${responseData[1].school}")
-                Log.d(TAG, "onSuccess: ${responseData[2].school}")
-
-                val itemsize: Int = responseData.size-1
-                Log.d(TAG, "size: $itemsize")
-
-                for(i: Int in 0..itemsize){
-                    itemList.add(responseData[i].school)
+                for(item in responseData) {
+                    itemList.add(item.school)
                 }
-//
-//                for(item in responseData) {
-//                    itemList.add(item.school)
-//                }
 
                 val adapter = ArrayAdapter(this@ChildAddActivity, R.layout.simple_spinner_dropdown_item, itemList)
                   binding.spinnerSchool.adapter = adapter
@@ -96,4 +100,28 @@ class ChildAddActivity : AppCompatActivity() {
 
         })
     }
+
+    fun GetRoom(school: String){
+
+        ResponseService().GetRoom(school, object: RetrofitCallback<MutableList<GetRoom>> {
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: MutableList<GetRoom>) {
+                for(item in responseData) {
+                    RoomList.add(item.room)
+                }
+
+                val adapter = ArrayAdapter(this@ChildAddActivity, R.layout.simple_spinner_dropdown_item, RoomList)
+                binding.spinnerRoom.adapter = adapter
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+            }
+
+        })
+    }
+
 }
