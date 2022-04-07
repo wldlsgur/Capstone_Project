@@ -42,6 +42,10 @@ let parentinfoRouter = require('./routes/parentinfo');
 let presidentinfoRouter = require('./routes/presidentinfo');
 let userRouter = require('./routes/user');
 
+//인승 추가(아래)
+var staffRouter = require('./routes/staff');
+var medicineRouter = require('./routes/medicine');
+
 var app = express();
 
 // view engine setup
@@ -63,6 +67,10 @@ app.use('/schoolmanagement', schoolmanagementRouter);
 app.use('/parentinfo', parentinfoRouter);
 app.use('/presidentinfo', presidentinfoRouter);
 app.use('/uploadimage/:target/:id/:name', upload.single('image'), uploadimageRouter);
+
+//인승 추가(아래)
+app.use('/staff', staffRouter);
+app.use('/medicine', medicineRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
