@@ -1,18 +1,22 @@
 const express = require('express');
 const router = express();
 const db = require('../DB/db');
-const db_query = require('../function/query');
+const make_query = require('../function/make_query');
 
 router.get('/info', function(req, res){
-	let data_array = [
-		req.query.id
-	];
-
-    if(!data_array[0]){
+	let id = req.query.id;
+    if(!id){
         res.send('plz send require elements'); 
         return;
     }
-	res.send(db_query.select('*', 'parentinfo', data_array, '', 'json_array'));
+	let query = `SELECT * FROM parentinfo WHERE id = '${id}'`;
+	db.query(query, function(err, result){
+		if(err){
+			res.status(400).send(err);
+			return;
+		}
+		res.send(result);
+	})
 })
 
 router.get('/room/allinfo', function(req, res){
