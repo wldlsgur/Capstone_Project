@@ -87,4 +87,33 @@ router.post('teacherinfo', function(req, res){
 	}
 	res.send(db_query.insert('teacherinfo', data_array));
 });
+
+router.post('/food_list', function(req, res){
+	let image_url = `/image/food_list/${req.body.image}.jpg`;
+	let data_array = [
+		req.body.school,
+		req.body.year,
+		req.body.month,
+		image_url
+	];
+	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3]){
+		res.send('plz send require elements');
+		return;
+	}
+	res.send(db_query.insert('food_list', data_array));
+})
+
+router.post('/album', function(req, res){
+	let image_url = `/image/album/${req.body.image}.jpg`;
+	let data_array = [
+		req.body.school,
+		req.body.room,
+		image_url
+	];
+	if(!data_array[0] || !data_array[1] || !data_array[2]){
+		res.send('plz send require elements');
+		return;
+	}
+	res.send(db_query.insert('album', data_array));
+})
 module.exports = router;
