@@ -8,7 +8,7 @@ router.get('/info', function(req, res){
 		req.query.id
 	];
 
-    if(!data[0]){
+    if(!data_array[0]){
         res.send('plz send require elements'); 
         return;
     }
