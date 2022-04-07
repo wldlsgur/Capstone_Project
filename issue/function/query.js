@@ -11,15 +11,13 @@ module.exports = {
             if(i != data.length-1) make_query += ',';
         }
         make_query += ')';
-	console.log(data);
-	console.log(make_query);
+	    console.log(data);
+	    console.log(make_query);
         db.query(make_query, data, function(err, result){
             if(err){
                 return err;
             }
-            else{
-                return this.response; 
-            }
+            return this.response; 
         })
     }
 }
