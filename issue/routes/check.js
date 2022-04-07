@@ -44,7 +44,7 @@ router.get('/sameid', function(req, res){
             return;
         }
         if(!result[0]){
-            res.send({req : false, msg : 'not found'});
+            res.send({res : false, msg : 'not found'});
             return;
         }
         res.send({res : true, msg : 'found'});
