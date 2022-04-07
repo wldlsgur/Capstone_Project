@@ -24,8 +24,8 @@ router.post('/schoolmanagement', function(req, res){
 		req.body.room,
 		req.body.title,
 		req.body.content,
-		req.body.month,
 		req.body.year,
+		req.body.month,
 		req.body.day
 	];
     if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4] || !data_array[5] || !data_array[6] || !data_array[7]){
