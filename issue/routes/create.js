@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../DB/db');
-const db_query = require('../function/query');
+const make_query = require('../Function/make_query');
+const response = {res : true, msg : 'success'};
 
 router.post('/user', function(req, res){
 	let data_array = [
@@ -14,7 +15,13 @@ router.post('/user', function(req, res){
         res.send("plz send require elements");
         return;
     }
-	res.send(db_query.insert('user', data_array));
+	db.query(make_query.INSERT('user', data_array), data_array, function(err, result){
+		if(err){
+			res.status(400).send(err);
+			return;
+		}
+		res.send(response);
+	})
 });
 
 router.post('/schoolmanagement', function(req, res){
@@ -29,10 +36,16 @@ router.post('/schoolmanagement', function(req, res){
 		req.body.day
 	];
     if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4] || !data_array[5] || !data_array[6] || !data_array[7]){
-	res.send("plz send require elements");
-	return;
+		res.send("plz send require elements");
+		return;
     }
-	res.send(db_query.insert('schoolmanagement', data_array));
+	db.query(make_query.INSERT('schoolmanagement', data_array), data_array, function(err, result){
+		if(err){
+			res.status(400).send(err);
+			return;
+		}
+		res.send(response);
+	})
 });
 
 router.post('/presidentinfo', function(req, res){
@@ -47,8 +60,14 @@ router.post('/presidentinfo', function(req, res){
 	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4]){
 		res.send("plz send require elements");
 		return;
-	} 
-	res.send(db_query.insert('presidentinfo', data_array));
+	}
+	db.query(make_query.INSERT('presidentinfo', data_array), data_array, function(err, result){
+		if(err){
+			res.status(400).send(err);
+			return;
+		}
+		res.send(response);
+	})
 });
 
 router.post('/parentinfo', function(req, res){
@@ -68,7 +87,13 @@ router.post('/parentinfo', function(req, res){
 		res.send("plz send require elements");
 		return;
 	}
-	res.send(db_query.insert('parentinfo', data_array));
+	db.query(make_query.INSERT('parentinfo', data_array), data_array, function(err, result){
+		if(err){
+			res.status(400).send(err);
+			return;
+		}
+		res.send(response);
+	})
 });
 
 router.post('teacherinfo', function(req, res){
@@ -85,7 +110,13 @@ router.post('teacherinfo', function(req, res){
 		res.send('plz send require elements');
 		return;
 	}
-	res.send(db_query.insert('teacherinfo', data_array));
+	db.query(make_query.INSERT('teacherinfo', data_array), data_array, function(err, result){
+		if(err){
+			res.status(400).send(err);
+			return;
+		}
+		res.send(response);
+	})
 });
 
 router.post('/food_list', function(req, res){
@@ -100,7 +131,13 @@ router.post('/food_list', function(req, res){
 		res.send('plz send require elements');
 		return;
 	}
-	res.send(db_query.insert('food_list', data_array));
+	db.query(make_query.INSERT('food_list', data_array), data_array, function(err, result){
+		if(err){
+			res.status(400).send(err);
+			return;
+		}
+		res.send(response);
+	})
 })
 
 router.post('/album', function(req, res){
@@ -114,6 +151,12 @@ router.post('/album', function(req, res){
 		res.send('plz send require elements');
 		return;
 	}
-	res.send(db_query.insert('album', data_array));
+	db.query(make_query.INSERT('album', data_array), data_array, function(err, result){
+		if(err){
+			res.status(400).send(err);
+			return;
+		}
+		res.send(response);
+	})
 })
 module.exports = router;

@@ -3,21 +3,19 @@ const router = express();
 const db = require('../DB/db');
 
 router.get('/info', function(req, res){
-    let id = req.query.id;
-
+	let id = req.query.id;
     if(!id){
         res.send('plz send require elements'); 
         return;
     }
-
-    let query = `SELECT * FROM parentinfo WHERE id='${id}'`;
-    db.query(query, function(err, result){
-        if(err){
-            res.status(400).send(err);
-            return;
-        }
-        res.send(result);
-    })
+	let query = `SELECT * FROM parentinfo WHERE id = '${id}'`;
+	db.query(query, function(err, result){
+		if(err){
+			res.status(400).send(err);
+			return;
+		}
+		res.send(result);
+	})
 })
 
 router.get('/room/allinfo', function(req, res){

@@ -3,3 +3,4 @@ const router = express.Router();
 const db = require('../DB/db');
 
 // medicine, medicinemanagement 통일
+module.exports = router;
