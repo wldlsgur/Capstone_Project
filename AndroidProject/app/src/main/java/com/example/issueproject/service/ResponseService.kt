@@ -264,18 +264,27 @@ class ResponseService {
 //        RetrofitBuilder.api.Upload(body)
 //    }
 
-    fun GetImageUrl(url: String, callback: RetrofitCallback<ResponseBody>) {
-        RetrofitBuilder.api.GetImageUrl(url).enqueue(object : Callback<ResponseBody>{
+//    fun GetImageUrl(url: String, callback: RetrofitCallback<ResponseBody>) {
+//        RetrofitBuilder.api.GetImageUrl(url).enqueue(object : Callback<ResponseBody>{
+//            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+//                Log.d(TAG, "GetImageUrl: ..")
+//                Log.d(TAG, "onResponse: ${response}")
+//                callback.onSuccess(response.code(), response.body()!!)
+//            }
+//
+//            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+//                Log.d(TAG, "onFailure: $t")
+//                callback.onError(t)
+//            }
+//
+//        })
+//    }
+    fun GetImageUrl(target: String, name: String, callback: RetrofitCallback<ResponseBody>) {
+        RetrofitBuilder.api.GetImageUrl(target, name).enqueue(object : Callback<ResponseBody>{
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                Log.d(TAG, "RoomChildListShow: ..")
-                if (response.code() == 200){
-                    if(response.body() != null){
-                        Log.d(TAG, "onResponse: 200")
-                        callback.onSuccess(response.code(), response.body()!!)
-                    } else{
-                        callback.onFailure(response.code())
-                    }
-                }
+                Log.d(TAG, "GetImageUrl: ..")
+                Log.d(TAG, "onResponse: ${response}")
+                callback.onSuccess(response.code(), response.body()!!)
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {

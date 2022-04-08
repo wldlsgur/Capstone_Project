@@ -1,5 +1,6 @@
 package com.example.issueproject.api
 
+import com.example.issueproject.R
 import com.example.issueproject.dto.*
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
@@ -73,10 +74,15 @@ interface ResponseApi {
         @Path("id") id: String,
         @Path("name") name: String
     ): Call<LoginResult>
+//
+//    @GET("{url}")
+//    fun  GetImageUrl(
+//        @Path("url") url: String
+//    ): Call<ResponseBody>
 
-    @GET("/{url}")
+    @GET("/image/{target}/{name}.jpg")
     fun  GetImageUrl(
-        @Path("url") url: String
+        @Path("target") target: String,
+        @Path("name") name: String
     ): Call<ResponseBody>
-
 }

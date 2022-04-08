@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.issueproject.R
-import com.example.issueproject.dto.LoginResult
 import com.example.issueproject.dto.RoomChildListResult
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -29,26 +28,29 @@ class RoomChildListAdapter(var list:MutableList<RoomChildListResult>) : Recycler
             age.text = data.child_age
             parentnumber.text = data.parent_num
             spec.text = data.spec
-            GetImageUrl(data.child_image)
+            //GetImageUrl(data.child_image)
+            //val text= "/image/parents/이정은.jpg"
+            //GetImageUrl(text)
+            GetImageUrl("parents", "이정은")
+
         }
 
-        fun GetImageUrl(url: String){
-            ResponseService().GetImageUrl(url, object: RetrofitCallback<ResponseBody>{
+        fun GetImageUrl(target: String, name: String){
+            ResponseService().GetImageUrl(target, name, object: RetrofitCallback<ResponseBody>{
                 override fun onError(t: Throwable) {
                     Log.d(TAG, "onError: ")
                 }
 
                 override fun onSuccess(code: Int, responseData: ResponseBody) {
                     Log.d(TAG, "onSuccess: $responseData")
-//                    Bitmap bmp = BitmapFactory().decodeStream(responseData.body().byteStream())
-//                    childimage.setImageBitmap(responseData)
 
+                    val bitmap: Bitmap = BitmapFactory.decodeStream(responseData.byteStream())
+                    childimage.setImageBitmap(bitmap)
                 }
 
                 override fun onFailure(code: Int) {
                     Log.d(TAG, "onFailure: $code")
                 }
-
             })
         }
     }
