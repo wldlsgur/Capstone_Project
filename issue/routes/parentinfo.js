@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express();
 const db = require('../DB/db');
-const make_query = require('../function/make_query');
 
 router.get('/info', function(req, res){
 	let id = req.query.id;

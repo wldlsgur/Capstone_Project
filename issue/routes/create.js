@@ -15,7 +15,7 @@ router.post('/user', function(req, res){
         res.send("plz send require elements");
         return;
     }
-	db.query(make_query.insert('user', data_array), function(err, result){
+	db.query(make_query.insert('user', data_array), data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 		}
@@ -38,7 +38,7 @@ router.post('/schoolmanagement', function(req, res){
 	res.send("plz send require elements");
 	return;
     }
-	db.query(make_query.insert('schoolmanagement', data_array), function(err, result){
+	db.query(make_query.insert('schoolmanagement', data_array), data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 		}
@@ -59,7 +59,7 @@ router.post('/presidentinfo', function(req, res){
 		res.send("plz send require elements");
 		return;
 	} 
-	db.query(make_query.insert('presidentinfo', data_array), function(err, result){
+	db.query(make_query.insert('presidentinfo', data_array), data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 		}
@@ -84,7 +84,7 @@ router.post('/parentinfo', function(req, res){
 		res.send("plz send require elements");
 		return;
 	}
-	db.query(make_query.insert('parentinfo', data_array), function(err, result){
+	db.query(make_query.insert('parentinfo', data_array), data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 		}
@@ -106,7 +106,7 @@ router.post('teacherinfo', function(req, res){
 		res.send('plz send require elements');
 		return;
 	}
-	db.query(make_query.insert('teacherinfo', data_array), function(err, result){
+	db.query(make_query.insert('teacherinfo', data_array), data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 		}
@@ -126,7 +126,7 @@ router.post('/food_list', function(req, res){
 		res.send('plz send require elements');
 		return;
 	}
-	db.query(make_query.insert('food_list', data_array), function(err, result){
+	db.query(make_query.insert('food_list', data_array), data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 		}
@@ -145,7 +145,7 @@ router.post('/album', function(req, res){
 		res.send('plz send require elements');
 		return;
 	}
-	db.query(make_query.insert('album', data_array), function(err, result){
+	db.query(make_query.insert('album', data_array), data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 		}
