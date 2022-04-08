@@ -13,11 +13,11 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/imageViewChildImage"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imageViewChildImage"
         android:layout_width="74dp"
         android:layout_height="66dp"
         android:layout_marginStart="20dp"
@@ -74,7 +74,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:text="부모님 전화번호 : "
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/imageViewChildImage"
         app:layout_constraintTop_toBottomOf="@+id/textViewRoom_child_list_item_name" />
 
     <TextView
@@ -86,6 +86,6 @@
         android:layout_marginBottom="15dp"
         android:text="특이사항 : "
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/imageViewChildImage"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 </androidx.constraintlayout.widget.ConstraintLayout>

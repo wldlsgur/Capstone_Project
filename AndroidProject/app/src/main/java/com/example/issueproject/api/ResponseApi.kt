@@ -2,6 +2,7 @@ package com.example.issueproject.api
 
 import com.example.issueproject.dto.*
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.http.*
@@ -65,9 +66,17 @@ interface ResponseApi {
         @Path("id") id: String
     ): Call<UserInfo>
 
-//    @Multipart
-//    @POST("uploads/")
-//    fun Upload(
-//        @Part photo: MultipartBody.Part
-//    )
+    @Multipart
+    @POST("uploadimage/{target}/{id}/{name}")
+    fun Uploadimage(
+        @Path("target") target: String,
+        @Path("id") id: String,
+        @Path("name") name: String
+    ): Call<LoginResult>
+
+    @GET("/{url}")
+    fun  GetImageUrl(
+        @Path("url") url: String
+    ): Call<ResponseBody>
+
 }

@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.issueproject.dto.*
 import com.example.issueproject.retrofit.RetrofitBuilder
 import com.example.issueproject.retrofit.RetrofitCallback
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -262,4 +263,26 @@ class ResponseService {
 //
 //        RetrofitBuilder.api.Upload(body)
 //    }
+
+    fun GetImageUrl(url: String, callback: RetrofitCallback<ResponseBody>) {
+        RetrofitBuilder.api.GetImageUrl(url).enqueue(object : Callback<ResponseBody>{
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                Log.d(TAG, "RoomChildListShow: ..")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.d(TAG, "onFailure: $t")
+                callback.onError(t)
+            }
+
+        })
+    }
 }
