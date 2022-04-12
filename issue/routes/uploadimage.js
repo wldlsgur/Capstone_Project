@@ -40,7 +40,7 @@ router.post('/', function(req, res){
 				];
 				break;
 			case '원장님':
-				query = `UPDATE presidentinfo SET presi_image='${file_url}' WHERE id='${key}';`
+				query = `UPDATE presidentinfo SET presi_image=? WHERE id=?;`
 				data_array = [
 					file_url,
 					key
