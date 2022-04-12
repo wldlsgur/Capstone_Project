@@ -7,7 +7,7 @@ module.exports = function () {
                 var sql=`select * from teacherinfo where school='${school}'`;
                 con.query(sql,function(err,result,fields){
                     con.release();
-                    if(err) callback(err,null);
+                    if(err) return;
                     else callback(null,result);
                 })
             });
