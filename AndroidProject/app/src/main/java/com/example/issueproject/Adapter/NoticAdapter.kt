@@ -11,13 +11,17 @@ class NoticAdapter(var list:MutableList<AddManagement>) : RecyclerView.Adapter<N
     inner class NoticeViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView){
         private val title: TextView = itemView.findViewById(R.id.textViewNotic_item_title)
         private val date: TextView = itemView.findViewById(R.id.textViewNotic_item_date)
+        private val content: TextView = itemView.findViewById(R.id.textViewNotic_item_content)
+
         fun bindinfo(data:AddManagement){
-            date.text = "${data.year}년 ${data.month}월 ${data.day}일 DDD"
-            title.text = data.title
+            // "${data.year}년 ${data.month}월 ${data.day}일"
+            date.text = data.date
+            title.text = "제목: " + data.title
+            content.text = data.content
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoticeViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_notic_item,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_notic_item, parent,false)
         return NoticeViewHolder(view)
     }
 
@@ -26,5 +30,4 @@ class NoticAdapter(var list:MutableList<AddManagement>) : RecyclerView.Adapter<N
     override fun onBindViewHolder(holder: NoticeViewHolder, position: Int) {
         holder.bindinfo(list[position])
     }
-
 }

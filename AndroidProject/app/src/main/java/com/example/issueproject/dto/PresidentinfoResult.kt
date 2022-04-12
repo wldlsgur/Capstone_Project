@@ -1,8 +1,9 @@
 package com.example.issueproject.dto
 
-data class Presidentinfo(
+data class PresidentinfoResult(
     val id: String,
     val school: String,
     val room: String,
-    val number: String
+    val presi_num: String,
+    val presi_image: String
 )

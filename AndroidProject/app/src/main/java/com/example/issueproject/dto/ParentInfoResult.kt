@@ -1,11 +1,13 @@
 package com.example.issueproject.dto
 
-data class ParentInfo(
+class ParentInfoResult (
     val id: String,
     val school: String,
     val room: String,
     val number: String,
     val name: String,
     val age: String,
-    val spec: String
+    val image: String,
+    val spec: String,
+    val checked: Boolean
 )

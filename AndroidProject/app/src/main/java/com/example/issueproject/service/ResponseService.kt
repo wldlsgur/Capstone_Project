@@ -22,7 +22,7 @@ class ResponseService {
             }
 
             override fun onResponse(call: Call<LoginResult>, response: Response<LoginResult>) {
-                Log.d(TAG, "onResponse: ..")
+                Log.d(TAG, "LoginCheckService: ..")
                 if (response.code() == 200){
                     if(response.body() != null){
                         Log.d(TAG, "onResponse: 200")
@@ -40,7 +40,7 @@ class ResponseService {
                 Log.d(TAG, "onResponse: $t")
             }
             override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
-                Log.d(TAG, "onResponse: ")
+                Log.d(TAG, "Sameid: ")
                 if (response.code() == 200){
                     if(response.body() != null){
                         Log.d(TAG, "onResponse: 200")
@@ -53,6 +53,53 @@ class ResponseService {
         })
     }
 
+    fun GetPresidentInfo(id: String, callback: RetrofitCallback<MutableList<PresidentinfoResult>>){
+        RetrofitBuilder.api.GetPresidentInfo(id).enqueue(object : Callback<MutableList<PresidentinfoResult>>{
+            override fun onResponse(call: Call<MutableList<PresidentinfoResult>>, response: Response<MutableList<PresidentinfoResult>>) {
+                Log.d(TAG, "GetPresidentInfo: ..")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+            override fun onFailure(call: Call<MutableList<PresidentinfoResult>>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+
+        })
+    }
+
+    fun GetParentInfo(id: String, callback: RetrofitCallback<ParentInfoResult>){
+        RetrofitBuilder.api.GetParentInfo(id).enqueue(object : Callback<ParentInfoResult>{
+            override fun onResponse(
+                call: Call<ParentInfoResult>,
+                response: Response<ParentInfoResult>
+            ) {
+                Log.d(TAG, "SignUpService: ..")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ParentInfoResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+
+        })
+    }
     fun SignUpService(signupinfo: SingUpInfo, callback: RetrofitCallback<SignUpResult>){
         RetrofitBuilder.api.SignUp(signupinfo).enqueue(object : Callback<SignUpResult>{
             override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
@@ -61,7 +108,7 @@ class ResponseService {
             }
 
             override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
-                Log.d(TAG, "onResponse: ..")
+                Log.d(TAG, "SignUpService: ..")
                 if (response.code() == 200){
                     Log.d(TAG, "onResponse: 200")
                     if(response.body() != null){
@@ -82,7 +129,7 @@ class ResponseService {
             }
 
             override fun onResponse(call: Call<AddManagementResult>,response: Response<AddManagementResult>) {
-                Log.d(TAG, "onResponse: ..")
+                Log.d(TAG, "AddManagementService: ..")
                 if (response.code() == 200){
                     Log.d(TAG, "onResponse: 200")
                     if(response.body() != null){
@@ -102,7 +149,7 @@ class ResponseService {
                 call: Call<MutableList<AddManagement>>,
                 response: Response<MutableList<AddManagement>>
             ) {
-                Log.d(TAG, "onResponse: ..")
+                Log.d(TAG, "DayNoticInfoShow: ..")
                 if (response.code() == 200){
                     if(response.body() != null){
                         Log.d(TAG, "onResponse: 200")
@@ -123,7 +170,7 @@ class ResponseService {
     fun CreatePresidentinfo(info: Presidentinfo, callback: RetrofitCallback<SignUpResult>) {
         RetrofitBuilder.api.Presidentinfo(info).enqueue(object : Callback<SignUpResult>{
             override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
-                Log.d(TAG, "onResponse: ..")
+                Log.d(TAG, "CreatePresidentinfo: ..")
                 if (response.code() == 200){
                     if(response.body() != null){
                         Log.d(TAG, "onResponse: 200")
@@ -142,7 +189,7 @@ class ResponseService {
     fun CreateParentinfo(info: ParentInfo, callback: RetrofitCallback<SignUpResult>) {
         RetrofitBuilder.api.ParentInfo(info).enqueue(object : Callback<SignUpResult>{
             override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
-                Log.d(TAG, "onResponse: ..")
+                Log.d(TAG, "CreateParentinfo: ..")
                 if (response.code() == 200){
                     if(response.body() != null){
                         Log.d(TAG, "onResponse: 200")
@@ -190,7 +237,7 @@ class ResponseService {
                 call: Call<MutableList<GetSchool>>,
                 response: Response<MutableList<GetSchool>>
             ) {
-                Log.d(TAG, "RoomChildListShow: ..")
+                Log.d(TAG, "GetSchool: ..")
                 if (response.code() == 200){
                     if(response.body() != null){
                         Log.d(TAG, "onResponse: 200")
@@ -216,7 +263,7 @@ class ResponseService {
                 call: Call<MutableList<GetRoom>>,
                 response: Response<MutableList<GetRoom>>
             ) {
-                Log.d(TAG, "RoomChildListShow: ..")
+                Log.d(TAG, "GetRoom: ..")
                 if (response.code() == 200){
                     if(response.body() != null){
                         Log.d(TAG, "onResponse: 200")
@@ -238,7 +285,7 @@ class ResponseService {
     fun GetUserInfo(id: String, callback: RetrofitCallback<UserInfo>) {
         RetrofitBuilder.api.GetUserInfo(id).enqueue(object : Callback<UserInfo>{
             override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {
-                Log.d(TAG, "RoomChildListShow: ..")
+                Log.d(TAG, "GetUserInfo: ..")
                 if (response.code() == 200){
                     if(response.body() != null){
                         Log.d(TAG, "onResponse: 200")
