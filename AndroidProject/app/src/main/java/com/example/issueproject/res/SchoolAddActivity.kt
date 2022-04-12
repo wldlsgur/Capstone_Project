@@ -17,9 +17,6 @@ import android.provider.MediaStore
 
 import android.content.Intent
 
-
-
-
 private const val TAG = "SchoolAddActivity"
 class SchoolAddActivity : AppCompatActivity() {
     private val binding by lazy {

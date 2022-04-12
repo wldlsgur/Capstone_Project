@@ -300,7 +300,6 @@ class ResponseService {
                 Log.d(TAG, "onFailure: $t")
                 callback.onError(t)
             }
-
         })
     }
 //    fun uploadimage() {

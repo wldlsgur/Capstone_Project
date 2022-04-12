@@ -5,9 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.example.issueproject.databinding.ActivityMainBinding
 import com.example.issueproject.dto.LoginResult
-import com.example.issueproject.dto.UserInfo
+import com.example.issueproject.res.viewmodel.MainViewModels
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
@@ -57,6 +58,7 @@ class MainActivity : AppCompatActivity() {
                     Log.d(TAG, "res: true")
                     if(responseData.msg == "success"){
                         Log.d(TAG, "msg: success")
+                        Log.d(TAG, "onSuccess: $id")
                         var intent = Intent(this@MainActivity, MenuActivity::class.java).apply{
                             putExtra("id", id)
                             Log.d(TAG, "id: $id")
