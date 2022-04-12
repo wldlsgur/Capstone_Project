@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const multer = require('multer');
-const db = require('./DB/db');
 
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
@@ -27,7 +26,7 @@ const storage = multer.diskStorage({
 		}
 	},
 	filename: function (req, file, cb) {
-		let key = req.params.key;
+		let key = req.body.key;
 		cb(null, `${key}_${file.originalname}`);
 	},
 	limits: {fileSize: 5 * 1024 * 1024}
