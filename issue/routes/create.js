@@ -52,7 +52,7 @@ router.post('/presidentinfo', function(req, res){
 		req.body.school,
 		req.body.room,
 		req.body.number,
-		'default'
+		'/default'
 	];
 	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4]){
 		res.send("plz send require elements");
@@ -75,7 +75,7 @@ router.post('/parentinfo', function(req, res){
 		req.body.number,
 		req.body.name,
 		req.body.age,
-		'default',
+		'/default',
 		req.body.spec,
 		false
 	];
@@ -98,7 +98,7 @@ router.post('teacherinfo', function(req, res){
 		req.body.school,
 		req.body.room,
 		req.body.number,
-		'default',
+		'/default',
 		false
 	];
 	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4]){
@@ -118,7 +118,7 @@ router.post('/food_list', function(req, res){
 	let data_array = [
 		req.body.school,
 		req.body.date,
-		'default'
+		'/default'
 	];
 	if(!data_array[0] || !data_array[1] || !data_array[2]){
 		res.send('plz send require elements');
@@ -139,7 +139,7 @@ router.post('/album', function(req, res){
 		req.body.room,
 		req.body.title,
 		req.body.date,
-		'default'
+		'/default'
 	];
 	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4]){
 		res.send('plz send require elements');
