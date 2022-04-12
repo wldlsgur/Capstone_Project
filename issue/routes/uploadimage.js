@@ -12,12 +12,12 @@ router.post('/', function(req, res){
 		if(!file || !target || !key || !value1 || !value2){
 			res.send('plz send require elements');
 		}
-		let file_url = `${key}_${file.originalname}`;
+		let file_url = `/${key}_${file.originalname}`;
 		let query = ``;
 		let data_array =[];
 		switch(target){
 			case '부모님':
-				query = `UPDATE parentinfo SET cihld_image=? WHERE id=? AND child_name=?;`
+				query = `UPDATE parentinfo SET child_image=? WHERE id=? AND child_name=?;`
 				data_array = [
 					file_url,
 					key,
@@ -60,6 +60,7 @@ router.post('/', function(req, res){
 		db.query(query, data_array, function(err, result){
 			if(err){
 				res.status(400).send(err);
+				return;
 			}
 			res.send({res : true, msg : 'success'});
 		})

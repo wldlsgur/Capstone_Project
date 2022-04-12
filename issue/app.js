@@ -7,7 +7,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		let target = req.params.target;
+		let target = req.body.target;
 	
 		if(target === "부모님"){
 			cb(null, 'uploads/parents');
