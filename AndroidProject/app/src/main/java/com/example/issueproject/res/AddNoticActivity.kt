@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.issueproject.databinding.ActivityAddNoticBinding
 import com.example.issueproject.dto.AddManagement
 import com.example.issueproject.dto.AddManagementResult
@@ -40,14 +41,14 @@ class AddNoticActivity : AppCompatActivity() {
             var room = binding.editTextAddGroup.text.toString()
             var menu = binding.editTextAddMenu.text.toString()
             var date = binding.textViewDate.text.toString()
-            var year = date.substring(0,4)
-            var month = date.substring(6,8)
-            var day = date.substring(10,12)
+//            var year = date.substring(0,4)
+//            var month = date.substring(6,8)
+//            var day = date.substring(10,12)
 
             var school = binding.editTextAddSchool.text.toString()
-            Log.d(TAG, "datetest: ${year}-${month}-${day}")
+//            Log.d(TAG, "datetest: ${year}-${month}-${day}")
 
-            var addManagement = AddManagement(title, content, year, month, day, school, room, menu)
+            var addManagement = AddManagement(title, content, date, school, room, menu)
             insertaddManagement(addManagement)
 
         }
@@ -94,6 +95,7 @@ class AddNoticActivity : AppCompatActivity() {
 
             override fun onSuccess(code: Int, responseData: AddManagementResult) {
                 Log.d(TAG, "onSuccess: $responseData")
+                Toast.makeText(this@AddNoticActivity, "성공",Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(code: Int) {

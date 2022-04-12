@@ -21,9 +21,10 @@ class ChildAddActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityChildAddBinding.inflate(layoutInflater)
     }
-    val school = ""
+    var school : String = ""
+    var room : String = ""
     val itemList = mutableListOf<String>()
-    val RoomList = mutableListOf<String>()
+    val roomList = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,27 +34,31 @@ class ChildAddActivity : AppCompatActivity() {
 
         binding.spinnerSchool.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
             }
-
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selecttext = itemList[position]
-                GetRoom(selecttext)
+                school = itemList[position]
+                GetRoom(school)
             }
 
+        }
+        binding.spinnerRoom.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                room = roomList[position]
+            }
         }
 
         binding.buttonChildAdd.setOnClickListener {
             val id = "test"
-            val school = "달서어린이집"
-            val room = "햇살반"
+            val schoolname = school
+            val roomname = room
             val childage = binding.editTextChildAge.text.toString()
             val childname = binding.editTextChildName.text.toString()
             val childspec = binding.editTextChildSpec.text.toString()
             val parentnum = binding.editTextParentNum.text.toString()
-            val image = "default"
 
-            var parentinfo = ParentInfo(id, school, room, parentnum, childname, childage, image, childspec)
+            var parentinfo = ParentInfo(id, schoolname, roomname, parentnum, childname, childage, childspec)
             ChildAdd(parentinfo)
         }
     }
@@ -85,6 +90,8 @@ class ChildAddActivity : AppCompatActivity() {
             }
 
             override fun onSuccess(code: Int, responseData: MutableList<GetSchool>) {
+                itemList.clear()
+                itemList.add("어린이집")
                 for(item in responseData) {
                     itemList.add(item.school)
                 }
@@ -109,11 +116,13 @@ class ChildAddActivity : AppCompatActivity() {
             }
 
             override fun onSuccess(code: Int, responseData: MutableList<GetRoom>) {
+                roomList.clear()
+                roomList.add("반")
                 for(item in responseData) {
-                    RoomList.add(item.room)
+                    roomList.add(item.room)
                 }
 
-                val adapter = ArrayAdapter(this@ChildAddActivity, R.layout.simple_spinner_dropdown_item, RoomList)
+                val adapter = ArrayAdapter(this@ChildAddActivity, R.layout.simple_spinner_dropdown_item, roomList)
                 binding.spinnerRoom.adapter = adapter
             }
 

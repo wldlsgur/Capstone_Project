@@ -15,7 +15,6 @@ import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
 private const val TAG = "NoticActivity"
-
 class NoticActivity : AppCompatActivity() {
     lateinit var NoticAdapter: NoticAdapter
 
@@ -25,7 +24,7 @@ class NoticActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_notic)
+        setContentView(binding.root)
         ShowRecycler("공지사항","달서어린이집","인혁반")
 
         binding.buttonNoticAdd.setOnClickListener {

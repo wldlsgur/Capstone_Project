@@ -11,9 +11,13 @@ class DayNoticAdapter(var list:MutableList<AddManagement>) : RecyclerView.Adapte
     inner class NoticeViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView){
         private val date: TextView = itemView.findViewById(R.id.textViewDay_notic_item_date)
         private val title: TextView = itemView.findViewById(R.id.textViewDay_notic_item_title)
+        private val content: TextView = itemView.findViewById(R.id.textViewDay_notic_item_content)
+
         fun bindinfo(data:AddManagement){
-            date.text = "${data.year}년 ${data.month}월 ${data.day}일"
-            title.text = data.title
+            //"${data.year}년 ${data.month}월 ${data.day}일"
+            date.text = data.date
+            title.text = "제목: " + data.title
+            content.text = data.content
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoticeViewHolder {

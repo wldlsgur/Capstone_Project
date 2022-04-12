@@ -4,6 +4,5 @@ data class Presidentinfo(
     val id: String,
     val school: String,
     val room: String,
-    val number: String,
-    val image: String
+    val number: String
 )
