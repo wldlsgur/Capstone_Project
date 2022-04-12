@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../DB/db');
 
-router.post('/:target/:key/:value1/value2', function(req, res){
+router.post('/:target/:key/:value1/:value2', function(req, res){
 	let file = req.file;
 	let target = req.params.target;
 	let key = req.params.key;
