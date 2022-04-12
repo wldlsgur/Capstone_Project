@@ -26,10 +26,10 @@ const storage = multer.diskStorage({
 		}
 	},
 	filename: function (req, file, cb) {
-		let id = req.params.id;
-		let name = req.params.name;
-		cb(null, id + '_' + name + '.jpg');
-	}
+		let key = req.params.key;
+		cb(null, `${key}_${file.originalname}`);
+	},
+	limits: {fileSize: 5 * 1024 * 1024},
 })
 const upload = multer({ storage: storage })
 

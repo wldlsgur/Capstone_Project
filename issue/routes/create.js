@@ -31,11 +31,9 @@ router.post('/schoolmanagement', function(req, res){
 		req.body.room,
 		req.body.title,
 		req.body.content,
-		req.body.year,
-		req.body.month,
-		req.body.day
+		req.body.date
 	];
-    if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4] || !data_array[5] || !data_array[6] || !data_array[7]){
+    if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4] || !data_array[5]){
 		res.send("plz send require elements");
 		return;
     }
@@ -49,13 +47,12 @@ router.post('/schoolmanagement', function(req, res){
 });
 
 router.post('/presidentinfo', function(req, res){
-	let image_url = `/image/president/${req.body.image}.jpg`;
 	let data_array = [
 		req.body.id,
 		req.body.school,
 		req.body.room,
 		req.body.number,
-		image_url
+		'default'
 	];
 	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4]){
 		res.send("plz send require elements");
@@ -71,7 +68,6 @@ router.post('/presidentinfo', function(req, res){
 });
 
 router.post('/parentinfo', function(req, res){
-	let image_url = `/image/parent/${req.body.image}.jpg`;
 	let data_array = [
 		req.body.id,
 		req.body.school,
@@ -79,7 +75,7 @@ router.post('/parentinfo', function(req, res){
 		req.body.number,
 		req.body.name,
 		req.body.age,
-		image_url,
+		'default',
 		req.body.spec,
 		false
 	];
@@ -97,13 +93,12 @@ router.post('/parentinfo', function(req, res){
 });
 
 router.post('teacherinfo', function(req, res){
-	let image_url = `/image/teacher/${req.body.image}.jpg`;
-	let data_array = [
+		let data_array = [
 		req.body.id,
 		req.body.school,
 		req.body.room,
 		req.body.number,
-		image_url,
+		'default',
 		false
 	];
 	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4]){
@@ -120,14 +115,12 @@ router.post('teacherinfo', function(req, res){
 });
 
 router.post('/food_list', function(req, res){
-	let image_url = `/image/food_list/${req.body.image}.jpg`;
 	let data_array = [
 		req.body.school,
-		req.body.year,
-		req.body.month,
-		image_url
+		req.body.date,
+		'default'
 	];
-	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3]){
+	if(!data_array[0] || !data_array[1] || !data_array[2]){
 		res.send('plz send require elements');
 		return;
 	}
@@ -141,13 +134,14 @@ router.post('/food_list', function(req, res){
 })
 
 router.post('/album', function(req, res){
-	let image_url = `/image/album/${req.body.image}.jpg`;
 	let data_array = [
 		req.body.school,
 		req.body.room,
-		image_url
+		req.body.title,
+		req.body.date,
+		'default'
 	];
-	if(!data_array[0] || !data_array[1] || !data_array[2]){
+	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4]){
 		res.send('plz send require elements');
 		return;
 	}
