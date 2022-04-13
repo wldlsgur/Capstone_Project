@@ -25,11 +25,12 @@ router.post('/', function(req, res){
 				];
 				break;
 			case '식단표':
-				query = `UPDATE food_list SET food_image=? WHERE school=? AND date=?;`
+				query = `UPDATE food_list SET food_image=? WHERE school=? AND date=? AND food_image=?;`
 				data_array = [
 					file_url,
 					value1,
-					key
+					key,
+					'/default'
 				];
 				break;
 			case '선생님':
@@ -47,12 +48,13 @@ router.post('/', function(req, res){
 				];
 				break;
 			case '앨범':
-				query = `UPDATE album SET album_image=? WHERE title=? AND school=? AND room=?;`
+				query = `UPDATE album SET album_image=? WHERE title=? AND school=? AND room=? AND album_image=?;`
 				data_array = [
 					file_url,
 					key,
 					value1,
-					value2
+					value2,
+					'/default'
 				];
 				break;
 		}
