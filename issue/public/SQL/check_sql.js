@@ -14,7 +14,7 @@ module.exports = function () {
         },
         get_sameid_check : function(data, callback){
             pool.getConnection(function(err, con){
-                let query = `SELECT * FROM user WHERE id='?'`;
+                let query = `SELECT * FROM user WHERE id=?`;
                 con.query(query, data, function(err, result){
                     con.release();
                     if(err) callback(err, null);
