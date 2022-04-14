@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../DB/db');
+const db_create_sql = require('../public/SQL/create_sql')();
+const check_element = require('../Function/check_require_element');
 const make_query = require('../Function/make_query');
 const response = {res : true, msg : 'success'};
 
@@ -11,11 +13,12 @@ router.post('/user', function(req, res){
 		req.body.name,
 		req.body.job
 	];
-    if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3]){
-        res.send("plz send require elements");
-        return;
-    }
-	db.query(make_query.INSERT('user', data_array), data_array, function(err, result){
+
+    if(check_element.check_require_element(data_array) === false){
+		res.send(response);
+		return;
+	}
+	db_create_sql.insert_query('user', data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
