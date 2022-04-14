@@ -4,8 +4,8 @@ module.exports = function () {
     return {
         get_login_check : function (data,callback) {
             pool.getConnection(function (err, con) {
-                let query = `SELECT * FROM user WHERE id='${data[0]}'`;
-                con.query(query, function(err,result,fields){
+                let get_login_check_query = `SELECT * FROM user WHERE id='${data[0]}'`;
+                con.query(get_login_check_query, function(err,result,fields){
                     con.release();
                     if(err) callback(err,null);
                     else callback(null,result);
@@ -14,8 +14,8 @@ module.exports = function () {
         },
         get_sameid_check : function(data, callback){
             pool.getConnection(function(err, con){
-                let query = `SELECT * FROM user WHERE id=?`;
-                con.query(query, data, function(err, result){
+                let get_sameid_check_query = `SELECT * FROM user WHERE id='${data[0]}'`;
+                con.query(get_sameid_check_query, function(err, result){
                     con.release();
                     if(err) callback(err, null);
                     else callback(null, err);
