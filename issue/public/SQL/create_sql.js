@@ -6,7 +6,7 @@ module.exports = function(){
         insert_query : function(tabel, data, callback){
             pool.getConnection(function (err, con) {
                 let query = make_query.INSERT(tabel, data);
-                con.query(query, function(err,result,fields){
+                con.query(query, data, function(err,result,fields){
                     con.release();
                     if(err) callback(err,null);
                     else callback(null,result);
