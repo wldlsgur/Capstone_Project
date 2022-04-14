@@ -1,17 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../DB/db');
+const db_check_sql = require('../public/SQL/check_sql')();
+const check_element = require('../Function/check_require_element');
+const element_msg = "plz send require element";
 
 router.get('/login', function(req, res){
-    let id = req.query.id;
-    let pw = req.query.pw;
-
-    if(!id || !pw){
-        res.send("plz send require element!");
+    let data_array = [
+        req.query.id,
+        req.query.pw
+    ]
+    if(check_element.check_require_element(data_array) === false){
+        res.send(element_msg);
         return;
     }
 
-    db.query(`SELECT * FROM user WHERE id='${id}'`, function(err, result){
+    db_check_sql.get_login_check(data_array, function(err, result){
         if(err){
             res.status(400).send(err);
             return;
@@ -20,7 +23,7 @@ router.get('/login', function(req, res){
             res.send({res : false, msg : "not found"});
             return;
         }
-        if(result[0].pw === pw){
+        if(result[0].pw === data_array[1]){
             res.send({res : true, msg : "success"});
         }
         else{
@@ -30,15 +33,15 @@ router.get('/login', function(req, res){
 });
 
 router.get('/sameid', function(req, res){
-    let id = req.query.id;
+    let data_array = [
+        req.query.id
+    ];
 
-    if(!id){
-        res.send('plz send require elements');
+    if(check_element.check_require_element(data_array) === false){
+        res.send(element_msg);
         return;
     }
-
-    let query = `SELECT * FROM user WHERE id='${id}'`;
-    db.query(query, function(err, result){
+    db_check_sql.get_sameid_check(data_array, function(err, result){
         if(err){
             res.status(400).send(err);
             return;
