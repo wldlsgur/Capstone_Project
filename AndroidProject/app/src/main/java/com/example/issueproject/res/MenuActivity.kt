@@ -18,8 +18,6 @@ import com.example.issueproject.service.ResponseService
 
 private const val TAG = "MenuActivity"
 class MenuActivity : AppCompatActivity() {
-    private var id = ""
-
     private val binding by lazy{
         ActivityMenuBinding.inflate(layoutInflater)
     }
@@ -31,18 +29,23 @@ class MenuActivity : AppCompatActivity() {
         val id = intent.getStringExtra("id")
         Log.d(TAG, "id: $id")
         if (id != null) {
-            GetUserInfo(id)
+            GetPresidentInfo(id)
         }
+        val name = intent.getStringExtra("name")
+        binding.textViewName.text = name
 
-//        binding.buttonDayNotice.setOnClickListener {
-//            var intent = Intent(this, DayNoticActivity::class.java)
-//            startActivity(intent)
-//        }
-//
-//        binding.buttonNotic.setOnClickListener {
-//            var intent = Intent(this, NoticActivity::class.java)
-//            startActivity(intent)
-//        }
+        binding.PresidentDayNotic.setOnClickListener {
+            var intent = Intent(this, DayNoticActivity::class.java)
+            startActivity(intent)
+        }
+        binding.PresidentNotic.setOnClickListener {
+            var intent = Intent(this, NoticActivity::class.java)
+            startActivity(intent)
+        }
+        binding.PresidentSchoolManager.setOnClickListener {
+            var intent = Intent(this, RoomChildListActivity::class.java)
+            startActivity(intent)
+        }
 //
 //        binding.buttonMenuSchoolAdd.setOnClickListener {
 //            var intent = Intent(this, SchoolAddActivity::class.java)
@@ -52,13 +55,10 @@ class MenuActivity : AppCompatActivity() {
 //            var intent = Intent(this, ChildAddActivity::class.java)
 //            startActivity(intent)
 //        }
-//        binding.buttonRoomManager.setOnClickListener {
-//            var intent = Intent(this, RoomChildListActivity::class.java)
-//            startActivity(intent)
-//        }
+
 
     }
-    fun GetUserInfo(id: String){
+//    fun GetUserInfo(id: String){
 //        ResponseService().GetUserInfo(id, object : RetrofitCallback<UserInfo> {
 //            override fun onError(t: Throwable) {
 //                Log.d(TAG, "onError: $t")
@@ -81,33 +81,32 @@ class MenuActivity : AppCompatActivity() {
 //                    GetParentInfo(id)
 //                }
 //            }
-//
 //            override fun onFailure(code: Int) {
 //                Log.d(TAG, "onFailure: $code")
 //            }
 //        })
-    }
-
+//    }
     fun GetPresidentInfo(id: String){
-//        ResponseService().GetPresidentInfo(id, object : RetrofitCallback<MutableList<PresidentinfoResult>>{
-//            override fun onError(t: Throwable) {
-//                Log.d(TAG, "onError: $t")
-//                binding.textViewSchool.text = "어린이집을 등록해주세요"
-//            }
-//
-//            override fun onSuccess(code: Int, responseData: MutableList<PresidentinfoResult>) {
-//                Log.d(TAG, "onSuccess: $responseData")
-//                binding.textViewSchool.text = responseData[0].school
-//            }
-//
-//            override fun onFailure(code: Int) {
-//                Log.d(TAG, "onFailure: $code")
-//                binding.textViewSchool.text = "어린이집을 등록해주세요"
-//            }
-//
-//        })
+        ResponseService().GetPresidentInfo(id, object : RetrofitCallback<MutableList<PresidentinfoResult>>{
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+                binding.textView2.text = ""
+                binding.textViewSchool.text = "어린이집을 등록해주세요"
+            }
+
+            override fun onSuccess(code: Int, responseData: MutableList<PresidentinfoResult>) {
+                Log.d(TAG, "onSuccess: $responseData")
+                binding.textViewSchool.text = responseData[0].school
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+                binding.textView2.text = ""
+                binding.textViewSchool.text = "어린이집을 등록해주세요"
+            }
+        })
     }
-    fun GetParentInfo(id: String){
+//    fun GetParentInfo(id: String){
 //        ResponseService().GetParentInfo(id, object : RetrofitCallback<ParentInfoResult>{
 //            override fun onError(t: Throwable) {
 //                Log.d(TAG, "onError: $t")
@@ -125,6 +124,5 @@ class MenuActivity : AppCompatActivity() {
 //            }
 //
 //        })
-    }
-
+//    }
 }

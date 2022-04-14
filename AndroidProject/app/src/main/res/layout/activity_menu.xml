@@ -62,7 +62,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textViewSchool"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -92,7 +92,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textViewName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -129,14 +129,14 @@
         app:layout_constraintTop_toBottomOf="@+id/view">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout8"
+            android:id="@+id/President_Notic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout6"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout7">
+            app:layout_constraintTop_toTopOf="@+id/President_SchoolManager">
 
             <ImageView
-                android:id="@+id/imageView10"
+                android:id="@+id/button_President_Notic"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 app:srcCompat="@drawable/notice" />
@@ -151,18 +151,19 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+                app:layout_constraintTop_toBottomOf="@+id/button_President_Notic" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/President_Album"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout7"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout8"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout8">
+            app:layout_constraintBottom_toBottomOf="@+id/President_SchoolManager"
+            app:layout_constraintEnd_toEndOf="@+id/President_Notic"
+            app:layout_constraintStart_toStartOf="@+id/President_Notic">
 
             <ImageView
-                android:id="@+id/imageView11"
+                android:id="@+id/button_President_Album"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -180,7 +181,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+                app:layout_constraintTop_toBottomOf="@+id/button_President_Album" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -188,11 +189,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout4"
+                android:id="@+id/President_Daliy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -200,7 +202,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/imageView6"
+                    android:id="@+id/button_President_Daily"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -218,20 +220,20 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+                    app:layout_constraintTop_toBottomOf="@+id/button_President_Daily" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout5"
+                android:id="@+id/President_DayNotic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/constraintLayout4"
+                app:layout_constraintStart_toEndOf="@+id/President_Daliy"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/imageView7"
+                    android:id="@+id/button_President_DayNotic"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -248,20 +250,21 @@
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+                    app:layout_constraintTop_toBottomOf="@+id/button_President_DayNotic" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/President_FoodList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/constraintLayout5"
+                app:layout_constraintStart_toEndOf="@+id/President_DayNotic"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/imageView8"
+                    android:id="@+id/button_President_FoodList"
                     android:layout_width="70dp"
                     android:layout_height="80dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -279,12 +282,12 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+                    app:layout_constraintTop_toBottomOf="@+id/button_President_FoodList" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout7"
+            android:id="@+id/President_SchoolManager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -292,7 +295,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
 
             <ImageView
-                android:id="@+id/imageView9"
+                android:id="@+id/button_President_SchoolManagement"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
                 app:srcCompat="@drawable/school" />
@@ -306,7 +309,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+                app:layout_constraintTop_toBottomOf="@+id/button_President_SchoolManagement" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

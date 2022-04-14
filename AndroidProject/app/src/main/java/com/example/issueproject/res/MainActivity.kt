@@ -8,6 +8,9 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.issueproject.databinding.ActivityMainBinding
 import com.example.issueproject.dto.LoginResult
+import com.example.issueproject.dto.ParentInfoResult
+import com.example.issueproject.dto.PresidentinfoResult
+import com.example.issueproject.dto.UserInfo
 import com.example.issueproject.res.viewmodel.MainViewModels
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -59,13 +62,47 @@ class MainActivity : AppCompatActivity() {
                     if(responseData.msg == "success"){
                         Log.d(TAG, "msg: success")
                         Log.d(TAG, "onSuccess: $id")
-                        var intent = Intent(this@MainActivity, MenuActivity::class.java).apply{
-                            putExtra("id", id)
-                            Log.d(TAG, "id: $id")
-                            Log.d(TAG, "job: $responseData")
-                        }
-                        startActivity(intent)
+                        GetUserInfo(id)
                     }
+                }
+            }
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+            }
+        })
+    }
+    fun GetUserInfo(id: String){
+        ResponseService().GetUserInfo(id, object : RetrofitCallback<UserInfo> {
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: UserInfo) {
+                Log.d(TAG, "onSuccess: $responseData")
+                val name = responseData.name
+                val job = responseData.job
+
+                if(job == "원장님"){
+                    var intent = Intent(this@MainActivity, MenuActivity::class.java).apply{
+                        putExtra("id", id)
+                        putExtra("name", responseData.name)
+                        Log.d(TAG, "id: $id")
+                        Log.d(TAG, "job: $responseData")
+                    }
+                    startActivity(intent)
+                }
+                else if(job == "선생님"){
+                    var intent = Intent(this@MainActivity, MainTeacherActivity::class.java).apply{
+                        putExtra("id", id)
+                        putExtra("name", responseData.name)
+                        Log.d(TAG, "id: $id")
+                        Log.d(TAG, "job: $responseData")
+                    }
+                    startActivity(intent)
+                }
+
+                else if(job == "부모님"){
+
                 }
             }
             override fun onFailure(code: Int) {
