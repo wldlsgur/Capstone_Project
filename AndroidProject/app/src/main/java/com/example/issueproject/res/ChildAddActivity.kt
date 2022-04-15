@@ -1,13 +1,19 @@
 package com.example.issueproject.res
 
 import android.R
+import android.content.Intent
+import android.graphics.ImageDecoder
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.issueproject.databinding.ActivityChildAddBinding
 import com.example.issueproject.dto.GetRoom
 import com.example.issueproject.dto.GetSchool
@@ -15,12 +21,17 @@ import com.example.issueproject.dto.ParentInfo
 import com.example.issueproject.dto.SignUpResult
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
+import androidx.core.app.ActivityCompat.startActivityForResult
+
+
+
 
 private const val TAG = "ChildAddActivity"
 class ChildAddActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityChildAddBinding.inflate(layoutInflater)
     }
+    private lateinit var getResult: ActivityResultLauncher<Intent>
     var school : String = ""
     var room : String = ""
     val itemList = mutableListOf<String>()
@@ -31,6 +42,39 @@ class ChildAddActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         GetSchool()
+
+        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            if(it.resultCode == RESULT_OK && it.data !=null) {
+                var currentImageUri = it.data?.data
+                try {
+                    currentImageUri?.let {
+                        if(Build.VERSION.SDK_INT < 28) {
+                            val bitmap = MediaStore.Images.Media.getBitmap(
+                                this.contentResolver,
+                                currentImageUri
+                            )
+                            binding.imageView2?.setImageBitmap(bitmap)
+                        } else {
+                            val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
+                            val bitmap = ImageDecoder.decodeBitmap(source)
+                            binding.imageView2?.setImageBitmap(bitmap)
+                        }
+                    }
+                }catch(e:Exception) {
+                    e.printStackTrace()
+                }
+            } else if(it.resultCode == RESULT_CANCELED){
+                Toast.makeText(this, "사진 선택 취소", Toast.LENGTH_LONG).show();
+            }else{
+                Log.d("ActivityResult","something wrong")
+            }
+        }
+
+        binding.imageView2.setOnClickListener {
+            val intent: Intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.setType("image/*")
+            getResult.launch(intent)
+        }
 
         binding.spinnerSchool.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {

@@ -25,10 +25,15 @@ interface ResponseApi {
         @Body signData: SingUpInfo
     ): Call<SignUpResult>
 
-    @GET("/staff/gain/presidentinfo")
+    @GET("/staff/presidentinfo/useid")
     fun GetPresidentInfo(
         @Query("id") id: String
     ): Call<MutableList<PresidentinfoResult>>
+
+    @GET("/staff/teacherinfo/useid")
+    fun GetTeacherInfo(
+        @Query("id") id: String
+    ): Call<MutableList<TeacherinfoResult>>
 
     @GET("/parentinfo/info")
     fun GetParentInfo(

@@ -74,7 +74,31 @@ class ResponseService {
 
         })
     }
+    fun GetTeacherInfo(id: String, callback: RetrofitCallback<MutableList<TeacherinfoResult>>) {
+        RetrofitBuilder.api.GetTeacherInfo(id).enqueue(object : Callback<MutableList<TeacherinfoResult>>{
+            override fun onResponse(
+                call: Call<MutableList<TeacherinfoResult>>,
+                response: Response<MutableList<TeacherinfoResult>>
+            ) {
+                Log.d(TAG, "SignUpService: ..")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
 
+            override fun onFailure(call: Call<MutableList<TeacherinfoResult>>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+
+        })
+    }
     fun GetParentInfo(id: String, callback: RetrofitCallback<ParentInfoResult>){
         RetrofitBuilder.api.GetParentInfo(id).enqueue(object : Callback<ParentInfoResult>{
             override fun onResponse(
