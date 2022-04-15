@@ -4,10 +4,10 @@ const db = require('../DB/db');
 
 router.post('/', function(req, res){
 		let file = req.file;
-		let target = req.body.target;
-		let key = req.body.key;
-		let value1 = req.body.value1;
-		let value2 = req.body.value2;
+		let target = req.query.target;
+		let key = req.query.key;
+		let value1 = req.query.value1;
+		let value2 = req.query.value2;
 
 		if(!file || !target || !key || !value1 || !value2){
 			res.send('plz send require elements');

@@ -7,7 +7,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		let target = req.body.target;
+		let target = req.query.target;
 	
 		if(target === "부모님"){
 			cb(null, 'uploads/parents');
@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
 		}
 	},
 	filename: function (req, file, cb) {
-		let key = req.body.key;
+		let key = req.query.key;
 		cb(null, `${key}_${file.originalname}`);
 	},
 	limits: {fileSize: 1 * 512 * 512}

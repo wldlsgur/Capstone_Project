@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router();
 const db_check_sql = require('../public/SQL/check_sql')();
 const check_element = require('../Function/check_require_element');
-const element_msg = "plz send require element";
+
+const element_msg = "plz send require elements";
+const sucess_response = {res : true, msg : 'success'};
+const failed_response = {res : false, msg : "failed"};
 
 router.get('/login', function(req, res){
     let data_array = [
@@ -24,10 +27,10 @@ router.get('/login', function(req, res){
             return;
         }
         if(result[0].pw === data_array[1]){
-            res.send({res : true, msg : "success"});
+            res.send(sucess_response);
         }
         else{
-            res.send({res : false, msg : "failed"});
+            res.send(failed_response);
         }
     })
 });

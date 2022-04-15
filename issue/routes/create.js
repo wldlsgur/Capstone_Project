@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../DB/db');
 const db_create_sql = require('../public/SQL/create_sql')();
 const check_element = require('../Function/check_require_element');
-const make_query = require('../Function/make_query');
-const response = {res : true, msg : 'success'};
+
+const element_msg = "plz send require elements";
+const sucess_response = {res : true, msg : 'success'};
+const failed_response = {res : false, msg : "failed"};
 
 router.post('/user', function(req, res){
 	let data_array = [
@@ -15,7 +16,7 @@ router.post('/user', function(req, res){
 	];
 
     if(check_element.check_require_element(data_array) === false){
-		res.send(response);
+		res.send(element_msg);
 		return;
 	}
 	db_create_sql.insert_query('user', data_array, function(err, result){
@@ -23,7 +24,7 @@ router.post('/user', function(req, res){
 			res.status(400).send(err);
 			return;
 		}
-		res.send(response);
+		res.send(sucess_response);
 	})
 });
 
@@ -36,16 +37,16 @@ router.post('/schoolmanagement', function(req, res){
 		req.body.content,
 		req.body.date
 	];
-    if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4] || !data_array[5]){
-		res.send("plz send require elements");
+    if(check_element.check_require_element(data_array) === false){
+		res.send(element_msg);
 		return;
-    }
-	db.query(make_query.INSERT('schoolmanagement', data_array), data_array, function(err, result){
+	}
+	db_create_sql.insert_query('schoolmanagement', data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
 		}
-		res.send(response);
+		res.send(sucess_response);
 	})
 });
 
@@ -57,16 +58,16 @@ router.post('/presidentinfo', function(req, res){
 		req.body.number,
 		'/default'
 	];
-	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4]){
-		res.send("plz send require elements");
+	if(check_element.check_require_element(data_array) === false){
+		res.send(element_msg);
 		return;
 	}
-	db.query(make_query.INSERT('presidentinfo', data_array), data_array, function(err, result){
+	db_create_sql.insert_query('presidentinfo', data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
 		}
-		res.send(response);
+		res.send(sucess_response);
 	})
 });
 
@@ -82,16 +83,16 @@ router.post('/parentinfo', function(req, res){
 		req.body.spec,
 		false
 	];
-	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4] || !data_array[5] || !data_array[6] || !data_array[7]){
-		res.send("plz send require elements");
+	if(check_element.check_require_element(data_array) === false){
+		res.send(element_msg);
 		return;
 	}
-	db.query(make_query.INSERT('parentinfo', data_array), data_array, function(err, result){
+	db_create_sql.insert_query('parentinfo', data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
 		}
-		res.send(response);
+		res.send(sucess_response);
 	})
 });
 
@@ -104,16 +105,16 @@ router.post('teacherinfo', function(req, res){
 		'/default',
 		false
 	];
-	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4]){
-		res.send('plz send require elements');
+	if(check_element.check_require_element(data_array) === false){
+		res.send(element_msg);
 		return;
 	}
-	db.query(make_query.INSERT('teacherinfo', data_array), data_array, function(err, result){
+	db_create_sql.insert_query('teacherinfo', data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
 		}
-		res.send(response);
+		res.send(sucess_response);
 	})
 });
 
@@ -123,16 +124,16 @@ router.post('/food_list', function(req, res){
 		req.body.date,
 		'/default'
 	];
-	if(!data_array[0] || !data_array[1] || !data_array[2]){
-		res.send('plz send require elements');
+	if(check_element.check_require_element(data_array) === false){
+		res.send(element_msg);
 		return;
 	}
-	db.query(make_query.INSERT('food_list', data_array), data_array, function(err, result){
+	db_create_sql.insert_query('food_list', data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
 		}
-		res.send(response);
+		res.send(sucess_response);
 	})
 })
 
@@ -144,16 +145,16 @@ router.post('/album', function(req, res){
 		req.body.date,
 		'/default'
 	];
-	if(!data_array[0] || !data_array[1] || !data_array[2] || !data_array[3] || !data_array[4]){
-		res.send('plz send require elements');
+	if(check_element.check_require_element(data_array) === false){
+		res.send(element_msg);
 		return;
 	}
-	db.query(make_query.INSERT('album', data_array), data_array, function(err, result){
+	db_create_sql.insert_query('album', data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
 		}
-		res.send(response);
+		res.send(sucess_response);
 	})
 })
 module.exports = router;
