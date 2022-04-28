@@ -2,12 +2,16 @@ const express = require('express');
 const router = express.Router();
 const db = require('../DB/db');
 
-router.post('/:target/:key/:value1/:value2', function(req, res){
+router.post('/:data', function(req, res){
 		let file = req.file;
-		let target = req.params.target;
-		let key = req.params.key;
-		let value1 = req.params.value1;
-		let value2 = req.params.value2;
+
+		let split_array = req.params.data.split('-');
+		console.log(split_array);
+
+		let target = split_array[0];
+		let key = split_array[1];
+		let value1 = split_array[2];
+		let value2 = split_array[3];
 
 		if(!file || !target || !key || !value1 || !value2){
 			res.send('plz send require elements');

@@ -7,7 +7,8 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		let target = req.params.target;
+		let split_array = req.params.data.split('-');
+		let target = split_array[0];
 	
 		if(target === "부모님"){
 			cb(null, 'uploads/parents');
@@ -26,7 +27,8 @@ const storage = multer.diskStorage({
 		}
 	},
 	filename: function (req, file, cb) {
-		let key = req.params.key;
+		let split_array = req.params.data.split('-');
+		let key = split_array[1];
 		cb(null, `${key}_${file.originalname}`);
 	},
 	limits: {fileSize: 1 * 512 * 512}
@@ -66,7 +68,7 @@ app.use('/user', userRouter);
 app.use('/schoolmanagement', schoolmanagementRouter);
 app.use('/parentinfo', parentinfoRouter);
 app.use('/presidentinfo', presidentinfoRouter);
-app.use('/uploadimage/:target/:key/:value1/:value2', upload.single('image'), uploadimageRouter);
+app.use('/uploadimage/:data', upload.single('image'), uploadimageRouter);
 
 //인승 추가(아래)
 app.use('/staff', staffRouter);
