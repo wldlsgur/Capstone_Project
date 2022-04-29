@@ -5,15 +5,15 @@ module.exports = {
         for(key of Object.keys(json_data)){
             make_query += `${key},`;
         }
-        make_query.substring(0, make_query.length - 1);//마지막, 제거
+        make_query = make_query.substring(0, make_query.length - 1);//마지막, 제거
         make_query += `) VALUES(`;
 
         for(var key in json_data){
             make_query += `?,`;
         }
-        make_query.substring(0, make_query.length - 1);//마지막, 제거
+        make_query = make_query.substring(0, make_query.length - 1);//마지막, 제거
         make_query += `)`;
-        
+
         console.log(make_query);
         return make_query;
     },
