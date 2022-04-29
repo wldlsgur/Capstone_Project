@@ -8,18 +8,23 @@ const sucess_response = {res : true, msg : 'success'};
 const failed_response = {res : false, msg : "failed"};
 
 router.post('/user', function(req, res){
-	let data_array = [
-		req.body.id,
-		req.body.pw,
-		req.body.name,
-		req.body.job
-	];
+	let data_array = [];
+	let json_data = {
+		id : req.body.id,
+		pw : req.body.pw,
+		name : req.body.name,
+		job : req.body.job
+	};
+
+	for(key of Object.keys(json_data)){
+		data_array.push(json_data[key]);
+	}
 
     if(check_element.check_require_element(data_array) === false){
 		res.send(element_msg);
 		return;
 	}
-	db_create_sql.insert_query('user', data_array, function(err, result){
+	db_create_sql.insert_query('user', data_array, json_data, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
