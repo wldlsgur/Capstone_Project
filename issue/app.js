@@ -68,7 +68,7 @@ app.use('/user', userRouter);
 app.use('/schoolmanagement', schoolmanagementRouter);
 app.use('/parentinfo', parentinfoRouter);
 app.use('/presidentinfo', presidentinfoRouter);
-app.use('/uploadimage/:data', upload.single('image'), uploadimageRouter);
+app.post('/uploadimage/:data', upload.single('image'), uploadimageRouter);
 
 //인승 추가(아래)
 app.use('/staff', staffRouter);
