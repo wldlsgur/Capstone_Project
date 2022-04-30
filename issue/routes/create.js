@@ -98,7 +98,7 @@ router.post('/parentinfo', function(req, res){
 		child_age : req.body.age,
 		image_url : '/default',
 		spec : req.body.spec,
-		check : 'false'
+		agree : 'false'
 	};
 
 	let data_array = [];
@@ -126,7 +126,7 @@ router.post('teacherinfo', function(req, res){
 		room : req.body.room,
 		number : req.body.number,
 		image_url : '/default',
-		check : 'false'
+		agree : 'false'
 	};
 
 	let data_array = [];
