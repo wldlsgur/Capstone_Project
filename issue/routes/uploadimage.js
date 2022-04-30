@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../DB/db');
 
-router.post('/:data', function(req, res){
+router.post('uploadimage/:data', function(req, res){
 		let file = req.file;
 
 		let split_array = req.params.data.split('-');
