@@ -17,12 +17,11 @@ module.exports = {
         console.log(make_query);
         return make_query;
     },
-    //SELECTidFROM parentinfo WHEREid='1'
-    SELECT : function(table, json_data, or_and, cnt){
+    SELECT : function(target, table, json_data, or_and, cnt){
         let make_query = `SELECT `;
 
-        for(key of Object.keys(json_data)){//파싱해도 key는 Object 문자열을 넣을려면 이 반복문을 고정적으로 사용해야한다
-            make_query += `${key},`;
+        for(let i=0 ; i<target.length ; i++){//파싱해도 key는 Object 문자열을 넣을려면 이 반복문을 고정적으로 사용해야한다
+            make_query += `${target[i]},`;
         }
         make_query = make_query.substring(0, make_query.length - 1);//마지막, 제거
 
@@ -37,7 +36,6 @@ module.exports = {
             }
         }
         make_query = make_query.substring(0, make_query.length - 1);//마지막 공백 제거
-        make_query += `)`;
         console.log(make_query);
         return make_query;
     }
