@@ -2,7 +2,7 @@ module.exports = {
     INSERT : function(table, json_data){
         let make_query = `INSERT INTO ${table} (`;
         
-        for(key of Object.keys(json_data)){
+        for(key of Object.keys(json_data)){//파싱해도 key는 Object 문자열을 넣을려면 이 반복문을 고정적으로 사용해야한다
             make_query += `${key},`;
         }
         make_query = make_query.substring(0, make_query.length - 1);//마지막, 제거
