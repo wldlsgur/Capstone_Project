@@ -96,7 +96,7 @@ router.post('/parentinfo', function(req, res){
 		number : req.body.number,
 		child_name : req.body.name,
 		child_age : req.body.age,
-		iamge_url : '/default',
+		image_url : '/default',
 		spec : req.body.spec,
 		check : 'false'
 	};
