@@ -17,16 +17,16 @@ module.exports = {
         console.log(make_query);
         return make_query;
     },
-
+    //SELECTidFROM parentinfo WHEREid='1'
     SELECT : function(table, json_data, or_and, cnt){
-        let make_query = `SELECT`;
+        let make_query = `SELECT `;
 
         for(key of Object.keys(json_data)){//파싱해도 key는 Object 문자열을 넣을려면 이 반복문을 고정적으로 사용해야한다
             make_query += `${key},`;
         }
         make_query = make_query.substring(0, make_query.length - 1);//마지막, 제거
 
-        make_query += `FROM ${table} WHERE`;
+        make_query += ` FROM ${table} WHERE `;
 
         let or_and_cnt = 0;
         for(key of Object.keys(json_data)){
