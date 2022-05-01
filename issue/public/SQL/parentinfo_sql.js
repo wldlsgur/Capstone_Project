@@ -1,4 +1,4 @@
-const pool = require('../../DB/db_config');
+var pool = require('../../DB/db_config');
 
 module.exports = function(){
     return {
