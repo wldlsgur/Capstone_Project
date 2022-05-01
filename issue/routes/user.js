@@ -20,7 +20,7 @@ router.get('/info/:id', function(req, res){
 		'name',
 		'job'
 	]
-	if(check_element.check_require_element(data_array === false)){
+	if(check_element.check_require_element(data_array) === false){
 		res.send(element_msg);
 		return;
 	}
