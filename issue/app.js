@@ -10,19 +10,19 @@ const storage = multer.diskStorage({
 		let split_array = req.params.data.split('-');
 		let target = split_array[0];
 	
-		if(target === "부모님"){
+		if(target === "parent"){
 			cb(null, 'uploads/parents');
 		}
-		else if(target === "선생님"){
+		else if(target === "teacher"){
 			cb(null, 'uploads/teacher');
 		}
-		else if(target === "원장님"){
+		else if(target === "president"){
 			cb(null, 'uploads/president');
 		}
-		else if(target === "식단표"){
+		else if(target === "food"){
 			cb(null, 'uploads/food_menu');
 		}
-		else{
+		else if(target === "album"){
 			cb(null, 'uploads/album');
 		}
 	},

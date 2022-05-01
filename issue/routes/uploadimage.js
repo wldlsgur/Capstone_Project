@@ -20,7 +20,7 @@ router.post('/uploadimage/:data', function(req, res){
 		let query = ``;
 		let data_array =[];
 		switch(target){
-			case '부모님':
+			case 'parent':
 				query = `UPDATE parentinfo SET image_url=? WHERE id=? AND child_name=?;`
 				data_array = [
 					file_url,
@@ -28,7 +28,7 @@ router.post('/uploadimage/:data', function(req, res){
 					value1
 				];
 				break;
-			case '식단표':
+			case 'food':
 				query = `UPDATE food_list SET image_url=? WHERE school=? AND date=? AND food_image=?;`
 				data_array = [
 					file_url,
@@ -37,21 +37,21 @@ router.post('/uploadimage/:data', function(req, res){
 					'/default'
 				];
 				break;
-			case '선생님':
+			case 'teacher':
 				query = `UPDATE teachertinfo SET image_url=? WHERE id=?;`
 				data_array = [
 					file_url,
 					key
 				];
 				break;
-			case '원장님':
+			case 'president':
 				query = `UPDATE presidentinfo SET image_url=? WHERE id=?;`
 				data_array = [
 					file_url,
 					key
 				];
 				break;
-			case '앨범':
+			case 'album':
 				query = `UPDATE album SET image_url=? WHERE title=? AND school=? AND room=? AND album_image=?;`
 				data_array = [
 					file_url,
