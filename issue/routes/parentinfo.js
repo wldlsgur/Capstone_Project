@@ -74,7 +74,7 @@ router.post('/change/check', function(req, res){
 		res.send(element_msg);
 		return;
 	}
-	let target = 'agree=yes';
+	let target = 'agree="yes"';
 	let query = make_query.UPDATE(target, 'parentinfo', json_data, 'AND', 1);
 	db_parent_sql.UPDATE(query, data_array, function(err, result){
 		if(err){

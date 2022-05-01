@@ -46,7 +46,7 @@ module.exports = {
         for(key of Object.keys(json_data)){
             make_query += `${key}=? `;
             if(or_and_cnt != cnt){
-                make_query += or_and;
+                make_query += `${or_and} `;
                 or_and_cnt++;
             }
         }
