@@ -12,6 +12,7 @@ router.get('/login', function(req, res){
     let json_data = {
         id : req.query.id
     }
+    let pw = req.query.pw;
     let data_array = [];
 	for(key of Object.keys(json_data)){//배열 형식
 		data_array.push(json_data[key]);
@@ -20,7 +21,7 @@ router.get('/login', function(req, res){
 		'*'
 	]
 
-    if(check_element.check_require_element(data_array) === false && !res.query.pw){
+    if(check_element.check_require_element(data_array) === false && !pw){
         res.send(element_msg);
         return;
     }
@@ -34,7 +35,7 @@ router.get('/login', function(req, res){
             res.send({res : false, msg : "not found"});
             return;
         }
-        if(result[0].pw === res.query.pw){
+        if(result[0].pw === pw){
             res.send(sucess_response);
         }
         else{
