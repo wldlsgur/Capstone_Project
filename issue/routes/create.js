@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db_create_sql = require('../public/SQL/create_sql')();
 const check_element = require('../Function/check_require_element');
-const make_query = require('../../Function/make_query');
+const make_query = require('../Function/make_query');
 
 const element_msg = "plz send require elements";
 const sucess_response = {res : true, msg : 'success'};
