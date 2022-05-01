@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db_create_sql = require('../public/SQL/create_sql')();
 const check_element = require('../Function/check_require_element');
+const make_query = require('../../Function/make_query');
 
 const element_msg = "plz send require elements";
 const sucess_response = {res : true, msg : 'success'};
@@ -14,7 +15,6 @@ router.post('/user', function(req, res){
 		name : req.body.name,
 		job : req.body.job
 	};//json 형식
-
 	let data_array = [];
 	for(key of Object.keys(json_data)){//배열 형식
 		data_array.push(json_data[key]);
@@ -24,7 +24,8 @@ router.post('/user', function(req, res){
 		res.send(element_msg);
 		return;
 	}
-	db_create_sql.insert_query('user', data_array, json_data, function(err, result){
+	let query = make_query.INSERT('user', json_data);
+	db_create_sql.INSERT(query, data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
@@ -52,7 +53,8 @@ router.post('/schoolmanagement', function(req, res){
 		res.send(element_msg);
 		return;
 	}
-	db_create_sql.insert_query('schoolmanagement', data_array, json_data, function(err, result){
+	let query = make_query.INSERT('schoolmanagement', json_data);
+	db_create_sql.INSERT(query, data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
@@ -69,7 +71,6 @@ router.post('/presidentinfo', function(req, res){
 		number : req.body.number,
 		image_url : '/default'
 	};
-
 	let data_array = [];
 	for(key of Object.keys(json_data)){//배열 형식
 		data_array.push(json_data[key]);
@@ -79,7 +80,8 @@ router.post('/presidentinfo', function(req, res){
 		res.send(element_msg);
 		return;
 	}
-	db_create_sql.insert_query('presidentinfo', data_array, json_data, function(err, result){
+	let query = make_query.INSERT('presidentinfo', json_data);
+	db_create_sql.INSERT(query, data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
@@ -98,9 +100,8 @@ router.post('/parentinfo', function(req, res){
 		child_age : req.body.age,
 		image_url : '/default',
 		spec : req.body.spec,
-		agree : 'false'
+		agree : 'no'
 	};
-
 	let data_array = [];
 	for(key of Object.keys(json_data)){//배열 형식
 		data_array.push(json_data[key]);
@@ -110,7 +111,8 @@ router.post('/parentinfo', function(req, res){
 		res.send(element_msg);
 		return;
 	}
-	db_create_sql.insert_query('parentinfo', data_array, json_data, function(err, result){
+	let query = make_query.INSERT('parentinfo', json_data);
+	db_create_sql.INSERT(query, data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
@@ -126,18 +128,19 @@ router.post('teacherinfo', function(req, res){
 		room : req.body.room,
 		number : req.body.number,
 		image_url : '/default',
-		agree : 'false'
+		agree : 'no'
 	};
-
 	let data_array = [];
 	for(key of Object.keys(json_data)){//배열 형식
 		data_array.push(json_data[key]);
 	}
+
 	if(check_element.check_require_element(data_array) === false){
 		res.send(element_msg);
 		return;
 	}
-	db_create_sql.insert_query('teacherinfo', data_array, json_data, function(err, result){
+	let query = make_query.INSERT('teacherinfo', json_data);
+	db_create_sql.INSERT(query, data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
@@ -152,7 +155,6 @@ router.post('/food_list', function(req, res){
 		date : req.body.date,
 		image_url : '/default'
 	};
-
 	let data_array = [];
 	for(key of Object.keys(json_data)){//배열 형식
 		data_array.push(json_data[key]);
@@ -162,7 +164,8 @@ router.post('/food_list', function(req, res){
 		res.send(element_msg);
 		return;
 	}
-	db_create_sql.insert_query('food_list', data_array, json_data, function(err, result){
+	let query = make_query.INSERT('food_list', json_data);
+	db_create_sql.INSERT(query, data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
@@ -179,7 +182,6 @@ router.post('/album', function(req, res){
 		date : req.body.date,
 		image_url : '/default'
 	};
-
 	let data_array = [];
 	for(key of Object.keys(json_data)){//배열 형식
 		data_array.push(json_data[key]);
@@ -189,7 +191,8 @@ router.post('/album', function(req, res){
 		res.send(element_msg);
 		return;
 	}
-	db_create_sql.insert_query('album', data_array, json_data, function(err, result){
+	let query = make_query.INSERT('album', json_data);
+	db_create_sql.INSERT(query, data_array, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
