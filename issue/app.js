@@ -43,6 +43,8 @@ let uploadimageRouter = require('./routes/uploadimage');
 let parentinfoRouter = require('./routes/parentinfo');
 let presidentinfoRouter = require('./routes/presidentinfo');
 let userRouter = require('./routes/user');
+let food_listRouter = require('./routes/food_list');
+let albumRouter = require('./routes/album');
 
 //인승 추가(아래)
 var staffRouter = require('./routes/staff');
@@ -68,6 +70,8 @@ app.use('/user', userRouter);
 app.use('/schoolmanagement', schoolmanagementRouter);
 app.use('/parentinfo', parentinfoRouter);
 app.use('/presidentinfo', presidentinfoRouter);
+app.use('/food_list', food_listRouter);
+app.use('/album', albumRouter);
 app.post('/uploadimage/:data', upload.single('image'), uploadimageRouter);
 
 //인승 추가(아래)
