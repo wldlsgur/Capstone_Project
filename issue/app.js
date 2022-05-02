@@ -31,7 +31,7 @@ const storage = multer.diskStorage({
 		let key = req.body.key;
 		let timestamp = new Date().getTime().valueOf();	// 현재 시간
 		let file_url = path.basename(file.originalname, ext) + timestamp + ext;
-
+		console.log(file_url);
 		if((update_image_url.update_image_url(target, key, file_url) === false)) return;
 			
 		cb(null, file_url);
@@ -54,7 +54,6 @@ let albumRouter = require('./routes/album');
 //인승 추가(아래)
 var staffRouter = require('./routes/staff');
 var medicineRouter = require('./routes/medicine');
-const update_image_url = require('./Function/update_image_url');
 
 var app = express();
 
