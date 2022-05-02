@@ -8,7 +8,7 @@ const update_image_url = require('./Function/update_image_url');
 
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		let target = req.body.target;
+		let target = req.params.target;
 
 		if(target === "parent"){
 			cb(null, 'uploads/parent');
@@ -27,8 +27,8 @@ const storage = multer.diskStorage({
 		}
 	},
 	filename: function (req, file, cb) {
-		let target = req.body.target;
-		let key = req.body.key;
+		let target = req.params.target;
+		let key = req.params.key;
 		let timestamp = new Date().getTime().valueOf();	// 현재 시간
 		let file_url = path.basename(file.originalname, ext) + timestamp + ext;
 		console.log(file_url);
@@ -77,7 +77,7 @@ app.use('/parentinfo', parentinfoRouter);
 app.use('/presidentinfo', presidentinfoRouter);
 app.use('/food_list', food_listRouter);
 app.use('/album', albumRouter);
-app.post('/uploadimage', upload.single('image'), uploadimageRouter);
+app.post('/uploadimage/:target/:key', upload.single('image'), uploadimageRouter);
 
 //인승 추가(아래)
 app.use('/staff', staffRouter);
