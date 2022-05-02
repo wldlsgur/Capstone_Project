@@ -102,7 +102,13 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 else if(job == "부모님"){
-
+                    var intent = Intent(this@MainActivity, MainParentActivity::class.java).apply{
+                        putExtra("id", id)
+                        putExtra("name", responseData.name)
+                        Log.d(TAG, "id: $id")
+                        Log.d(TAG, "job: $responseData")
+                    }
+                    startActivity(intent)
                 }
             }
             override fun onFailure(code: Int) {

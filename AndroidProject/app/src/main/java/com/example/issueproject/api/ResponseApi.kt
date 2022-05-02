@@ -38,7 +38,7 @@ interface ResponseApi {
     @GET("/parentinfo/info")
     fun GetParentInfo(
         @Query("id") id: String
-    ): Call<ParentInfoResult>
+    ): Call<MutableList<ParentInfoResult>>
 
     @POST("/create/schoolmanagement")
     fun Addschoolmanagement(
@@ -82,18 +82,19 @@ interface ResponseApi {
         @Path("id") id: String
     ): Call<UserInfo>
 
+//    @Multipart
+//    @POST("/uploadimage/{data}")
+//    fun Uploadimage(
+//        @Path("data") data: String,
+//        @Part image: MultipartBody.Part
+//    ): Call<LoginResult>
+
     @Multipart
-    @POST("uploadimageGetPresidentInfo/{target}/{id}/{name}")
+    @POST("/uploadimage/")
     fun Uploadimage(
-        @Path("target") target: String,
-        @Path("id") id: String,
-        @Path("name") name: String
+        @Body data: ImagePost,
+        @Part image: MultipartBody.Part
     ): Call<LoginResult>
-//
-//    @GET("{url}")
-//    fun  GetImageUrl(
-//        @Path("url") url: String
-//    ): Call<ResponseBody>
 
     @GET("/image/{target}/{name}.jpg")
     fun  GetImageUrl(

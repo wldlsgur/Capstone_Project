@@ -1,6 +1,7 @@
 package com.example.issueproject.res.RoomManager
 
 import RoomChildListAdapter
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issueproject.databinding.ActivityRoomChildListBinding
 import com.example.issueproject.dto.ParentInfo
 import com.example.issueproject.dto.RoomChildListResult
+import com.example.issueproject.res.ChildAddActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
@@ -23,7 +25,13 @@ class RoomChildListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        ShowRecycler("햇살반")
+        val room = intent.getStringExtra("room")
+        ShowRecycler(room.toString())
+
+        binding.buttonTeacherChildAdd.setOnClickListener{
+            var intent = Intent(this, ChildAddActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initRecycler(list:MutableList<RoomChildListResult>){
@@ -49,7 +57,6 @@ class RoomChildListActivity : AppCompatActivity() {
             override fun onFailure(code: Int) {
                 Log.d(TAG, "onFailure: $code")
             }
-
         })
         
     }

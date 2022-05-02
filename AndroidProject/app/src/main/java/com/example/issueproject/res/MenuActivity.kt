@@ -28,24 +28,28 @@ class MenuActivity : AppCompatActivity() {
 
         val id = intent.getStringExtra("id")
         Log.d(TAG, "id: $id")
-        if (id != null) {
-            GetPresidentInfo(id)
-        }
+//        if (id != null) {
+//            GetPresidentInfo(id)
+//        }
         val name = intent.getStringExtra("name")
         binding.textViewName.text = name
 
-        binding.PresidentDayNotic.setOnClickListener {
-            var intent = Intent(this, DayNoticActivity::class.java)
+        binding.PresidentSchoolteachermanagement.setOnClickListener {
+            var intent = Intent(this, SchoolAddActivity::class.java)
             startActivity(intent)
         }
-        binding.PresidentNotic.setOnClickListener {
-            var intent = Intent(this, NoticActivity::class.java)
-            startActivity(intent)
-        }
-        binding.PresidentSchoolManager.setOnClickListener {
-            var intent = Intent(this, RoomChildListActivity::class.java)
-            startActivity(intent)
-        }
+//        binding.PresidentDayNotic.setOnClickListener {
+//            var intent = Intent(this, DayNoticActivity::class.java)
+//            startActivity(intent)
+//        }
+//        binding.PresidentNotic.setOnClickListener {
+//            var intent = Intent(this, NoticActivity::class.java)
+//            startActivity(intent)
+//        }
+//        binding.PresidentSchoolManager.setOnClickListener {
+//            var intent = Intent(this, RoomChildListActivity::class.java)
+//            startActivity(intent)
+//        }
 //
 //        binding.buttonMenuSchoolAdd.setOnClickListener {
 //            var intent = Intent(this, SchoolAddActivity::class.java)
@@ -86,43 +90,26 @@ class MenuActivity : AppCompatActivity() {
 //            }
 //        })
 //    }
-    fun GetPresidentInfo(id: String){
-        ResponseService().GetPresidentInfo(id, object : RetrofitCallback<MutableList<PresidentinfoResult>>{
-            override fun onError(t: Throwable) {
-                Log.d(TAG, "onError: $t")
-                binding.textView2.text = ""
-                binding.textViewSchool.text = "어린이집을 등록해주세요"
-            }
-
-            override fun onSuccess(code: Int, responseData: MutableList<PresidentinfoResult>) {
-                Log.d(TAG, "onSuccess: $responseData")
-                binding.textViewSchool.text = responseData[0].school
-            }
-
-            override fun onFailure(code: Int) {
-                Log.d(TAG, "onFailure: $code")
-                binding.textView2.text = ""
-                binding.textViewSchool.text = "어린이집을 등록해주세요"
-            }
-        })
-    }
-//    fun GetParentInfo(id: String){
-//        ResponseService().GetParentInfo(id, object : RetrofitCallback<ParentInfoResult>{
+//    fun GetPresidentInfo(id: String) {
+//    ResponseService().GetPresidentInfo(
+//        id,
+//        object : RetrofitCallback<MutableList<PresidentinfoResult>> {
 //            override fun onError(t: Throwable) {
 //                Log.d(TAG, "onError: $t")
+//                binding.textView2.text = ""
 //                binding.textViewSchool.text = "어린이집을 등록해주세요"
 //            }
 //
-//            override fun onSuccess(code: Int, responseData: ParentInfoResult) {
+//            override fun onSuccess(code: Int, responseData: MutableList<PresidentinfoResult>) {
 //                Log.d(TAG, "onSuccess: $responseData")
-//                binding.textViewSchool.text = responseData.school
+//                binding.textViewSchool.text = responseData[0].school
 //            }
 //
 //            override fun onFailure(code: Int) {
 //                Log.d(TAG, "onFailure: $code")
+//                binding.textView2.text = ""
 //                binding.textViewSchool.text = "어린이집을 등록해주세요"
 //            }
-//
 //        })
 //    }
 }

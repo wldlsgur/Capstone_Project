@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.issueproject.dto.*
 import com.example.issueproject.retrofit.RetrofitBuilder
 import com.example.issueproject.retrofit.RetrofitCallback
+import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -99,13 +100,13 @@ class ResponseService {
 
         })
     }
-    fun GetParentInfo(id: String, callback: RetrofitCallback<ParentInfoResult>){
-        RetrofitBuilder.api.GetParentInfo(id).enqueue(object : Callback<ParentInfoResult>{
+    fun GetParentInfo(id: String, callback: RetrofitCallback<MutableList<ParentInfoResult>>){
+        RetrofitBuilder.api.GetParentInfo(id).enqueue(object : Callback<MutableList<ParentInfoResult>>{
             override fun onResponse(
-                call: Call<ParentInfoResult>,
-                response: Response<ParentInfoResult>
+                call: Call<MutableList<ParentInfoResult>>,
+                response: Response<MutableList<ParentInfoResult>>
             ) {
-                Log.d(TAG, "SignUpService: ..")
+                Log.d(TAG, "GetParentInfo: ..")
                 if (response.code() == 200){
                     Log.d(TAG, "onResponse: 200")
                     if(response.body() != null){
@@ -117,7 +118,7 @@ class ResponseService {
                 }
             }
 
-            override fun onFailure(call: Call<ParentInfoResult>, t: Throwable) {
+            override fun onFailure(call: Call<MutableList<ParentInfoResult>>, t: Throwable) {
                 Log.d(TAG, "onFailure: ")
                 callback.onError(t)
             }
@@ -214,6 +215,8 @@ class ResponseService {
         RetrofitBuilder.api.ParentInfo(info).enqueue(object : Callback<SignUpResult>{
             override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
                 Log.d(TAG, "CreateParentinfo: ..")
+                Log.d(TAG, "onResponse: ${response.code()}")
+                Log.d(TAG, "onResponse: ")
                 if (response.code() == 200){
                     if(response.body() != null){
                         Log.d(TAG, "onResponse: 200")
@@ -280,7 +283,6 @@ class ResponseService {
         })
     }
 
-
     fun GetRoom(school: String, callback: RetrofitCallback<MutableList<GetRoom>>) {
         RetrofitBuilder.api.GetRoom(school).enqueue(object : Callback<MutableList<GetRoom>>{
             override fun onResponse(
@@ -302,7 +304,6 @@ class ResponseService {
                 Log.d(TAG, "onFailure: $t")
                 callback.onError(t)
             }
-
         })
     }
 
@@ -326,34 +327,56 @@ class ResponseService {
             }
         })
     }
-//    fun uploadimage() {
-//        var file = File("${getExternalFilesDir(Environment.DIRECTORY_PICTURES)}/tempImg.png")
-//        var requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
-//        var body = MultipartBody.Part.createFormData("file", file.name, requestFile)
-//
-//        RetrofitBuilder.api.Upload(body)
-//    }
-
-//    fun GetImageUrl(url: String, callback: RetrofitCallback<ResponseBody>) {
-//        RetrofitBuilder.api.GetImageUrl(url).enqueue(object : Callback<ResponseBody>{
-//            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-//                Log.d(TAG, "GetImageUrl: ..")
-//                Log.d(TAG, "onResponse: ${response}")
-//                callback.onSuccess(response.code(), response.body()!!)
+//    fun uploadimage(data: String, image: MultipartBody.Part, callback: RetrofitCallback<LoginResult>) {
+//        RetrofitBuilder.api.Uploadimage(data, image).enqueue(object : Callback<LoginResult>{
+//            override fun onResponse(call: Call<LoginResult>, response: Response<LoginResult>) {
+//                Log.d(TAG, "uploadimage: ..")
+//                Log.d(TAG, "onResponse: ${response.code()}")
+//                Log.d(TAG, "onResponse: ${response.errorBody()!!.string()}")
+//                if (response.code() == 200){
+//                    if(response.body() != null){
+//                        Log.d(TAG, "onResponse: 200")
+//                        callback.onSuccess(response.code(), response.body()!!)
+//                    } else{
+//                        callback.onFailure(response.code())
+//                    }
+//                }
 //            }
 //
-//            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+//            override fun onFailure(call: Call<LoginResult>, t: Throwable) {
 //                Log.d(TAG, "onFailure: $t")
 //                callback.onError(t)
 //            }
 //
 //        })
 //    }
+    fun uploadimage(data: ImagePost, image: MultipartBody.Part, callback: RetrofitCallback<LoginResult>) {
+        RetrofitBuilder.api.Uploadimage(data, image).enqueue(object : Callback<LoginResult>{
+            override fun onResponse(call: Call<LoginResult>, response: Response<LoginResult>) {
+                Log.d(TAG, "uploadimage: ..")
+                Log.d(TAG, "onResponse: ${response.code()}")
+//                Log.d(TAG, "onResponse: ${response.errorBody()!!.string()}")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: $t")
+                callback.onError(t)
+            }
+
+        })
+    }
     fun GetImageUrl(target: String, name: String, callback: RetrofitCallback<ResponseBody>) {
         RetrofitBuilder.api.GetImageUrl(target, name).enqueue(object : Callback<ResponseBody>{
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 Log.d(TAG, "GetImageUrl: ..")
-                Log.d(TAG, "onResponse: ${response}")
                 callback.onSuccess(response.code(), response.body()!!)
             }
 

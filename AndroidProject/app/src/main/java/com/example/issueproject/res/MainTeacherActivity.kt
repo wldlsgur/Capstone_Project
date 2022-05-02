@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.issueproject.databinding.ActivityMainTeacherBinding
+import com.example.issueproject.res.RoomManager.RoomChildListActivity
 
 class MainTeacherActivity : AppCompatActivity() {
     private val binding by lazy {
@@ -14,8 +15,10 @@ class MainTeacherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.buttonTeacherChildAdd.setOnClickListener {
-            var intent = Intent(this, ChildAddActivity::class.java)
+        binding.TeacherRoomchildmanagement.setOnClickListener{
+            var intent = Intent(this, RoomChildListActivity::class.java).apply{
+                putExtra("room", binding.textViewRoom.toString())
+            }
             startActivity(intent)
         }
     }

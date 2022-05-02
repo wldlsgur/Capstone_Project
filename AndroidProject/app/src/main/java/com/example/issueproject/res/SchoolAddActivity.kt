@@ -36,7 +36,7 @@ class SchoolAddActivity : AppCompatActivity() {
 
         binding.buttonSchoolAdd.setOnClickListener {
             Log.d(TAG, "onCreate: ")
-            val id = "test1"
+            val id = "test2"
             val school = binding.editTextSchoolName.text.toString()
             val room = binding.editTextRoomName.text.toString()
             val number = binding.editTextSchoolNum.text.toString()
