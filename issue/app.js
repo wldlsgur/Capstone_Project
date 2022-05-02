@@ -4,14 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const multer = require('multer');
+const update_image_url = require('./Function/update_image_url');
 
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		let split_array = req.params.data.split('-');
-		let target = split_array[0];
-	
+		let target = req.body.target;
+
 		if(target === "parent"){
-			cb(null, 'uploads/parents');
+			cb(null, 'uploads/parent');
 		}
 		else if(target === "teacher"){
 			cb(null, 'uploads/teacher');
@@ -27,9 +27,14 @@ const storage = multer.diskStorage({
 		}
 	},
 	filename: function (req, file, cb) {
-		let split_array = req.params.data.split('-');
-		let key = split_array[1];
-		cb(null, `${key}_${file.originalname}`);
+		let target = req.body.target;
+		let key = req.body.key;
+		let timestamp = new Date().getTime().valueOf();	// 현재 시간
+		let file_url = path.basename(file.originalname, ext) + timestamp + ext;
+
+		if((update_image_url.update_image_url(target, key, file_url) === false)) return;
+			
+		cb(null, file_url);
 	},
 	limits: {fileSize: 1 * 512 * 512}
 })
@@ -49,6 +54,7 @@ let albumRouter = require('./routes/album');
 //인승 추가(아래)
 var staffRouter = require('./routes/staff');
 var medicineRouter = require('./routes/medicine');
+const update_image_url = require('./Function/update_image_url');
 
 var app = express();
 
@@ -72,13 +78,18 @@ app.use('/parentinfo', parentinfoRouter);
 app.use('/presidentinfo', presidentinfoRouter);
 app.use('/food_list', food_listRouter);
 app.use('/album', albumRouter);
-app.post('/uploadimage/:data', upload.single('image'), uploadimageRouter);
+app.post('/uploadimage', upload.single('image'), uploadimageRouter);
 
 //인승 추가(아래)
 app.use('/staff', staffRouter);
 app.use('/medicine', medicineRouter);
 
 // catch 404 and forward to error handler
+app.get('/favicon.ico', function(req, res) { 
+    res.status(204);
+    res.end();    
+});
+
 app.use(function(req, res, next) {
   next(createError(404));
 });
