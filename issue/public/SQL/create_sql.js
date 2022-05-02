@@ -1,12 +1,10 @@
-const pool = require('../../DB/db_config');
-const make_query = require('../../Function/make_query');
+var pool = require('../../DB/db_config');
 
 module.exports = function(){
     return {
-        insert_query : function(tabel, data, callback){
+        INSERT : function(query, data_array, callback){
             pool.getConnection(function (err, con) {
-                let query = make_query.INSERT(tabel, data);
-                con.query(query, data, function(err,result,fields){
+                con.query(query, data_array, function(err,result,fields){
                     con.release();
                     if(err) callback(err,null);
                     else callback(null,result);
