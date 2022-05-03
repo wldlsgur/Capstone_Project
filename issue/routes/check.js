@@ -17,7 +17,7 @@ router.get('/login', function(req, res){
 		'*'
 	]
 
-    if(check_element.check_require_element(json_data) === false && !pw){
+    if(check_element.check_require_element(json_data) === false || !pw){
         res.send(element_msg);
         return;
     }
