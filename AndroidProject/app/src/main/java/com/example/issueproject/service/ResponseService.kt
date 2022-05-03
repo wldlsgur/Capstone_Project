@@ -387,4 +387,128 @@ class ResponseService {
 
         })
     }
+
+    fun GetMedcineInfo(name: String, callback: RetrofitCallback<Medicine>) {
+        RetrofitBuilder.api.GetMedicineInfo(name).enqueue(object : Callback<Medicine>{
+            override fun onResponse(
+                call: Call<Medicine>,
+                response: Response<Medicine>
+            ) {
+                Log.d(TAG, "GetRoom: ..")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Medicine>, t: Throwable) {
+                Log.d(TAG, "onFailure: $t")
+                callback.onError(t)
+            }
+
+        })
+    }
+
+    fun MedicineListShow(room: String, callback: RetrofitCallback<MutableList<MedicineManage>>) {
+        RetrofitBuilder.api.MedicineList(room).enqueue(object : Callback<MutableList<MedicineManage>>{
+            override fun onResponse(
+                call: Call<MutableList<MedicineManage>>,
+                response: Response<MutableList<MedicineManage>>
+            ) {
+                Log.d(TAG, "MedicineList: ..")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<MutableList<MedicineManage>>, t: Throwable) {
+                Log.d(TAG, "onFailure: $t")
+                callback.onError(t)
+            }
+
+        })
+
+    }
+
+    fun SchoolTeacherListShow(school: String, callback: RetrofitCallback<MutableList<SchoolteacherListResult>>) {
+        RetrofitBuilder.api.SchoolteacherList(school).enqueue(object : Callback<MutableList<SchoolteacherListResult>>{
+            override fun onResponse(
+                call: Call<MutableList<SchoolteacherListResult>>,
+                response: Response<MutableList<SchoolteacherListResult>>
+            ) {
+                Log.d(TAG, "SchoolteacherList: ..")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<MutableList<SchoolteacherListResult>>, t: Throwable) {
+                Log.d(TAG, "onFailure: $t")
+                callback.onError(t)
+            }
+
+        })
+
+    }
+
+    fun getCalender(date : String, callback: RetrofitCallback<CalenderInfo>) {
+        RetrofitBuilder.api.getCalender(date).enqueue(object : Callback<CalenderInfo>{
+            override fun onResponse(
+                call: Call<CalenderInfo>,
+                response: Response<CalenderInfo>
+            ) {
+                Log.d(TAG, "getCalender: ..")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<CalenderInfo>, t: Throwable) {
+                Log.d(TAG, "onFailure: $t")
+                callback.onError(t)
+            }
+
+        })
+    }
+
+    fun saveCalender(data: CalenderInfo, callback: RetrofitCallback<CalenderResult>){
+        RetrofitBuilder.api.saveCalender(data).enqueue(object : Callback<CalenderResult> {
+            override fun onFailure(call: Call<CalenderResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+            override fun onResponse(call: Call<CalenderResult>,response: Response<CalenderResult>) {
+                Log.d(TAG, "saveCalender: ..")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+        })
+    }
+
 }

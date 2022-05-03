@@ -82,6 +82,36 @@ interface ResponseApi {
         @Path("id") id: String
     ): Call<UserInfo>
 
+    //캘린더로 변경
+    @GET("/calenderinfo/info")
+    fun getCalender(
+        @Query("date") date: String
+    ): Call<CalenderInfo>
+
+    //캘린더로변경
+    @POST("/calenderinfo/info")
+    fun saveCalender(
+        @Body Calenderdata: CalenderInfo
+    ): Call<CalenderResult>
+
+    //선생리스트 경로변경
+    @GET("/parentinfo/room/allinfo")
+    fun SchoolteacherList(
+        @Query("school") school: String
+    ): Call<MutableList<SchoolteacherListResult>>
+
+    //약리스트 경로변경
+    @GET("/parentinfo/room/allinfo")
+    fun MedicineList(
+        @Query("room") room: String
+    ): Call<MutableList<MedicineManage>>
+
+    //약 정보 경로변경
+    @GET("/medicine/info/{name}")
+    fun GetMedicineInfo(
+        @Path("name") name: String
+    ): Call<Medicine>
+
 //    @Multipart
 //    @POST("/uploadimage/{data}")
 //    fun Uploadimage(

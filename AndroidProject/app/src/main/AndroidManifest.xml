@@ -27,9 +27,7 @@
         <activity
             android:name=".res.SchoolManager.SchoolTeacherListActivity"
             android:exported="false" />
-        <activity
-            android:name=".res.SchoolManager.SchooTeacherListActivity"
-            android:exported="false" />
+
         <activity
             android:name=".res.RoomManager.RoomChildListItemActivity"
             android:exported="false" />
@@ -39,9 +37,7 @@
         <activity
             android:name=".res.ChildAddActivity"
             android:exported="false" />
-        <activity
-            android:name=".res.ChieldAddActivity"
-            android:exported="false" />
+
         <activity
             android:name=".res.AddNoticActivity"
             android:exported="false" />
@@ -54,9 +50,7 @@
         <activity
             android:name=".res.SchoolAddActivity"
             android:exported="false" />
-        <activity
-            android:name=".res.DayNotic.DayNoticAddActivity"
-            android:exported="false" />
+
         <activity
             android:name=".res.DayNotic.DayNoticActivity"
             android:exported="false" />
@@ -66,9 +60,30 @@
         <activity
             android:name=".res.SignUpActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".res.Calender.Calender"
+            android:exported="true"/>
+        <activity
+            android:name=".res.Medicine.ParentsMedicineList"
+            android:exported="true"/>
+
+        <activity
+            android:name=".res.Medicine.TeacherMedicineList"
+            android:exported="true"/>
+        <activity
+            android:name=".res.Medicine.Parents_MedicineInfo"
+            android:exported="true"/>
+        <activity
+            android:name=".res.Medicine.Teacher_MedicineInfo"
+            android:exported="true"/>
+        <activity
+            android:name=".res.Medicine.TeacherMedicineItem"
+            android:exported="true"/>
         <activity
             android:name=".res.MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
