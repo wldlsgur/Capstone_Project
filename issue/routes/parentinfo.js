@@ -12,20 +12,16 @@ router.get('/info', function(req, res){
 	let json_data = {
 		id : req.query.id
 	}
-	let data_array = [];
-	for(key of Object.keys(json_data)){//배열 형식
-		data_array.push(json_data[key]);
-	}
 	let target_array = [
 		'*'
 	]
 
-    if(check_element.check_require_element(data_array) === false){
+    if(check_element.check_require_element(json_data) === false){
 		res.send(element_msg);
 		return;
 	}
 	let query = make_query.SELECT(target_array, 'parentinfo', json_data, '', 0);//target, table, json, or_and, cnt
-	db_parent_sql.SELECT(query, data_array, function(err, result){
+	db_parent_sql.SELECT(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
@@ -38,20 +34,16 @@ router.get('/room/allinfo', function(req, res){
 	let json_data = {
 		room : req.query.room
 	}
-	let data_array = [];
-	for(key of Object.keys(json_data)){//배열 형식
-		data_array.push(json_data[key]);
-	}
 	let target_array = [
 		'*'
 	]
 
-	if(check_element.check_require_element(data_array) === false){
+	if(check_element.check_require_element(json_data) === false){
 		res.send(element_msg);
 		return;
 	}
 	let query = make_query.SELECT(target_array, 'parentinfo', json_data, '', 0);
-	db_parent_sql.SELECT(query, data_array, function(err, result){
+	db_parent_sql.SELECT(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
@@ -59,24 +51,43 @@ router.get('/room/allinfo', function(req, res){
 		res.send(result);
 	})
 })
+router.get('/agreelist', function(req, res){
+	let json_data = {
+		school : req.query.school,
+		room : req.query.room,
+		agree : 'no'
+	}
+	let target_array = [
+		'*'
+	];
 
+	if(check_element.check_require_element(json_data) === false){
+		res.send(element_msg);
+		return;
+	}
+
+	let query = make_query.SELECT(target_array, 'parentinfo', json_data, 'AND', 2);
+	db_parent_sql.SELECT(query, function(err, result){
+		if(err){
+			res.status(400).send(err);
+			return;
+		}
+		res.send(result);
+	})
+})
 router.post('/change/check', function(req, res){
 	let json_data = {
 		id : req.body.id,
 		child_name : req.body.name
 	}
-	let data_array = [];
-	for(key of Object.keys(json_data)){//배열 형식
-		data_array.push(json_data[key]);
-	}
 
-	if(check_element.check_require_element(data_array) === false){
+	if(check_element.check_require_element(json_data) === false){
 		res.send(element_msg);
 		return;
 	}
 	let target = 'agree="yes"';
 	let query = make_query.UPDATE(target, 'parentinfo', json_data, 'AND', 1);
-	db_parent_sql.UPDATE(query, data_array, function(err, result){
+	db_parent_sql.UPDATE(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
@@ -90,18 +101,14 @@ router.post('/delete/info', function(req, res){
 		id : req.body.id,
 		child_name : req.body.name
 	}
-	let data_array = [];
-	for(key of Object.keys(json_data)){//배열 형식
-		data_array.push(json_data[key]);
-	}
 
-	if(check_element.check_require_element(data_array) === false){
+	if(check_element.check_require_element(json_data) === false){
 		res.send(element_msg);
 		return;
 	}
 	
 	let query = make_query.DELETE('parentinfo', json_data, 'AND', 1);
-	db_parent_sql.DELETE(query, data_array, function(err, result){
+	db_parent_sql.DELETE(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;

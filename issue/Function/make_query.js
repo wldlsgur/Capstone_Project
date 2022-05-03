@@ -8,8 +8,8 @@ module.exports = {
         make_query = make_query.substring(0, make_query.length - 1);//마지막, 제거
         make_query += `) VALUES(`;
 
-        for(var key in json_data){
-            make_query += `?,`;
+        for(key of Object.keys(json_data)){
+            make_query += `'${json_data[key]}',`;
         }
         make_query = make_query.substring(0, make_query.length - 1);//마지막, 제거
         make_query += `)`;
@@ -29,7 +29,7 @@ module.exports = {
 
         let or_and_cnt = 0;
         for(key of Object.keys(json_data)){
-            make_query += `${key}=? `;
+            make_query += `${key}='${json_data[key]}' `;
             if(or_and_cnt != cnt){
                 make_query += `${or_and} `;
                 or_and_cnt++;
@@ -44,7 +44,7 @@ module.exports = {
         
         let or_and_cnt = 0;
         for(key of Object.keys(json_data)){
-            make_query += `${key}=? `;
+            make_query += `${key}='${json_data[key]}' `;
             if(or_and_cnt != cnt){
                 make_query += `${or_and} `;
                 or_and_cnt++;
@@ -59,7 +59,7 @@ module.exports = {
 
         let or_and_cnt = 0;
         for(key of Object.keys(json_data)){
-            make_query += `${key}=? `;
+            make_query += `${key}='${json_data[key]}' `;
             if(or_and_cnt != cnt){
                 make_query += `${or_and} `;
                 or_and_cnt++;

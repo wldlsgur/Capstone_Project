@@ -13,21 +13,17 @@ router.get('/image_url', function(req, res){
         school : req.query.school,
         date : req.query.date
     }
-    let data_array = [];
-    for(key of Object.keys(json_data)){//배열 형식
-		data_array.push(json_data[key]);
-	}
 	let target_array = [
 		'image_url'
 	]
 
-    if(check_element.check_require_element(data_array) === false){
+    if(check_element.check_require_element(json_data) === false){
         res.send(element_msg);
         return;
     }
 
     let query = make_query.SELECT(target_array, 'food_list', json_data, 'AND', 1);
-    db_food_list_sql.SELECT(query, data_array, function(err, result){
+    db_food_list_sql.SELECT(query, function(err, result){
         if(err){
             res.status(400).send(err);
             return;
@@ -40,20 +36,16 @@ router.get('/all/image_url/:school', function(req, res){
     let json_data = {
         school : req.params.school
     }
-    let data_array = [];
-    for(key of Object.keys(json_data)){//배열 형식
-		data_array.push(json_data[key]);
-	}
 	let target_array = [
 		'image_url'
 	]
-    if(check_element.check_require_element(data_array) === false){
+    if(check_element.check_require_element(json_data) === false){
         res.send(element_msg);
         return;
     }
 
     let query = make_query.SELECT(target_array, 'food_list', json_data, '', 0);
-    db_food_list_sql.SELECT(query, data_array, function(err, result){
+    db_food_list_sql.SELECT(query, function(err, result){
         if(err){
             res.status(400).send(err);
             return;

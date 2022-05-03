@@ -1,7 +1,7 @@
 module.exports = {
-    check_require_element : function(data){
-        for(let i=0 ; i<data.length ; i++){
-            if(!data[i]) return false;
+    check_require_element : function(json_data){
+        for(var key in json_data){
+            if(!json_data[key]) return false;
         }
         return true;
     }

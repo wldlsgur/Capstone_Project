@@ -13,20 +13,16 @@ router.get('/login', function(req, res){
         id : req.query.id
     }
     let pw = req.query.pw;
-    let data_array = [];
-	for(key of Object.keys(json_data)){//배열 형식
-		data_array.push(json_data[key]);
-	}
 	let target_array = [
 		'*'
 	]
 
-    if(check_element.check_require_element(data_array) === false && !pw){
+    if(check_element.check_require_element(json_data) === false && !pw){
         res.send(element_msg);
         return;
     }
 	let query = make_query.SELECT(target_array, 'user', json_data, '', 0);//target, table, json, or_and, cnt
-    db_check_sql.SELECT(query, data_array, function(err, result){
+    db_check_sql.SELECT(query, function(err, result){
         if(err){
             res.status(400).send(err);
             return;
@@ -48,20 +44,16 @@ router.get('/sameid', function(req, res){
     let json_data = {
         id : req.query.id
     };
-    let data_array = [];
-	for(key of Object.keys(json_data)){//배열 형식
-		data_array.push(json_data[key]);
-	}
 	let target_array = [
 		'*'
 	]
 
-    if(check_element.check_require_element(data_array) === false){
+    if(check_element.check_require_element(json_data) === false){
         res.send(element_msg);
         return;
     }
     let query = make_query.SELECT(target_array, 'user', json_data, '', 0);//target, table, json, or_and, cnt
-    db_check_sql.SELECT(query, data_array, function(err, result){
+    db_check_sql.SELECT(query, function(err, result){
         if(err){
             res.status(400).send(err);
             return;

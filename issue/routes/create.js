@@ -15,17 +15,13 @@ router.post('/user', function(req, res){
 		name : req.body.name,
 		job : req.body.job
 	};//json 형식
-	let data_array = [];
-	for(key of Object.keys(json_data)){//배열 형식
-		data_array.push(json_data[key]);
-	}
 
-    if(check_element.check_require_element(data_array) === false){
+    if(check_element.check_require_element(json_data) === false){
 		res.send(element_msg);
 		return;
 	}
 	let query = make_query.INSERT('user', json_data);
-	db_create_sql.INSERT(query, data_array, function(err, result){
+	db_create_sql.INSERT(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
@@ -44,17 +40,12 @@ router.post('/schoolmanagement', function(req, res){
 		date : req.body.date
 	};
 
-	let data_array = [];
-	for(key of Object.keys(json_data)){//배열 형식
-		data_array.push(json_data[key]);
-	}
-
-    if(check_element.check_require_element(data_array) === false){
+    if(check_element.check_require_element(json_data) === false){
 		res.send(element_msg);
 		return;
 	}
 	let query = make_query.INSERT('schoolmanagement', json_data);
-	db_create_sql.INSERT(query, data_array, function(err, result){
+	db_create_sql.INSERT(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
@@ -71,17 +62,13 @@ router.post('/presidentinfo', function(req, res){
 		number : req.body.number,
 		image_url : '/default'
 	};
-	let data_array = [];
-	for(key of Object.keys(json_data)){//배열 형식
-		data_array.push(json_data[key]);
-	}
 
-	if(check_element.check_require_element(data_array) === false){
+	if(check_element.check_require_element(json_data) === false){
 		res.send(element_msg);
 		return;
 	}
 	let query = make_query.INSERT('presidentinfo', json_data);
-	db_create_sql.INSERT(query, data_array, function(err, result){
+	db_create_sql.INSERT(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
@@ -102,17 +89,13 @@ router.post('/parentinfo', function(req, res){
 		spec : req.body.spec,
 		agree : 'no'
 	};
-	let data_array = [];
-	for(key of Object.keys(json_data)){//배열 형식
-		data_array.push(json_data[key]);
-	}
 
-	if(check_element.check_require_element(data_array) === false){
+	if(check_element.check_require_element(json_data) === false){
 		res.send(element_msg);
 		return;
 	}
 	let query = make_query.INSERT('parentinfo', json_data);
-	db_create_sql.INSERT(query, data_array, function(err, result){
+	db_create_sql.INSERT(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
@@ -130,17 +113,13 @@ router.post('teacherinfo', function(req, res){
 		image_url : '/default',
 		agree : 'no'
 	};
-	let data_array = [];
-	for(key of Object.keys(json_data)){//배열 형식
-		data_array.push(json_data[key]);
-	}
 
-	if(check_element.check_require_element(data_array) === false){
+	if(check_element.check_require_element(json_data) === false){
 		res.send(element_msg);
 		return;
 	}
 	let query = make_query.INSERT('teacherinfo', json_data);
-	db_create_sql.INSERT(query, data_array, function(err, result){
+	db_create_sql.INSERT(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
@@ -155,17 +134,13 @@ router.post('/food_list', function(req, res){
 		date : req.body.date,
 		image_url : '/default'
 	};
-	let data_array = [];
-	for(key of Object.keys(json_data)){//배열 형식
-		data_array.push(json_data[key]);
-	}
 
-	if(check_element.check_require_element(data_array) === false){
+	if(check_element.check_require_element(json_data) === false){
 		res.send(element_msg);
 		return;
 	}
 	let query = make_query.INSERT('food_list', json_data);
-	db_create_sql.INSERT(query, data_array, function(err, result){
+	db_create_sql.INSERT(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;
@@ -182,17 +157,13 @@ router.post('/album', function(req, res){
 		date : req.body.date,
 		image_url : '/default'
 	};
-	let data_array = [];
-	for(key of Object.keys(json_data)){//배열 형식
-		data_array.push(json_data[key]);
-	}
 
-	if(check_element.check_require_element(data_array) === false){
+	if(check_element.check_require_element(json_data) === false){
 		res.send(element_msg);
 		return;
 	}
 	let query = make_query.INSERT('album', json_data);
-	db_create_sql.INSERT(query, data_array, function(err, result){
+	db_create_sql.INSERT(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
 			return;

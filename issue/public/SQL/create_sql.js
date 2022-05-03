@@ -2,9 +2,9 @@ var pool = require('../../DB/db_config');
 
 module.exports = function(){
     return {
-        INSERT : function(query, data_array, callback){
+        INSERT : function(query, callback){
             pool.getConnection(function (err, con) {
-                con.query(query, data_array, function(err,result,fields){
+                con.query(query, function(err,result,fields){
                     con.release();
                     if(err) callback(err,null);
                     else callback(null,result);
