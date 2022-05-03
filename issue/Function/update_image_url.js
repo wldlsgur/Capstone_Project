@@ -9,23 +9,22 @@ module.exports = {
 		let query = ``;
 		switch(target){
 			case 'parent':
-				query = `UPDATE parentinfo SET image_url=${file_url} WHERE key_id = '${key}';`
+				query = `UPDATE parentinfo SET image_url='/${file_url}' WHERE key_id = '${key}';`
 				break;
 			case 'food':
-				query = `UPDATE food_list SET image_url=${file_url} WHERE key_id = '${key}';`
+				query = `UPDATE food_list SET image_url='/${file_url}' WHERE key_id = '${key}';`
 				break;
 			case 'teacher':
-				query = `UPDATE teachertinfo SET image_url=${file_url} WHERE key_id = '${key}';`
+				query = `UPDATE teachertinfo SET image_url='/${file_url}' WHERE key_id = '${key}';`
 				break;
 			case 'president':
-				query = `UPDATE presidentinfo SET image_url=${file_url} WHERE key_id = '${key}';`
+				query = `UPDATE presidentinfo SET image_url='/${file_url}' WHERE key_id = '${key}';`
 				break;
 			case 'album':
-				query = `UPDATE album SET image_url=${file_url} WHERE key_id = '${key}';`
+				query = `UPDATE album SET image_url='/${file_url}' WHERE key_id = '${key}';`
 				break;
 			default :
-				res.send(failed_response);
-				return;
+				break;
 		}
         console.log(query);
 		db.query(query, function(err, result){
