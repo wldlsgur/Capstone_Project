@@ -30,6 +30,30 @@ router.get('/info', function(req, res){
 	})
 })
 
+router.get('/child/info', function(req, res){
+	let json_data = {
+		id : req.query.id,
+		child_name : req.query.name
+	}
+	let target_array = [
+		'*'
+	]
+
+	if(check_element.check_require_element(json_data) === false){
+		res.send(element_msg);
+		return;
+	}
+
+	let query = make_query.SELECT(target_array, 'parentinfo', json_data, 'AND', 1);
+	db_parent_sql.SELECT(query, function(err, result){
+		if(err){
+			res.status(400).send(err);
+			return;
+		}
+		res.send(result[0]);
+	})
+})
+
 router.get('/room/allinfo', function(req, res){
 	let json_data = {
 		room : req.query.room

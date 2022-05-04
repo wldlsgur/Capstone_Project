@@ -30,7 +30,7 @@ const storage = multer.diskStorage({
 		let target = req.params.target;
 		let key = req.params.key;
 		let timestamp = new Date().getTime().valueOf();	// 현재 시간
-		let file_url = path.basename(file.originalname, key) + timestamp + key;
+		let file_url = timestamp + key + path.basename(file.originalname);
 		console.log(file_url);
 		if((update_image_url.update_image_url(target, key, file_url) === false)) return;
 			
