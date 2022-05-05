@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
 const db_check_sql = require('../public/SQL/check_sql')();
 const check_element = require('../Function/check_require_element');
 const make_query = require('../Function/make_query');
@@ -63,6 +64,55 @@ router.get('/sameid', function(req, res){
             return;
         }
         res.send({res : true, msg : 'found'});
+    })
+})
+
+router.post('/delete/image', function(req, res){
+    let json_data = {
+        target : req.body.target,
+        image_url : req.body.image_url,
+    }
+
+    if(check_element.check_require_element(json_data) === false){
+        res.send(element_msg);
+        return;
+    }
+
+    fs.unlinkSync(`uploads/${json_data.target}/${json_data.image_url}`, function(err){
+        if(err){
+            res.status(400).send(err);
+            return;
+        }
+        else{
+            let query = ``;
+            switch(json_data.target){
+                case 'parent':
+                    query = `UPDATE parentinfo SET image_url='/default.jpg' WHERE image_url = '${json_data.image_url}';`
+                    break;
+                case 'food':
+                    query = `DELETE FROM food_list WHERE image_url = '${json_data.image_url}';`
+                    break;
+                case 'teacher':
+                    query = `UPDATE teachertinfo SET image_url='/default.jpg' WHERE image_url = '${json_data.image_url}';`
+                    break;
+                case 'president':
+                    query = `UPDATE presidentinfo SET image_url='/default.jpg' WHERE image_url = '${json_data.image_url}';`
+                    break;
+                case 'album':
+                    query = `DELETE FROM album WHERE image_url = '${json_data.image_url}';`
+                    break;
+                default :
+                    break;
+                console.log(query);
+		        db_check_sql.image_delete(query, function(err, result){
+			        if(err){
+				        res.status(400).send(err);
+                        return;
+			        }
+			        res.send(sucess_response);
+		        })
+		    } 
+        }
     })
 })
 module.exports = router;

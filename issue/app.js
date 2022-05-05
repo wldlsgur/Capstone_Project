@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
 			cb(null, 'uploads/president');
 		}
 		else if(target === "food"){
-			cb(null, 'uploads/food_menu');
+			cb(null, 'uploads/food');
 		}
 		else if(target === "album"){
 			cb(null, 'uploads/album');
