@@ -103,15 +103,15 @@ router.post('/delete/image', function(req, res){
                     break;
                 default :
                     break;
-                console.log(query);
-		        db_check_sql.image_delete(query, function(err, result){
-			        if(err){
-				        res.status(400).send(err);
-                        return;
-			        }
-			        res.send(sucess_response);
-		        })
-		    } 
+		    }
+            console.log(query);
+		    db_check_sql.image_delete(query, function(err, result){
+			    if(err){
+			        res.status(400).send(err);
+                    return;
+			    }
+			    res.send(sucess_response);
+		    })
         }
     })
 })
