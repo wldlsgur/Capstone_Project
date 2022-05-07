@@ -139,14 +139,13 @@ class ChildAddActivity : AppCompatActivity() {
 //        var value1 = "1"
 //        var value2 = "1"
 //        var data = "${target}-${key}-${value1}-${value2}"
-        var imagepost = ImagePost("parent", key_id)
-        Log.d(TAG, "data: $imagepost")
-        uploadimage(imagepost, uploadFile)
+        Log.d(TAG, "savaimage: $key_id")
+        uploadimage("parent", key_id, uploadFile)
     }
 
-    fun uploadimage(data: ImagePost, file: MultipartBody.Part){
+    fun uploadimage(target: String, key: String, file: MultipartBody.Part){
         Log.d(TAG, "uploadimage: ....")
-        ResponseService().uploadimage(data, file, object : RetrofitCallback<LoginResult>{
+        ResponseService().uploadimage(target, key, file, object : RetrofitCallback<LoginResult>{
 
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
@@ -171,7 +170,7 @@ class ChildAddActivity : AppCompatActivity() {
                 Log.d(TAG, "onSuccess: $responseData")
                 if(responseData.msg == "success"){
                     Toast.makeText(this@ChildAddActivity, "성공", Toast.LENGTH_SHORT).show()
-                    GetParentInfo("이승현")
+                    GetParentInfo("이승현12")
                 }
             }
 

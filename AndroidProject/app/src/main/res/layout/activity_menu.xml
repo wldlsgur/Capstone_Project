@@ -10,11 +10,9 @@
         android:id="@+id/President_schoolteachermanagement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout9"
-        app:layout_constraintEnd_toEndOf="@+id/constraintLayout9"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout9">
 
         <ImageView
             android:id="@+id/imageView4"
@@ -42,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +59,7 @@
             app:srcCompat="@drawable/more" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/imageViewChild"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginStart="20dp"
@@ -78,8 +76,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="50dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView5"
-            app:layout_constraintTop_toTopOf="@+id/imageView5">
+            app:layout_constraintStart_toEndOf="@+id/imageViewChild"
+            app:layout_constraintTop_toTopOf="@+id/imageViewChild">
 
             <TextView
                 android:id="@+id/textView2"
@@ -99,6 +97,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="TextView"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
@@ -110,7 +109,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="50dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewChild"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout">
 
@@ -129,6 +128,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="TextView"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView4"
@@ -152,12 +152,10 @@
         android:id="@+id/constraintLayout9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view">
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout5"
@@ -181,10 +179,13 @@
                     android:id="@+id/textView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="앨범"
                     android:textColor="@color/black"
-                    tools:layout_editor_absoluteX="22dp"
-                    tools:layout_editor_absoluteY="78dp" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button_President_Album" />
 
                 <ImageView
                     android:id="@+id/button_President_Album"

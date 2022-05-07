@@ -26,6 +26,7 @@ class SchoolTeacherListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val school = intent.getStringExtra("school").toString()
+        Log.d(TAG, "onCreate: $school")
         ShowRecycler(school)
     }
 
@@ -41,7 +42,7 @@ class SchoolTeacherListActivity : AppCompatActivity() {
                     var intent = Intent(this@SchoolTeacherListActivity, RoomChildListActivity::class.java).apply {
                         putExtra(
                             "teacher_name",
-                            SchoolTeacherListAdapter.SchoolListViewHolder(v).name.toString()
+                            SchoolTeacherListAdapter.SchoolListViewHolder(v).number.toString()
                         )
                         putExtra(
                             "room",
@@ -55,9 +56,7 @@ class SchoolTeacherListActivity : AppCompatActivity() {
     }
 
     private fun ShowRecycler(school: String) {
-        ResponseService().SchoolTeacherListShow(
-            school,
-            object : RetrofitCallback<MutableList<SchoolteacherListResult>> {
+        ResponseService().SchoolTeacherListShow(school, object : RetrofitCallback<MutableList<SchoolteacherListResult>> {
                 override fun onError(t: Throwable) {
                     Log.d(TAG, "onError: $t")
                 }
