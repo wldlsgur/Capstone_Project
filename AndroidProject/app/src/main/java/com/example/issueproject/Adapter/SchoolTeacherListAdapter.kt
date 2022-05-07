@@ -18,14 +18,14 @@ private const val TAG = "SchoolTeacherAdapter"
 class SchoolTeacherListAdapter(var list: MutableList<SchoolteacherListResult>) : RecyclerView.Adapter<SchoolTeacherListAdapter.SchoolListViewHolder>() {
 
     inner class SchoolListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        //변수 설정 name, room
-        val name: TextView = itemView.findViewById(R.id.textViewSchool_teacher_list_item_name)
+        //변수 설정 room, number
+        val number: TextView = itemView.findViewById(R.id.textViewSchool_teacher_list_item_number)
         val room: TextView = itemView.findViewById(R.id.textViewSchool_teacher_list_item_room)
         private val image: ImageView = itemView.findViewById(R.id.imageViewTeacherImage)
 
         fun bindinfo(data: SchoolteacherListResult){
-            name.text = data.name
             room.text = data.room
+            number.text = data.number
             //GetImageUrl(data.teacher_image)
             //val text= "/image/parents/이정은.jpg"
             //GetImageUrl(text)

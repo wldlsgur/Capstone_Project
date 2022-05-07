@@ -38,15 +38,10 @@ class AddNoticActivity : AppCompatActivity() {
         binding.buttonAdd.setOnClickListener {
             var title = binding.editTextAddTitle.text.toString()
             var content = binding.editTextAddContent.text.toString()
-            var room = binding.editTextAddGroup.text.toString()
-            var menu = binding.editTextAddMenu.text.toString()
-            var date = binding.textViewDate.text.toString()
-//            var year = date.substring(0,4)
-//            var month = date.substring(6,8)
-//            var day = date.substring(10,12)
-
             var school = binding.editTextAddSchool.text.toString()
-//            Log.d(TAG, "datetest: ${year}-${month}-${day}")
+            var room = binding.editTextAddGroup.text.toString()
+            var menu = intent.getStringExtra("menu")!!
+            var date = binding.textViewDate.text.toString()
 
             var addManagement = AddManagement(title, content, date, school, room, menu)
             insertaddManagement(addManagement)
