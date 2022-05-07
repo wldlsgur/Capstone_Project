@@ -87,16 +87,16 @@ router.post('/delete/image', function(req, res){
             let query = ``;
             switch(json_data.target){
                 case 'parent':
-                    query = `UPDATE parentinfo SET image_url='/default.jpg' WHERE image_url = '${json_data.image_url}';`
+                    query = `UPDATE parentinfo SET image_url='/default' WHERE image_url = '${json_data.image_url}';`
                     break;
                 case 'food':
                     query = `DELETE FROM food_list WHERE image_url = '${json_data.image_url}';`
                     break;
                 case 'teacher':
-                    query = `UPDATE teachertinfo SET image_url='/default.jpg' WHERE image_url = '${json_data.image_url}';`
+                    query = `UPDATE teachertinfo SET image_url='/default' WHERE image_url = '${json_data.image_url}';`
                     break;
                 case 'president':
-                    query = `UPDATE presidentinfo SET image_url='/default.jpg' WHERE image_url = '${json_data.image_url}';`
+                    query = `UPDATE presidentinfo SET image_url='/default' WHERE image_url = '${json_data.image_url}';`
                     break;
                 case 'album':
                     query = `DELETE FROM album WHERE image_url = '${json_data.image_url}';`
