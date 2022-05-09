@@ -76,7 +76,10 @@
             android:name=".res.Medicine.Teacher_MedicineInfo"
             android:exported="true" />
         <activity
-            android:name=".res.Medicine.TeacherMedicineItem"
+        android:name=".res.Medicine.TeacherMedicineItem"
+        android:exported="true" />
+        <activity
+            android:name=".res.Navi.Navigation"
             android:exported="true" />
         <activity
             android:name=".res.MainActivity"

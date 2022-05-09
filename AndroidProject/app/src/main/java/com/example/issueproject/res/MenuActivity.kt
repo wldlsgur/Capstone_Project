@@ -5,17 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.viewModels
 import com.example.issueproject.databinding.ActivityMenuBinding
-import com.example.issueproject.dto.ParentInfoResult
 import com.example.issueproject.dto.PresidentinfoResult
-import com.example.issueproject.dto.UserInfo
 import com.example.issueproject.res.DayNotic.DayNoticActivity
 import com.example.issueproject.res.Foodlist.FoodlistActivity
+import com.example.issueproject.res.Navi.Navigation
 import com.example.issueproject.res.Notic.NoticActivity
-import com.example.issueproject.res.RoomManager.RoomChildListActivity
 import com.example.issueproject.res.SchoolManager.SchoolTeacherListActivity
-import com.example.issueproject.res.viewmodel.MainViewModels
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
@@ -78,6 +74,16 @@ class MenuActivity : AppCompatActivity() {
 //            var intent = Intent(this, ::class.java)
 //            startActivity(intent)
         }
+    binding.buttontest.setOnClickListener {
+        var intent = Intent(this, Navigation::class.java)
+        startActivity(intent)
+    }
+//        //끝나면 지울것
+//        binding.buttontest.setOnClickListener{
+//            var intent = Intent(this, test1::class.java).apply {
+//            }
+//            startActivity(intent)
+//        }
     }
 
     fun GetPresidentInfo(id: String) {
