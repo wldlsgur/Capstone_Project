@@ -1,5 +1,6 @@
 const db = require('../DB/db');
 const db_create_sql = require('../public/SQL/create_sql')();
+const make_query = require('./make_query');
 
 const element_msg = "plz send require elements";
 const sucess_response = {res : true, msg : 'success'};
