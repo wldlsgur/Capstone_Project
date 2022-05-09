@@ -37,7 +37,7 @@ router.get('/select/get/data', function(req, res, next) {
     let id = req.query.id;
     let child_name = req.query.child_name;
 
-    db_medicine.selectMedicinemanageInfo(id, child_name, function(err,result){
+    db_medicine.selectMedicineInfo(id, child_name, function(err,result){
     if(err){
         console.log(err);
         res.status(400).send(err);
@@ -51,7 +51,7 @@ router.get('/selectManage/get/data', function(req, res, next) {
     let school = req.query.school;
     let room = req.query.room;
 
-    db_medicine.selectMedicineInfo(id, child_name, function(err,result){
+    db_medicine.selectMedicinemanageInfo(school, room, function(err,result){
     if(err){
         console.log(err);
         res.status(400).send(err);
