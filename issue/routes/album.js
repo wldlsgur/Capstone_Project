@@ -8,21 +8,18 @@ const element_msg = "plz send require elements";
 const sucess_response = {res : true, msg : 'success'};
 const failed_response = {res : false, msg : "failed"};
 
-router.get('/image_url', function(req, res){
+router.get('/info', function(req, res){
     let json_data = {
         school : req.query.school,
         room : req.query.room
     }
-	let target_array = [
-		'*'
-	]
 
     if(check_element.check_require_element(json_data) === false){
         res.send(element_msg);
         return;
     }
 
-    let query = make_query.SELECT(target_array, 'album', json_data, 'AND', 1);
+    let query = `SELECT DISTINCT title, date FROM album WHERE school='${school}' AND room='${room}'`;
     db_album_sql.SELECT(query, function(err, result){
         if(err){
             res.status(400).send(err);
@@ -31,4 +28,30 @@ router.get('/image_url', function(req, res){
         res.send(result);
     })
 })
+
+router.get('/image_url', function(req, res){
+    let json_data = {
+        school : req.query.school,
+        room : req.query.room,
+        title : req.query.title,
+        date : req.query.date
+    }
+    let target_array = [
+        'image_url'
+    ]
+    
+    if(check_element.check_require_element(json_data) === false){
+        res.send(element_msg);
+        return;
+    }
+
+    let query = make_query.SELECT(target_array, 'album', json_data, 'AND', 2);
+    db_album_sql.SELECT(query, function(err, result){
+        if(err){
+            res.status(400).send(err);
+        }
+        res.send(result);
+    })
+})
+
 module.exports = router;
