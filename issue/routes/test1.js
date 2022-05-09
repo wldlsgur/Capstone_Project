@@ -23,7 +23,7 @@ router.post('/insert', function(req, res, next) {
           }
          else res.send(success_response);
   })
-});
+})
 
 
 module.exports = router;

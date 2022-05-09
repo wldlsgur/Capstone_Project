@@ -16,17 +16,15 @@ router.post('/insert/data', function(req, res, next) {  //medicine, medicinemana
     let lunch = req.body.lunch;
     let dinner = req.body.dinner;
     let date = req.body.date;
-    let mKind = req.body.mKind;
-    let mSpecial = req.body.mSpecial;
     let mPlace = req.body.mPlace;
-    let mAmount = req.body.mAmount;
-    let mSym = req.body.mSym;
+    let content = req.body.content;
+    
 
     //medicinemanagement 만 추가
     let school = req.body.school;
     let room = req.body.room;
 
-    db_medicine.insertMedicineInfoAll(id, child_name, m_name, morning, lunch, dinner, date, mKind, mSpecial, mPlace, mAmount, mSym, school, room,function(err,result){
+    db_medicine.insertMedicineInfoAll(id, child_name, m_name, morning, lunch, dinner, date, mPlace, content, school, room,function(err,result){
          if(err){
                 console.log(err);
                 res.status(400).send(err);
