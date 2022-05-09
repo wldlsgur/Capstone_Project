@@ -7,7 +7,7 @@ module.exports = function () {
                         let insertMedicineInfo = `insert into medicine ('id', 'child_name', 'm_name', 'morning', 'lunch', 'dinner', 'date', 'mPlace', 'content')
                                                   values('${id}','${child_name}','${m_name}','${morning}','${lunch}','${dinner}','${date}','${mPlace}','${content}')`;
                         let insertMedicineManagementInfo = `insert into medicinemanagement ('id', 'school', 'room', 'child_name', 'm_name', 'date', 'morning', 'lunch', 'dinner')
-                                                            values('${id}', '${school}', '${room}', '${child_name}','${m_name}',NOW(),'false','false','false')`;
+                                                            values('${id}', '${school}', '${room}', '${child_name}','${m_name}','${NOW()}','false','false','false')`;
                         let multiQuery = `${insertMedicineInfo};${insertMedicineManagementInfo};`
                         con.query(multiQuery,function(err,result,fields){
                             con.release();
