@@ -23,10 +23,19 @@ class DayNoticActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        ShowRecycler("알림장","달서어린이집","인혁반")
+
+        val school = intent.getStringExtra("school")
+        val room = intent.getStringExtra("room")
+        val menu = intent.getStringExtra("menu")
+        Log.d(TAG, "onCreate: $school")
+        Log.d(TAG, "onCreate: $room")
+        Log.d(TAG, "onCreate: $menu")
+        ShowRecycler(menu!!,school!!,room!!)
 
         binding.buttonDaynoticAdd.setOnClickListener {
-            var intent = Intent(this, AddNoticActivity::class.java)
+            var intent = Intent(this, AddNoticActivity::class.java).apply {
+                putExtra("menu", menu)
+            }
             startActivity(intent)
         }
     }

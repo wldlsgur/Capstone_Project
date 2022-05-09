@@ -23,12 +23,12 @@ router.get('/image_url', function(req, res){
     }
 
     let query = make_query.SELECT(target_array, 'album', json_data, 'AND', 1);
-    db_food_list_sql.SELECT(query, function(err, result){
+    db_album_sql.SELECT(query, function(err, result){
         if(err){
             res.status(400).send(err);
             return;
         }
-        res.send(result[0]);
+        res.send(result);
     })
 })
 module.exports = router;

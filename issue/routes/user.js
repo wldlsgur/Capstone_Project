@@ -31,4 +31,27 @@ router.get('/info/:id', function(req, res){
 	})
 })
 
+// router.post('/update/info', function(req, res){//같은 컬럼 정보를 가진 다른 테이블도 다 업데이트??
+
+// })
+
+router.post('/delete/info', function(req, res){//다른 테이블 연쇄 삭제 고려
+	let json_data = {
+		id : req.body.id,
+	}
+	if(check_element.check_require_element(json_data) === false){
+		res.sned(element_msg);
+		return;
+	}
+
+	let query = make_query.DELETE('user', json_data, '', 0);
+	db_user_sql.DELETE(query, function(err, result){
+		if(err){
+			res.status(400).send(err);
+			return;
+		}
+		res.send(sucess_response);
+	})
+})
+
 module.exports = router;

@@ -1,11 +1,9 @@
 package com.example.issueproject.api
 
-import com.example.issueproject.R
 import com.example.issueproject.dto.*
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.http.*
 
 interface ResponseApi {
@@ -39,6 +37,12 @@ interface ResponseApi {
     fun GetParentInfo(
         @Query("id") id: String
     ): Call<MutableList<ParentInfoResult>>
+
+    @GET("/parentinfo/child/info")
+    fun GetChildInfo(
+        @Query("id") id: String,
+        @Query("name") name: String,
+    ): Call<ParentInfoResult>
 
     @POST("/create/schoolmanagement")
     fun Addschoolmanagement(
@@ -94,8 +98,8 @@ interface ResponseApi {
         @Body Calenderdata: CalenderInfo
     ): Call<CalenderResult>
 
-    //선생리스트 경로변경
-    @GET("/parentinfo/room/allinfo")
+    //선생리스트
+    @GET("/staff/teacherinfo/useschool")
     fun SchoolteacherList(
         @Query("school") school: String
     ): Call<MutableList<SchoolteacherListResult>>
@@ -112,19 +116,20 @@ interface ResponseApi {
         @Path("name") name: String
     ): Call<Medicine>
 
-//    @Multipart
-//    @POST("/uploadimage/{data}")
-//    fun Uploadimage(
-//        @Path("data") data: String,
-//        @Part image: MultipartBody.Part
-//    ): Call<LoginResult>
-
     @Multipart
-    @POST("/uploadimage/")
+    @POST("/uploadimage/{target}/{key}")
     fun Uploadimage(
-        @Body data: ImagePost,
+        @Path("target") data: String,
+        @Path("key") key: String,
         @Part image: MultipartBody.Part
     ): Call<LoginResult>
+
+//    @Multipart
+//    @POST("/uploadimage/")
+//    fun Uploadimage(
+//        @Body data: ImagePost,
+//        @Part image: MultipartBody.Part
+//    ): Call<LoginResult>
 
     @GET("/image/{target}/{name}.jpg")
     fun  GetImageUrl(

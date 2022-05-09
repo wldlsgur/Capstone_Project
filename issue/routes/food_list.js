@@ -8,13 +8,13 @@ const element_msg = "plz send require elements";
 const sucess_response = {res : true, msg : 'success'};
 const failed_response = {res : false, msg : "failed"};
 
-router.get('/image_url', function(req, res){
+router.get('/info', function(req, res){
     let json_data = {
         school : req.query.school,
         date : req.query.date
     }
 	let target_array = [
-		'image_url'
+		'*'
 	]
 
     if(check_element.check_require_element(json_data) === false){
@@ -32,12 +32,12 @@ router.get('/image_url', function(req, res){
     })
 })
 
-router.get('/all/image_url/:school', function(req, res){
+router.get('/all/info/:school', function(req, res){
     let json_data = {
         school : req.params.school
     }
 	let target_array = [
-		'image_url'
+		'*'
 	]
     if(check_element.check_require_element(json_data) === false){
         res.send(element_msg);

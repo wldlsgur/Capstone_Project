@@ -1,10 +1,10 @@
-var pool = require('../../DB/db_config');
+const pool = require('../../DB/db_config');
 
 module.exports = function () {
     return {
         get_teacherinfo_use_school: function (school,callback) {
             pool.getConnection(function (err, con) {
-                var sql=`select * from teacherinfo where school='${school}'`;
+                let sql=`select * from teacherinfo where school='${school}'`;
                 con.query(sql,function(err,result,fields){
                     con.release();
                     if(err) callback(err,null);
@@ -14,7 +14,7 @@ module.exports = function () {
         },
         get_teacherinfo_use_id: function (id,callback) {
             pool.getConnection(function (err, con) {
-                var sql=`select * from teacherinfo where id='${id}'`;
+                let sql=`select * from teacherinfo where id='${id}'`;
                 con.query(sql,function(err,result,fields){
                     con.release();
                     if(err) callback(err,null);
@@ -24,7 +24,7 @@ module.exports = function () {
         },
         get_presidentinfo_use_id: function (id,callback) {
             pool.getConnection(function (err, con) {
-                var sql=`select * from presidentinfo where id='${id}'`;
+                let sql=`select * from presidentinfo where id='${id}'`;
                 con.query(sql,function(err,result,fields){
                     con.release();
                     if(err) callback(err,null);

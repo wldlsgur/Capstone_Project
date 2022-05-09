@@ -30,7 +30,7 @@
             app:srcCompat="@drawable/more" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/imageViewChild"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginStart="20dp"
@@ -47,8 +47,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="50dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView5"
-            app:layout_constraintTop_toTopOf="@+id/imageView5">
+            app:layout_constraintStart_toEndOf="@+id/imageViewChild"
+            app:layout_constraintTop_toTopOf="@+id/imageViewChild">
 
             <TextView
                 android:id="@+id/textView2"
