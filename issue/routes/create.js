@@ -150,26 +150,26 @@ router.post('/food_list', function(req, res){
 	})
 })
 
-router.post('/album', function(req, res){
-	let json_data = {
-		school : req.body.school,
-		room : req.body.room,
-		title : req.body.title,
-		date : req.body.date,
-		image_url : '/default'
-	};
+// router.post('/album', function(req, res){
+// 	let json_data = {
+// 		school : req.body.school,
+// 		room : req.body.room,
+// 		title : req.body.title,
+// 		date : req.body.date,
+// 		image_url : '/default'
+// 	};
 
-	if(check_element.check_require_element(json_data) === false){
-		res.send(element_msg);
-		return;
-	}
-	let query = make_query.INSERT('album', json_data);
-	db_create_sql.INSERT(query, function(err, result){
-		if(err){
-			res.status(400).send(err);
-			return;
-		}
-		res.send(sucess_response);
-	})
-})
+// 	if(check_element.check_require_element(json_data) === false){
+// 		res.send(element_msg);
+// 		return;
+// 	}
+// 	let query = make_query.INSERT('album', json_data);
+// 	db_create_sql.INSERT(query, function(err, result){
+// 		if(err){
+// 			res.status(400).send(err);
+// 			return;
+// 		}
+// 		res.send(sucess_response);
+// 	})
+// })
 module.exports = router;
