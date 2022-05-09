@@ -13,10 +13,10 @@ router.post('/insert', function(req, res, next) {
     let school=req.body.school;
     let room=req.body.room;
     let number=req.body.number;
-    var date = new DateTime.now();
-    var newDate = new DateTime(date.year, date.month, date.day+1);
+    //var date = new DateTime.now();
+   // var newDate = new DateTime(date.year, date.month, date.day+1);
 
-    db_test.test(id, school, room, number, newDate,function(err,result){
+    db_test.test(id, school, room, number,function(err,result){
          if(err){
                 console.log(err);
                 res.status(400).send(err);
