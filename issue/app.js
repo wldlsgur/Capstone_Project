@@ -73,6 +73,7 @@ let albumRouter = require('./routes/album');
 //인승 추가(아래)
 var staffRouter = require('./routes/staff');
 var medicineRouter = require('./routes/medicine');
+var testRouter = require('./routes/test');
 
 var app = express();
 
@@ -101,6 +102,7 @@ app.post('/uploadimages/:school/:room/:title/:date', uploads.array('image'), upl
 //인승 추가(아래)
 app.use('/staff', staffRouter);
 app.use('/medicine', medicineRouter);
+app.use('/test', testRouter);
 
 // catch 404 and forward to error handler
 app.get('/favicon.ico', function(req, res) { 
