@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const multer = require('multer');
 
-const update_image_url = require('./Function/update_image_url');
+const update_image_url = require('../Function/update_image_url');
 
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
