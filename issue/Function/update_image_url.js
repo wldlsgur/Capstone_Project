@@ -1,4 +1,5 @@
 const db = require('../DB/db');
+const db_create_sql = require('../public/SQL/create_sql')();
 
 const element_msg = "plz send require elements";
 const sucess_response = {res : true, msg : 'success'};
@@ -33,5 +34,22 @@ module.exports = {
 			}
 			return true;
 		})
-    }
+    },
+	insert_image_array_album : function(file_url, album_school, album_room , album_title, album_date){
+		let json_data = {
+			school : album_school,
+			room : album_room,
+			title : album_title,
+			date : album_date,
+			image_url : file_url
+		};
+	
+		let query = make_query.INSERT('album', json_data);
+		db_create_sql.INSERT(query, function(err, result){
+			if(err){
+				return false;
+			}
+			return true;
+		})
+	}
 }
