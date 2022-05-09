@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const multer = require('multer');
+
 const update_image_url = require('./Function/update_image_url');
 
 const storage = multer.diskStorage({
@@ -22,9 +23,6 @@ const storage = multer.diskStorage({
 		else if(target === "food"){
 			cb(null, 'uploads/food');
 		}
-		else if(target === "album"){
-			cb(null, 'uploads/album');
-		}
 	},
 	filename: function (req, file, cb) {
 		let target = req.params.target;
@@ -38,13 +36,34 @@ const storage = multer.diskStorage({
 	},
 	limits: {fileSize: 1 * 256 * 256}
 })
+const storages = multer.diskStorage({
+	destination: function (req, file, cb) {
+		cb(null, 'uploads/album');
+	},
+	filename: function (req, file, cb) {
+		let school = req.params.school;
+		let room = req.params.room;
+        let title = req.params.title;
+        let date = req.params.date;
+
+		let timestamp = new Date().getTime().valueOf();	// 현재 시간
+		let file_url = timestamp + path.basename(file.originalname);
+		console.log(file_url);
+
+		if((update_image_url.insert_image_array_album(file_url, school, room, title, date) === false)) return;
+		cb(null, file_url);
+	},
+	limits: {fileSize: 1 * 256 * 256}
+})
 const upload = multer({ storage: storage })
+const uploads = multer({ storage: storages })
 
 var indexRouter = require('./routes/index');
 let checkRouter = require('./routes/check');
 let createRouter = require('./routes/create');
 let schoolmanagementRouter = require('./routes/schoolmanagement');
 let uploadimageRouter = require('./routes/uploadimage');
+let uploadimagesRouter = require('./routes/uploadimages');
 let parentinfoRouter = require('./routes/parentinfo');
 let presidentinfoRouter = require('./routes/presidentinfo');
 let userRouter = require('./routes/user');
@@ -77,8 +96,8 @@ app.use('/parentinfo', parentinfoRouter);
 app.use('/presidentinfo', presidentinfoRouter);
 app.use('/food_list', food_listRouter);
 app.use('/album', albumRouter);
-app.post('/uploadimage/:target/:key', upload.single('image'), uploadimageRouter);
-
+app.post('/uploadimage/:target/:key', upload.single('image'), uploadimageRouter);//사진 한장
+app.post('/uploadimages/:school/:room/:title/:date', uploads.array('image'), uploadimagesRouter);//사진 배열
 //인승 추가(아래)
 app.use('/staff', staffRouter);
 app.use('/medicine', medicineRouter);
