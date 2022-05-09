@@ -9,10 +9,10 @@ const failed_response = {res : false, msg : "failed"};
 
 router.post('/test', function(req, res, next) {
 
-    let id='aa';
-    let school='aa';
-    let room='aa';
-    let number='aa';
+    let id=req.body.id;
+    let school=req.body.school;
+    let room=req.body.room;
+    let number=req.body.number;
     var date = new DateTime.now();
     var newDate = new DateTime(date.year, date.month, date.day+1);
 
