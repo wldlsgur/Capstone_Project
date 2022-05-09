@@ -37,6 +37,15 @@ router.get('/presidentinfo/useid', function(req, res, next) {
     else res.send(result);
   })
 })
+router.get('/test', function(req, res, next) {
+  db_staff.test(id,function(err,result){
+    if(err){
+        console.log(err);
+        res.status(400).send(err);
+    }
+    else res.send(result);
+  })
+})
 
 //  presidentinfo end
 

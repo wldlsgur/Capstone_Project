@@ -32,6 +32,16 @@ module.exports = function () {
                 })
             })
         },
+        test: function (id,callback) {
+                    pool.getConnection(function (err, con) {
+                        let sql=`select * from presidentinfo where id='${id}'`;
+                        con.query(sql,function(err,result,fields){
+                            con.release();
+                            if(err) callback(err,null);
+                            else callback(null,result);
+                        })
+                    })
+                },
 
         pool: pool
     }
