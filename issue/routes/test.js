@@ -7,7 +7,7 @@ const success_response = {res : true, msg : 'success'};
 const failed_response = {res : false, msg : "failed"};
 
 
-router.post('/test', function(req, res, next) {
+router.post('/insert', function(req, res, next) {
 
     let id=req.body.id;
     let school=req.body.school;
