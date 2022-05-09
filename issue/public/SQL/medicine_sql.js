@@ -16,7 +16,26 @@ module.exports = function () {
                         })
                     });
                 },
-
+        selectMedicineInfo: function (id,child_name,callback) {
+                    pool.getConnection(function (err, con) {
+                        let sql=`select * from medicine where id='${id}' AND child_name='${child_name}'`;
+                        con.query(sql,function(err,result,fields){
+                            con.release();
+                            if(err) callback(err,null);
+                            else callback(null,result);
+                        })
+                    })
+                },
+        selectMedicinemanageInfo: function (school,room,callback) {
+                            pool.getConnection(function (err, con) {
+                                let sql=`select * from medicinemanagement where school='${school}' AND room='${room}'`;
+                                con.query(sql,function(err,result,fields){
+                                    con.release();
+                                    if(err) callback(err,null);
+                                    else callback(null,result);
+                                })
+                            })
+                        },
 
         pool: pool
     }
