@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const router = express();
 
 const db_test = require('../public/SQL/test_sql')();
 
