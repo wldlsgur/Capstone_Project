@@ -33,6 +33,7 @@ router.post('/user', function(req, res){
 router.post('/schoolmanagement', function(req, res){
 	let json_data = {
 		menu : req.body.menu,
+		writer : req.body.writer,
 		school : req.body.school,
 		room : req.body.room,
 		title : req.body.title,
