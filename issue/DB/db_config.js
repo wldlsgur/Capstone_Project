@@ -7,6 +7,7 @@ module.exports = function () {
         user: 'root',
         password: '0000',
         database: 'issue',
+        multipleStatements: true,
         connectionLimit: 50,
         queueLimit: 100
     });
