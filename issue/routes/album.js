@@ -18,17 +18,32 @@ router.get('/info', function(req, res){
         res.send(element_msg);
         return;
     }
+    
+    let array2 = [];
 
-    let a = [];
-    a.push
-    let query = `SELECT title, date, image_url FROM album WHERE school='${school}' AND room='${room}'`;
+    let query = `SELECT distance title, date FROM album WHERE school='${school}' AND room='${room}'`;
     db_album_sql.SELECT(query, function(err, result){
         if(err){
             res.status(400).send(err);
             return;
+        }        
+        for(let i=0 ; i<result.length ; i++){
+            let array1 = {};
+            array1["title"] = result[i].title
+            array1["date"] = result[i].date
+
+            let query2 = `SELECT image_url FROM album WHERE title = ${result[i].title} AND date=${result[i].date}`;
+
+            db_album_sql.SELECT(query2, function(err, result){
+                if(err){
+                    res.status(400).send(err);
+                    return;
+                }
+                array1["image_url"] = result;
+            })
+            array2.push(array1);
         }
-        console.log(result);
-        res.send(result);
+        res.status(200).json(array2);
     })
 })
 
