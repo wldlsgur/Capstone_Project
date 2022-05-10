@@ -19,12 +19,15 @@ router.get('/info', function(req, res){
         return;
     }
 
-    let query = `SELECT * FROM album WHERE school='${school}' AND room='${room}'`;
+    let a = [];
+    a.push
+    let query = `SELECT title, date, image_url FROM album WHERE school='${school}' AND room='${room}'`;
     db_album_sql.SELECT(query, function(err, result){
         if(err){
             res.status(400).send(err);
             return;
         }
+        console.log(result);
         res.send(result);
     })
 })
