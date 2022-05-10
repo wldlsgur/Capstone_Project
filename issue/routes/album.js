@@ -21,32 +21,28 @@ router.get('/info', function(req, res){
         if(err){
             res.status(400).send(err);
             return;
-        }        
-        for(let i=0 ; i<Object.keys(result).length ; i++){
+        }
+        console.log(`길이 : ${result.length}`);
+        for(let i=0 ; i<result.length ; i++){
             let array1 = {};
-            array1.title = result[i].title
-            array1.date = result[i].date
-
-            let query2 = `SELECT image_url FROM album WHERE title = ${result[i].title} AND date=${result[i].date}`;
-            db_album_sql.SELECT(query2,  function(err, result){
+            array1.title = result[i].title;
+            array1.date = result[i].date;
+            let query2 = `SELECT image_url FROM album WHERE school='${json_data.school}' AND room='${json_data.room} AND title = ${result[i].title} AND date=${result[i].date}`;
+            db_album_sql.SELECT(query2, function(err, result){
                 if(err){
                     res.status(400).send(err);
                     return;
                 }
                 let img_url = [];
                 for(let j =0 ; j < result.length; ++j)
-                {    
+                {
                     img_url.push(result[j].image_url);
                 }
                 array1.image_url = img_url;
             })
-            console.log(array1);
             array2.push(array1);
         }
         res.status(200).json(array2);
-
-
-        
     })
 })
 
