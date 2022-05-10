@@ -19,7 +19,7 @@ router.get('/info', function(req, res){
         return;
     }
 
-    let query = `SELECT DISTINCT title, date FROM album WHERE school='${school}' AND room='${room}'`;
+    let query = `SELECT * FROM album WHERE school='${school}' AND room='${room}'`;
     db_album_sql.SELECT(query, function(err, result){
         if(err){
             res.status(400).send(err);
