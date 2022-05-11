@@ -10,9 +10,11 @@
         android:id="@+id/President_schoolteachermanagement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout9"
-        app:layout_constraintEnd_toEndOf="@+id/constraintLayout9">
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout9"
+        app:layout_constraintTop_toBottomOf="@+id/view">
 
         <ImageView
             android:id="@+id/imageView4"
@@ -50,20 +52,20 @@
             android:id="@+id/imageButton"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:background="@android:color/transparent"
             android:scaleType="centerInside"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageViewChild"
             app:srcCompat="@drawable/more" />
 
         <ImageView
             android:id="@+id/imageViewChild"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -74,10 +76,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageViewChild"
-            app:layout_constraintTop_toTopOf="@+id/imageViewChild">
+            app:layout_constraintStart_toEndOf="@+id/imageViewChild">
 
             <TextView
                 android:id="@+id/textView2"
@@ -98,6 +100,8 @@
                 android:layout_marginEnd="8dp"
                 android:text="TextView"
                 android:textColor="@color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
@@ -108,7 +112,7 @@
             android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageViewChild"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout">

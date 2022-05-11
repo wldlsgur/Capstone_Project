@@ -19,16 +19,20 @@
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1421875" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_add_notic.xml" value="0.264" />
+        <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_album.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_album_item.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_album_item2.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_chield_add.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_child_add.xml" value="0.264" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_day_notic.xml" value="0.264" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_day_notic_add.xml" value="0.264" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_day_notic_item.xml" value="0.4" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_day_notic_list.xml" value="0.264" />
+        <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_food_list_item.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_foodlist.xml" value="0.2" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_main_parent.xml" value="0.264" />
-        <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_main_teacher.xml" value="0.4" />
+        <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_main_parent.xml" value="0.4" />
+        <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_main_teacher.xml" value="0.264" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_medicine.xml" value="0.24365942028985507" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_medicine_list.xml" value="0.24365942028985507" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_medicine_list_item.xml" value="0.24365942028985507" />
@@ -44,6 +48,9 @@
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_school_teacher_list_item.xml" value="0.4" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_select.xml" value="0.23505434782608695" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
+<<<<<<< HEAD
+        <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_teacher_add.xml" value="0.25364583333333335" />
+=======
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_add_notic.xml" value="0.33" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_main.xml" value="0.17249240121580547" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_main_parent.xml" value="0.17249240121580547" />
@@ -63,6 +70,7 @@
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/test.xml" value="0.25" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/menu-navexposed/menu_list.xml" value="0.45" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/menu/menu_list.xml" value="0.33" />
+>>>>>>> ed7578e88ff1636bad5ec1105082c60892588992
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_medicine.xml" value="0.3515625" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_medicine_list.xml" value="0.3515625" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_medicine_list_item.xml" value="0.3515625" />

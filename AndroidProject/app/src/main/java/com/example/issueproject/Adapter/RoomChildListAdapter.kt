@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.issueproject.R
 import com.example.issueproject.dto.RoomChildListResult
+import com.example.issueproject.retrofit.RetrofitBuilder
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 import okhttp3.ResponseBody
@@ -31,7 +33,10 @@ class RoomChildListAdapter(var list:MutableList<RoomChildListResult>) : Recycler
             //GetImageUrl(data.child_image)
             //val text= "/image/parents/이정은.jpg"
             //GetImageUrl(text)
-            GetImageUrl("parents", "이정은")
+//            GetImageUrl("parents", "이정은")
+            Glide.with(childimage.context)
+                .load("${RetrofitBuilder.servers}/image/teacher/이정은.jpg")
+                .into(childimage)
 
         }
 

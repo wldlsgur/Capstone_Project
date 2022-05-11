@@ -1,11 +1,11 @@
 package com.example.issueproject.dto
 
 data class TeacherinfoResult(
+    val key_id: Int,
     val id: String,
     val school: String,
-    val name: String,
     val room: String,
-    val teacher_num: String,
-    val teacher_image: String,
-    val checked: String
+    val number: String,
+    val agree: String,
+    val image_url: String
 )

@@ -1,4 +1,4 @@
-package com.example.issueproject.res
+package com.example.issueproject.res.Add
 
 import android.R
 import android.content.Intent

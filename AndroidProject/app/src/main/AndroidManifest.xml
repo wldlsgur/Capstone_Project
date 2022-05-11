@@ -16,6 +16,21 @@
         android:theme="@style/Theme.IssueProject"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".res.Add.TeacherAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.Album.AlbumItem2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".res.Album.AlbumItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.Album.AlbumActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.Foodlist.FoodListItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".res.Foodlist.FoodlistActivity"
             android:exported="false" />
         <activity
