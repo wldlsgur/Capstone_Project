@@ -78,7 +78,7 @@ router.post('/delete/image', function(req, res){
         return;
     }
 
-    fs.unlinkSync(`uploads/${json_data.target}/${json_data.image_url}`, function(err){
+    fs.unlink(`uploads/${json_data.target}` + json_data.image_url, function(err){
         if(err){
             res.status(400).send(err);
             return;

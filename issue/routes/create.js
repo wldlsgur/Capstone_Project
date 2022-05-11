@@ -33,6 +33,7 @@ router.post('/user', function(req, res){
 router.post('/schoolmanagement', function(req, res){
 	let json_data = {
 		menu : req.body.menu,
+		writer : req.body.writer,
 		school : req.body.school,
 		room : req.body.room,
 		title : req.body.title,
@@ -60,7 +61,7 @@ router.post('/presidentinfo', function(req, res){
 		school : req.body.school,
 		room : req.body.room,
 		number : req.body.number,
-		image_url : '/default'
+		image_url : 'default'
 	};
 
 	if(check_element.check_require_element(json_data) === false){
@@ -85,7 +86,7 @@ router.post('/parentinfo', function(req, res){
 		number : req.body.number,
 		child_name : req.body.name,
 		child_age : req.body.age,
-		image_url : '/default',
+		image_url : 'default',
 		spec : req.body.spec,
 		agree : 'no'
 	};
@@ -110,7 +111,7 @@ router.post('teacherinfo', function(req, res){
 		school : req.body.school,
 		room : req.body.room,
 		number : req.body.number,
-		image_url : '/default',
+		image_url : 'default',
 		agree : 'no'
 	};
 
@@ -132,7 +133,7 @@ router.post('/food_list', function(req, res){
 	let json_data = {
 		schoo : req.body.school,
 		date : req.body.date,
-		image_url : '/default'
+		image_url : 'default'
 	};
 
 	if(check_element.check_require_element(json_data) === false){
@@ -140,29 +141,6 @@ router.post('/food_list', function(req, res){
 		return;
 	}
 	let query = make_query.INSERT('food_list', json_data);
-	db_create_sql.INSERT(query, function(err, result){
-		if(err){
-			res.status(400).send(err);
-			return;
-		}
-		res.send(sucess_response);
-	})
-})
-
-router.post('/album', function(req, res){
-	let json_data = {
-		school : req.body.school,
-		room : req.body.room,
-		title : req.body.title,
-		date : req.body.date,
-		image_url : '/default'
-	};
-
-	if(check_element.check_require_element(json_data) === false){
-		res.send(element_msg);
-		return;
-	}
-	let query = make_query.INSERT('album', json_data);
 	db_create_sql.INSERT(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
