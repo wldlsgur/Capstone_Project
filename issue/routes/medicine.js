@@ -36,8 +36,9 @@ router.post('/insert/data', function(req, res, next) {  //medicine, medicinemana
 router.get('/select/get/data', function(req, res, next) {
     let id = req.query.id;
     let child_name = req.query.child_name;
+    let m_name = req.query.m_name;
 
-    db_medicine.selectMedicineInfo(id, child_name, function(err,result){
+    db_medicine.selectMedicineInfo(id, child_name, m_name, function(err,result){
     if(err){
         console.log(err);
         res.status(400).send(err);
