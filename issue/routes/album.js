@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Promise = require('promise');
 const db_album_sql = require('../public/SQL/album_sql')();
 const check_element = require('../Function/check_require_element');
 const make_query = require('../Function/make_query');
@@ -17,32 +18,46 @@ router.get('/info', function(req, res){
     
     let array2 = [];
     let query1 = `SELECT distinct title, date FROM album WHERE school='${json_data.school}' AND room='${json_data.room}'`;
-    db_album_sql.SELECT(query1, function(err, result){
+    db_album_sql.SELECT(query1, function(err, result1){
         if(err){
             res.status(400).send(err);
             return;
         }
-        console.log(`길이 : ${result.length}`);
-        for(let i=0 ; i<result.length ; i++){
+        for(let i=0 ; i<result1.length ; i++){
             let array1 = {};
-            array1.title = result[i].title;
-            array1.date = result[i].date;
-            let query2 = `SELECT image_url FROM album WHERE school='${json_data.school}' AND room='${json_data.room} AND title = ${result[i].title} AND date=${result[i].date}`;
-            db_album_sql.SELECT(query2, function(err, result){
-                if(err){
-                    res.status(400).send(err);
-                    return;
-                }
-                let img_url = [];
-                for(let j =0 ; j < result.length; ++j)
-                {
-                    img_url.push(result[j].image_url);
-                }
-                array1.image_url = img_url;
+            array1.title = result1[i].title;
+            array1.date = result1[i].date;
+            let query2 = `SELECT image_url FROM album WHERE school='${json_data.school}' AND room='${json_data.room}' AND title = '${result1[i].title}' AND date='${result1[i].date}'`;
+            console.log(`첫번째 : ${i}`, array1);
+            
+            function job1 (){
+                return new Promise(function(resolve, rejected){
+                    db_album_sql.SELECT(query2, function(err, result){
+                        if(err){
+                            rejected(err);
+                        }
+                        resolve(result);
+                    })
+                })
+            }
+            job1()
+            .then(function(result){
+                    let img_url = [];
+                    for(let j =0 ; j < result.length; j++)
+                    {
+                        img_url.push(result[j].image_url);
+                    }
+                    array1.image_url = img_url;
+                    console.log(`두번째`, array1);
+                    array2.push(array1);
             })
-            array2.push(array1);
+            .catch(function(err){
+                console.log(err)
+                res.status(400).send(err);
+            })
         }
-        res.status(200).json(array2);
+        console.log("최종",array2);
+        res.status(200).send(array2);
     })
 })
 
