@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 object RetrofitBuilder {
-
+    var servers = "http://49.50.164.199:3000"
     var api: ResponseApi
 
     init {

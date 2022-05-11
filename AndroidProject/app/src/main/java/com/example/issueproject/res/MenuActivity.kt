@@ -10,6 +10,7 @@ import com.example.issueproject.databinding.ActivityMenuBinding
 import com.example.issueproject.dto.ParentInfoResult
 import com.example.issueproject.dto.PresidentinfoResult
 import com.example.issueproject.dto.UserInfo
+import com.example.issueproject.res.Album.AlbumActivity
 import com.example.issueproject.res.DayNotic.DayNoticActivity
 import com.example.issueproject.res.Foodlist.FoodlistActivity
 import com.example.issueproject.res.Notic.NoticActivity
@@ -55,8 +56,11 @@ class MenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.PresidentAlbum.setOnClickListener {
-            //var intent = Intent(this, ::class.java)
-            //startActivity(intent)
+            var intent = Intent(this, AlbumActivity::class.java).apply {
+                putExtra("school", school)
+                putExtra("room", room)
+            }
+            startActivity(intent)
         }
         binding.PresidentDaliy.setOnClickListener {
 //            var intent = Intent(this, CalenActivity::class.java)

@@ -1,4 +1,4 @@
-package com.example.issueproject.res
+package com.example.issueproject.res.Add
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

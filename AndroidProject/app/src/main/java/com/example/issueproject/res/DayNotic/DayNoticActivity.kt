@@ -8,7 +8,7 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issueproject.databinding.ActivityDayNoticBinding
 import com.example.issueproject.dto.AddManagement
-import com.example.issueproject.res.AddNoticActivity
+import com.example.issueproject.res.Add.AddNoticActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 

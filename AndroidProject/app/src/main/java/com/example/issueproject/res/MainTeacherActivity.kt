@@ -3,8 +3,10 @@ package com.example.issueproject.res
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bumptech.glide.Glide
 import com.example.issueproject.databinding.ActivityMainTeacherBinding
 import com.example.issueproject.res.RoomManager.RoomChildListActivity
+import com.example.issueproject.retrofit.RetrofitBuilder
 
 class MainTeacherActivity : AppCompatActivity() {
     private val binding by lazy {
@@ -21,5 +23,7 @@ class MainTeacherActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }
+
+
     }
 }
