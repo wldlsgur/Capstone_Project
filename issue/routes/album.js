@@ -29,13 +29,11 @@ router.get('/info', function(req, res){
             array1.title = result[i].title;
             array1.date = result[i].date;
             let query2 = `SELECT image_url FROM album WHERE school='${json_data.school}' AND room='${json_data.room}' AND title = '${result[i].title}' AND date='${result[i].date}'`;
-            console.log(`첫번째 : ${i}`, array1);
-            await job2(query2, i , result.length); 
+            await job2(query2); 
         }
-        console.log("최종",array2);
         res.status(200).send(array2);
     })
-    function job2(query2, i, length){
+    function job2(query2){
         return new Promise(function(resolve, rejected){
             db_album_sql.SELECT(query2, function(err, result){
                 if(err){
@@ -46,69 +44,16 @@ router.get('/info', function(req, res){
                 {
                     img_url.push(result[j].image_url);
                 }
-                array1.image_url = img_url;
-                console.log(`두번째`, array1);
-                array2.push(array1);
-                resolve(i, length);
+                resolve(img_url);
             })
         })
-        .then(function(i, length){
-            if(i === length) res.status(200).send(array2);
+        .then(function(img_url){
+            array1.image_url = img_url;
+            array2.push(array1);
         })
         .catch(function(err){
             res.status(400).send(err);
         })
     }
-    // function job1 (){
-    //     return new Promise(function(resolve, rejected){
-    //         db_album_sql.SELECT(query1, function(err, result){
-    //             if(err){
-    //                 rejected(err);
-    //             }
-    //             resolve(result);
-    //         })
-    //     })
-    // }          
-    // function job2 (query2){
-    //     return new Promise(function(resolve, rejected){
-    //         db_album_sql.SELECT(query2, function(err, result){
-    //             if(err){
-    //                 rejected(err);
-    //             }
-    //             resolve(result);
-    //         })
-    //     })
-    // }
-    // job1()
-    // .then(function(result){
-    //     for(let i=0 ; i<result.length ; i++){
-    //         array1 = {};
-    //         array1.title = result[i].title;
-    //         array1.date = result[i].date;
-    //         let query2 = `SELECT image_url FROM album WHERE school='${json_data.school}' AND room='${json_data.room}' AND title = '${result[i].title}' AND date='${result[i].date}'`;
-    //         console.log(`첫번째 : ${i}`, array1);
-
-    //         return job2(query2);
-    //     }
-    // })
-    // .then(function(result){
-    //     let img_url = [];
-    //     for(let j =0 ; j < result.length; j++)
-    //     {
-    //         img_url.push(result[j].image_url);
-    //     }
-    //     array1.image_url = img_url;
-    //     console.log(`두번째`, array1);
-    //     array2.push(array1);
-    //     return;
-    // })
-    // .then(function(){
-    //     console.log("최종",array2);
-    //     res.status(200).send(array2);
-    // })
-    // .catch(function(err){
-    //     console.log(err)
-    //     res.status(400).send(err);
-    // })
 })
 module.exports = router;
