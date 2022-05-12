@@ -13,8 +13,7 @@ const failed_response = {res : false, msg : "failed"};
 router.get('/info', function(req, res){
     const json_data = req.query;
     if(check_element.check_require_element(json_data) === false){
-        res.send(element_msg);
-        return;
+        return res.send(element_msg);
     }
 
     let array1 = {};

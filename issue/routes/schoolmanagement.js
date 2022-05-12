@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../DB/db');
 
-const db_user_sql = require('../public/SQL/user_sql')();
+const db_schoolmanage_sql = require('../public/SQL/schoolmanage')();
 const check_element = require('../Function/check_require_element');
 const make_query = require('../Function/make_query');
 
@@ -11,21 +10,47 @@ const sucess_response = {res : true, msg : 'success'};
 const failed_response = {res : false, msg : "failed"};
 
 router.get('/info', function(req, res){
-	let menu = req.query.menu;
-	let school = req.query.school;
-	let room = req.query.room;
+	let	json_data = {
+		menu : req.query.menu,
+		school : req.query.school,
+		room : req.query.room
+	};
+	let target_array = [
+		'*'
+	]
 
-	if(!menu || !school || !room){
-		res.send("plz send require elements!");
-		return;
-	}
-	let query = `SELECT * FROM schoolmanagement WHERE menu=? AND school=? AND room=?`;
-	db.query(query,[menu,school,room], function(err, result){
-		if(err){
-			res.status(400).send(err);
-			return;
-		}
-		res.send(result);
-	});
+	if(check_element.check_require_element(json_data) === false) return res.send(element_msg);
+	let query = make_query.SELECT(target_array, 'schoolmanagement', json_data, 'AND', 2);
+	db_schoolmanage_sql.SELECT(query, function(err, result){
+		if(err) return res.status(400).send(err);
+		res.status(200).send(result);
+	})
 });
+
+router.post('/deleteinfo', function(req, res){
+	let json_data = {
+		keya_id : req.body.keya_id
+	}
+	if(check_element.check_require_element(json_data) === false) return res.send(element_msg);
+	let query = make_query.DELETE('schoolmanagement', json_data, '', 0);
+	db_schoolmanage_sql.DELETE(query, function(err, result){
+		if(err) return res.status(400).send(err);
+		res.status(200).send(sucess_response);
+	})
+})
+
+router.post('/updateinfo', function(req, res){
+	let json_data = {
+		key_id : req.body.key_id,
+		title : req.body.title,
+		content : req.body.content,
+		date : req.body.date
+	};
+	if(check_element.check_require_element(json_data) === false) return res.send(element_msg);
+	let query = `UPDATE 'schoolmanagement' SET title='${title}', content='${title}', date='${date}' WHERE key_id='${key_id}'`;
+	db_schoolmanage_sql.UPDATE(query, function(err, result){
+		if(err) return res.status(400).send(err);
+		res.status(200).send(sucess_response);
+	})
+})
 module.exports = router;
