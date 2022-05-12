@@ -20,7 +20,7 @@ module.exports = {
 				query = `UPDATE teachertinfo SET image_url='${file_url}' WHERE key_id = '${key}';`
 				break;
 			case 'president':
-				query = `UPDATE presidentinfo SET image_url='${file_url}' WHERE key_id = '${key}';`
+				query = `UPDATE presidentinfo SET image_url='${file_url}' WHERE id = '${key}';`
 				break;
 			case 'album':
 				query = `UPDATE album SET image_url='${file_url}' WHERE key_id = '${key}';`
