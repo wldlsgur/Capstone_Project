@@ -23,7 +23,7 @@ class SchoolAddActivity : AppCompatActivity() {
         ActivitySchoolAddBinding.inflate(layoutInflater)
     }
 //    private val PICK_FROM_ALBUM = 1
-
+    // key_id 대신에 id주는걸로
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)

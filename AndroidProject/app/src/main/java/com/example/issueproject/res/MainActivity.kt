@@ -11,6 +11,7 @@ import com.example.issueproject.dto.LoginResult
 import com.example.issueproject.dto.ParentInfoResult
 import com.example.issueproject.dto.PresidentinfoResult
 import com.example.issueproject.dto.UserInfo
+import com.example.issueproject.res.submenu.SubChildMunuActivity
 import com.example.issueproject.res.viewmodel.MainViewModels
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -102,7 +103,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 else if(job == "부모님"){
-                    var intent = Intent(this@MainActivity, MainParentActivity::class.java).apply{
+                    var intent = Intent(this@MainActivity, SubChildMunuActivity::class.java).apply{
                         putExtra("id", id)
                         putExtra("name", responseData.name)
                         Log.d(TAG, "id: $id")

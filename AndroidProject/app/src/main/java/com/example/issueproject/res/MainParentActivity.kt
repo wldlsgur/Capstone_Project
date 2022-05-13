@@ -5,8 +5,12 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityMainParentBinding
 import com.example.issueproject.dto.ParentInfoResult
+import com.example.issueproject.retrofit.RetrofitBuilder
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 import okhttp3.ResponseBody
@@ -26,8 +30,8 @@ class MainParentActivity : AppCompatActivity() {
         if (id != null) {
             GetParentInfo(id)
         }
-        val name = intent.getStringExtra("name")
-        binding.textViewName.text = name
+//        val name = intent.getStringExtra("name")
+//        binding.textViewName.text = name
     }
 
     fun GetParentInfo(id: String){
@@ -42,31 +46,18 @@ class MainParentActivity : AppCompatActivity() {
                 binding.textViewSchool.text = responseData[0].school
                 binding.textViewRoom.text = responseData[0].room
                 binding.textViewName.text = responseData[0].child_name
-//                GetImageUrl("parent", responseData[0].image_url)
+
+                val childimage: ImageView = binding.imageViewChild
+
+                Glide.with(childimage.context)
+                    .load("${RetrofitBuilder.servers}/image/parent/${responseData[0].image_url}")
+                    .into(childimage)
+
             }
 
             override fun onFailure(code: Int) {
                 Log.d(TAG, "onFailure: $code")
                 binding.textViewSchool.text = "등록해주세요"
-            }
-        })
-    }
-
-    fun GetImageUrl(target: String, name: String){
-        ResponseService().GetImageUrl(target, name, object: RetrofitCallback<ResponseBody>{
-            override fun onError(t: Throwable) {
-                Log.d(TAG, "onError: ")
-            }
-
-            override fun onSuccess(code: Int, responseData: ResponseBody) {
-                Log.d(TAG, "onSuccess: $responseData")
-
-                val bitmap: Bitmap = BitmapFactory.decodeStream(responseData.byteStream())
-                binding.imageViewChild.setImageBitmap(bitmap)
-            }
-
-            override fun onFailure(code: Int) {
-                Log.d(TAG, "onFailure: $code")
             }
         })
     }
