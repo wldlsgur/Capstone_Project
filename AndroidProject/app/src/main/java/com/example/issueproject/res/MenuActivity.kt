@@ -5,18 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.viewModels
 import com.example.issueproject.databinding.ActivityMenuBinding
-import com.example.issueproject.dto.ParentInfoResult
 import com.example.issueproject.dto.PresidentinfoResult
-import com.example.issueproject.dto.UserInfo
 import com.example.issueproject.res.Album.AlbumActivity
 import com.example.issueproject.res.DayNotic.DayNoticActivity
 import com.example.issueproject.res.Foodlist.FoodlistActivity
 import com.example.issueproject.res.Notic.NoticActivity
-import com.example.issueproject.res.RoomManager.RoomChildListActivity
 import com.example.issueproject.res.SchoolManager.SchoolTeacherListActivity
-import com.example.issueproject.res.viewmodel.MainViewModels
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
@@ -33,15 +28,17 @@ class MenuActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val id = intent.getStringExtra("id")
+        val name = intent.getStringExtra("name")
+
         Log.d(TAG, "id: $id")
         if (id != null) {
             GetPresidentInfo(id)
         }
-        val name = intent.getStringExtra("name")
         binding.textViewName.text = name
 
         binding.PresidentNotic.setOnClickListener {
             var intent = Intent(this, NoticActivity::class.java).apply {
+                putExtra("id", id)
                 putExtra("school", school)
                 putExtra("room", room)
                 putExtra("menu", "공지사항")
@@ -68,6 +65,7 @@ class MenuActivity : AppCompatActivity() {
         }
         binding.PresidentDayNotic.setOnClickListener {
             var intent = Intent(this, DayNoticActivity::class.java).apply {
+                putExtra("id", id)
                 putExtra("school", school)
                 putExtra("room", room)
                 putExtra("menu", "알림장")

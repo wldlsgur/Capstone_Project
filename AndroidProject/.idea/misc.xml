@@ -4,19 +4,27 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android Project/IssueProject/app/src/main/res/layout/activity_main.xml" value="0.11803444782168186" />
+        <entry key="..\:/Sdk/platforms/android-32/data/res/layout/simple_spinner_dropdown_item.xml" value="0.2817028985507246" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_add_notic.xml" value="0.36614583333333334" />
-        <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_child_add.xml" value="0.2" />
+        <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_child_add.xml" value="0.33" />
+        <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_child_item.xml" value="0.14010416666666667" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_day_notic.xml" value="0.33" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_day_notic_add.xml" value="0.33" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_day_notic_item.xml" value="0.33" />
+        <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_foodlist.xml" value="0.23369565217391305" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_main_parent.xml" value="0.5" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_menu.xml" value="0.25" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_notic.xml" value="0.3038949275362319" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_notic_item.xml" value="0.3038949275362319" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_room_child_list.xml" value="0.33" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_room_child_list_item.xml" value="0.2898550724637681" />
+        <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_school_add.xml" value="0.26902173913043476" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_select.xml" value="0.33" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
+        <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_spinner_item.xml" value="0.2817028985507246" />
+        <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_sub_child_munu.xml" value="0.23369565217391305" />
+        <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_teacher_add.xml" value="0.3515625" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1421875" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_add_notic.xml" value="0.264" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_album.xml" value="0.25364583333333335" />

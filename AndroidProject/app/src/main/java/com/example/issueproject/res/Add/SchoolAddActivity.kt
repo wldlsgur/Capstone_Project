@@ -16,23 +16,55 @@ import androidx.core.app.ActivityCompat.startActivityForResult
 import android.provider.MediaStore
 
 import android.content.Intent
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 
 private const val TAG = "SchoolAddActivity"
 class SchoolAddActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivitySchoolAddBinding.inflate(layoutInflater)
     }
+    private lateinit var getResult: ActivityResultLauncher<Intent>
+    private lateinit var currentImageUri: Uri
+
 //    private val PICK_FROM_ALBUM = 1
     // key_id 대신에 id주는걸로
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-//        binding.imageView.setOnClickListener {
-//            val intent = Intent(Intent.ACTION_PICK)
-//            intent.type = MediaStore.Images.Media.CONTENT_TYPE
-//            startActivityForResult(intent, PICK_FROM_ALBUM)
-//        }
+        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            if(it.resultCode == RESULT_OK && it.data !=null) {
+                currentImageUri = it.data?.data!!
+                try {
+                    currentImageUri?.let {
+                        if(Build.VERSION.SDK_INT < 28) {
+                            val bitmap = MediaStore.Images.Media.getBitmap(
+                                this.contentResolver,
+                                currentImageUri
+                            )
+                            Log.d(TAG, "currentImageUri: $currentImageUri")
+                            Log.d(TAG, "bitmap: $bitmap")
+                            binding.imageView?.setImageBitmap(bitmap)
+                        } else {
+                            val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
+                            val bitmap = ImageDecoder.decodeBitmap(source)
+                            binding.imageView?.setImageBitmap(bitmap)
+                        }
+                    }
+                }catch(e:Exception) {
+                    e.printStackTrace()
+                }
+            } else if(it.resultCode == RESULT_CANCELED){
+                Toast.makeText(this, "사진 선택 취소", Toast.LENGTH_LONG).show();
+            }else{
+                Log.d("ActivityResult","something wrong")
+            }
+        }
 
         binding.buttonSchoolAdd.setOnClickListener {
             Log.d(TAG, "onCreate: ")

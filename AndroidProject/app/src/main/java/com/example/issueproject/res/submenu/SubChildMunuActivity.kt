@@ -52,8 +52,11 @@ class SubChildMunuActivity : AppCompatActivity() {
         ChildAdapter.setItemClickListener(object: ChildAdapter.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
                 // 클릭 시 이벤트 작성
-                val intent = Intent(this@SubChildMunuActivity, MainParentActivity::class.java).apply{
 
+                val intent = Intent(this@SubChildMunuActivity, MainParentActivity::class.java).apply{
+                    putExtra("id", intent.getStringExtra("id"))
+                    Log.d(TAG, "position: $position")
+                    putExtra("position", position.toString())
                 }
                 startActivity(intent)
             }

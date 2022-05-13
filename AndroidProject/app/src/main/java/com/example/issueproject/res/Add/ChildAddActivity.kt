@@ -84,6 +84,7 @@ class ChildAddActivity : AppCompatActivity() {
             getResult.launch(intent)
         }
 
+
         binding.spinnerSchool.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
@@ -110,13 +111,14 @@ class ChildAddActivity : AppCompatActivity() {
             val childspec = binding.editTextChildSpec.text.toString()
             val parentnum = binding.editTextParentNum.text.toString()
 
-            var parentinfo = ParentInfo(id, schoolname, roomname, parentnum, childname, childage, childspec)
-            Log.d(TAG, "onCreate: $parentinfo")
-            ChildAdd(parentinfo)
-
-//            if(currentImageUri != null){
-//x
-//            }
+            if(childname == "" || childage == "" || childspec == "" || schoolname == "" || roomname == "" || parentnum == ""){
+                Toast.makeText(this, "모든 정보를 기입해주세요", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                var parentinfo = ParentInfo(id, schoolname, roomname, parentnum, childname, childage, childspec)
+                Log.d(TAG, "onCreate: $parentinfo")
+                ChildAdd(parentinfo)
+            }
         }
     }
 

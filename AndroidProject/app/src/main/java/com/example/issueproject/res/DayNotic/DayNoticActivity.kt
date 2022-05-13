@@ -35,6 +35,8 @@ class DayNoticActivity : AppCompatActivity() {
         binding.buttonDaynoticAdd.setOnClickListener {
             var intent = Intent(this, AddNoticActivity::class.java).apply {
                 putExtra("menu", menu)
+                putExtra("school", school)
+                putExtra("room", room)
             }
             startActivity(intent)
         }
