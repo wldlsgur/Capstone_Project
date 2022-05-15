@@ -194,8 +194,6 @@ class ChildAddActivity : AppCompatActivity() {
             override fun onFailure(code: Int) {
                 Log.d(TAG, "onFailure: ..")
             }
-
-
         })
     }
 

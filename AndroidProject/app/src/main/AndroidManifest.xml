@@ -16,6 +16,9 @@
         android:theme="@style/Theme.IssueProject"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".res.DayNotic.DayNoticTeacherActivity"
+            android:exported="false" />
+        <activity
             android:name=".SpinnerItemActivity"
             android:exported="false" />
         <activity

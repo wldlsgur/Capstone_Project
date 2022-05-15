@@ -1,13 +1,18 @@
 package com.example.issueproject.res.DayNotic
 
 import DayNoticAdapter
+import android.R
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issueproject.databinding.ActivityDayNoticBinding
 import com.example.issueproject.dto.AddManagement
+import com.example.issueproject.dto.GetRoom
 import com.example.issueproject.res.Add.AddNoticActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -19,26 +24,44 @@ class DayNoticActivity : AppCompatActivity() {
     private val binding by lazy{
         ActivityDayNoticBinding.inflate(layoutInflater)
     }
+    val roomList = mutableListOf<String>()
+    var room : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        val id = intent.getStringExtra("id")
+        var name = intent.getStringExtra("name")
         val school = intent.getStringExtra("school")
-        val room = intent.getStringExtra("room")
         val menu = intent.getStringExtra("menu")
+
+        binding.textViewDayNoticSchool.text = school
+
+        GetRoom(school!!)
+
         Log.d(TAG, "onCreate: $school")
-        Log.d(TAG, "onCreate: $room")
         Log.d(TAG, "onCreate: $menu")
-        ShowRecycler(menu!!,school!!,room!!)
+
 
         binding.buttonDaynoticAdd.setOnClickListener {
             var intent = Intent(this, AddNoticActivity::class.java).apply {
+                putExtra("name", name)
                 putExtra("menu", menu)
                 putExtra("school", school)
                 putExtra("room", room)
             }
             startActivity(intent)
+        }
+
+        binding.spinnerDayNoticSchool.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                room = roomList[position]
+                ShowRecycler(menu!!,school!!,room)
+            }
+
         }
     }
 
@@ -67,5 +90,28 @@ class DayNoticActivity : AppCompatActivity() {
                 }
 
             })
+    }
+
+    fun GetRoom(school: String){
+        ResponseService().GetRoom(school, object: RetrofitCallback<MutableList<GetRoom>> {
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: MutableList<GetRoom>) {
+                roomList.clear()
+                for(item in responseData) {
+                    roomList.add(item.room)
+                }
+
+                val adapter = ArrayAdapter(this@DayNoticActivity, R.layout.simple_spinner_dropdown_item, roomList)
+                binding.spinnerDayNoticSchool.adapter = adapter
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+            }
+
+        })
     }
 }

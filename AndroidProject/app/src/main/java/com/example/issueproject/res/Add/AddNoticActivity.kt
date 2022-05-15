@@ -29,6 +29,7 @@ class AddNoticActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.textViewMenu.text = intent.getStringExtra("menu")
+        binding.textViewWriter.text = intent.getStringExtra("name")
 
         val currentTime = System.currentTimeMillis()
         convertTimestampToDate(currentTime)

@@ -259,6 +259,7 @@ class ResponseService {
             }
         })
     }
+
     fun CreateTeacherinfo(info: TeacherInfo, callback: RetrofitCallback<SignUpResult>){
         RetrofitBuilder.api.TeacherInfo(info).enqueue(object : Callback<SignUpResult> {
             override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
