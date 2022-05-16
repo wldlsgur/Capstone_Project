@@ -28,6 +28,9 @@ class AddNoticActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.textViewMenu.text = intent.getStringExtra("menu")
+        binding.textViewWriter.text = intent.getStringExtra("name")
+
         val currentTime = System.currentTimeMillis()
         convertTimestampToDate(currentTime)
 
@@ -38,12 +41,14 @@ class AddNoticActivity : AppCompatActivity() {
         binding.buttonAdd.setOnClickListener {
             var title = binding.editTextAddTitle.text.toString()
             var content = binding.editTextAddContent.text.toString()
-            var school = binding.editTextAddSchool.text.toString()
-            var room = binding.editTextAddGroup.text.toString()
-            var menu = intent.getStringExtra("menu")!!
             var date = binding.textViewDate.text.toString()
 
-            var addManagement = AddManagement(title, content, date, school, room, menu)
+            var school = intent.getStringExtra("school")!!
+            var room = intent.getStringExtra("room")!!
+            var menu = intent.getStringExtra("menu")!!
+            var writer = intent.getStringExtra("name")!!
+
+            var addManagement = AddManagement(menu, writer, school, room, title, content, date)
             insertaddManagement(addManagement)
 
         }

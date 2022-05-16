@@ -20,12 +20,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.example.issueproject.databinding.ActivityChildAddBinding
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
-import androidx.core.app.ActivityCompat.startActivityForResult
 import com.example.issueproject.dto.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.Path
 import java.io.*
 
 
@@ -35,6 +33,7 @@ class ChildAddActivity : AppCompatActivity() {
         ActivityChildAddBinding.inflate(layoutInflater)
     }
     private lateinit var getResult: ActivityResultLauncher<Intent>
+    var id: String = ""
     var school : String = ""
     var room : String = ""
     var key_id : String = ""
@@ -45,6 +44,8 @@ class ChildAddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        id = intent.getStringExtra("id").toString()
 
         GetSchool()
 
@@ -83,6 +84,7 @@ class ChildAddActivity : AppCompatActivity() {
             getResult.launch(intent)
         }
 
+
         binding.spinnerSchool.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
@@ -101,7 +103,7 @@ class ChildAddActivity : AppCompatActivity() {
         }
 
         binding.buttonChildAdd.setOnClickListener {
-            val id = "test1"
+            val id = id
             val schoolname = school
             val roomname = room
             val childage = binding.editTextChildAge.text.toString()
@@ -109,13 +111,14 @@ class ChildAddActivity : AppCompatActivity() {
             val childspec = binding.editTextChildSpec.text.toString()
             val parentnum = binding.editTextParentNum.text.toString()
 
-            var parentinfo = ParentInfo(id, schoolname, roomname, parentnum, childname, childage, childspec)
-            Log.d(TAG, "onCreate: $parentinfo")
-            ChildAdd(parentinfo)
-
-//            if(currentImageUri != null){
-//
-//            }
+            if(childname == "" || childage == "" || childspec == "" || schoolname == "" || roomname == "" || parentnum == ""){
+                Toast.makeText(this, "모든 정보를 기입해주세요", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                var parentinfo = ParentInfo(id, schoolname, roomname, parentnum, childname, childage, childspec)
+                Log.d(TAG, "onCreate: $parentinfo")
+                ChildAdd(parentinfo)
+            }
         }
     }
 
@@ -134,11 +137,7 @@ class ChildAddActivity : AppCompatActivity() {
         bitmap.compress(Bitmap.CompressFormat.JPEG,20,byteArrayOutputStream)
         val requestBody = RequestBody.create(MediaType.parse("image/*"),byteArrayOutputStream.toByteArray())
         val uploadFile = MultipartBody.Part.createFormData("image","${file.name}.${fileExtension?.substring(6)}",requestBody)
-//        var target = "parent"
-//        var key = "이승현12"
-//        var value1 = "1"
-//        var value2 = "1"
-//        var data = "${target}-${key}-${value1}-${value2}"
+
         Log.d(TAG, "savaimage: $key_id")
         uploadimage("parent", key_id, uploadFile)
     }
@@ -170,7 +169,8 @@ class ChildAddActivity : AppCompatActivity() {
                 Log.d(TAG, "onSuccess: $responseData")
                 if(responseData.msg == "success"){
                     Toast.makeText(this@ChildAddActivity, "성공", Toast.LENGTH_SHORT).show()
-                    GetParentInfo("이승현12")
+                    val childname = binding.editTextChildName.text.toString()
+                    ChildInfo(id!!, childname!!)
                 }
             }
 
@@ -180,24 +180,20 @@ class ChildAddActivity : AppCompatActivity() {
         })
     }
 
-    fun GetParentInfo(id: String){
-        ResponseService().GetParentInfo(id, object : RetrofitCallback<MutableList<ParentInfoResult>> {
+    fun ChildInfo(id: String, name: String){
+        ResponseService().ChildInfo(id, name, object : RetrofitCallback<ParentInfoResult> {
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
-
-            override fun onSuccess(code: Int, responseData: MutableList<ParentInfoResult>) {
+            override fun onSuccess(code: Int, responseData: ParentInfoResult) {
                 Log.d(TAG, "onSuccess: ..")
-                key_id = responseData[0].key_id.toString()
+                key_id = responseData.key_id.toString()
                 savaimage(currentImageUri)
             }
 
             override fun onFailure(code: Int) {
                 Log.d(TAG, "onFailure: ..")
             }
-
-
-
         })
     }
 

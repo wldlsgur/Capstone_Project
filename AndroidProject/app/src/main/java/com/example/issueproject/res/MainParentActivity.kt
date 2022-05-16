@@ -1,12 +1,23 @@
 package com.example.issueproject.res
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityMainParentBinding
 import com.example.issueproject.dto.ParentInfoResult
+import com.example.issueproject.res.Album.AlbumActivity
+import com.example.issueproject.res.DayNotic.DayNoticActivity
+import com.example.issueproject.res.DayNotic.DayNoticTeacherActivity
+import com.example.issueproject.res.Foodlist.FoodlistActivity
+import com.example.issueproject.res.Notic.NoticActivity
+import com.example.issueproject.res.SchoolManager.SchoolTeacherListActivity
+import com.example.issueproject.retrofit.RetrofitBuilder
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 import okhttp3.ResponseBody
@@ -17,52 +28,82 @@ class MainParentActivity : AppCompatActivity() {
         ActivityMainParentBinding.inflate(layoutInflater)
     }
 
+    var school : String = ""
+    var room : String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val id = intent.getStringExtra("id")
-        Log.d(TAG, "id: $id")
-        if (id != null) {
-            GetParentInfo(id)
+        val position = intent.getStringExtra("position")!!.toInt()
+        val id = intent.getStringExtra("id")!!
+
+        GetParentInfo(id, position)
+
+        school = binding.textViewSchool.text.toString()
+        room = binding.textViewRoom.text.toString()
+
+        binding.ParentNotic.setOnClickListener{
+            var intent = Intent(this, NoticActivity::class.java).apply {
+                putExtra("school", school)
+                putExtra("room", room)
+                putExtra("job", "부모님")
+                putExtra("name", binding.textViewName.text)
+                putExtra("menu", "공지사항")
+            }
+            startActivity(intent)
         }
-        val name = intent.getStringExtra("name")
-        binding.textViewName.text = name
+
+        binding.ParentAlbum.setOnClickListener {
+            var intent = Intent(this, AlbumActivity::class.java).apply {
+                putExtra("school", school)
+                putExtra("room", room)
+            }
+            startActivity(intent)
+        }
+        binding.ParentDaliy.setOnClickListener {
+//            var intent = Intent(this, CalenActivity::class.java)
+//            startActivity(intent)
+        }
+        binding.ParentDayNotic.setOnClickListener {
+            var intent = Intent(this, DayNoticTeacherActivity::class.java).apply {
+                putExtra("school", school)
+                putExtra("room", room)
+                putExtra("job", "부모님")
+                putExtra("name", binding.textViewName.text)
+                putExtra("menu", "알림장")
+            }
+            startActivity(intent)
+        }
+        binding.ParentFoodList.setOnClickListener {
+            var intent = Intent(this, FoodlistActivity::class.java)
+            startActivity(intent)
+        }
+        binding.ParentMedicinemanagement.setOnClickListener {
+//            var intent = Intent(this, ::class.java)
+//            startActivity(intent)
+        }
     }
 
-    fun GetParentInfo(id: String){
+    fun GetParentInfo(id: String, position: Int){
         ResponseService().GetParentInfo(id, object : RetrofitCallback<MutableList<ParentInfoResult>> {
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
-                binding.textViewSchool.text = "등록해주세요"
             }
 
             override fun onSuccess(code: Int, responseData: MutableList<ParentInfoResult>) {
                 Log.d(TAG, "onSuccess: $responseData")
-                binding.textViewSchool.text = responseData[0].school
-                binding.textViewRoom.text = responseData[0].room
-                binding.textViewName.text = responseData[0].child_name
-//                GetImageUrl("parent", responseData[0].image_url)
-            }
+                binding.textViewSchool.text = responseData[position].school
+                binding.textViewRoom.text = responseData[position].room
+                binding.textViewName.text = responseData[position].child_name
 
-            override fun onFailure(code: Int) {
-                Log.d(TAG, "onFailure: $code")
-                binding.textViewSchool.text = "등록해주세요"
-            }
-        })
-    }
+                val childimage: ImageView = binding.imageViewChild
 
-    fun GetImageUrl(target: String, name: String){
-        ResponseService().GetImageUrl(target, name, object: RetrofitCallback<ResponseBody>{
-            override fun onError(t: Throwable) {
-                Log.d(TAG, "onError: ")
-            }
-
-            override fun onSuccess(code: Int, responseData: ResponseBody) {
-                Log.d(TAG, "onSuccess: $responseData")
-
-                val bitmap: Bitmap = BitmapFactory.decodeStream(responseData.byteStream())
-                binding.imageViewChild.setImageBitmap(bitmap)
+                if(responseData[position].image_url != null){
+                    Glide.with(childimage.context)
+                        .load("${RetrofitBuilder.servers}/image/parent/${responseData[position].image_url}")
+                        .into(childimage)
+                }
             }
 
             override fun onFailure(code: Int) {

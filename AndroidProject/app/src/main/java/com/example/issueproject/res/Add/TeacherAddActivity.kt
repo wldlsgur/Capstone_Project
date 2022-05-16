@@ -34,6 +34,7 @@ class TeacherAddActivity : AppCompatActivity() {
     private lateinit var getResult: ActivityResultLauncher<Intent>
     var school : String = ""
     var room : String = ""
+    var id : String = ""
     var key_id : String = ""
     val itemList = mutableListOf<String>()
     val roomList = mutableListOf<String>()
@@ -46,6 +47,8 @@ class TeacherAddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val id = intent.getStringExtra("id")!!
 
         GetSchool()
 
@@ -85,13 +88,13 @@ class TeacherAddActivity : AppCompatActivity() {
         }
 
         binding.TeacherAddButtonAdd.setOnClickListener {
-            val id = "test1"
+            val id = id
             val schoolname = school
             val roomname = room
             val teachernum = binding.TeacherAddEditTextNumber.text.toString()
 
             var teacherinfo = TeacherInfo(id, schoolname, roomname, teachernum)
-            Log.d(TAG, "onCreate: $teacherinfo")
+            Log.d(TAG, "TeacherInfo: $teacherinfo")
             TeacherAdd(teacherinfo)
 
 //            if(currentImageUri != null){
@@ -155,8 +158,8 @@ class TeacherAddActivity : AppCompatActivity() {
         })
     }
 
-    fun TeacherAdd(info: TeacherInfo){
-        ResponseService().CreateTeacherinfo(info, object: RetrofitCallback<SignUpResult> {
+    fun TeacherAdd(teacherInfo: TeacherInfo){
+        ResponseService().CreateTeacherinfo(teacherInfo, object: RetrofitCallback<SignUpResult> {
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
@@ -165,7 +168,7 @@ class TeacherAddActivity : AppCompatActivity() {
                 Log.d(TAG, "onSuccess: $responseData")
                 if(responseData.msg == "success"){
                     Toast.makeText(this@TeacherAddActivity, "성공", Toast.LENGTH_SHORT).show()
-                    GetTeacherInfo("이승현12")
+                    GetTeacherInfo(id)
                 }
             }
 

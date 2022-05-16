@@ -259,6 +259,7 @@ class ResponseService {
             }
         })
     }
+
     fun CreateTeacherinfo(info: TeacherInfo, callback: RetrofitCallback<SignUpResult>){
         RetrofitBuilder.api.TeacherInfo(info).enqueue(object : Callback<SignUpResult> {
             override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
@@ -438,8 +439,8 @@ class ResponseService {
         })
     }
 
-    fun GetMedcineInfo(name: String, callback: RetrofitCallback<Medicine>) {
-        RetrofitBuilder.api.GetMedicineInfo(name).enqueue(object : Callback<Medicine>{
+    fun GetMedcineInfo(id: String, child_name:String, m_name:String, callback: RetrofitCallback<Medicine>) {
+        RetrofitBuilder.api.GetMedicineInfo(id,child_name,m_name).enqueue(object : Callback<Medicine>{
             override fun onResponse(
                 call: Call<Medicine>,
                 response: Response<Medicine>
@@ -463,11 +464,11 @@ class ResponseService {
         })
     }
 
-    fun MedicineListShow(room: String, callback: RetrofitCallback<MutableList<MedicineManage>>) {
-        RetrofitBuilder.api.MedicineList(room).enqueue(object : Callback<MutableList<MedicineManage>>{
+    fun MedicineListShow(school: String, room: String, callback: RetrofitCallback<MutableList<MedicineManagementResult>>) {
+        RetrofitBuilder.api.MedicineList(school, room).enqueue(object : Callback<MutableList<MedicineManagementResult>>{
             override fun onResponse(
-                call: Call<MutableList<MedicineManage>>,
-                response: Response<MutableList<MedicineManage>>
+                call: Call<MutableList<MedicineManagementResult>>,
+                response: Response<MutableList<MedicineManagementResult>>
             ) {
                 Log.d(TAG, "MedicineList: ..")
                 if (response.code() == 200){
@@ -480,13 +481,58 @@ class ResponseService {
                 }
             }
 
-            override fun onFailure(call: Call<MutableList<MedicineManage>>, t: Throwable) {
+            override fun onFailure(call: Call<MutableList<MedicineManagementResult>>, t: Throwable) {
                 Log.d(TAG, "onFailure: $t")
                 callback.onError(t)
             }
 
         })
 
+    }
+    fun ParentsMedicineListShow(id: String, child_name: String, callback: RetrofitCallback<MutableList<MedicineManagementResult>>) {
+        RetrofitBuilder.api.parentsMedicineList(id, child_name).enqueue(object : Callback<MutableList<MedicineManagementResult>>{
+            override fun onResponse(
+                call: Call<MutableList<MedicineManagementResult>>,
+                response: Response<MutableList<MedicineManagementResult>>
+            ) {
+                Log.d(TAG, "MedicineList: ..")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<MutableList<MedicineManagementResult>>, t: Throwable) {
+                Log.d(TAG, "onFailure: $t")
+                callback.onError(t)
+            }
+
+        })
+
+    }
+
+    fun CreateMedicine(info: PostMedicine, callback: RetrofitCallback<SignUpResult>) {
+        RetrofitBuilder.api.PostMedicine(info).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "CreateMedicineinfo: ..")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: $t")
+                callback.onError(t)
+            }
+        })
     }
 
     fun SchoolTeacherListShow(school: String, callback: RetrofitCallback<MutableList<SchoolteacherListResult>>) {
