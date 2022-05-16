@@ -105,7 +105,7 @@ router.post('/parentinfo', function(req, res){
 	})
 });
 
-router.post('teacherinfo', function(req, res){
+router.post('/teacherinfo', function(req, res){
 	let json_data = {
 		id : req.body.id,
 		school : req.body.school,
