@@ -26,12 +26,8 @@ class RoomChildListActivity : AppCompatActivity() {
 
 //        val room = intent.getStringExtra("room")
         val room = "달님반"
-        ShowRecycler(room.toString())
+        ShowRecycler(room)
 
-        binding.buttonTeacherChildAdd.setOnClickListener{
-            var intent = Intent(this, ChildAddActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     private fun initRecycler(list:MutableList<RoomChildListResult>){

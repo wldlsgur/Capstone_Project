@@ -36,9 +36,10 @@ class MenuActivity : AppCompatActivity() {
 
         binding.PresidentNotic.setOnClickListener {
             var intent = Intent(this, NoticActivity::class.java).apply {
-                putExtra("id", id)
-                putExtra("name", name)
                 putExtra("school", school)
+                putExtra("room", room)
+                putExtra("job", "원장님")
+                putExtra("name", name)
                 putExtra("menu", "공지사항")
             }
             startActivity(intent)
@@ -63,9 +64,10 @@ class MenuActivity : AppCompatActivity() {
         }
         binding.PresidentDayNotic.setOnClickListener {
             var intent = Intent(this, DayNoticActivity::class.java).apply {
-                putExtra("id", id)
-                putExtra("name", name)
                 putExtra("school", school)
+                putExtra("room", room)
+                putExtra("job", "원장님")
+                putExtra("name", name)
                 putExtra("menu", "알림장")
             }
             startActivity(intent)

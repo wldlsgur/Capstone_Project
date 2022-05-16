@@ -41,9 +41,10 @@ class MainTeacherActivity : AppCompatActivity() {
 
         binding.TeacherNotic.setOnClickListener {
             var intent = Intent(this, NoticActivity::class.java).apply {
-                putExtra("id", id)
-                putExtra("name", name)
                 putExtra("school", school)
+                putExtra("room", room)
+                putExtra("job", "부모님")
+                putExtra("name", name)
                 putExtra("menu", "공지사항")
             }
             startActivity(intent)
@@ -62,9 +63,10 @@ class MainTeacherActivity : AppCompatActivity() {
         }
         binding.TeacherDayNotic.setOnClickListener {
             var intent = Intent(this, DayNoticTeacherActivity::class.java).apply {
-                putExtra("id", id)
-                putExtra("name", name)
                 putExtra("school", school)
+                putExtra("room", room)
+                putExtra("job", "선생님")
+                putExtra("name", name)
                 putExtra("menu", "알림장")
             }
             startActivity(intent)

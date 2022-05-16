@@ -32,11 +32,19 @@ class DayNoticTeacherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        val job = intent.getStringExtra("job")
         val id = intent.getStringExtra("id")
         var name = intent.getStringExtra("name")
         val school = intent.getStringExtra("school")
         val room = intent.getStringExtra("room")
         val menu = intent.getStringExtra("menu")
+
+        if(job == "선생님"){
+            binding.buttonDayNoticAddTeacher.visibility = View.VISIBLE
+        }
+        else if(job == "부모님" || job == "원장님"){
+            binding.buttonDayNoticAddTeacher.visibility = View.INVISIBLE
+        }
 
         binding.textViewDayNoticTeacherSchool.text = school
         binding.textViewDayNoticTeacherRoom.text = room

@@ -13,6 +13,7 @@ import com.example.issueproject.databinding.ActivityMainParentBinding
 import com.example.issueproject.dto.ParentInfoResult
 import com.example.issueproject.res.Album.AlbumActivity
 import com.example.issueproject.res.DayNotic.DayNoticActivity
+import com.example.issueproject.res.DayNotic.DayNoticTeacherActivity
 import com.example.issueproject.res.Foodlist.FoodlistActivity
 import com.example.issueproject.res.Notic.NoticActivity
 import com.example.issueproject.res.SchoolManager.SchoolTeacherListActivity
@@ -46,6 +47,7 @@ class MainParentActivity : AppCompatActivity() {
             var intent = Intent(this, NoticActivity::class.java).apply {
                 putExtra("school", school)
                 putExtra("room", room)
+                putExtra("job", "부모님")
                 putExtra("name", binding.textViewName.text)
                 putExtra("menu", "공지사항")
             }
@@ -64,9 +66,10 @@ class MainParentActivity : AppCompatActivity() {
 //            startActivity(intent)
         }
         binding.ParentDayNotic.setOnClickListener {
-            var intent = Intent(this, DayNoticActivity::class.java).apply {
+            var intent = Intent(this, DayNoticTeacherActivity::class.java).apply {
                 putExtra("school", school)
                 putExtra("room", room)
+                putExtra("job", "부모님")
                 putExtra("name", binding.textViewName.text)
                 putExtra("menu", "알림장")
             }

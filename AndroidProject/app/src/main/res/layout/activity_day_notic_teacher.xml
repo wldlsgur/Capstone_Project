@@ -55,9 +55,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout38">
+        app:layout_constraintTop_toTopOf="@+id/buttonDayNoticAddTeacher">
 
         <TextView
             android:id="@+id/textView49"
@@ -87,6 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonDayNoticAddTeacher"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout39"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout39">
 

@@ -43,17 +43,6 @@ class DayNoticActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate: $school")
         Log.d(TAG, "onCreate: $menu")
 
-
-        binding.buttonDaynoticAdd.setOnClickListener {
-            var intent = Intent(this, AddNoticActivity::class.java).apply {
-                putExtra("name", name)
-                putExtra("menu", menu)
-                putExtra("school", school)
-                putExtra("room", room)
-            }
-            startActivity(intent)
-        }
-
         binding.spinnerDayNoticSchool.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
