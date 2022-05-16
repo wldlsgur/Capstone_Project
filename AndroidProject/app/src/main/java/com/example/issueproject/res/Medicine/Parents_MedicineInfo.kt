@@ -1,5 +1,6 @@
 package com.example.issueproject.res.Medicine
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +15,8 @@ import com.example.issueproject.res.MainActivity
 import com.example.issueproject.res.viewmodel.MainViewModels
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
+import java.text.SimpleDateFormat
+import java.util.*
 
 private const val TAG = "Parents_MedicineInfo"
 class Parents_MedicineInfo : AppCompatActivity() {
@@ -21,15 +24,26 @@ class Parents_MedicineInfo : AppCompatActivity() {
     private val binding by lazy{
         ActivityMedicineBinding.inflate(layoutInflater)
     }
-    val id = intent.getStringExtra("id").toString()
-    val cname = intent.getStringExtra("cname").toString()
-    val mname = intent.getStringExtra("mname").toString()
-    val add : Boolean = intent.getStringExtra("add").toBoolean()
+
+    var id : String = ""
+    var cname : String = ""
+    var mname : String = ""
+    var add : Boolean = false
+    var school : String = ""
+    var room : String = ""
+    var date : String = ""
+    var content : String = ""
+    var morning : String = ""
+    var lunch : String = ""
+    var dinner : String = ""
+    var mplace : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        init()
         setContentView(binding.root)
+        init()
+        val currentTime = System.currentTimeMillis()
+        convertTimestampToDate(currentTime)
 
         binding.medicineButtonSave.setOnClickListener {
             // update 값 변경 통신
@@ -38,11 +52,38 @@ class Parents_MedicineInfo : AppCompatActivity() {
             // delete값 변경 통신
         }
         binding.buttonAdd.setOnClickListener {
-            // 추가값 변경 통신
+            makedata()
+            var medicine = PostMedicine(id,cname,mname,morning,lunch,dinner,date,mplace,content,school,room)
+            CreateMedicine(medicine)
+        }
+        binding.buttonDatePicker.setOnClickListener {
+            showDatePicker()
         }
     }
 
+    fun makedata(){
+        date = binding.TextViewDate.text.toString()
+        content = binding.EditMedicineContent.text.toString()
+        if(binding.CheckMorning.isChecked == true) morning = "true"
+        else morning = "false"
+        if(binding.CheckLunch.isChecked == true) lunch = "true"
+        else morning = "false"
+        if(binding.CheckDinner.isChecked == true) dinner = "true"
+        else morning = "false"
+        if(binding.checkBoxOn.isChecked == true) mplace = "실온"
+        else if(binding.checkBoxOn.isChecked == false)mplace = "냉장"
+    }
     fun init(){
+        id = intent.getStringExtra("id").toString()
+        cname = intent.getStringExtra("cname").toString()
+        mname = intent.getStringExtra("mname").toString()
+        add = intent.getBooleanExtra("add",false)
+        school = intent.getStringExtra("school").toString()
+        room = intent.getStringExtra("room").toString()
+
+        binding.medicineSchool.text = school
+        binding.medicineRoom.text = room
+        binding.medicineCname.text = cname
         binding.medicineContent.visibility = View.INVISIBLE
         binding.medicineMname.visibility = View.INVISIBLE
         if(add == false) {
@@ -54,6 +95,39 @@ class Parents_MedicineInfo : AppCompatActivity() {
             binding.medicineButtonDelete.visibility = View.INVISIBLE
         }
     }
+
+    var cal = Calendar.getInstance()
+    private val dateSetListener =
+        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, monthOfYear)
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            updateDateInText()
+        }
+
+    private fun showDatePicker(){
+        DatePickerDialog(this,
+            dateSetListener,
+            cal.get(Calendar.YEAR),
+            cal.get(Calendar.MONTH),
+            cal.get(Calendar.DAY_OF_MONTH)).show()
+    }
+    private fun convertTimestampToDate(timespamp: Long){
+        val sdf = SimpleDateFormat("yyyy년 MM월 dd일")
+        val date = sdf.format(timespamp)
+
+        binding.TextViewDate.text = date
+        var year = date.substring(0,4)
+        var month = date.substring(6,8)
+        var day = date.substring(10,12)
+        Log.d(TAG, "datetest: ${year}-${month}-${day}")
+    }
+
+    private fun updateDateInText(){
+        var formatter = SimpleDateFormat("yyyy년 MM월 dd일")
+        binding.TextViewDate.text = formatter.format(cal.time)
+    }
+
     fun bindinfo(data: Medicine) {
         binding.medicineCname.text = data.child_name
         binding.EditMedicineMname.setText(data.m_name)

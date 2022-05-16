@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.issueproject.databinding.ActivityMenuBinding
 import com.example.issueproject.dto.PresidentinfoResult
+import com.example.issueproject.res.Album.AlbumActivity
 import com.example.issueproject.res.DayNotic.DayNoticActivity
 import com.example.issueproject.res.Foodlist.FoodlistActivity
 import com.example.issueproject.res.Navi.Navigation
