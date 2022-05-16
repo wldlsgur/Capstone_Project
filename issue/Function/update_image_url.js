@@ -17,7 +17,7 @@ module.exports = {
 				query = `UPDATE food_list SET image_url='${file_url}' WHERE key_id = '${key}';`
 				break;
 			case 'teacher':
-				query = `UPDATE teachertinfo SET image_url='${file_url}' WHERE key_id = '${key}';`
+				query = `UPDATE teachertinfo SET image_url='${file_url}' WHERE id = '${key}';`
 				break;
 			case 'president':
 				query = `UPDATE presidentinfo SET image_url='${file_url}' WHERE id = '${key}';`
