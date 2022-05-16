@@ -64,6 +64,7 @@ class Parents_MedicineInfo : AppCompatActivity() {
     fun makedata(){
         date = binding.TextViewDate.text.toString()
         content = binding.EditMedicineContent.text.toString()
+        mname = binding.EditMedicineMname.text.toString()
         if(binding.CheckMorning.isChecked == true) morning = "true"
         else morning = "false"
         if(binding.CheckLunch.isChecked == true) lunch = "true"
