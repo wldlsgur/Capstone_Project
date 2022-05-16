@@ -12,10 +12,7 @@ router.post('/uploadimage/:target/:key', function(req, res){
 		target : req.params.target,
 		key : req.params.key
 	}
-	if(check_element.check_require_element(json_data) === false){
-		res.send(element_msg);
-		return;
-	}
+	if(check_element.check_require_element(json_data) === false) return res.send(element_msg);
 	res.send(sucess_response);
 });
 module.exports = router;
