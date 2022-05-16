@@ -7,10 +7,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.issueproject.databinding.ActivityMainBinding
-import com.example.issueproject.dto.LoginResult
-import com.example.issueproject.dto.ParentInfoResult
-import com.example.issueproject.dto.PresidentinfoResult
-import com.example.issueproject.dto.UserInfo
+import com.example.issueproject.dto.*
+import com.example.issueproject.res.Add.SchoolAddActivity
+import com.example.issueproject.res.Add.TeacherAddActivity
+import com.example.issueproject.res.submenu.SubChildMunuActivity
 import com.example.issueproject.res.viewmodel.MainViewModels
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -22,9 +22,16 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
+    val name :String = ""
+    val school :String = ""
+    val room :String = ""
+    val id : String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+
 
         binding.buttonLogin.setOnClickListener {
             Log.d(TAG, "onCreate: clicklogin")
@@ -81,30 +88,19 @@ class MainActivity : AppCompatActivity() {
                 Log.d(TAG, "onSuccess: $responseData")
                 val name = responseData.name
                 val job = responseData.job
+                val id = binding.editTextID.text.toString()
 
                 if(job == "원장님"){
-                    var intent = Intent(this@MainActivity, MenuActivity::class.java).apply{
-                        putExtra("id", id)
-                        putExtra("name", responseData.name)
-                        Log.d(TAG, "id: $id")
-                        Log.d(TAG, "job: $responseData")
-                    }
-                    startActivity(intent)
+                    GetPresidentInfo(id, name)
                 }
                 else if(job == "선생님"){
-                    var intent = Intent(this@MainActivity, MainTeacherActivity::class.java).apply{
-                        putExtra("id", id)
-                        putExtra("name", responseData.name)
-                        Log.d(TAG, "id: $id")
-                        Log.d(TAG, "job: $responseData")
-                    }
-                    startActivity(intent)
+                    GetTeacherInfo(id, name)
                 }
 
                 else if(job == "부모님"){
-                    var intent = Intent(this@MainActivity, MainParentActivity::class.java).apply{
+                    var intent = Intent(this@MainActivity, SubChildMunuActivity::class.java).apply{
                         putExtra("id", id)
-                        putExtra("name", responseData.name)
+                        putExtra("name", name)
                         Log.d(TAG, "id: $id")
                         Log.d(TAG, "job: $responseData")
                     }
@@ -114,6 +110,69 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(code: Int) {
                 Log.d(TAG, "onFailure: $code")
             }
+        })
+    }
+
+    fun GetPresidentInfo(id: String, name: String) {
+        ResponseService().GetPresidentInfo(id, object : RetrofitCallback<MutableList<PresidentinfoResult>> {
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: MutableList<PresidentinfoResult>) {
+                Log.d(TAG, "onSuccess: $responseData")
+                if(responseData.isEmpty()){
+                    var intent = Intent(this@MainActivity, SchoolAddActivity::class.java).apply{
+                        putExtra("id", id)
+                    }
+                    startActivity(intent)
+                }
+                else{
+                    var intent = Intent(this@MainActivity, MenuActivity::class.java).apply{
+                        putExtra("id", id)
+                        putExtra("name", name)
+                        putExtra("school", responseData[0].school)
+                        putExtra("room", responseData[0].room)
+                    }
+                    startActivity(intent)
+                }
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+            }
+        })
+    }
+    
+    fun GetTeacherInfo(id: String, name: String){
+        ResponseService().GetTeacherInfo(id, object :RetrofitCallback<MutableList<TeacherinfoResult>>{
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: MutableList<TeacherinfoResult>) {
+                Log.d(TAG, "onSuccess: $responseData")
+                if(responseData.isEmpty()){
+                    var intent = Intent(this@MainActivity, TeacherAddActivity::class.java).apply{
+                        putExtra("id", id)
+                    }
+                    startActivity(intent)
+                }
+                else{
+                    var intent = Intent(this@MainActivity, MainTeacherActivity::class.java).apply{putExtra("id", id)
+                        putExtra("id", id)
+                        putExtra("name", name)
+                        putExtra("school", responseData[0].school)
+                        putExtra("room", responseData[0].room)
+                    }
+                    startActivity(intent)
+                }
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+            }
+
         })
     }
 }

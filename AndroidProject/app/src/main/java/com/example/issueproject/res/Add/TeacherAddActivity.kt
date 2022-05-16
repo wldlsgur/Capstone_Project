@@ -1,4 +1,4 @@
-package com.example.issueproject.res
+package com.example.issueproject.res.Add
 
 import android.R
 import android.content.Intent
@@ -17,34 +17,38 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.issueproject.databinding.ActivityChildAddBinding
+import com.example.issueproject.databinding.ActivityTeacherAddBinding
+import com.example.issueproject.dto.*
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
-import androidx.core.app.ActivityCompat.startActivityForResult
-import com.example.issueproject.dto.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.Path
-import java.io.*
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.IOException
+import java.io.InputStream
 
-
-private const val TAG = "ChildAddActivity"
-class ChildAddActivity : AppCompatActivity() {
-    private val binding by lazy {
-        ActivityChildAddBinding.inflate(layoutInflater)
-    }
+private const val TAG = "TeacherAddActivity"
+class TeacherAddActivity : AppCompatActivity() {
     private lateinit var getResult: ActivityResultLauncher<Intent>
     var school : String = ""
     var room : String = ""
+    var id : String = ""
     var key_id : String = ""
     val itemList = mutableListOf<String>()
     val roomList = mutableListOf<String>()
     private lateinit var currentImageUri: Uri
 
+    private val binding by lazy{
+    ActivityTeacherAddBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val id = intent.getStringExtra("id")!!
 
         GetSchool()
 
@@ -60,11 +64,11 @@ class ChildAddActivity : AppCompatActivity() {
                             )
                             Log.d(TAG, "currentImageUri: $currentImageUri")
                             Log.d(TAG, "bitmap: $bitmap")
-                            binding.imageView2?.setImageBitmap(bitmap)
+                            binding.TeacherAddImageView?.setImageBitmap(bitmap)
                         } else {
                             val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
                             val bitmap = ImageDecoder.decodeBitmap(source)
-                            binding.imageView2?.setImageBitmap(bitmap)
+                            binding.TeacherAddImageView?.setImageBitmap(bitmap)
                         }
                     }
                 }catch(e:Exception) {
@@ -77,13 +81,28 @@ class ChildAddActivity : AppCompatActivity() {
             }
         }
 
-        binding.imageView2.setOnClickListener {
+        binding.TeacherAddImageView?.setOnClickListener {
             val intent: Intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.setType("image/*")
             getResult.launch(intent)
         }
 
-        binding.spinnerSchool.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        binding.TeacherAddButtonAdd.setOnClickListener {
+            val id = id
+            val schoolname = school
+            val roomname = room
+            val teachernum = binding.TeacherAddEditTextNumber.text.toString()
+
+            var teacherinfo = TeacherInfo(id, schoolname, roomname, teachernum)
+            Log.d(TAG, "TeacherInfo: $teacherinfo")
+            TeacherAdd(teacherinfo)
+
+//            if(currentImageUri != null){
+//
+//            }
+        }
+
+        binding.TeacherAddSpinnerSchool.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -92,30 +111,12 @@ class ChildAddActivity : AppCompatActivity() {
             }
 
         }
-        binding.spinnerRoom.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        binding.TeacherAddSpinnerRoom.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 room = roomList[position]
             }
-        }
-
-        binding.buttonChildAdd.setOnClickListener {
-            val id = "test1"
-            val schoolname = school
-            val roomname = room
-            val childage = binding.editTextChildAge.text.toString()
-            val childname = binding.editTextChildName.text.toString()
-            val childspec = binding.editTextChildSpec.text.toString()
-            val parentnum = binding.editTextParentNum.text.toString()
-
-            var parentinfo = ParentInfo(id, schoolname, roomname, parentnum, childname, childage, childspec)
-            Log.d(TAG, "onCreate: $parentinfo")
-            ChildAdd(parentinfo)
-
-//            if(currentImageUri != null){
-//
-//            }
         }
     }
 
@@ -134,11 +135,7 @@ class ChildAddActivity : AppCompatActivity() {
         bitmap.compress(Bitmap.CompressFormat.JPEG,20,byteArrayOutputStream)
         val requestBody = RequestBody.create(MediaType.parse("image/*"),byteArrayOutputStream.toByteArray())
         val uploadFile = MultipartBody.Part.createFormData("image","${file.name}.${fileExtension?.substring(6)}",requestBody)
-//        var target = "parent"
-//        var key = "이승현12"
-//        var value1 = "1"
-//        var value2 = "1"
-//        var data = "${target}-${key}-${value1}-${value2}"
+
         Log.d(TAG, "savaimage: $key_id")
         uploadimage("parent", key_id, uploadFile)
     }
@@ -160,8 +157,9 @@ class ChildAddActivity : AppCompatActivity() {
             }
         })
     }
-    fun ChildAdd(info: ParentInfo){
-        ResponseService().CreateParentinfo(info, object: RetrofitCallback<SignUpResult> {
+
+    fun TeacherAdd(teacherInfo: TeacherInfo){
+        ResponseService().CreateTeacherinfo(teacherInfo, object: RetrofitCallback<SignUpResult> {
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
@@ -169,8 +167,8 @@ class ChildAddActivity : AppCompatActivity() {
             override fun onSuccess(code: Int, responseData: SignUpResult) {
                 Log.d(TAG, "onSuccess: $responseData")
                 if(responseData.msg == "success"){
-                    Toast.makeText(this@ChildAddActivity, "성공", Toast.LENGTH_SHORT).show()
-                    GetParentInfo("이승현12")
+                    Toast.makeText(this@TeacherAddActivity, "성공", Toast.LENGTH_SHORT).show()
+                    GetTeacherInfo(id)
                 }
             }
 
@@ -180,13 +178,13 @@ class ChildAddActivity : AppCompatActivity() {
         })
     }
 
-    fun GetParentInfo(id: String){
-        ResponseService().GetParentInfo(id, object : RetrofitCallback<MutableList<ParentInfoResult>> {
+    fun GetTeacherInfo(id: String){
+        ResponseService().GetTeacherInfo(id, object : RetrofitCallback<MutableList<TeacherinfoResult>> {
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
 
-            override fun onSuccess(code: Int, responseData: MutableList<ParentInfoResult>) {
+            override fun onSuccess(code: Int, responseData: MutableList<TeacherinfoResult>) {
                 Log.d(TAG, "onSuccess: ..")
                 key_id = responseData[0].key_id.toString()
                 savaimage(currentImageUri)
@@ -195,14 +193,11 @@ class ChildAddActivity : AppCompatActivity() {
             override fun onFailure(code: Int) {
                 Log.d(TAG, "onFailure: ..")
             }
-
-
-
         })
     }
 
     fun GetSchool(){
-        ResponseService().GetSchool(object : RetrofitCallback<MutableList<GetSchool>>{
+        ResponseService().GetSchool(object : RetrofitCallback<MutableList<GetSchool>> {
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
@@ -214,8 +209,8 @@ class ChildAddActivity : AppCompatActivity() {
                     itemList.add(item.school)
                 }
 
-                val adapter = ArrayAdapter(this@ChildAddActivity, R.layout.simple_spinner_dropdown_item, itemList)
-                  binding.spinnerSchool.adapter = adapter
+                val adapter = ArrayAdapter(this@TeacherAddActivity, R.layout.simple_spinner_dropdown_item, itemList)
+                binding.TeacherAddSpinnerSchool.adapter = adapter
 
             }
 
@@ -227,7 +222,6 @@ class ChildAddActivity : AppCompatActivity() {
     }
 
     fun GetRoom(school: String){
-
         ResponseService().GetRoom(school, object: RetrofitCallback<MutableList<GetRoom>> {
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
@@ -240,8 +234,8 @@ class ChildAddActivity : AppCompatActivity() {
                     roomList.add(item.room)
                 }
 
-                val adapter = ArrayAdapter(this@ChildAddActivity, R.layout.simple_spinner_dropdown_item, roomList)
-                binding.spinnerRoom.adapter = adapter
+                val adapter = ArrayAdapter(this@TeacherAddActivity, R.layout.simple_spinner_dropdown_item, roomList)
+                binding.TeacherAddSpinnerRoom.adapter = adapter
             }
 
             override fun onFailure(code: Int) {
@@ -250,5 +244,4 @@ class ChildAddActivity : AppCompatActivity() {
 
         })
     }
-
 }

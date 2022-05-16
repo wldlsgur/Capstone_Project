@@ -16,17 +16,15 @@ router.post('/insert/data', function(req, res, next) {  //medicine, medicinemana
     let lunch = req.body.lunch;
     let dinner = req.body.dinner;
     let date = req.body.date;
-    let mKind = req.body.mKind;
-    let mSpecial = req.body.mSpecial;
     let mPlace = req.body.mPlace;
-    let mAmount = req.body.mAmount;
-    let mSym = req.body.mSym;
+    let content = req.body.content;
+    
 
     //medicinemanagement 만 추가
     let school = req.body.school;
     let room = req.body.room;
 
-    db_medicine.insertMedicineInfoAll(id, child_name, m_name, morning, lunch, dinner, date, mKind, mSpecial, mPlace, mAmount, mSym, school, room,function(err,result){
+    db_medicine.insertMedicineInfoAll(id, child_name, m_name, morning, lunch, dinner, date, mPlace, content, school, room,function(err,result){
          if(err){
                 console.log(err);
                 res.status(400).send(err);
@@ -38,8 +36,9 @@ router.post('/insert/data', function(req, res, next) {  //medicine, medicinemana
 router.get('/select/get/data', function(req, res, next) {
     let id = req.query.id;
     let child_name = req.query.child_name;
+    let m_name = req.query.m_name;
 
-    db_medicine.selectMedicinemanageInfo(id, child_name, function(err,result){
+    db_medicine.selectMedicineInfo(id, child_name, m_name, function(err,result){
     if(err){
         console.log(err);
         res.status(400).send(err);
@@ -53,7 +52,7 @@ router.get('/selectManage/get/data', function(req, res, next) {
     let school = req.query.school;
     let room = req.query.room;
 
-    db_medicine.selectMedicineInfo(id, child_name, function(err,result){
+    db_medicine.selectMedicinemanageInfo(school, room, function(err,result){
     if(err){
         console.log(err);
         res.status(400).send(err);

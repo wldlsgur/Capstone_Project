@@ -56,6 +56,7 @@ router.get('/child/info', function(req, res){
 
 router.get('/room/allinfo', function(req, res){
 	let json_data = {
+		school : req.query.school,
 		room : req.query.room
 	}
 	let target_array = [
@@ -66,7 +67,7 @@ router.get('/room/allinfo', function(req, res){
 		res.send(element_msg);
 		return;
 	}
-	let query = make_query.SELECT(target_array, 'parentinfo', json_data, '', 0);
+	let query = make_query.SELECT(target_array, 'parentinfo', json_data, 'AND', 1);
 	db_parent_sql.SELECT(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
@@ -101,8 +102,7 @@ router.get('/agreelist', function(req, res){
 })
 router.post('/change/check', function(req, res){
 	let json_data = {
-		id : req.body.id,
-		child_name : req.body.name
+		key_id : req.body.key_id
 	}
 
 	if(check_element.check_require_element(json_data) === false){
@@ -110,7 +110,7 @@ router.post('/change/check', function(req, res){
 		return;
 	}
 	let target = 'agree="yes"';
-	let query = make_query.UPDATE(target, 'parentinfo', json_data, 'AND', 1);
+	let query = make_query.UPDATE(target, 'parentinfo', json_data, '', 0);
 	db_parent_sql.UPDATE(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
@@ -122,8 +122,7 @@ router.post('/change/check', function(req, res){
 
 router.post('/delete/info', function(req, res){
 	let json_data = {
-		id : req.body.id,
-		child_name : req.body.name
+		key_id : req.body.key_id
 	}
 
 	if(check_element.check_require_element(json_data) === false){
@@ -131,7 +130,7 @@ router.post('/delete/info', function(req, res){
 		return;
 	}
 	
-	let query = make_query.DELETE('parentinfo', json_data, 'AND', 1);
+	let query = make_query.DELETE('parentinfo', json_data, '', 0);
 	db_parent_sql.DELETE(query, function(err, result){
 		if(err){
 			res.status(400).send(err);

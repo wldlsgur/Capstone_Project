@@ -1,5 +1,7 @@
 const express = require('express');
+const res = require('express/lib/response');
 const router = express.Router();
+const Promise = require('promise');
 const db_album_sql = require('../public/SQL/album_sql')();
 const check_element = require('../Function/check_require_element');
 const make_query = require('../Function/make_query');
@@ -8,27 +10,49 @@ const element_msg = "plz send require elements";
 const sucess_response = {res : true, msg : 'success'};
 const failed_response = {res : false, msg : "failed"};
 
-router.get('/image_url', function(req, res){
-    let json_data = {
-        school : req.query.school,
-        room : req.query.room
-    }
-	let target_array = [
-		'*'
-	]
-
+router.get('/info', function(req, res){
+    const json_data = req.query;
     if(check_element.check_require_element(json_data) === false){
-        res.send(element_msg);
-        return;
+        return res.send(element_msg);
     }
 
-    let query = make_query.SELECT(target_array, 'album', json_data, 'AND', 1);
-    db_album_sql.SELECT(query, function(err, result){
+    let array1 = {};
+    let array2 = [];
+    let query1 = `SELECT distinct title, date FROM album WHERE school='${json_data.school}' AND room='${json_data.room}'`;
+    db_album_sql.SELECT(query1, async function(err, result){
         if(err){
-            res.status(400).send(err);
-            return;
+            return res.status(400).send(err);
         }
-        res.send(result);
+        for(let i=0 ; i<result.length ; i++){
+            array1 = {};
+            array1.title = result[i].title;
+            array1.date = result[i].date;
+            let query2 = `SELECT image_url FROM album WHERE school='${json_data.school}' AND room='${json_data.room}' AND title = '${result[i].title}' AND date='${result[i].date}'`;
+            await job2(query2); 
+        }
+        res.status(200).send(array2);
     })
+    function job2(query2){
+        return new Promise(function(resolve, rejected){
+            db_album_sql.SELECT(query2, function(err, result){
+                if(err){
+                    rejected(err);
+                }
+                let img_url = [];
+                for(let j =0 ; j < result.length; j++)
+                {
+                    img_url.push(result[j].image_url);
+                }
+                resolve(img_url);
+            })
+        })
+        .then(function(img_url){
+            array1.image_url = img_url;
+            array2.push(array1);
+        })
+        .catch(function(err){
+            res.status(400).send(err);
+        })
+    }
 })
 module.exports = router;

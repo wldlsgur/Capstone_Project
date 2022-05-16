@@ -20,25 +20,25 @@ class MenuActivity : AppCompatActivity() {
     private val binding by lazy{
         ActivityMenuBinding.inflate(layoutInflater)
     }
-    var school : String = ""
-    var room : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         val id = intent.getStringExtra("id")
-        Log.d(TAG, "id: $id")
-        if (id != null) {
-            GetPresidentInfo(id)
-        }
         val name = intent.getStringExtra("name")
+        val school = intent.getStringExtra("school")
+        val room = intent.getStringExtra("room")
+
         binding.textViewName.text = name
+        binding.textViewSchool.text = school
 
         binding.PresidentNotic.setOnClickListener {
             var intent = Intent(this, NoticActivity::class.java).apply {
                 putExtra("school", school)
                 putExtra("room", room)
+                putExtra("job", "원장님")
+                putExtra("name", name)
                 putExtra("menu", "공지사항")
             }
             startActivity(intent)
@@ -51,8 +51,11 @@ class MenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.PresidentAlbum.setOnClickListener {
-            //var intent = Intent(this, ::class.java)
-            //startActivity(intent)
+            var intent = Intent(this, AlbumActivity::class.java).apply {
+                putExtra("school", school)
+                putExtra("room", room)
+            }
+            startActivity(intent)
         }
         binding.PresidentDaliy.setOnClickListener {
 //            var intent = Intent(this, CalenActivity::class.java)
@@ -62,6 +65,8 @@ class MenuActivity : AppCompatActivity() {
             var intent = Intent(this, DayNoticActivity::class.java).apply {
                 putExtra("school", school)
                 putExtra("room", room)
+                putExtra("job", "원장님")
+                putExtra("name", name)
                 putExtra("menu", "알림장")
             }
             startActivity(intent)
@@ -86,33 +91,5 @@ class MenuActivity : AppCompatActivity() {
 //        }
     }
 
-    fun GetPresidentInfo(id: String) {
-    ResponseService().GetPresidentInfo(id, object : RetrofitCallback<MutableList<PresidentinfoResult>> {
-            override fun onError(t: Throwable) {
-                Log.d(TAG, "onError: $t")
-                binding.textView2.text = ""
-                binding.textViewSchool.text = "등록해주세요"
-                Toast.makeText(this@MenuActivity, "어린이집을 먼저 등록해주세요", Toast.LENGTH_SHORT).show()
-            }
 
-            override fun onSuccess(code: Int, responseData: MutableList<PresidentinfoResult>) {
-                Log.d(TAG, "onSuccess: $responseData")
-                if(responseData.isEmpty()){
-                    binding.textView2.text = ""
-                    binding.textViewSchool.text = "등록해주세요"
-                }
-                else{
-                    school = responseData[0].school
-                    room = responseData[0].room
-                    binding.textViewSchool.text = responseData[0].school
-                }
-            }
-
-            override fun onFailure(code: Int) {
-                Log.d(TAG, "onFailure: $code")
-                binding.textView2.text = ""
-                binding.textViewSchool.text = "등록해주세요"
-            }
-        })
-    }
 }

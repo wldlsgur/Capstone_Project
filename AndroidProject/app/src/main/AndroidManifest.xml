@@ -16,6 +16,33 @@
         android:theme="@style/Theme.IssueProject"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".res.DayNotic.DayNoticTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SpinnerItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.submenu.SubChildMunuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.submenu.ChildItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.Add.TeacherAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.Album.AlbumItem2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".res.Album.AlbumItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.Album.AlbumActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.Foodlist.FoodListItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".res.Foodlist.FoodlistActivity"
             android:exported="false" />
         <activity
@@ -37,10 +64,10 @@
             android:name=".res.RoomManager.RoomChildListActivity"
             android:exported="false" />
         <activity
-            android:name=".res.ChildAddActivity"
+            android:name=".res.Add.ChildAddActivity"
             android:exported="false" />
         <activity
-            android:name=".res.AddNoticActivity"
+            android:name=".res.Add.AddNoticActivity"
             android:exported="false" />
         <activity
             android:name=".res.Notic.NoticItemActivity"
@@ -49,7 +76,7 @@
             android:name=".res.Notic.NoticActivity"
             android:exported="false" />
         <activity
-            android:name=".res.SchoolAddActivity"
+            android:name=".res.Add.SchoolAddActivity"
             android:exported="false" />
         <activity
             android:name=".res.DayNotic.DayNoticActivity"

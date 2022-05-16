@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "pm2 start ./bin/www",
+    "start": "pm2 start ./bin/www -- start",
     "stop": "pm2 stop ./bin/www"
   },
   "dependencies": {

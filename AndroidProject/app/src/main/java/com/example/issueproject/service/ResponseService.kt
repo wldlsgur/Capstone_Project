@@ -259,6 +259,30 @@ class ResponseService {
             }
         })
     }
+
+    fun CreateTeacherinfo(info: TeacherInfo, callback: RetrofitCallback<SignUpResult>){
+        RetrofitBuilder.api.TeacherInfo(info).enqueue(object : Callback<SignUpResult> {
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "CreateTeacherinfo: ..")
+                Log.d(TAG, "onResponse: ${response.code()}")
+                Log.d(TAG, "onResponse: ")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: $t")
+                callback.onError(t)
+            }
+
+        })
+    }
     fun RoomChildListShow(room: String, callback: RetrofitCallback<MutableList<RoomChildListResult>>) {
         RetrofitBuilder.api.RoomChildList(room).enqueue(object : Callback<MutableList<RoomChildListResult>>{
             override fun onResponse(
@@ -582,4 +606,26 @@ class ResponseService {
         })
     }
 
+    fun GetAlbumInfo(school: String, room: String, callback: RetrofitCallback<MutableList<AlbumResult>>) {
+        RetrofitBuilder.api.GetAlbumInfo(school, room).enqueue(object : Callback<MutableList<AlbumResult>>{
+            override fun onResponse(call: Call<MutableList<AlbumResult>>, response: Response<MutableList<AlbumResult>>) {
+                Log.d(TAG, "saveCalender: ..")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<MutableList<AlbumResult>>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+
+        })
+    }
 }
