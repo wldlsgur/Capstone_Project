@@ -12,18 +12,18 @@ import com.google.android.material.navigation.NavigationView
 
 class Navigation : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    lateinit var navigationView: NavigationView
-    lateinit var drawerLayout: DrawerLayout
+            lateinit var navigationView: NavigationView
+            lateinit var drawerLayout: DrawerLayout
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_navigation)
+            override fun onCreate(savedInstanceState: Bundle?) {
+                super.onCreate(savedInstanceState)
+                setContentView(R.layout.activity_navigation)
 
-        val toolbar: Toolbar = findViewById(R.id.tool) // toolBar를 통해 App Bar 생성
-        setSupportActionBar(toolbar) // 툴바 적용
+                val toolbar: Toolbar = findViewById(R.id.tool) // toolBar를 통해 App Bar 생성
+                setSupportActionBar(toolbar) // 툴바 적용
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
-        //supportActionBar?.setHomeAsUpIndicator(R.drawable.navi_menu) // 홈버튼 이미지 변경
+                supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.more) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
 
         // 네비게이션 드로어 생성

@@ -22,58 +22,73 @@ class Teacher_MedicineInfo : AppCompatActivity() {
     private val binding by lazy{
         ActivityMedicineBinding.inflate(layoutInflater)
     }
-
+/*
+ val id: String,
+    val child_name: String,
+    val m_name: String,
+    val morning: String,
+    val lunch: String,
+    val dinner: String,
+    val date: String,
+    val mPlace: String,
+    val content: String
+ */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.medicineButtonSave.visibility = View.INVISIBLE
-        binding.medicineButtonDelete.visibility = View.INVISIBLE
+        init()
         setContentView(binding.root)
+        val id = intent.getStringExtra("id").toString()
         val cname = intent.getStringExtra("cname").toString()
-        GetmedicineInfo(cname)
+        val mname = intent.getStringExtra("mname").toString()
+        GetmedicineInfo(id,cname,mname)
 
     }
+
+    fun init(){
+        binding.buttonAdd.visibility = View.INVISIBLE
+        binding.medicineButtonSave.visibility = View.INVISIBLE
+        binding.medicineButtonDelete.visibility = View.INVISIBLE
+        binding.EditMedicineContent.visibility = View.INVISIBLE
+        binding.EditMedicineMname.visibility = View.INVISIBLE
+    }
+
     fun bindinfo(data: Medicine) {
-        binding.medicineCname.text = data.cname
-        binding.medicineMname.text = data.mname
-        binding.mhurt.text = data.mhurt
-        binding.mspecial.text = data.mspecial
-        binding.mkind.text = data.mkind
-        binding.mamount.text = data.mamount
-        if(data.mor == true)
-            binding.CheckMorning.visibility = View.VISIBLE
+        binding.medicineCname.text = data.child_name
+        binding.medicineMname.text = data.m_name
+        binding.medicineContent.text = data.content
 
-        else binding.CheckMorning.visibility = View.INVISIBLE
+        if(data.morning == "true") binding.CheckMorning.isChecked = true
+
+        else binding.CheckMorning.isChecked = false
 
 
-        if(data.lun == true)
-            binding.CheckLunch.visibility = View.VISIBLE
+        if(data.lunch == "true") binding.CheckLunch.isChecked = true
 
-        else binding.CheckLunch.visibility = View.INVISIBLE
-
-
-        if(data.din == true)
-            binding.CheckDinner.visibility = View.VISIBLE
-
-        else binding.CheckDinner.visibility = View.INVISIBLE
+        else binding.CheckLunch.isChecked = false
 
 
-        if(data.mplace == "실온") {
-            binding.checkBoxOn.visibility = View.VISIBLE
-            binding.checkBoxOut.visibility = View.INVISIBLE
+        if(data.dinner == "true") binding.CheckDinner.isChecked = true
+
+        else binding.CheckDinner.isChecked = false
+
+
+        if(data.mPlace == "실온") {
+            binding.checkBoxOn.isChecked = true
+            binding.checkBoxOut.isChecked = false
 
         }
         else {
-            binding.checkBoxOn.visibility = View.INVISIBLE
+            binding.checkBoxOn.isChecked = false
 
-            binding.checkBoxOut.visibility = View.VISIBLE
+            binding.checkBoxOut.isChecked = true
 
         }
 
     }
 
-    fun GetmedicineInfo(name: String){
+    fun GetmedicineInfo(id: String, child_name: String, m_name: String){
         ResponseService().GetMedcineInfo(
-            name,
+            id,child_name,m_name,
             object : RetrofitCallback<Medicine> {
                 override fun onError(t: Throwable) {
                     Log.d(TAG, "onError: $t")
