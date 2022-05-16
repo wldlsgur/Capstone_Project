@@ -1,4 +1,3 @@
-const db = require('../DB/db');
 const db_create_sql = require('../public/SQL/create_sql')();
 const make_query = require('./make_query');
 
@@ -29,7 +28,7 @@ module.exports = {
 				break;
 		}
         console.log(query);
-		db.query(query, function(err, result){
+		db_create_sql.UPDATE(query, function(err, result){
 			if(err){
 				return false;
 			}
