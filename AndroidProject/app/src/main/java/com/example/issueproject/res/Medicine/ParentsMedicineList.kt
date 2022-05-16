@@ -22,23 +22,45 @@ class ParentsMedicineList : AppCompatActivity() {
         ActivityMedicineListBinding.inflate(layoutInflater)
     }
 
-
+    var room : String = ""
+    var school : String = ""
+    var id : String = ""
+    var cname : String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val id = intent.getStringExtra("id").toString()
-        val cname = intent.getStringExtra("cname").toString()
+        init()
         ShowRecycler(id, cname)
 
         binding.medicinelistButtonAdd.setOnClickListener {
             val add : Boolean = true
             var intent = Intent(this@ParentsMedicineList, Parents_MedicineInfo::class.java).apply {
                 putExtra("add", add)
+                putExtra("id",id)
+                putExtra("cname",cname)
+                putExtra("mname","NULL")
+                putExtra("school", school)
+                putExtra("room", room)
             }
             startActivity(intent)
         }
     }
 
+    fun init(){
+        id = intent.getStringExtra("id").toString()
+        cname = intent.getStringExtra("cname").toString()
+        school = intent.getStringExtra("school").toString()
+        room = intent.getStringExtra("room").toString()
+
+
+        Log.d(TAG, "school: $school")
+        Log.d(TAG, "room: $room")
+
+        binding.textViewRoomName.text = school + room
+        binding.buttonMor.visibility = View.INVISIBLE
+        binding.buttonLun.visibility = View.INVISIBLE
+        binding.buttonDin.visibility = View.INVISIBLE
+    }
     private fun initRecycler(list: MutableList<MedicineManagementResult>) {
         MedicineListAdapter = MedicineListAdapter(list)
         binding.RoomMedicineListRV.apply {
@@ -53,6 +75,8 @@ class ParentsMedicineList : AppCompatActivity() {
                         putExtra("id",MedicineListAdapter.MedicineListViewHolder(v).id.toString())
                         putExtra("cname", MedicineListAdapter.MedicineListViewHolder(v).cname.toString())
                         putExtra("mname", MedicineListAdapter.MedicineListViewHolder(v).mname.toString())
+                        putExtra("school", school)
+                        putExtra("room", room)
                     }
                     startActivity(intent)
                 }

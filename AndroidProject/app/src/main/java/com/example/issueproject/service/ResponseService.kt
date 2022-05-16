@@ -519,6 +519,10 @@ class ResponseService {
         RetrofitBuilder.api.PostMedicine(info).enqueue(object : Callback<SignUpResult>{
             override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
                 Log.d(TAG, "CreateMedicineinfo: ..")
+                Log.d(TAG, "onResponse: ${response.code()}")
+                Log.d(TAG, "onResponse: ${response.errorBody()}")
+                Log.d(TAG, "onResponse: ${response.message()}")
+                Log.d(TAG, "onResponse: ${response.body()}")
                 if (response.code() == 200){
                     if(response.body() != null){
                         Log.d(TAG, "onResponse: 200")

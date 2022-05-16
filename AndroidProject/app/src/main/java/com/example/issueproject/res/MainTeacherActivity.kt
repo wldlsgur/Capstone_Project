@@ -9,6 +9,7 @@ import com.example.issueproject.res.Album.AlbumActivity
 import com.example.issueproject.res.DayNotic.DayNoticActivity
 import com.example.issueproject.res.DayNotic.DayNoticTeacherActivity
 import com.example.issueproject.res.Foodlist.FoodlistActivity
+import com.example.issueproject.res.Medicine.TeacherMedicineList
 import com.example.issueproject.res.Notic.NoticActivity
 import com.example.issueproject.res.RoomManager.RoomChildListActivity
 import com.example.issueproject.res.SchoolManager.SchoolTeacherListActivity
@@ -76,8 +77,11 @@ class MainTeacherActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.TeacherMedicinemanagement.setOnClickListener {
-//            var intent = Intent(this, ::class.java)
-//            startActivity(intent)
+            var intent = Intent(this, TeacherMedicineList::class.java).apply {
+                putExtra("school", school)
+                putExtra("room", room)
+            }
+            startActivity(intent)
         }
 
     }
