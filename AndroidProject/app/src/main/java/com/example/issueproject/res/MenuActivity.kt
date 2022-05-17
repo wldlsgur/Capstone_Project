@@ -41,7 +41,7 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         val school = intent.getStringExtra("school")
         val room = intent.getStringExtra("room")
         val img_url = intent.getStringExtra("img_url")
-        
+
         binding.textViewName.text = name
         binding.textViewSchool.text = school
 

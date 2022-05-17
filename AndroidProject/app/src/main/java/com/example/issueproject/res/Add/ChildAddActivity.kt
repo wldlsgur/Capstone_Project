@@ -55,22 +55,9 @@ class ChildAddActivity : AppCompatActivity() {
                 currentImageUri = it.data?.data!!
                 try {
                     currentImageUri?.let {
-                        if(Build.VERSION.SDK_INT < 28) {
-                            val bitmap = MediaStore.Images.Media.getBitmap(
-                                this.contentResolver,
-                                currentImageUri
-                            )
-                            Log.d(TAG, "currentImageUri: $currentImageUri")
-                            Log.d(TAG, "bitmap: $bitmap")
-                            binding.imageView2?.setImageBitmap(bitmap)
-                        } else {
-//                            val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
-//                            val bitmap = ImageDecoder.decodeBitmap(source)
-//                            binding.imageView2?.setImageBitmap(bitmap)
-                            Glide.with(this)
-                                .load(currentImageUri)
-                                .into(binding.imageView2)
-                        }
+                        Glide.with(this)
+                            .load(currentImageUri)
+                            .into(binding.imageView2)
                     }
                 }catch(e:Exception) {
                     e.printStackTrace()
