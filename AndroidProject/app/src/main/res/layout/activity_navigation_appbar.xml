@@ -33,7 +33,7 @@
                 app:navigationIcon="@drawable/more" />
 
             <TextView
-                android:id="@+id/textView45"
+                android:id="@+id/textViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="알림장"

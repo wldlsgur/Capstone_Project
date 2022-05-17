@@ -32,8 +32,8 @@ class Parents_MedicineInfo : AppCompatActivity() {
     var school : String = ""
     var room : String = ""
     var date : String = ""
-    var content : String = ""
     var morning : String = ""
+    var content : String = ""
     var lunch : String = ""
     var dinner : String = ""
     var mplace : String = ""
@@ -197,6 +197,8 @@ class Parents_MedicineInfo : AppCompatActivity() {
                     var intent = Intent(this@Parents_MedicineInfo, ParentsMedicineList::class.java).apply{
                         putExtra("id",id)
                         putExtra("cname", cname)
+                        putExtra("school",school)
+                        putExtra("room",room)
                     }
 
                     startActivity(intent)
