@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
 import com.example.issueproject.databinding.ActivityChildAddBinding
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -63,9 +64,12 @@ class ChildAddActivity : AppCompatActivity() {
                             Log.d(TAG, "bitmap: $bitmap")
                             binding.imageView2?.setImageBitmap(bitmap)
                         } else {
-                            val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
-                            val bitmap = ImageDecoder.decodeBitmap(source)
-                            binding.imageView2?.setImageBitmap(bitmap)
+//                            val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
+//                            val bitmap = ImageDecoder.decodeBitmap(source)
+//                            binding.imageView2?.setImageBitmap(bitmap)
+                            Glide.with(this)
+                                .load(currentImageUri)
+                                .into(binding.imageView2)
                         }
                     }
                 }catch(e:Exception) {

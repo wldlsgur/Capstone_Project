@@ -261,30 +261,27 @@ class ResponseService {
     }
 
     fun CreateTeacherinfo(info: TeacherInfo, callback: RetrofitCallback<SignUpResult>){
-        RetrofitBuilder.api.TeacherInfo(info).enqueue(object : Callback<SignUpResult> {
-            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
-                Log.d(TAG, "CreateTeacherinfo: ..")
-                Log.d(TAG, "onResponse: ${response.code()}")
-                Log.d(TAG, "onResponse: ")
-                if (response.code() == 200){
-                    if(response.body() != null){
-                        Log.d(TAG, "onResponse: 200")
-                        callback.onSuccess(response.code(), response.body()!!)
-                    } else{
-                        callback.onFailure(response.code())
-                    }
-                }
-            }
+       RetrofitBuilder.api.TeacherInfo(info).enqueue(object : Callback<SignUpResult>{
+           override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+               if (response.code() == 200){
+                   if(response.body() != null){
+                       Log.d(TAG, "onResponse: 200")
+                       callback.onSuccess(response.code(), response.body()!!)
+                   } else{
+                       callback.onFailure(response.code())
+                   }
+               }
+           }
 
-            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
-                Log.d(TAG, "onFailure: $t")
-                callback.onError(t)
-            }
+           override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+               Log.d(TAG, "onFailure: $t")
+               callback.onError(t)
+           }
 
-        })
+       })
     }
-    fun RoomChildListShow(room: String, callback: RetrofitCallback<MutableList<RoomChildListResult>>) {
-        RetrofitBuilder.api.RoomChildList(room).enqueue(object : Callback<MutableList<RoomChildListResult>>{
+    fun RoomChildListShow(school: String, room: String, callback: RetrofitCallback<MutableList<RoomChildListResult>>) {
+        RetrofitBuilder.api.RoomChildList(school, room).enqueue(object : Callback<MutableList<RoomChildListResult>>{
             override fun onResponse(
                 call: Call<MutableList<RoomChildListResult>>,
                 response: Response<MutableList<RoomChildListResult>>
@@ -378,29 +375,7 @@ class ResponseService {
             }
         })
     }
-//    fun uploadimage(data: String, image: MultipartBody.Part, callback: RetrofitCallback<LoginResult>) {
-//        RetrofitBuilder.api.Uploadimage(data, image).enqueue(object : Callback<LoginResult>{
-//            override fun onResponse(call: Call<LoginResult>, response: Response<LoginResult>) {
-//                Log.d(TAG, "uploadimage: ..")
-//                Log.d(TAG, "onResponse: ${response.code()}")
-//                Log.d(TAG, "onResponse: ${response.errorBody()!!.string()}")
-//                if (response.code() == 200){
-//                    if(response.body() != null){
-//                        Log.d(TAG, "onResponse: 200")
-//                        callback.onSuccess(response.code(), response.body()!!)
-//                    } else{
-//                        callback.onFailure(response.code())
-//                    }
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<LoginResult>, t: Throwable) {
-//                Log.d(TAG, "onFailure: $t")
-//                callback.onError(t)
-//            }
-//
-//        })
-//    }
+
     fun uploadimage(target: String, key: String, image: MultipartBody.Part, callback: RetrofitCallback<LoginResult>) {
         RetrofitBuilder.api.Uploadimage(target, key, image).enqueue(object : Callback<LoginResult>{
             override fun onResponse(call: Call<LoginResult>, response: Response<LoginResult>) {

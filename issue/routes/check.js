@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt')
 const fs = require('fs');
 const db_check_sql = require('../public/SQL/check_sql')();
 const check_element = require('../Function/check_require_element');
@@ -32,12 +33,14 @@ router.get('/login', function(req, res){
             res.send({res : false, msg : "not found"});
             return;
         }
-        if(result[0].pw === pw){
-            res.send(sucess_response);
+        bcrypt.compare(pw, result[0].pw, (err, same) => {
+        console.log(same); //=> true
+        if (same) {
+          res.send(sucess_response);
+        } else {
+          res.send(failed_response);
         }
-        else{
-            res.send(failed_response);
-        }
+      });
     })
 });
 

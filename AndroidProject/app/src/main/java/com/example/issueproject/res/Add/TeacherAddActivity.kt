@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
 import com.example.issueproject.databinding.ActivityTeacherAddBinding
 import com.example.issueproject.dto.*
 import com.example.issueproject.retrofit.RetrofitCallback
@@ -35,7 +36,6 @@ class TeacherAddActivity : AppCompatActivity() {
     var school : String = ""
     var room : String = ""
     var id : String = ""
-    var key_id : String = ""
     val itemList = mutableListOf<String>()
     val roomList = mutableListOf<String>()
     private lateinit var currentImageUri: Uri
@@ -48,7 +48,8 @@ class TeacherAddActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val id = intent.getStringExtra("id")!!
+        id = intent.getStringExtra("id")!!
+        Log.d(TAG, "id: $id")
 
         GetSchool()
 
@@ -66,9 +67,12 @@ class TeacherAddActivity : AppCompatActivity() {
                             Log.d(TAG, "bitmap: $bitmap")
                             binding.TeacherAddImageView?.setImageBitmap(bitmap)
                         } else {
-                            val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
-                            val bitmap = ImageDecoder.decodeBitmap(source)
-                            binding.TeacherAddImageView?.setImageBitmap(bitmap)
+//                            val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
+//                            val bitmap = ImageDecoder.decodeBitmap(source)
+//                            binding.TeacherAddImageView?.setImageBitmap(bitmap)
+                            Glide.with(this)
+                                .load(currentImageUri)
+                                .into(binding.TeacherAddImageView)
                         }
                     }
                 }catch(e:Exception) {
@@ -88,7 +92,6 @@ class TeacherAddActivity : AppCompatActivity() {
         }
 
         binding.TeacherAddButtonAdd.setOnClickListener {
-            val id = id
             val schoolname = school
             val roomname = room
             val teachernum = binding.TeacherAddEditTextNumber.text.toString()
@@ -135,9 +138,8 @@ class TeacherAddActivity : AppCompatActivity() {
         bitmap.compress(Bitmap.CompressFormat.JPEG,20,byteArrayOutputStream)
         val requestBody = RequestBody.create(MediaType.parse("image/*"),byteArrayOutputStream.toByteArray())
         val uploadFile = MultipartBody.Part.createFormData("image","${file.name}.${fileExtension?.substring(6)}",requestBody)
-
-        Log.d(TAG, "savaimage: $key_id")
-        uploadimage("parent", key_id, uploadFile)
+        Log.d(TAG, "id: $id")
+        uploadimage("teacher", id, uploadFile)
     }
 
     fun uploadimage(target: String, key: String, file: MultipartBody.Part){
@@ -158,7 +160,7 @@ class TeacherAddActivity : AppCompatActivity() {
         })
     }
 
-    fun TeacherAdd(teacherInfo: TeacherInfo){
+     fun TeacherAdd(teacherInfo: TeacherInfo){
         ResponseService().CreateTeacherinfo(teacherInfo, object: RetrofitCallback<SignUpResult> {
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
@@ -168,7 +170,7 @@ class TeacherAddActivity : AppCompatActivity() {
                 Log.d(TAG, "onSuccess: $responseData")
                 if(responseData.msg == "success"){
                     Toast.makeText(this@TeacherAddActivity, "성공", Toast.LENGTH_SHORT).show()
-                    GetTeacherInfo(id)
+                    savaimage(currentImageUri)
                 }
             }
 
@@ -176,25 +178,7 @@ class TeacherAddActivity : AppCompatActivity() {
                 Log.d(TAG, "onFailure: $code")
             }
         })
-    }
-
-    fun GetTeacherInfo(id: String){
-        ResponseService().GetTeacherInfo(id, object : RetrofitCallback<MutableList<TeacherinfoResult>> {
-            override fun onError(t: Throwable) {
-                Log.d(TAG, "onError: $t")
-            }
-
-            override fun onSuccess(code: Int, responseData: MutableList<TeacherinfoResult>) {
-                Log.d(TAG, "onSuccess: ..")
-                key_id = responseData[0].key_id.toString()
-                savaimage(currentImageUri)
-            }
-
-            override fun onFailure(code: Int) {
-                Log.d(TAG, "onFailure: ..")
-            }
-        })
-    }
+     }
 
     fun GetSchool(){
         ResponseService().GetSchool(object : RetrofitCallback<MutableList<GetSchool>> {
