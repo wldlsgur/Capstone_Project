@@ -24,6 +24,7 @@ class TeacherMedicineList : AppCompatActivity() {
         ActivityMedicineListBinding.inflate(layoutInflater)
     }
 
+    var img_url : String = ""
     var mo : Boolean = true;
     var lu : Boolean = true;
     var di : Boolean = true;
@@ -31,8 +32,10 @@ class TeacherMedicineList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding.medicinelistButtonAdd.visibility = View.INVISIBLE
         setContentView(binding.root)
+
         val school = intent.getStringExtra("school").toString()
         val room = intent.getStringExtra("room").toString()
+        img_url = intent.getStringExtra("img_url").toString()
         binding.textViewRoomName.text = room
         ShowRecycler(school, room)
 
@@ -66,6 +69,7 @@ class TeacherMedicineList : AppCompatActivity() {
             MedicineListAdapter.setItemClickListener(object: MedicineListAdapter.OnItemClickListener{
                 override fun onClick(v: View, position: Int) {
                     var intent = Intent(this@TeacherMedicineList, Teacher_MedicineInfo::class.java).apply {
+                        putExtra("img_url",img_url)
                         putExtra(
                             "id",
                             MedicineListAdapter.MedicineListViewHolder(v).id.toString()
