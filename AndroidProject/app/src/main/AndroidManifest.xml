@@ -16,6 +16,12 @@
         android:theme="@style/Theme.IssueProject"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".res.Album.AddAlbumActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.Add.AddRoomActivity"
+            android:exported="false" />
+        <activity
             android:name=".res.DayNotic.DayNoticTeacherActivity"
             android:exported="false" />
         <activity
@@ -103,8 +109,8 @@
             android:name=".res.Medicine.Teacher_MedicineInfo"
             android:exported="true" />
         <activity
-        android:name=".res.Medicine.TeacherMedicineItem"
-        android:exported="true" />
+            android:name=".res.Medicine.TeacherMedicineItem"
+            android:exported="true" />
         <activity
             android:name=".res.Navi.Navigation"
             android:exported="true" />

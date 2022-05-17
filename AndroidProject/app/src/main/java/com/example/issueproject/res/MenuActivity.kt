@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.bumptech.glide.Glide
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityMenuBinding
 import com.example.issueproject.dto.PresidentinfoResult
@@ -19,6 +20,7 @@ import com.example.issueproject.res.Foodlist.FoodlistActivity
 import com.example.issueproject.res.Navi.Navigation
 import com.example.issueproject.res.Notic.NoticActivity
 import com.example.issueproject.res.SchoolManager.SchoolTeacherListActivity
+import com.example.issueproject.retrofit.RetrofitBuilder
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 import com.google.android.material.navigation.NavigationView
@@ -38,9 +40,16 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         val name = intent.getStringExtra("name")
         val school = intent.getStringExtra("school")
         val room = intent.getStringExtra("room")
+        val img_url = intent.getStringExtra("img_url")
 
         binding.textViewName.text = name
         binding.textViewSchool.text = school
+
+        if(img_url != null){
+            Glide.with(this)
+                .load("${RetrofitBuilder.servers}/image/teacher/${img_url}")
+                .into(binding.imageViewPresident)
+        }
 
         binding.PresidentNotic.setOnClickListener {
             var intent = Intent(this, NoticActivity::class.java).apply {
