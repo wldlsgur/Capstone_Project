@@ -123,16 +123,32 @@ interface ResponseApi {
     ): Call<MutableList<SchoolteacherListResult>>
 
     //약리스트 경로변경
-    @GET("/parentinfo/room/allinfo")
+    @GET("/medicine/selectManage/get/data")
     fun MedicineList(
+        @Query("school") school: String,
         @Query("room") room: String
-    ): Call<MutableList<MedicineManage>>
+    ): Call<MutableList<MedicineManagementResult>>
+
+    //약리스트 경로변경
+    @GET("/parentinfo/room/allinfo")
+    fun parentsMedicineList(
+        @Query("school") id: String,
+        @Query("room") child_name: String
+    ): Call<MutableList<MedicineManagementResult>>
 
     //약 정보 경로변경
-    @GET("/medicine/info/{name}")
+    @GET("/medicine/select/get/data")
     fun GetMedicineInfo(
-        @Path("name") name: String
+        @Query("name") id: String,
+        @Query("name") child_name: String,
+        @Query("name") m_name: String
+
     ): Call<Medicine>
+
+    @POST("/medicine/insert/data")
+    fun PostMedicine(
+        @Body PostMedicine: PostMedicine
+    ): Call<SignUpResult>
 
     @Multipart
     @POST("/uploadimage/{target}/{key}")

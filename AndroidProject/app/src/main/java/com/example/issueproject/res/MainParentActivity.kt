@@ -15,6 +15,7 @@ import com.example.issueproject.res.Album.AlbumActivity
 import com.example.issueproject.res.DayNotic.DayNoticActivity
 import com.example.issueproject.res.DayNotic.DayNoticTeacherActivity
 import com.example.issueproject.res.Foodlist.FoodlistActivity
+import com.example.issueproject.res.Medicine.ParentsMedicineList
 import com.example.issueproject.res.Notic.NoticActivity
 import com.example.issueproject.res.SchoolManager.SchoolTeacherListActivity
 import com.example.issueproject.retrofit.RetrofitBuilder
@@ -40,9 +41,8 @@ class MainParentActivity : AppCompatActivity() {
 
         GetParentInfo(id, position)
 
-        school = binding.textViewSchool.text.toString()
-        room = binding.textViewRoom.text.toString()
-
+        Log.d(TAG, "school: $school")
+        Log.d(TAG, "room: $room")
         binding.ParentNotic.setOnClickListener{
             var intent = Intent(this, NoticActivity::class.java).apply {
                 putExtra("school", school)
@@ -80,8 +80,15 @@ class MainParentActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.ParentMedicinemanagement.setOnClickListener {
-//            var intent = Intent(this, ::class.java)
-//            startActivity(intent)
+            var intent = Intent(this, ParentsMedicineList::class.java).apply {
+                putExtra("id", id.toString())
+                putExtra("cname", binding.textViewName.text)
+                putExtra("school", school)
+                putExtra("room", room)
+                Log.d(TAG, "onCreate: $school")
+                Log.d(TAG, "onCreate: $room")
+            }
+            startActivity(intent)
         }
     }
 
@@ -96,6 +103,9 @@ class MainParentActivity : AppCompatActivity() {
                 binding.textViewSchool.text = responseData[position].school
                 binding.textViewRoom.text = responseData[position].room
                 binding.textViewName.text = responseData[position].child_name
+
+                school = binding.textViewSchool.text.toString()
+                room = binding.textViewRoom.text.toString()
 
                 val childimage: ImageView = binding.imageViewChild
 

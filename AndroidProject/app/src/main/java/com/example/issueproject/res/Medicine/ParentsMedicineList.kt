@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issueproject.Adapterimport.MedicineListAdapter
 import com.example.issueproject.databinding.ActivityMedicineListBinding
 import com.example.issueproject.dto.MedicineManage
+import com.example.issueproject.dto.MedicineManagementResult
 import com.example.issueproject.res.Medicine.Parents_MedicineInfo
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -21,23 +22,46 @@ class ParentsMedicineList : AppCompatActivity() {
         ActivityMedicineListBinding.inflate(layoutInflater)
     }
 
-
+    var room : String = ""
+    var school : String = ""
+    var id : String = ""
+    var cname : String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val room = intent.getStringExtra("room").toString()
-        ShowRecycler(room)
+        init()
+        ShowRecycler(id, cname)
 
         binding.medicinelistButtonAdd.setOnClickListener {
             val add : Boolean = true
             var intent = Intent(this@ParentsMedicineList, Parents_MedicineInfo::class.java).apply {
                 putExtra("add", add)
+                putExtra("id",id)
+                putExtra("cname",cname)
+                putExtra("mname","NULL")
+                putExtra("school", school)
+                putExtra("room", room)
             }
             startActivity(intent)
         }
     }
 
-    private fun initRecycler(list: MutableList<MedicineManage>) {
+    fun init(){
+        id = intent.getStringExtra("id").toString()
+        cname = intent.getStringExtra("cname").toString()
+        school = intent.getStringExtra("school").toString()
+        room = intent.getStringExtra("room").toString()
+
+
+        Log.d(TAG, "school: $school")
+        Log.d(TAG, "room: $room")
+
+        binding.textViewRoomName.text = school + room
+        binding.buttonMor.visibility = View.INVISIBLE
+        binding.buttonLun.visibility = View.INVISIBLE
+        binding.buttonDin.visibility = View.INVISIBLE
+    }
+    private fun initRecycler(list: MutableList<MedicineManagementResult>) {
         MedicineListAdapter = MedicineListAdapter(list)
         binding.RoomMedicineListRV.apply {
             adapter = MedicineListAdapter
@@ -47,17 +71,12 @@ class ParentsMedicineList : AppCompatActivity() {
                 override fun onClick(v: View, position: Int) {
                     val add : Boolean = false
                     var intent = Intent(this@ParentsMedicineList, Parents_MedicineInfo::class.java).apply {
-
                         putExtra("add", add)
-
-                        putExtra(
-                            "cname",
-                            MedicineListAdapter.MedicineListViewHolder(v).cname.toString()
-                        )
-                        putExtra(
-                            "cname",
-                            MedicineListAdapter.MedicineListViewHolder(v).mname.toString()
-                        )
+                        putExtra("id",MedicineListAdapter.MedicineListViewHolder(v).id.toString())
+                        putExtra("cname", MedicineListAdapter.MedicineListViewHolder(v).cname.toString())
+                        putExtra("mname", MedicineListAdapter.MedicineListViewHolder(v).mname.toString())
+                        putExtra("school", school)
+                        putExtra("room", room)
                     }
                     startActivity(intent)
                 }
@@ -65,15 +84,15 @@ class ParentsMedicineList : AppCompatActivity() {
         }
     }
 
-    private fun ShowRecycler(room: String) {
-        ResponseService().MedicineListShow(
-            room,
-            object : RetrofitCallback<MutableList<MedicineManage>> {
+    private fun ShowRecycler(id: String, child_name : String) {
+        ResponseService().ParentsMedicineListShow(
+            id, child_name,
+            object : RetrofitCallback<MutableList<MedicineManagementResult>> {
                 override fun onError(t: Throwable) {
                     Log.d(TAG, "onError: $t")
                 }
 
-                override fun onSuccess(code: Int, responseData: MutableList<MedicineManage>) {
+                override fun onSuccess(code: Int, responseData: MutableList<MedicineManagementResult>) {
                     Log.d(TAG, "onSuccess: $responseData")
                     initRecycler(responseData)
                 }

@@ -9,7 +9,9 @@ import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issueproject.Adapterimport.MedicineListAdapter
 import com.example.issueproject.databinding.ActivityMedicineListBinding
+import com.example.issueproject.dto.GetMedicineManagement
 import com.example.issueproject.dto.MedicineManage
+import com.example.issueproject.dto.MedicineManagementResult
 import com.example.issueproject.res.Medicine.Teacher_MedicineInfo
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -22,18 +24,40 @@ class TeacherMedicineList : AppCompatActivity() {
         ActivityMedicineListBinding.inflate(layoutInflater)
     }
 
-
+    var mo : Boolean = true;
+    var lu : Boolean = true;
+    var di : Boolean = true;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.medicinelistButtonAdd.visibility = View.INVISIBLE
-
         setContentView(binding.root)
-
+        val school = intent.getStringExtra("school").toString()
         val room = intent.getStringExtra("room").toString()
-        ShowRecycler(room)
+        binding.textViewRoomName.text = room
+        ShowRecycler(school, room)
+
+        //button click event handler
+        binding.buttonMor.setOnClickListener{
+            mo = true
+            lu = false
+            di = false
+            ShowRecycler(school, room)
+        }
+        binding.buttonLun.setOnClickListener{
+            mo = false
+            lu = true
+            di = false
+            ShowRecycler(school, room)
+        }
+        binding.buttonDin.setOnClickListener{
+            mo = false
+            lu = false
+            di = true
+            ShowRecycler(school, room)
+        }
     }
 
-    private fun initRecycler(list: MutableList<MedicineManage>) {
+    private fun initRecycler(list: MutableList<MedicineManagementResult>) {
         MedicineListAdapter = MedicineListAdapter(list)
         binding.RoomMedicineListRV.apply {
             adapter = MedicineListAdapter
@@ -43,11 +67,15 @@ class TeacherMedicineList : AppCompatActivity() {
                 override fun onClick(v: View, position: Int) {
                     var intent = Intent(this@TeacherMedicineList, Teacher_MedicineInfo::class.java).apply {
                         putExtra(
+                            "id",
+                            MedicineListAdapter.MedicineListViewHolder(v).id.toString()
+                        )
+                        putExtra(
                             "cname",
                             MedicineListAdapter.MedicineListViewHolder(v).cname.toString()
                         )
                         putExtra(
-                            "cname",
+                            "mname",
                             MedicineListAdapter.MedicineListViewHolder(v).mname.toString()
                         )
                     }
@@ -57,17 +85,23 @@ class TeacherMedicineList : AppCompatActivity() {
         }
     }
 
-    private fun ShowRecycler(room: String) {
+    private fun ShowRecycler(school:String, room:String) {
         ResponseService().MedicineListShow(
-            room,
-            object : RetrofitCallback<MutableList<MedicineManage>> {
+            school, room,
+            object : RetrofitCallback<MutableList<MedicineManagementResult>> {
                 override fun onError(t: Throwable) {
                     Log.d(TAG, "onError: $t")
                 }
 
-                override fun onSuccess(code: Int, responseData: MutableList<MedicineManage>) {
+                override fun onSuccess(code: Int, responseData: MutableList<MedicineManagementResult>) {
                     Log.d(TAG, "onSuccess: $responseData")
-                    initRecycler(responseData)
+                    val list : MutableList<MedicineManagementResult> = mutableListOf()
+                    for(l in responseData)
+                    {
+                        if((l.morning=="true" && mo) || (l.lunch=="true" && lu) || (l.dinner=="true" && di)) list.add(l)
+                    }
+
+                    initRecycler(list)
                 }
 
                 override fun onFailure(code: Int) {

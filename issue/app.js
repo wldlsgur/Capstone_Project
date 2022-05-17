@@ -29,10 +29,7 @@ const storage = multer.diskStorage({
 		let key = req.params.key;
 		let timestamp = new Date().getTime().valueOf();	// 현재 시간
 		let file_url = timestamp + key + path.basename(file.originalname);
-		console.log(file_url);
-		if((update_image_url.update_image_url(target, key, file_url) === false)) return;
-			
-		cb(null, file_url);
+		if((update_image_url.update_image_url(target, key, file_url) === true)) return	cb(null, file_url);
 	},
 	limits: {fileSize: 1 * 256 * 256}
 })
@@ -48,7 +45,6 @@ const storages = multer.diskStorage({
 
 		let timestamp = new Date().getTime().valueOf();	// 현재 시간
 		let file_url = timestamp + path.basename(file.originalname);
-		console.log(file_url);
 
 		if((update_image_url.insert_image_array_album(file_url, school, room, title, date) === false)) return;
 		cb(null, file_url);
