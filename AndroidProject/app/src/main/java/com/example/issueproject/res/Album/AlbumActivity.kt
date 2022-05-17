@@ -1,5 +1,6 @@
 package com.example.issueproject.res.Album
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import com.example.issueproject.databinding.ActivityAlbumBinding
 import com.example.issueproject.dto.AddManagement
 import com.example.issueproject.dto.AddManagementResult
 import com.example.issueproject.dto.AlbumResult
+import com.example.issueproject.res.submenu.SubChildMunuActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
@@ -27,6 +29,11 @@ class AlbumActivity : AppCompatActivity() {
         val room = intent.getStringExtra("room")
 
         ShowRecycler(school!!, room!!)
+
+        binding.buttonAlbumAdd.setOnClickListener {
+            var intent = Intent(this, AddAlbumActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initAdapter(lists:MutableList<AlbumResult>){
