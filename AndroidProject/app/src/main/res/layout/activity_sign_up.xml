@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="30dp"
         android:text="Sign Up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,12 +24,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/edittext_background"
         android:ems="10"
-        android:hint="아이디를 입력하세요"
+        android:hint="id"
         android:inputType="textPersonName"
+        android:padding="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/buttonIdcheck"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
 
     <EditText
         android:id="@+id/editTextISignUpPW"
@@ -38,9 +42,11 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="50dp"
+        android:background="@drawable/edittext_background"
         android:ems="10"
-        android:hint="비밀번호를 입력하세요"
+        android:hint="pw"
         android:inputType="textPersonName"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextISignUpID" />
@@ -49,14 +55,14 @@
         android:id="@+id/editTextISignUpName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="50dp"
+        android:background="@drawable/edittext_background"
         android:ems="10"
-        android:hint="이름을 입력하세요"
+        android:hint="name"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextISignUpPW"
+        app:layout_constraintStart_toStartOf="@+id/editTextISignUpPW"
         app:layout_constraintTop_toBottomOf="@+id/editTextISignUpPW" />
 
     <RadioGroup
@@ -98,22 +104,52 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:text="해당하는 것을 선택하세요"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/editTextISignUpName"
         app:layout_constraintTop_toBottomOf="@+id/editTextISignUpName" />
 
     <Button
         android:id="@+id/buttonIdcheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="50dp"
         android:text="중복확인"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextISignUpID"
+        app:layout_constraintEnd_toEndOf="@+id/editTextISignUpPW"
+        app:layout_constraintTop_toTopOf="@+id/editTextISignUpID" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editTextISignUpID"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="회원가입"
+            android:textColor="@color/main_500"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/main_500"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
