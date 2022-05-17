@@ -53,8 +53,11 @@ module.exports = function () {
                                  medicinemanagement.m_name, medicinemanagement.date, medicinemanagement.mor, medicinemanagement.lun, medicinemanagement.din,
                                  medicine.morning, medicine.lunch, medicine.dinner
                                  FROM medicinemanagement, medicine
-                                 WHERE id='${id}'
-                                 AND child_name='${child_name}'`;
+                                 WHERE medicinemanagement.id='${id}'   
+                                 AND medicinemanagement.child_name='${child_name}'
+                                 AND medicine.id='${id}'   
+                                 AND medicine.child_name='${child_name}'
+                                 AND medicine.m_name=medicinemanagement.m_name`;
                             con.query(sql,function(err,result,fields){
                                 con.release();
                                 if(err) callback(err,null);
