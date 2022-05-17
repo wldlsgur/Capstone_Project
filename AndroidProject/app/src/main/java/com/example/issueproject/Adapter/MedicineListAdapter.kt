@@ -46,7 +46,7 @@ class MedicineListAdapter(var list:MutableList<MedicineManagementResult>) : Recy
             //GetImageUrl(data.child_image)
             //val text= "/image/parents/이정은.jpg"
             //GetImageUrl(text)
-            GetImageUrl("parents", "이정은")
+            //GetImageUrl("parents", "이정은")
 
         }
 

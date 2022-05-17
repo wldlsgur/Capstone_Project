@@ -63,6 +63,7 @@
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/Navigation.xml" value="0.1875" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_add_notic.xml" value="0.33" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_album.xml" value="0.32971014492753625" />
+        <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_album_item2.xml" value="0.5536458333333333" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_child_add.xml" value="0.32971014492753625" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_child_item.xml" value="0.32971014492753625" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_day_notic_item.xml" value="0.1875" />
@@ -73,10 +74,10 @@
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_main_parent.xml" value="0.33" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_main_teacher.xml" value="0.17249240121580547" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_medicine.xml" value="0.33" />
-        <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_medicine_list.xml" value="0.33" />
+        <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_medicine_list.xml" value="0.5" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_medicine_list_item.xml" value="0.5" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_menu.xml" value="0.5" />
-        <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_navigation.xml" value="0.1" />
+        <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_navigation.xml" value="0.67" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_navigation_appbar.xml" value="0.33" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_navigation_header.xml" value="0.33" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_notic.xml" value="0.1875" />

@@ -16,7 +16,7 @@ import com.example.issueproject.res.Medicine.Teacher_MedicineInfo
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
-private const val TAG = "SchoolTeacherActivity"
+private const val TAG = "TeacherMedicineList"
 class TeacherMedicineList : AppCompatActivity() {
     lateinit var MedicineListAdapter: MedicineListAdapter
 

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt')
 const db_create_sql = require('../public/SQL/create_sql')();
 const check_element = require('../Function/check_require_element');
 const make_query = require('../Function/make_query');
@@ -11,7 +12,7 @@ const failed_response = {res : false, msg : "failed"};
 router.post('/user', function(req, res){
 	let json_data = {
 		id : req.body.id,
-		pw : req.body.pw,
+		pw : bcrypt.hashSync(req.body.pw, 10), //비밀번호 암호화
 		name : req.body.name,
 		job : req.body.job
 	};//json 형식
