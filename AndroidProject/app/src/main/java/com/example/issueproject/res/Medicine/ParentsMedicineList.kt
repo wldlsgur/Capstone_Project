@@ -6,11 +6,13 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.issueproject.Adapterimport.MedicineListAdapter
 import com.example.issueproject.databinding.ActivityMedicineListBinding
 import com.example.issueproject.dto.MedicineManage
 import com.example.issueproject.dto.MedicineManagementResult
 import com.example.issueproject.res.Medicine.Parents_MedicineInfo
+import com.example.issueproject.retrofit.RetrofitBuilder
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
@@ -26,6 +28,7 @@ class ParentsMedicineList : AppCompatActivity() {
     var school : String = ""
     var id : String = ""
     var cname : String = ""
+    var img_url : String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -41,6 +44,7 @@ class ParentsMedicineList : AppCompatActivity() {
                 putExtra("mname","NULL")
                 putExtra("school", school)
                 putExtra("room", room)
+
             }
             startActivity(intent)
         }
@@ -51,10 +55,8 @@ class ParentsMedicineList : AppCompatActivity() {
         cname = intent.getStringExtra("cname").toString()
         school = intent.getStringExtra("school").toString()
         room = intent.getStringExtra("room").toString()
+        img_url = intent.getStringExtra("img_url").toString()
 
-
-        Log.d(TAG, "school: $school")
-        Log.d(TAG, "room: $room")
 
         binding.textViewRoomName.text = school + room
         binding.buttonMor.visibility = View.INVISIBLE
@@ -77,6 +79,7 @@ class ParentsMedicineList : AppCompatActivity() {
                         putExtra("mname", MedicineListAdapter.MedicineListViewHolder(v).mname.toString())
                         putExtra("school", school)
                         putExtra("room", room)
+                        putExtra("img_url",img_url)
                     }
                     startActivity(intent)
                 }

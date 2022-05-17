@@ -87,6 +87,7 @@ class MainTeacherActivity : AppCompatActivity() {
             var intent = Intent(this, TeacherMedicineList::class.java).apply {
                 putExtra("school", school)
                 putExtra("room", room)
+                putExtra("img_url",img_url)
             }
             startActivity(intent)
         }

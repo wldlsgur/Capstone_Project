@@ -8,11 +8,13 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
+import com.bumptech.glide.Glide
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityMedicineBinding
 import com.example.issueproject.dto.*
 import com.example.issueproject.res.MainActivity
 import com.example.issueproject.res.viewmodel.MainViewModels
+import com.example.issueproject.retrofit.RetrofitBuilder
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 import java.text.SimpleDateFormat
@@ -37,7 +39,7 @@ class Parents_MedicineInfo : AppCompatActivity() {
     var lunch : String = ""
     var dinner : String = ""
     var mplace : String = ""
-
+    var img_url : String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -81,7 +83,8 @@ class Parents_MedicineInfo : AppCompatActivity() {
         add = intent.getBooleanExtra("add",false)
         school = intent.getStringExtra("school").toString()
         room = intent.getStringExtra("room").toString()
-
+        img_url = intent.getStringExtra("img_url").toString()
+        binding.medicineAppbar.textViewTitle.text = "약 관리"
         binding.medicineSchool.text = school
         binding.medicineRoom.text = room
         binding.medicineCname.text = cname
@@ -94,6 +97,12 @@ class Parents_MedicineInfo : AppCompatActivity() {
         else if(add == true){
             binding.medicineButtonSave.visibility = View.INVISIBLE
             binding.medicineButtonDelete.visibility = View.INVISIBLE
+        }
+
+        if(img_url != null){
+            Glide.with(this)
+                .load("${RetrofitBuilder.servers}/image/parent/${img_url}")
+                .into(binding.imageViewmedicine)
         }
     }
 
