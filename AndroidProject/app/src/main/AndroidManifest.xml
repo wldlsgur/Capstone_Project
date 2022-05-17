@@ -92,25 +92,25 @@
             android:exported="false" />
         <activity
             android:name=".res.Calender.Calender"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".res.Medicine.ParentsMedicineList"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".res.Medicine.TeacherMedicineList"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".res.Medicine.Parents_MedicineInfo"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".res.Medicine.Teacher_MedicineInfo"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".res.Medicine.TeacherMedicineItem"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".res.Navi.Navigation"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".res.MainActivity"
             android:exported="true">

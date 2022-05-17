@@ -14,7 +14,7 @@ import com.example.issueproject.res.Medicine.Parents_MedicineInfo
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
-private const val TAG = "SchoolTeacherActivity"
+private const val TAG = "ParentsMedicineList"
 class ParentsMedicineList : AppCompatActivity() {
     lateinit var MedicineListAdapter: MedicineListAdapter
 
@@ -30,7 +30,7 @@ class ParentsMedicineList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         init()
-        //ShowRecycler(id, cname)
+        ShowRecycler(id, cname)
 
         binding.medicinelistButtonAdd.setOnClickListener {
             val add : Boolean = true
@@ -60,7 +60,6 @@ class ParentsMedicineList : AppCompatActivity() {
         binding.buttonMor.visibility = View.INVISIBLE
         binding.buttonLun.visibility = View.INVISIBLE
         binding.buttonDin.visibility = View.INVISIBLE
-        binding.tabSelect.visibility = View.INVISIBLE
     }
     private fun initRecycler(list: MutableList<MedicineManagementResult>) {
         MedicineListAdapter = MedicineListAdapter(list)

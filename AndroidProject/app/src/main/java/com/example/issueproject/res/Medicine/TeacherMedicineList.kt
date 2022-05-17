@@ -30,7 +30,6 @@ class TeacherMedicineList : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.medicinelistButtonAdd.visibility = View.INVISIBLE
-        binding.tabSelect.visibility = View.INVISIBLE
         setContentView(binding.root)
         val school = intent.getStringExtra("school").toString()
         val room = intent.getStringExtra("room").toString()
