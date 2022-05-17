@@ -65,7 +65,7 @@ router.get('/selectManage/get/data/useID', function(req, res, next) {
   let id = req.query.id;
   let child_name = req.query.child_name;
 
-  db_medicine.selectMedicinemanageInfo(id, child_name, function(err,result){
+  db_medicine.selectMedicinemanageInfo_useId_chNm(id, child_name, function(err,result){
   if(err){
       console.log(err);
       res.status(400).send(err);
