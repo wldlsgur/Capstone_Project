@@ -31,6 +31,7 @@ class MainParentActivity : AppCompatActivity() {
 
     var school : String = ""
     var room : String = ""
+    var img_url : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,12 @@ class MainParentActivity : AppCompatActivity() {
         val id = intent.getStringExtra("id")!!
 
         GetParentInfo(id, position)
+
+        if(img_url != null){
+            Glide.with(this)
+                .load("${RetrofitBuilder.servers}/image/parent/${img_url}")
+                .into(binding.imageViewChild)
+        }
 
         Log.d(TAG, "school: $school")
         Log.d(TAG, "room: $room")
@@ -103,17 +110,10 @@ class MainParentActivity : AppCompatActivity() {
                 binding.textViewSchool.text = responseData[position].school
                 binding.textViewRoom.text = responseData[position].room
                 binding.textViewName.text = responseData[position].child_name
+                img_url = responseData[position].image_url
 
                 school = binding.textViewSchool.text.toString()
                 room = binding.textViewRoom.text.toString()
-
-                val childimage: ImageView = binding.imageViewChild
-
-                if(responseData[position].image_url != null){
-                    Glide.with(childimage.context)
-                        .load("${RetrofitBuilder.servers}/image/parent/${responseData[position].image_url}")
-                        .into(childimage)
-                }
             }
 
             override fun onFailure(code: Int) {

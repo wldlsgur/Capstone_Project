@@ -1,6 +1,7 @@
 package com.example.issueproject.Adapter
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.example.issueproject.dto.ParentInfoResult
 import com.example.issueproject.res.MainParentActivity
 import com.example.issueproject.retrofit.RetrofitBuilder
 
+private const val TAG = "ChildAdapter"
 class ChildAdapter(var list:MutableList<ParentInfoResult>) : RecyclerView.Adapter<ChildAdapter.ChildListViewHolder>() {
 
     inner class ChildListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -34,14 +36,13 @@ class ChildAdapter(var list:MutableList<ParentInfoResult>) : RecyclerView.Adapte
             else if(data.agree == "yes"){
                 childagree.text = "승인이 완료되었습니다."
             }
-
+            Log.d(TAG, "image_url: ${data.image_url}")
+            Log.d(TAG, "bindinfo: ${RetrofitBuilder.servers}/image/parent/${data.image_url}")
             if(data.image_url != "default"){
                 Glide.with(childimage.context)
                     .load("${RetrofitBuilder.servers}/image/parent/${data.image_url}")
                     .into(childimage)
             }
-
-
         }
     }
 

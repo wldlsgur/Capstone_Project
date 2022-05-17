@@ -133,6 +133,7 @@ class MainActivity : AppCompatActivity() {
                         putExtra("name", name)
                         putExtra("school", responseData[0].school)
                         putExtra("room", responseData[0].room)
+                        putExtra("img_url", responseData[0].image_url)
                     }
                     startActivity(intent)
                 }
@@ -164,6 +165,7 @@ class MainActivity : AppCompatActivity() {
                         putExtra("name", name)
                         putExtra("school", responseData[0].school)
                         putExtra("room", responseData[0].room)
+                        putExtra("img_url", responseData[0].image_url)
                     }
                     startActivity(intent)
                 }
