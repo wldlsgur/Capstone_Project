@@ -17,6 +17,7 @@ private const val TAG = "SchoolTeacherActivity"
 class SchoolTeacherListActivity : AppCompatActivity() {
     lateinit var SchoolTeacherListAdapter: SchoolTeacherListAdapter
 
+    var school: String = ""
     private val binding by lazy {
         ActivitySchoolTeacherListBinding.inflate(layoutInflater)
     }
@@ -25,8 +26,10 @@ class SchoolTeacherListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val school = intent.getStringExtra("school").toString()
+        school = intent.getStringExtra("school").toString()
         Log.d(TAG, "onCreate: $school")
+        binding.textViewTeacherListSchool.text = school
+
         ShowRecycler(school)
     }
 
@@ -40,14 +43,10 @@ class SchoolTeacherListActivity : AppCompatActivity() {
             SchoolTeacherListAdapter.setItemClickListener(object: SchoolTeacherListAdapter.OnItemClickListener{
                 override fun onClick(v: View, position: Int) {
                     var intent = Intent(this@SchoolTeacherListActivity, RoomChildListActivity::class.java).apply {
-                        putExtra(
-                            "teacher_name",
-                            SchoolTeacherListAdapter.SchoolListViewHolder(v).number.toString()
-                        )
-                        putExtra(
-                            "room",
-                            SchoolTeacherListAdapter.SchoolListViewHolder(v).room.toString()
-                        )
+                        Log.d(TAG, "room: ${SchoolTeacherListAdapter.SchoolListViewHolder(v).room.toString()}")
+                        putExtra("position", position.toString())
+                        putExtra("room", SchoolTeacherListAdapter.SchoolListViewHolder(v).room.toString())
+                        putExtra("school", school)
                     }
                     startActivity(intent)
                 }

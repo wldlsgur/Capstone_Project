@@ -28,35 +28,13 @@ class RoomChildListAdapter(var list:MutableList<RoomChildListResult>) : Recycler
         fun bindinfo(data: RoomChildListResult){
             name.text = data.child_name
             age.text = data.child_age
-            parentnumber.text = data.parent_num
+            parentnumber.text = data.number
             spec.text = data.spec
-            //GetImageUrl(data.child_image)
-            //val text= "/image/parents/이정은.jpg"
-            //GetImageUrl(text)
-//            GetImageUrl("parents", "이정은")
+
             Glide.with(childimage.context)
-                .load("${RetrofitBuilder.servers}/image/teacher/이정은.jpg")
+                .load("${RetrofitBuilder.servers}/image/parent/${data.image_url}")
                 .into(childimage)
 
-        }
-
-        fun GetImageUrl(target: String, name: String){
-            ResponseService().GetImageUrl(target, name, object: RetrofitCallback<ResponseBody>{
-                override fun onError(t: Throwable) {
-                    Log.d(TAG, "onError: ")
-                }
-
-                override fun onSuccess(code: Int, responseData: ResponseBody) {
-                    Log.d(TAG, "onSuccess: $responseData")
-
-                    val bitmap: Bitmap = BitmapFactory.decodeStream(responseData.byteStream())
-                    childimage.setImageBitmap(bitmap)
-                }
-
-                override fun onFailure(code: Int) {
-                    Log.d(TAG, "onFailure: $code")
-                }
-            })
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomListViewHolder {

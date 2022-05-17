@@ -24,9 +24,10 @@ class RoomChildListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-//        val room = intent.getStringExtra("room")
-        val room = "달님반"
-        ShowRecycler(room)
+        val school = intent.getStringExtra("school")
+        val room = intent.getStringExtra("room")
+
+        ShowRecycler(school!!, room!!)
 
     }
 
@@ -39,8 +40,8 @@ class RoomChildListActivity : AppCompatActivity() {
         }
     }
 
-    private fun ShowRecycler(room: String) {
-        ResponseService().RoomChildListShow(room, object : RetrofitCallback<MutableList<RoomChildListResult>>{
+    private fun ShowRecycler(school: String, room: String) {
+        ResponseService().RoomChildListShow(school, room, object : RetrofitCallback<MutableList<RoomChildListResult>>{
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }

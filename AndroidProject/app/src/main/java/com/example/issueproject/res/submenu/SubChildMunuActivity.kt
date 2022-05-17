@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.issueproject.Adapter.ChildAdapter
@@ -52,13 +53,17 @@ class SubChildMunuActivity : AppCompatActivity() {
         ChildAdapter.setItemClickListener(object: ChildAdapter.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
                 // 클릭 시 이벤트 작성
-
-                val intent = Intent(this@SubChildMunuActivity, MainParentActivity::class.java).apply{
-                    putExtra("id", intent.getStringExtra("id"))
-                    Log.d(TAG, "position: $position")
-                    putExtra("position", position.toString())
+                if(ChildAdapter.ChildListViewHolder(v).childagree.toString() == "승인이 필요합니다."){
+                    Toast.makeText(this@SubChildMunuActivity, "승인까지 기다려주세요!", Toast.LENGTH_SHORT).show()
                 }
-                startActivity(intent)
+                else{
+                    val intent = Intent(this@SubChildMunuActivity, MainParentActivity::class.java).apply{
+                        putExtra("id", intent.getStringExtra("id"))
+                        Log.d(TAG, "position: $position")
+                        putExtra("position", position.toString())
+                    }
+                    startActivity(intent)
+                }
             }
         })
     }
