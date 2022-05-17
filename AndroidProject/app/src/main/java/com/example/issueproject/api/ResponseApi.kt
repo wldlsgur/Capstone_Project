@@ -85,6 +85,7 @@ interface ResponseApi {
 
     @GET("/parentinfo/room/allinfo")
     fun RoomChildList(
+        @Query("school") school: String,
         @Query("room") room: String
     ): Call<MutableList<RoomChildListResult>>
 
@@ -136,7 +137,7 @@ interface ResponseApi {
     @Multipart
     @POST("/uploadimage/{target}/{key}")
     fun Uploadimage(
-        @Path("target") data: String,
+        @Path("target") target: String,
         @Path("key") key: String,
         @Part image: MultipartBody.Part
     ): Call<LoginResult>

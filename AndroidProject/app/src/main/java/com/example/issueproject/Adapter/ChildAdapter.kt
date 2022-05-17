@@ -20,12 +20,20 @@ class ChildAdapter(var list:MutableList<ParentInfoResult>) : RecyclerView.Adapte
         private val childschool: TextView = itemView.findViewById(R.id.textViewChildItemSchool)
         private val childroom: TextView = itemView.findViewById(R.id.textViewChildItemRoom)
         private val childname: TextView = itemView.findViewById(R.id.textViewChildItemName)
+        val childagree: TextView = itemView.findViewById(R.id.textViewChildItemAgree)
         private val childimage: ImageView = itemView.findViewById(R.id.imageViewChildItemImage)
 
         fun bindinfo(data: ParentInfoResult){
             childschool.text = data.school
             childroom.text = data.room
             childname.text = data.child_name
+
+            if(data.agree == "no"){
+                childagree.text = "승인이 필요합니다."
+            }
+            else if(data.agree == "yes"){
+                childagree.text = "승인이 완료되었습니다."
+            }
 
             if(data.image_url != "default"){
                 Glide.with(childimage.context)

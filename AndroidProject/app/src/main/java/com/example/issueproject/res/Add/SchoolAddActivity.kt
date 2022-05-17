@@ -19,6 +19,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
 import com.example.issueproject.dto.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -35,16 +36,13 @@ class SchoolAddActivity : AppCompatActivity() {
     }
     private lateinit var getResult: ActivityResultLauncher<Intent>
     private lateinit var currentImageUri: Uri
-    var key_id : String = ""
     var id : String = ""
-//    private val PICK_FROM_ALBUM = 1
-    // key_id 대신에 id주는걸로
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val id = intent.getStringExtra("id")
+        id = intent.getStringExtra("id")!!
 
         getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == RESULT_OK && it.data !=null) {
@@ -52,17 +50,18 @@ class SchoolAddActivity : AppCompatActivity() {
                 try {
                     currentImageUri?.let {
                         if(Build.VERSION.SDK_INT < 28) {
-                            val bitmap = MediaStore.Images.Media.getBitmap(
-                                this.contentResolver,
-                                currentImageUri
-                            )
+                            val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, currentImageUri)
                             Log.d(TAG, "currentImageUri: $currentImageUri")
                             Log.d(TAG, "bitmap: $bitmap")
                             binding.imageViewSchool?.setImageBitmap(bitmap)
                         } else {
-                            val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
-                            val bitmap = ImageDecoder.decodeBitmap(source)
-                            binding.imageViewSchool?.setImageBitmap(bitmap)
+//                            val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
+//                            val bitmap = ImageDecoder.decodeBitmap(source)
+                            //binding.imageViewSchool?.setImageBitmap(bitmap)
+                            Glide.with(this)
+                                .load(currentImageUri)
+                                .into(binding.imageViewSchool)
+
                         }
                     }
                 }catch(e:Exception) {
@@ -83,7 +82,6 @@ class SchoolAddActivity : AppCompatActivity() {
 
         binding.buttonSchoolAdd.setOnClickListener {
             Log.d(TAG, "onCreate: ")
-            val id = id!!
             val school = binding.editTextSchoolName.text.toString()
             val room = binding.editTextRoomName.text.toString()
             val number = binding.editTextSchoolNum.text.toString()
@@ -109,8 +107,7 @@ class SchoolAddActivity : AppCompatActivity() {
         val requestBody = RequestBody.create(MediaType.parse("image/*"),byteArrayOutputStream.toByteArray())
         val uploadFile = MultipartBody.Part.createFormData("image","${file.name}.${fileExtension?.substring(6)}",requestBody)
 
-        Log.d(TAG, "savaimage: $key_id")
-        uploadimage("parent", key_id, uploadFile)
+        uploadimage("president", id, uploadFile)
     }
 
     fun uploadimage(target: String, key: String, file: MultipartBody.Part){
@@ -131,25 +128,6 @@ class SchoolAddActivity : AppCompatActivity() {
         })
     }
 
-    fun GetPresidentInfo(id: String){
-        ResponseService().GetPresidentInfo(id, object : RetrofitCallback<MutableList<PresidentinfoResult>>{
-            override fun onError(t: Throwable) {
-                Log.d(TAG, "onError: $t")
-            }
-
-            override fun onSuccess(code: Int, responseData: MutableList<PresidentinfoResult>) {
-                Log.d(TAG, "onSuccess: ..")
-                key_id = responseData[0].key_id.toString()
-                savaimage(currentImageUri)
-            }
-
-            override fun onFailure(code: Int) {
-                Log.d(TAG, "onFailure: $code")
-            }
-
-        })
-    }
-
     fun SchoolAdd(info: Presidentinfo){
         ResponseService().CreatePresidentinfo(info, object: RetrofitCallback<SignUpResult>{
             override fun onError(t: Throwable) {
@@ -159,7 +137,7 @@ class SchoolAddActivity : AppCompatActivity() {
                 Log.d(TAG, "onSuccess: $responseData")
                 if(responseData.msg == "success"){
                     Toast.makeText(this@SchoolAddActivity, "성공", Toast.LENGTH_SHORT).show()
-                    GetPresidentInfo(id!!)
+                    savaimage(currentImageUri)
                 }
             }
             override fun onFailure(code: Int) {
