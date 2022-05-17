@@ -1,5 +1,6 @@
 package com.example.issueproject.res.Add
 
+import android.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,7 @@ import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
+import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
@@ -37,11 +39,13 @@ class SchoolAddActivity : AppCompatActivity() {
     private lateinit var getResult: ActivityResultLauncher<Intent>
     private lateinit var currentImageUri: Uri
     var id : String = ""
+    val roomList = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        roomList.clear()
         id = intent.getStringExtra("id")!!
 
         getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -80,14 +84,36 @@ class SchoolAddActivity : AppCompatActivity() {
             getResult.launch(intent)
         }
 
+        binding.imageViewRoomAdd.setOnClickListener {
+            val roomname = binding.editTextRoomName.text.toString()
+            if(roomname != null){
+                roomList.add(roomname)
+                binding.editTextRoomName.text = null
+                Toast.makeText(this, "반이 추가되었습니다.", Toast.LENGTH_SHORT).show()
+
+                val adapter = ArrayAdapter(this@SchoolAddActivity, R.layout.simple_spinner_dropdown_item, roomList)
+                binding.spinnerSchoolAddRoom.adapter = adapter
+            }
+            else{
+                Toast.makeText(this, "반이름을 작성해주세요", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
         binding.buttonSchoolAdd.setOnClickListener {
             Log.d(TAG, "onCreate: ")
             val school = binding.editTextSchoolName.text.toString()
-            val room = binding.editTextRoomName.text.toString()
             val number = binding.editTextSchoolNum.text.toString()
 
-            var presidentinfo = Presidentinfo(id, school, room, number)
-            SchoolAdd(presidentinfo)
+            for(i in 0..roomList.size-1) {
+                val room = roomList[i]
+
+                var presidentinfo = Presidentinfo(id, school, room, number)
+                SchoolAdd(presidentinfo)
+            }
+//            val room = binding.editTextRoomName.text.toString()
+
+
         }
     }
 

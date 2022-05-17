@@ -85,11 +85,11 @@
             android:background="@android:color/transparent"
             android:scaleType="centerInside"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageViewChild"
+            app:layout_constraintTop_toTopOf="@+id/imageViewPresident"
             app:srcCompat="@drawable/more" />
 
         <ImageView
-            android:id="@+id/imageViewChild"
+            android:id="@+id/imageViewPresident"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="20dp"
@@ -108,7 +108,7 @@
             android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageViewChild">
+            app:layout_constraintStart_toEndOf="@+id/imageViewPresident">
 
             <TextView
                 android:id="@+id/textView2"
@@ -142,7 +142,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageViewChild"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewPresident"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout">
 

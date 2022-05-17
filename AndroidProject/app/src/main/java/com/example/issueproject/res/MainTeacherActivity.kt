@@ -28,10 +28,17 @@ class MainTeacherActivity : AppCompatActivity() {
         val name = intent.getStringExtra("name")
         val school = intent.getStringExtra("school")
         val room = intent.getStringExtra("room")
+        val img_url = intent.getStringExtra("img_url")
 
         binding.textViewName.text = name
         binding.textViewSchool.text = school
         binding.textViewRoom.text = room
+
+        if(img_url != null){
+            Glide.with(this)
+                .load("${RetrofitBuilder.servers}/image/teacher/${img_url}")
+                .into(binding.imageViewTeacher)
+        }
 
         binding.TeacherRoomchildmanagement.setOnClickListener{
             var intent = Intent(this, RoomChildListActivity::class.java).apply{
