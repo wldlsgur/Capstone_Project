@@ -53,20 +53,9 @@ class SchoolAddActivity : AppCompatActivity() {
                 currentImageUri = it.data?.data!!
                 try {
                     currentImageUri?.let {
-                        if(Build.VERSION.SDK_INT < 28) {
-                            val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, currentImageUri)
-                            Log.d(TAG, "currentImageUri: $currentImageUri")
-                            Log.d(TAG, "bitmap: $bitmap")
-                            binding.imageViewSchool?.setImageBitmap(bitmap)
-                        } else {
-//                            val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
-//                            val bitmap = ImageDecoder.decodeBitmap(source)
-                            //binding.imageViewSchool?.setImageBitmap(bitmap)
-                            Glide.with(this)
-                                .load(currentImageUri)
-                                .into(binding.imageViewSchool)
-
-                        }
+                        Glide.with(this)
+                            .load(currentImageUri)
+                            .into(binding.imageViewSchool)
                     }
                 }catch(e:Exception) {
                     e.printStackTrace()

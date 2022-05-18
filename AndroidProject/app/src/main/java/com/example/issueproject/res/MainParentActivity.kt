@@ -42,12 +42,6 @@ class MainParentActivity : AppCompatActivity() {
 
         GetParentInfo(id, position)
 
-        if(img_url != null){
-            Glide.with(this)
-                .load("${RetrofitBuilder.servers}/image/parent/${img_url}")
-                .into(binding.imageViewChild)
-        }
-
         Log.d(TAG, "school: $school")
         Log.d(TAG, "room: $room")
         binding.ParentNotic.setOnClickListener{
@@ -111,6 +105,11 @@ class MainParentActivity : AppCompatActivity() {
                 binding.textViewName.text = responseData[position].child_name
                 img_url = responseData[position].image_url
 
+                if(img_url != null){
+                    Glide.with(this@MainParentActivity)
+                        .load("${RetrofitBuilder.servers}/image/parent/${img_url}")
+                        .into(binding.imageViewChild)
+                }
                 school = binding.textViewSchool.text.toString()
                 room = binding.textViewRoom.text.toString()
             }

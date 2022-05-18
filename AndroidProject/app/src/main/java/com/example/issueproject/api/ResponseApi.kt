@@ -44,7 +44,7 @@ interface ResponseApi {
         @Query("id") id: String
     ): Call<MutableList<ParentInfoResult>>
 
-    //
+    //id와 name으로 원생 정보
     @GET("/parentinfo/child/info")
     fun GetChildInfo(
         @Query("id") id: String,
@@ -57,7 +57,7 @@ interface ResponseApi {
         @Body schoolmanagementData: AddManagement
     ): Call<AddManagementResult>
 
-    // 메뉴, 학교, 반에 해당하는 모든 정보
+    // 메뉴(공지사항,알림장), 학교, 반에 해당하는 모든 정보
     @GET("/schoolmanagement/info")
     fun DayNoticInfo(
         @Query("menu") menu: String,
@@ -83,22 +83,26 @@ interface ResponseApi {
         @Body teacherInfo: TeacherInfo
     ): Call<SignUpResult>
 
+    //어린이집과 반에 해당하는 모든 아이정보
     @GET("/parentinfo/room/allinfo")
     fun RoomChildList(
         @Query("school") school: String,
         @Query("room") room: String
     ): Call<MutableList<RoomChildListResult>>
 
+    //DB상에 존재하는 모든 어린이집 이름
     @GET("/presidentinfo/allschool")
     fun GetSchool(
 
     ): Call<MutableList<GetSchool>>
 
+    //해당 어린이집에 있는 모든 반 이름
     @GET("/presidentinfo/allroom/{school}")
     fun GetRoom(
         @Path("school") school: String
     ): Call<MutableList<GetRoom>>
 
+    //해당 id로 name과 job 가져옴
     @GET("/user/info/{id}")
     fun GetUserInfo(
         @Path("id") id: String
@@ -149,6 +153,7 @@ interface ResponseApi {
         @Body PostMedicine: PostMedicine
     ): Call<SignUpResult>
 
+    //이미지 한장 통신 (부모, 원장, 선생 등록)
     @Multipart
     @POST("/uploadimage/{target}/{key}")
     fun Uploadimage(
@@ -157,12 +162,25 @@ interface ResponseApi {
         @Part image: MultipartBody.Part
     ): Call<LoginResult>
 
-    @GET("/image/{target}/{name}")
-    fun  GetImageUrl(
-        @Path("target") target: String,
-        @Path("name") name: String
-    ): Call<ResponseBody>
+    //이미지 여러장 통신 (앨범)
+    @Multipart
+    @POST("/uploadimages/{school}/{room}/{title}/{date}")
+    fun Uploadimages(
+        @Path("school") school: String,
+        @Path("room") room: String,
+        @Path("title") title: String,
+        @Path("date") date: String,
+        @Part image: MultipartBody.Part
+    ): Call<LoginResult>
 
+//    //이미지 가져오기
+//    @GET("/image/{target}/{name}")
+//    fun  GetImageUrl(
+//        @Path("target") target: String,
+//        @Path("name") name: String
+//    ): Call<ResponseBody>
+
+    //어린이집과 반에 해당하는 모든 앨범 정보
     @GET("/album/info")
     fun GetAlbumInfo(
         @Query("school") school: String,
