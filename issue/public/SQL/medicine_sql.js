@@ -32,11 +32,11 @@ module.exports = function () {
                                 medicinemanagement.m_name, medicinemanagement.date, medicinemanagement.mor, medicinemanagement.lun, medicinemanagement.din,
                                 medicine.morning, medicine.lunch, medicine.dinner
                                 FROM medicinemanagement, medicine
-                                WHERE medicine.id=(SELECT id
+                                WHERE medicine.id IN (SELECT distinct id
                                                    FROM medicinemanagement
                                                    WHERE school='${school}'
                                                    AND room='${room}') 
-                                AND medicine.child_name=(SELECT child_name
+                                AND medicine.child_name IN (SELECT distinct child_name
                                                          FROM medicinemanagement
                                                          WHERE school='${school}'
                                                          AND room='${room}')`;
