@@ -7,6 +7,7 @@ const sucess_response = {res : true, msg : 'success'};
 const failed_response = {res : false, msg : "failed"};
 
 router.post('/uploadimages/:school/:room/:title/:date', function(req, res){
+	console.log(files);
 	let json_data = {
 		files : req.files,
 		school : req.params.school,
