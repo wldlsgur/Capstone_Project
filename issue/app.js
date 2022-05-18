@@ -50,7 +50,11 @@ const storages = multer.diskStorage({
 		let timestamp = new Date().getTime().valueOf();	// 현재 시간
 		let file_url = timestamp + path.basename(file.originalname);
 
-		if((update_image_url.insert_image_array_album(file_url, school, room, title, date) === true)) return	cb(null, file_url);
+		if(update_image_url.insert_image_array_album(file_url, school, room, title, date) === false){
+			return;
+		}else{
+			cb(null, file_url);
+		}
 	},
 	limits: {fileSize: 1 * 256 * 256}
 })

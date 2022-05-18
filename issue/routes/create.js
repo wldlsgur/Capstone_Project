@@ -36,7 +36,6 @@ router.post('/schoolmanagement', function(req, res){
 		menu : req.body.menu,
 		writer : req.body.writer,
 		school : req.body.school,
-		room : req.body.room,
 		title : req.body.title,
 		content : req.body.content,
 		date : req.body.date

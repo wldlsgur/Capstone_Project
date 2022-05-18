@@ -25,14 +25,12 @@
         android:id="@+id/button_apply"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/white"
         android:text="완료"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/stu_mname"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.437" />
 
@@ -92,7 +90,7 @@
         android:id="@+id/textView56"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="56dp"
         android:layout_marginTop="16dp"
         android:text="시간 :"
         app:layout_constraintStart_toEndOf="@+id/stu_cname"
@@ -111,10 +109,10 @@
         android:id="@+id/textView58"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="약 이름 :"
-        app:layout_constraintStart_toEndOf="@+id/stu_cname"
-        app:layout_constraintTop_toTopOf="@+id/stu_room" />
+        app:layout_constraintStart_toStartOf="@+id/textView38"
+        app:layout_constraintTop_toBottomOf="@+id/textView38" />
 
     <TextView
         android:id="@+id/textView59"
