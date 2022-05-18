@@ -33,4 +33,4 @@ jobs:
     - run: npm i
     - run: npm ci
     - run: npm run build --if-present
-    - run: npm app
+    - run: npm test
