@@ -31,13 +31,16 @@ class AlbumActivity : AppCompatActivity() {
         ShowRecycler(school!!, room!!)
 
         binding.buttonAlbumAdd.setOnClickListener {
-            var intent = Intent(this, AddAlbumActivity::class.java)
+            var intent = Intent(this, AddAlbumActivity::class.java).apply {
+                putExtra("school", school)
+                putExtra("room", room)
+            }
             startActivity(intent)
         }
     }
 
     private fun initAdapter(lists:MutableList<AlbumResult>){
-        albumAdapter = AlbumAdapter(lists, this)
+        albumAdapter = AlbumAdapter(lists)
 
         binding.albumRv.apply {
             layoutManager = LinearLayoutManager(context)
@@ -64,20 +67,20 @@ class AlbumActivity : AppCompatActivity() {
         })
     }
 
-    private fun GetAlbumInfo(school: String, room: String){
-        ResponseService().GetAlbumInfo(school, room, object: RetrofitCallback<MutableList<AlbumResult>> {
-            override fun onError(t: Throwable) {
-                Log.d(TAG, "onError: $t")
-            }
-
-            override fun onSuccess(code: Int, responseData: MutableList<AlbumResult>) {
-                Log.d(TAG, "onSuccess: $code")
-            }
-
-            override fun onFailure(code: Int) {
-                Log.d(TAG, "onFailure: $code")
-            }
-
-        })
-    }
+//    private fun GetAlbumInfo(school: String, room: String){
+//        ResponseService().GetAlbumInfo(school, room, object: RetrofitCallback<MutableList<AlbumResult>> {
+//            override fun onError(t: Throwable) {
+//                Log.d(TAG, "onError: $t")
+//            }
+//
+//            override fun onSuccess(code: Int, responseData: MutableList<AlbumResult>) {
+//                Log.d(TAG, "onSuccess: $code")
+//            }
+//
+//            override fun onFailure(code: Int) {
+//                Log.d(TAG, "onFailure: $code")
+//            }
+//
+//        })
+//    }
 }

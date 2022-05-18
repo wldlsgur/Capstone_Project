@@ -170,7 +170,7 @@ interface ResponseApi {
         @Path("room") room: String,
         @Path("title") title: String,
         @Path("date") date: String,
-        @Part image: MultipartBody.Part
+        @Part images: ArrayList<MultipartBody.Part>
     ): Call<LoginResult>
 
 //    //이미지 가져오기

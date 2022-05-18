@@ -97,16 +97,6 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 //            var intent = Intent(this, ::class.java)
 //            startActivity(intent)
         }
-    binding.buttontest.setOnClickListener {
-        var intent = Intent(this, Navigation::class.java)
-        startActivity(intent)
-    }
-//        //끝나면 지울것
-//        binding.buttontest.setOnClickListener{
-//            var intent = Intent(this, test1::class.java).apply {
-//            }
-//            startActivity(intent)
-//        }
         val toolbar: Toolbar = findViewById(R.id.tool) // toolBar를 통해 App Bar 생성
         setSupportActionBar(toolbar) // 툴바 적용
 

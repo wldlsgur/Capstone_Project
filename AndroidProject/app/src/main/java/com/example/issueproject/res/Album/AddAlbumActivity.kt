@@ -1,5 +1,6 @@
 package com.example.issueproject.res.Album
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -24,6 +25,9 @@ import java.io.File
 import java.io.IOException
 import java.io.InputStream
 import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 private const val TAG = "AddAlbumActivity"
 class AddAlbumActivity : AppCompatActivity() {
@@ -32,11 +36,22 @@ class AddAlbumActivity : AppCompatActivity() {
     private val binding by lazy{
         ActivityAddAlbumBinding.inflate(layoutInflater)
     }
-    val itemList = mutableListOf<Uri?>()
-
+    var itemList = mutableListOf<Uri?>()
+    var images = ArrayList<MultipartBody.Part>()
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val currentTime = System.currentTimeMillis()
+        convertTimestampToDate(currentTime)
+
+        val school = intent.getStringExtra("school")!!
+        val room = intent.getStringExtra("room")!!
+
+        binding.imageViewAlbumdatepicker.setOnClickListener {
+            showDatePicker()
+        }
 
         binding.imageViewAlbumImageAdd.setOnClickListener {
             var intent = Intent(Intent.ACTION_PICK)
@@ -54,7 +69,8 @@ class AddAlbumActivity : AppCompatActivity() {
             for(i in 0..itemList.size-1){
                 savaimage(itemList[i]!!)
             }
-
+            Uploadimages(school, room, title, date, images)
+            
         }
     }
 
@@ -86,6 +102,7 @@ class AddAlbumActivity : AppCompatActivity() {
                     for (i in 0 until clipData.itemCount) {
                         val imageUri = clipData.getItemAt(i).uri // 선택한 이미지들의 uri를 가져온다.
                         try {
+                            Log.e("multiple choice: ", data.data.toString())
                             itemList.add(imageUri) //uri를 list에 담는다.
                         } catch (e: Exception) {
                             Log.e(TAG, "File select error", e)
@@ -117,12 +134,12 @@ class AddAlbumActivity : AppCompatActivity() {
         bitmap.compress(Bitmap.CompressFormat.JPEG,20,byteArrayOutputStream)
         val requestBody = RequestBody.create(MediaType.parse("image/*"),byteArrayOutputStream.toByteArray())
         val uploadFile = MultipartBody.Part.createFormData("image","${file.name}.${fileExtension?.substring(6)}",requestBody)
-
-//        Uploadimages("")
+        images.add(uploadFile)
+        Log.d(TAG, "savaimage: ${images.size}")
     }
 
-    fun Uploadimages(school: String, room: String, title: String, date: String, file: MultipartBody.Part){
-        ResponseService().Uploadimages(school, room, title, date, file, object: RetrofitCallback<LoginResult>{
+    fun Uploadimages(school: String, room: String, title: String, date: String, images: ArrayList<MultipartBody.Part>){
+        ResponseService().Uploadimages(school, room, title, date, images, object: RetrofitCallback<LoginResult>{
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
@@ -139,4 +156,37 @@ class AddAlbumActivity : AppCompatActivity() {
 
         })
     }
+
+    var cal = Calendar.getInstance()
+    private val dateSetListener =
+        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, monthOfYear)
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            updateDateInText()
+        }
+
+    private fun showDatePicker(){
+        DatePickerDialog(this,
+            dateSetListener,
+            cal.get(Calendar.YEAR),
+            cal.get(Calendar.MONTH),
+            cal.get(Calendar.DAY_OF_MONTH)).show()
+    }
+    private fun convertTimestampToDate(timespamp: Long){
+        val sdf = SimpleDateFormat("yyyy년 MM월 dd일")
+        val date = sdf.format(timespamp)
+
+        binding.textViewAlbumdate.text = date
+        var year = date.substring(0,4)
+        var month = date.substring(6,8)
+        var day = date.substring(10,12)
+        Log.d(TAG, "datetest: ${year}-${month}-${day}")
+    }
+
+    private fun updateDateInText(){
+        var formatter = SimpleDateFormat("yyyy년 MM월 dd일")
+        binding.textViewAlbumdate.text = formatter.format(cal.time)
+    }
+
 }
