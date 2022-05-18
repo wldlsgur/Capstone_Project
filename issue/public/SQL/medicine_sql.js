@@ -39,7 +39,8 @@ module.exports = function () {
                                 AND medicine.child_name IN (SELECT distinct child_name
                                                          FROM medicinemanagement
                                                          WHERE school='${school}'
-                                                         AND room='${room}')`;
+                                                         AND room='${room}')
+                                AND medicine.m_name=medicinemanagement.m_name`;
                             con.query(sql,function(err,result,fields){
                                 con.release();
                                 if(err) callback(err,null);
@@ -49,9 +50,14 @@ module.exports = function () {
                 },
         selectMedicinemanageInfo_useId_chNm: function (id,child_name,callback) {
                     pool.getConnection(function (err, con) {
-                        let sql=`SELECT distinct m1.id, m1.school, m1.room, m1.child_name, m1.m_name, m1.date, m1.mor, m1.lun, m1.din, m2.morning, m2.lunch, m2.dinner
-                         FROM medicine as m2, medicinemanagement as m1
-                         WHERE m1.id = '${id}' AND m1.child_name = '${child_name}' AND m2.id = '${id}' AND m2.child_name = '${child_name}' AND m2.m_name=m1.m_name`;
+                        let sql=`SELECT medicinemanagement.id, medicinemanagement.school, medicinemanagement.room, medicinemanagement.child_name,
+                                medicinemanagement.m_name, medicinemanagement.date, medicinemanagement.mor, medicinemanagement.lun, 
+                                medicinemanagement.din, medicine.morning, medicine.lunch, medicine.dinner                        
+                                FROM medicinemanagement, medicine  
+                                WHERE medicinemanagement.id='${id}'
+                                AND medicinemanagement.child_name='${child_name}'
+                                AND medicine.id='${id}'   AND medicine.child_name='${child_name}'
+                                AND medicine.m_name=medicinemanagement.m_name`;
                             con.query(sql,function(err,result,fields){
                                 con.release();
                                 if(err) callback(err,null);
