@@ -36,7 +36,7 @@ class TeacherMedicineList : AppCompatActivity() {
         val school = intent.getStringExtra("school").toString()
         val room = intent.getStringExtra("room").toString()
         img_url = intent.getStringExtra("img_url").toString()
-        binding.textViewRoomName.text = room
+        //binding.textViewRoomName.text = room
         ShowRecycler(school, room)
 
         //button click event handler
