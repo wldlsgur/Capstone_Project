@@ -47,7 +47,7 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
         if(img_url != null){
             Glide.with(this)
-                .load("${RetrofitBuilder.servers}/image/teacher/${img_url}")
+                .load("${RetrofitBuilder.servers}/image/president/${img_url}")
                 .into(binding.imageViewPresident)
         }
 

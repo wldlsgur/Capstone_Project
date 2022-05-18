@@ -1,5 +1,6 @@
 package com.example.issueproject.Adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.issueproject.R
 import com.example.issueproject.retrofit.RetrofitBuilder
 
-class AddAlbumAdapter(var list:MutableList<String>) : RecyclerView.Adapter<AddAlbumAdapter.AddAlbumViewHolder>() {
+class AddAlbumAdapter(var list:MutableList<Uri?>) : RecyclerView.Adapter<AddAlbumAdapter.AddAlbumViewHolder>() {
 
     inner class AddAlbumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -29,7 +30,7 @@ class AddAlbumAdapter(var list:MutableList<String>) : RecyclerView.Adapter<AddAl
         val image_url = list[position]
 
         Glide.with(holder.albumimage.context)
-            .load("${RetrofitBuilder.servers}/image/album/${image_url}")
+            .load(image_url)
             .into(holder.albumimage)
     }
 }
