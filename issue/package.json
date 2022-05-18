@@ -5,6 +5,7 @@
   "scripts": {
     "start": "pm2 start ./bin/www -- start",
     "stop": "pm2 stop ./bin/www",
+    "test": "node ./bin/www",
     "lint": "./node_modules/.bin/eslint ."
   },
   "dependencies": {
