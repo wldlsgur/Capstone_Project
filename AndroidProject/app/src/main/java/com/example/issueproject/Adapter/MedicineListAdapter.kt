@@ -49,25 +49,6 @@ class MedicineListAdapter(var list:MutableList<MedicineManagementResult>) : Recy
             //GetImageUrl("parents", "이정은")
 
         }
-
-        fun GetImageUrl(target: String, name: String){
-            ResponseService().GetImageUrl(target, name, object: RetrofitCallback<ResponseBody>{
-                override fun onError(t: Throwable) {
-                    Log.d(TAG, "onError: ")
-                }
-
-                override fun onSuccess(code: Int, responseData: ResponseBody) {
-                    Log.d(TAG, "onSuccess: $responseData")
-
-                    val bitmap: Bitmap = BitmapFactory.decodeStream(responseData.byteStream())
-                    childimage.setImageBitmap(bitmap)
-                }
-
-                override fun onFailure(code: Int) {
-                    Log.d(TAG, "onFailure: $code")
-                }
-            })
-        }
     }
     override fun onCreateViewHolder(child: ViewGroup, viewType: Int): MedicineListViewHolder {
         val view = LayoutInflater.from(child.context).inflate(R.layout.activity_medicine_list_item,child,false)

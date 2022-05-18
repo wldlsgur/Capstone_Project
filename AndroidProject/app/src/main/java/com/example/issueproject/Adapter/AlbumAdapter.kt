@@ -1,6 +1,6 @@
 package com.example.issueproject.Adapter
 
-import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.issueproject.R
 import com.example.issueproject.dto.AlbumResult
 
-private const val TAG = "AlbumItemAdapter"
-class AlbumAdapter(var list: MutableList<AlbumResult>,var context: Context) : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
+private const val TAG = "AlbumAdapter"
+class AlbumAdapter(var list: MutableList<AlbumResult>) : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
 
     inner class AlbumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val title: TextView = itemView.findViewById(R.id.Album_textview_title)
@@ -26,7 +26,7 @@ class AlbumAdapter(var list: MutableList<AlbumResult>,var context: Context) : Re
 
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_album_item2,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_album_item,parent,false)
         return AlbumViewHolder(view)
     }
 
@@ -35,11 +35,16 @@ class AlbumAdapter(var list: MutableList<AlbumResult>,var context: Context) : Re
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         holder.apply {
             bindinfo(list[position])
+
 //            var lists = mutableListOf<AlbumResult>()
-            var albumItemAdapter = AlbumItemAdapter(list)
+            val image = list[position].image_url
+
+            var albumItemAdapter = AlbumItemAdapter(image)
+            Log.d(TAG, "onBindViewHolder: $image")
             itemView.findViewById<RecyclerView>(R.id.Album_image_RV).apply {
-                layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
                 adapter = albumItemAdapter
+                layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+
             }
         }
 

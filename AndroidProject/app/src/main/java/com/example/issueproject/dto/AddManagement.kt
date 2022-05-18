@@ -4,7 +4,6 @@ data class AddManagement(
     val menu : String,
     val writer : String,
     val school: String,
-    val room: String,
     val title: String,
     val content: String,
     val date: String

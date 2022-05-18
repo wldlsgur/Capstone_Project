@@ -376,8 +376,8 @@ class ResponseService {
         })
     }
 
-    fun Uploadimages(school: String, room: String, title: String, date: String, image: MultipartBody.Part, callback: RetrofitCallback<LoginResult>) {
-        RetrofitBuilder.api.Uploadimages(school, room, title, date, image).enqueue(object : Callback<LoginResult>{
+    fun Uploadimages(school: String, room: String, title: String, date: String, images: ArrayList<MultipartBody.Part>, callback: RetrofitCallback<LoginResult>) {
+        RetrofitBuilder.api.Uploadimages(school, room, title, date, images).enqueue(object : Callback<LoginResult>{
             override fun onResponse(call: Call<LoginResult>, response: Response<LoginResult>) {
                 Log.d(TAG, "uploadimage: ..")
                 Log.d(TAG, "onResponse: ${response.code()}")
