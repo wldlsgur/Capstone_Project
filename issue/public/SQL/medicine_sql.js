@@ -26,6 +26,28 @@ module.exports = function () {
                         })
                     })
                 },
+        updateMedicineInfo: function(id, child_name, m_name, morning, lunch, dinner, date, mPlace, content, callback){
+            pool.getConnection(function(err, con){
+                let sql=`update medicine AS m, medicinemanagement AS mm
+                        SET m.m_name = '${m_name}',
+                            m.morning = '${morning}',
+                            m.lunch = '${lunch}',
+                            m.dinner = '${dinner}',
+                            m.date = '${date}',
+                            m.mPlace = '${mPlace}',
+                            m.content = '${content}',
+                            mm.m_name = '${m_name}',
+                            mm.mor = 'false',
+                            mm.lun = 'false',
+                            mm.din = 'false'
+                        WHERE m.id = '${id}'
+                        AND m.child_name = '${child_name}'
+                        AND mm.id = '${id}'
+                        AND mm.child_name = '${child_name}'
+                        AND m.m_name = mm.m_name`
+            })
+
+        },
         selectMedicinemanageInfo: function (school,room,callback) {
                     pool.getConnection(function (err, con) {
                         let sql=`SELECT medicinemanagement.id, medicinemanagement.school, medicinemanagement.room, medicinemanagement.child_name,
