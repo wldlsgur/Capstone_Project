@@ -48,7 +48,7 @@ class AddNoticActivity : AppCompatActivity() {
             var menu = intent.getStringExtra("menu")!!
             var writer = intent.getStringExtra("name")!!
 
-            var addManagement = AddManagement(menu, writer, school, room, title, content, date)
+            var addManagement = AddManagement(menu, writer, school, title, content, date)
             insertaddManagement(addManagement)
 
         }
