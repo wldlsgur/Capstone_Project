@@ -27,18 +27,44 @@ module.exports = function () {
                     })
                 },
         selectMedicinemanageInfo: function (school,room,callback) {
-                            pool.getConnection(function (err, con) {
-                                let sql=`SELECT mm.id, mm.child_name, mm.m_name, mm.date, mm.mor, mm.lun, mm.din, m.morning, m.lunch, m.dinner 
-                                         from medicinemanagement AS mm
-                                         LEFT JOIN medicine AS m
-                                         ON mm.school='${school}' AND mm.room='${room}' AND mm.id=m.id AND mm.child_name=m.child_name AND mm.m_name=m.m_name`;
-                                con.query(sql,function(err,result,fields){
-                                    con.release();
-                                    if(err) callback(err,null);
-                                    else callback(null,result);
-                                })
-                            })
-                        },
+                    pool.getConnection(function (err, con) {
+                        let sql=`SELECT medicinemanagement.id, medicinemanagement.school, medicinemanagement.room, medicinemanagement.child_name,
+                                medicinemanagement.m_name, medicinemanagement.date, medicinemanagement.mor, medicinemanagement.lun, medicinemanagement.din,
+                                medicine.morning, medicine.lunch, medicine.dinner
+                                FROM medicinemanagement, medicine
+                                WHERE medicine.id IN (SELECT distinct id
+                                                   FROM medicinemanagement
+                                                   WHERE school='${school}'
+                                                   AND room='${room}') 
+                                AND medicine.child_name IN (SELECT distinct child_name
+                                                         FROM medicinemanagement
+                                                         WHERE school='${school}'
+                                                         AND room='${room}')`;
+                            con.query(sql,function(err,result,fields){
+                                con.release();
+                                if(err) callback(err,null);
+                                else callback(null,result);
+                        })
+                    })
+                },
+        selectMedicinemanageInfo_useId_chNm: function (id,child_name,callback) {
+                    pool.getConnection(function (err, con) {
+                        let sql=`SELECT medicinemanagement.id, medicinemanagement.school, medicinemanagement.room, medicinemanagement.child_name,
+                                 medicinemanagement.m_name, medicinemanagement.date, medicinemanagement.mor, medicinemanagement.lun, medicinemanagement.din,
+                                 medicine.morning, medicine.lunch, medicine.dinner
+                                 FROM medicinemanagement, medicine
+                                 WHERE medicinemanagement.id='${id}'   
+                                 AND medicinemanagement.child_name='${child_name}'
+                                 AND medicine.id='${id}'   
+                                 AND medicine.child_name='${child_name}'
+                                 AND medicine.m_name=medicinemanagement.m_name`;
+                            con.query(sql,function(err,result,fields){
+                                con.release();
+                                if(err) callback(err,null);
+                                else callback(null,result);
+                        })
+                    })
+                },
 
         pool: pool
     }

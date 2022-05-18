@@ -8,11 +8,13 @@ import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.core.view.isInvisible
+import com.bumptech.glide.Glide
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityMedicineBinding
 import com.example.issueproject.dto.Medicine
 import com.example.issueproject.dto.MedicineManage
 import com.example.issueproject.res.viewmodel.MainViewModels
+import com.example.issueproject.retrofit.RetrofitBuilder
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
@@ -22,17 +24,8 @@ class Teacher_MedicineInfo : AppCompatActivity() {
     private val binding by lazy{
         ActivityMedicineBinding.inflate(layoutInflater)
     }
-/*
- val id: String,
-    val child_name: String,
-    val m_name: String,
-    val morning: String,
-    val lunch: String,
-    val dinner: String,
-    val date: String,
-    val mPlace: String,
-    val content: String
- */
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
@@ -40,6 +33,14 @@ class Teacher_MedicineInfo : AppCompatActivity() {
         val id = intent.getStringExtra("id").toString()
         val cname = intent.getStringExtra("cname").toString()
         val mname = intent.getStringExtra("mname").toString()
+        val img_url = intent.getStringExtra("img_url").toString()
+
+        if(img_url != null){
+            Glide.with(this)
+                .load("${RetrofitBuilder.servers}/image/teacher/${img_url}")
+                .into(binding.imageViewmedicine)
+        }
+
         GetmedicineInfo(id,cname,mname)
 
     }

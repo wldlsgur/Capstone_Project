@@ -134,13 +134,12 @@ interface ResponseApi {
     ): Call<MutableList<MedicineManagementResult>>
 
     //약리스트 경로변경
-    @GET("/parentinfo/room/allinfo")
+    @GET("/medicine/selectManage/get/data/useID")
     fun parentsMedicineList(
         @Query("school") id: String,
         @Query("room") child_name: String
     ): Call<MutableList<MedicineManagementResult>>
 
-    //약 정보 경로변경
     @GET("/medicine/select/get/data")
     fun GetMedicineInfo(
         @Query("name") id: String,

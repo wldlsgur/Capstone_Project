@@ -86,8 +86,7 @@ class MainParentActivity : AppCompatActivity() {
                 putExtra("cname", binding.textViewName.text)
                 putExtra("school", school)
                 putExtra("room", room)
-                Log.d(TAG, "onCreate: $school")
-                Log.d(TAG, "onCreate: $room")
+                putExtra("img_url",img_url)
             }
             startActivity(intent)
         }
