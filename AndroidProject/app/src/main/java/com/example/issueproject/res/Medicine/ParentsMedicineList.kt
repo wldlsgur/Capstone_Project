@@ -33,6 +33,9 @@ class ParentsMedicineList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         init()
+
+        Log.d(TAG, "onCreate: $id")
+        Log.d(TAG, "onCreate: $cname")
         ShowRecycler(id, cname)
 
         binding.medicinelistButtonAdd.setOnClickListener {

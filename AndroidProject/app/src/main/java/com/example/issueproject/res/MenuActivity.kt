@@ -8,11 +8,12 @@ import android.view.MenuItem
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.bumptech.glide.Glide
 import com.example.issueproject.R
-import com.example.issueproject.databinding.ActivityMenuBinding
+import com.example.issueproject.databinding.ActivityMenuNaviBinding
 import com.example.issueproject.dto.PresidentinfoResult
 import com.example.issueproject.res.Album.AlbumActivity
 import com.example.issueproject.res.Calender.Calender
@@ -30,7 +31,8 @@ import com.google.android.material.navigation.NavigationView
 private const val TAG = "MenuActivity"
 class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener{
     private val binding by lazy{
-        ActivityMenuBinding.inflate(layoutInflater)
+        ActivityMenuNaviBinding.inflate(layoutInflater)
+
     }
     var id: String = ""
     var school: String = ""
@@ -38,6 +40,7 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     var name: String = ""
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
+    lateinit var constraintLayout : ConstraintLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -47,17 +50,17 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         school = intent.getStringExtra("school").toString()
         room = intent.getStringExtra("room").toString()
         val img_url = intent.getStringExtra("img_url")
-
-        binding.textViewName.text = name
-        binding.textViewSchool.text = school
+        constraintLayout = findViewById(R.id.menu)
+        binding.menu.textViewName.text = name
+        binding.menu.textViewSchool.text = school
 
         if(img_url != null){
             Glide.with(this)
                 .load("${RetrofitBuilder.servers}/image/president/${img_url}")
-                .into(binding.imageViewPresident)
+                .into(binding.menu.imageViewPresident)
         }
 
-        binding.PresidentNotic.setOnClickListener {
+        binding.menu.PresidentNotic.setOnClickListener {
             var intent = Intent(this, NoticActivity::class.java).apply {
                 putExtra("school", school)
                 putExtra("room", room)
@@ -68,13 +71,13 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             startActivity(intent)
         }
 
-        binding.PresidentSchoolteachermanagement.setOnClickListener{
+        binding.menu.PresidentSchoolteachermanagement.setOnClickListener{
             var intent = Intent(this, SchoolTeacherListActivity::class.java).apply {
                 putExtra("school", school)
             }
             startActivity(intent)
         }
-        binding.PresidentAlbum.setOnClickListener {
+        binding.menu.PresidentAlbum.setOnClickListener {
             var intent = Intent(this, AlbumActivity::class.java).apply {
                 putExtra("school", school)
                 putExtra("room", room)
@@ -86,7 +89,7 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             var intent = Intent(this, DailyActivity::class.java)
             startActivity(intent)
         }
-        binding.PresidentDayNotic.setOnClickListener {
+        binding.menu.PresidentDayNotic.setOnClickListener {
             var intent = Intent(this, DayNoticActivity::class.java).apply {
                 putExtra("school", school)
                 putExtra("room", room)
@@ -96,17 +99,21 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             }
             startActivity(intent)
         }
-        binding.PresidentFoodList.setOnClickListener {
+        binding.menu.PresidentFoodList.setOnClickListener {
             var intent = Intent(this, FoodlistActivity::class.java)
             startActivity(intent)
         }
-        binding.PresidentMedicinemanagement.setOnClickListener {
+        binding.menu.PresidentMedicinemanagement.setOnClickListener {
 //            var intent = Intent(this, ::class.java)
 //            startActivity(intent)
         }
+        binding.menu.Buttontest.setOnClickListener {
+        var intent = Intent(this, testActivity::class.java)
+        startActivity(intent)
+    }
+
         val toolbar: Toolbar = findViewById(R.id.tool) // toolBar를 통해 App Bar 생성
         setSupportActionBar(toolbar) // 툴바 적용
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setHomeAsUpIndicator(R.drawable.more) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
