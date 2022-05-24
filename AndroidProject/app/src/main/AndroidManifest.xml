@@ -16,6 +16,24 @@
         android:theme="@style/Theme.IssueProject"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".res.UserInfoChangeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.Calender.DailyItem2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".res.Calender.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.Calender.DailyItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.Calender.DailyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".res.Album.AlbumTeacherActivity"
+            android:exported="false" />
+        <activity
             android:name=".res.Album.AddAlbumActivity"
             android:exported="false" />
         <activity

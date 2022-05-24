@@ -27,6 +27,8 @@ class RoomChildListActivity : AppCompatActivity() {
         val school = intent.getStringExtra("school")
         val room = intent.getStringExtra("room")
 
+        binding.textViewChildListRoom.text = room
+
         ShowRecycler(school!!, room!!)
 
     }

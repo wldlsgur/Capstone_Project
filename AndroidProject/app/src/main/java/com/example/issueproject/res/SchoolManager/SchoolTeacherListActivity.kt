@@ -17,6 +17,7 @@ private const val TAG = "SchoolTeacherActivity"
 class SchoolTeacherListActivity : AppCompatActivity() {
     lateinit var SchoolTeacherListAdapter: SchoolTeacherListAdapter
 
+    lateinit var schoollistinfo : MutableList<SchoolteacherListResult>
     var school: String = ""
     private val binding by lazy {
         ActivitySchoolTeacherListBinding.inflate(layoutInflater)
@@ -43,9 +44,10 @@ class SchoolTeacherListActivity : AppCompatActivity() {
             SchoolTeacherListAdapter.setItemClickListener(object: SchoolTeacherListAdapter.OnItemClickListener{
                 override fun onClick(v: View, position: Int) {
                     var intent = Intent(this@SchoolTeacherListActivity, RoomChildListActivity::class.java).apply {
-                        Log.d(TAG, "room: ${SchoolTeacherListAdapter.SchoolListViewHolder(v).room.toString()}")
+                        Log.d(TAG, "room: ${schoollistinfo[position].room}")
+
                         putExtra("position", position.toString())
-                        putExtra("room", SchoolTeacherListAdapter.SchoolListViewHolder(v).room.toString())
+                        putExtra("room", schoollistinfo[position].room)
                         putExtra("school", school)
                     }
                     startActivity(intent)
@@ -62,7 +64,9 @@ class SchoolTeacherListActivity : AppCompatActivity() {
 
                 override fun onSuccess(code: Int, responseData: MutableList<SchoolteacherListResult>) {
                     Log.d(TAG, "onSuccess: $responseData")
+                    schoollistinfo = responseData
                     initRecycler(responseData)
+
                 }
 
                 override fun onFailure(code: Int) {

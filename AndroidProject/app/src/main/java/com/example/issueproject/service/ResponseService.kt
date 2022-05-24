@@ -54,6 +54,24 @@ class ResponseService {
         })
     }
 
+    fun DeleteInfo(deleteinfo: DeleteInfo, callback: RetrofitCallback<SignUpResult>) {
+        RetrofitBuilder.api.DeleteInfo(deleteinfo).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "Sameid: ")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }            }
+
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onResponse: $t")
+            }
+        })
+    }
     fun GetPresidentInfo(id: String, callback: RetrofitCallback<MutableList<PresidentinfoResult>>){
         RetrofitBuilder.api.GetPresidentInfo(id).enqueue(object : Callback<MutableList<PresidentinfoResult>>{
             override fun onResponse(call: Call<MutableList<PresidentinfoResult>>, response: Response<MutableList<PresidentinfoResult>>) {
@@ -376,8 +394,8 @@ class ResponseService {
         })
     }
 
-    fun Uploadimages(school: String, room: String, title: String, date: String, image: MultipartBody.Part, callback: RetrofitCallback<LoginResult>) {
-        RetrofitBuilder.api.Uploadimages(school, room, title, date, image).enqueue(object : Callback<LoginResult>{
+    fun Uploadimages(school: String, room: String, title: String, date: String, images: ArrayList<MultipartBody.Part>, callback: RetrofitCallback<LoginResult>) {
+        RetrofitBuilder.api.Uploadimages(school, room, title, date, images).enqueue(object : Callback<LoginResult>{
             override fun onResponse(call: Call<LoginResult>, response: Response<LoginResult>) {
                 Log.d(TAG, "uploadimage: ..")
                 Log.d(TAG, "onResponse: ${response.code()}")

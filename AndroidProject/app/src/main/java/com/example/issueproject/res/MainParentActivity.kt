@@ -12,6 +12,7 @@ import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityMainParentBinding
 import com.example.issueproject.dto.ParentInfoResult
 import com.example.issueproject.res.Album.AlbumActivity
+import com.example.issueproject.res.Album.AlbumTeacherActivity
 import com.example.issueproject.res.DayNotic.DayNoticActivity
 import com.example.issueproject.res.DayNotic.DayNoticTeacherActivity
 import com.example.issueproject.res.Foodlist.FoodlistActivity
@@ -56,9 +57,10 @@ class MainParentActivity : AppCompatActivity() {
         }
 
         binding.ParentAlbum.setOnClickListener {
-            var intent = Intent(this, AlbumActivity::class.java).apply {
+            var intent = Intent(this, AlbumTeacherActivity::class.java).apply {
                 putExtra("school", school)
                 putExtra("room", room)
+                putExtra("job", "부모님")
             }
             startActivity(intent)
         }

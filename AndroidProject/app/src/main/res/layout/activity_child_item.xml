@@ -10,9 +10,9 @@
         android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        app:layout_constraintStart_toEndOf="@+id/imageViewChildItemImage"
-        app:layout_constraintTop_toTopOf="@+id/imageViewChildItemImage">
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout4">
 
         <TextView
             android:id="@+id/textView2"
@@ -43,9 +43,9 @@
         android:id="@+id/constraintLayout4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout2">
 
         <TextView
             android:id="@+id/textView3"
@@ -76,9 +76,9 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout4"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout56"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout56">
 
         <TextView
             android:id="@+id/textView4"
@@ -116,7 +116,8 @@
         android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars[0]" />
 
     <View
         android:id="@+id/view6"
@@ -131,11 +132,13 @@
         app:layout_constraintTop_toBottomOf="@+id/imageViewChildItemImage" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout56"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewChildItemImage"
+        app:layout_constraintStart_toEndOf="@+id/imageViewChildItemImage">
 
         <TextView
             android:id="@+id/textView57"

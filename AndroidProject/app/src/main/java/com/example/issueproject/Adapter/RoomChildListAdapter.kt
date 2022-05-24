@@ -11,9 +11,6 @@ import com.bumptech.glide.Glide
 import com.example.issueproject.R
 import com.example.issueproject.dto.RoomChildListResult
 import com.example.issueproject.retrofit.RetrofitBuilder
-import com.example.issueproject.retrofit.RetrofitCallback
-import com.example.issueproject.service.ResponseService
-import okhttp3.ResponseBody
 
 private const val TAG = "RoomChildListAdapter"
 class RoomChildListAdapter(var list:MutableList<RoomChildListResult>) : RecyclerView.Adapter<RoomChildListAdapter.RoomListViewHolder>() {

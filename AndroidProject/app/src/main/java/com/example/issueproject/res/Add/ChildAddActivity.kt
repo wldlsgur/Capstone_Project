@@ -14,6 +14,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -200,7 +201,6 @@ class ChildAddActivity : AppCompatActivity() {
                 for(item in responseData) {
                     itemList.add(item.school)
                 }
-
                 val adapter = ArrayAdapter(this@ChildAddActivity, R.layout.simple_spinner_dropdown_item, itemList)
                   binding.spinnerSchool.adapter = adapter
 
