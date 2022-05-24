@@ -10,8 +10,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.issueproject.R
 import com.example.issueproject.dto.MedicineManagementResult
+import com.example.issueproject.retrofit.RetrofitBuilder
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 import okhttp3.ResponseBody
@@ -41,34 +43,36 @@ class MedicineListAdapter(var list:MutableList<MedicineManagementResult>) : Recy
 
 
 
-
-
-            //GetImageUrl(data.child_image)
-            //val text= "/image/parents/이정은.jpg"
-            //GetImageUrl(text)
-            //GetImageUrl("parents", "이정은")
-
+            /*
+            if(data.image_url != "default"){
+                Glide.with(childimage.context)
+                    .load("${RetrofitBuilder.servers}/image/parent/${data.image_url}")
+                    .into(childimage)
+            }
+        */
         }
 
-        fun GetImageUrl(target: String, name: String){
-            ResponseService().GetImageUrl(target, name, object: RetrofitCallback<ResponseBody>{
-                override fun onError(t: Throwable) {
-                    Log.d(TAG, "onError: ")
-                }
-
-                override fun onSuccess(code: Int, responseData: ResponseBody) {
-                    Log.d(TAG, "onSuccess: $responseData")
-
-                    val bitmap: Bitmap = BitmapFactory.decodeStream(responseData.byteStream())
-                    childimage.setImageBitmap(bitmap)
-                }
-
-                override fun onFailure(code: Int) {
-                    Log.d(TAG, "onFailure: $code")
-                }
-            })
-        }
+//        fun GetImageUrl(target: String, name: String){
+//            ResponseService().GetImageUrl(target, name, object: RetrofitCallback<ResponseBody>{
+//                override fun onError(t: Throwable) {
+//                    Log.d(TAG, "onError: ")
+//                }
+//
+//                override fun onSuccess(code: Int, responseData: ResponseBody) {
+//                    Log.d(TAG, "onSuccess: $responseData")
+//
+//                    val bitmap: Bitmap = BitmapFactory.decodeStream(responseData.byteStream())
+//                    childimage.setImageBitmap(bitmap)
+//                }
+//
+//                override fun onFailure(code: Int) {
+//                    Log.d(TAG, "onFailure: $code")
+//                }
+//            })
+//        }
     }
+
+
     override fun onCreateViewHolder(child: ViewGroup, viewType: Int): MedicineListViewHolder {
         val view = LayoutInflater.from(child.context).inflate(R.layout.activity_medicine_list_item,child,false)
         return MedicineListViewHolder(view)

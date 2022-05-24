@@ -3,37 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".res.MenuActivity">
+    android:layout_height="match_parent">
 
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:openDrawer="start">
-
-        <include
-            layout="@layout/activity_navigation_appbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="true"
-            app:headerLayout="@layout/activity_navigation_header"
-            app:menu="@menu/activity_navigation_parents_menu_list" />
-
-    </androidx.drawerlayout.widget.DrawerLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/President_schoolteachermanagement"
@@ -178,6 +150,7 @@
         android:layout_marginEnd="30dp"
         android:background="@color/main"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
@@ -390,13 +363,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/buttontest"
+        android:id="@+id/Buttontest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="192dp"
-        android:text="Button"
+        android:layout_marginTop="116dp"
+        android:text="Buttontest"
         app:layout_constraintEnd_toStartOf="@+id/President_schoolteachermanagement"
-        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
