@@ -16,6 +16,9 @@
         android:theme="@style/Theme.IssueProject"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".res.Album.AlbumTeacherActivity"
+            android:exported="false" />
+        <activity
             android:name=".res.Album.AddAlbumActivity"
             android:exported="false" />
         <activity

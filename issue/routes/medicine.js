@@ -46,6 +46,42 @@ router.get('/select/get/data', function(req, res, next) {
     else res.send(result);
   })
 })
+
+router.post('/updateMedicineInfo', function(req, res){
+  let id = req.body.id;
+  let child_name = req.body.child_name;
+  let m_name = req.body.m_name;
+  let orgMname = req.body.orgMname;
+  let morning = req.body.morning;
+  let lunch = req.body.lunch;
+  let dinner = req.body.dinner;
+  let date = req.body.date;
+  let mPlace = req.body.mPlace;
+  let content = req.body.content;
+
+  db_medicine.updateMedicineInfo(id, child_name, m_name, orgMname, morning, lunch, dinner, date, mPlace, content, function(err,result){
+    if(err){
+      res.status(400).send(err);
+    } else{
+      res.send(sucess_response);
+    }
+  })
+})
+
+router.post('/deleteMedicineInfo', function(req, res){
+  let id = req.body.id;
+  let child_name = req.body.child_name;
+  let m_name = req.body.m_name;
+
+  db_medicine.deleteMedicineInfo(id, child_name, m_name, function(err,result){
+    if(err){
+      res.status(400).send(err);
+    } else{
+      res.send(sucess_response);
+    }
+  })
+})
+
 // medicine end
 // medicinemanagement
 router.get('/selectManage/get/data', function(req, res, next) {

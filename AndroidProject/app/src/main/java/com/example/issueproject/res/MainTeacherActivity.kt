@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.example.issueproject.databinding.ActivityMainTeacherBinding
 import com.example.issueproject.res.Album.AlbumActivity
+import com.example.issueproject.res.Album.AlbumTeacherActivity
 import com.example.issueproject.res.DayNotic.DayNoticActivity
 import com.example.issueproject.res.DayNotic.DayNoticTeacherActivity
 import com.example.issueproject.res.Foodlist.FoodlistActivity
@@ -42,6 +43,7 @@ class MainTeacherActivity : AppCompatActivity() {
 
         binding.TeacherRoomchildmanagement.setOnClickListener{
             var intent = Intent(this, RoomChildListActivity::class.java).apply{
+                putExtra("school", school)
                 putExtra("room",room)
             }
             startActivity(intent)
@@ -51,7 +53,7 @@ class MainTeacherActivity : AppCompatActivity() {
             var intent = Intent(this, NoticActivity::class.java).apply {
                 putExtra("school", school)
                 putExtra("room", room)
-                putExtra("job", "부모님")
+                putExtra("job", "선생님")
                 putExtra("name", name)
                 putExtra("menu", "공지사항")
             }
@@ -59,9 +61,10 @@ class MainTeacherActivity : AppCompatActivity() {
         }
 
         binding.TeacherAlbum.setOnClickListener {
-            var intent = Intent(this, AlbumActivity::class.java).apply {
+            var intent = Intent(this, AlbumTeacherActivity::class.java).apply {
                 putExtra("school", school)
                 putExtra("room", room)
+                putExtra("job", "선생님")
             }
             startActivity(intent)
         }
