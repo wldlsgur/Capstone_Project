@@ -54,6 +54,24 @@ class ResponseService {
         })
     }
 
+    fun DeleteInfo(deleteinfo: DeleteInfo, callback: RetrofitCallback<SignUpResult>) {
+        RetrofitBuilder.api.DeleteInfo(deleteinfo).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "Sameid: ")
+                if (response.code() == 200){
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: 200")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }            }
+
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onResponse: $t")
+            }
+        })
+    }
     fun GetPresidentInfo(id: String, callback: RetrofitCallback<MutableList<PresidentinfoResult>>){
         RetrofitBuilder.api.GetPresidentInfo(id).enqueue(object : Callback<MutableList<PresidentinfoResult>>{
             override fun onResponse(call: Call<MutableList<PresidentinfoResult>>, response: Response<MutableList<PresidentinfoResult>>) {

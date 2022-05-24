@@ -15,6 +15,8 @@ import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityMenuBinding
 import com.example.issueproject.dto.PresidentinfoResult
 import com.example.issueproject.res.Album.AlbumActivity
+import com.example.issueproject.res.Calender.Calender
+import com.example.issueproject.res.Calender.DailyActivity
 import com.example.issueproject.res.DayNotic.DayNoticActivity
 import com.example.issueproject.res.Foodlist.FoodlistActivity
 import com.example.issueproject.res.Navi.Navigation
@@ -30,16 +32,20 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     private val binding by lazy{
         ActivityMenuBinding.inflate(layoutInflater)
     }
+    var id: String = ""
+    var school: String = ""
+    var room: String = ""
+    var name: String = ""
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val id = intent.getStringExtra("id")
-        val name = intent.getStringExtra("name")
-        val school = intent.getStringExtra("school")
-        val room = intent.getStringExtra("room")
+        id = intent.getStringExtra("id").toString()
+        name = intent.getStringExtra("name").toString()
+        school = intent.getStringExtra("school").toString()
+        room = intent.getStringExtra("room").toString()
         val img_url = intent.getStringExtra("img_url")
 
         binding.textViewName.text = name
@@ -77,8 +83,8 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             startActivity(intent)
         }
         binding.PresidentDaliy.setOnClickListener {
-//            var intent = Intent(this, CalenActivity::class.java)
-//            startActivity(intent)
+            var intent = Intent(this, DailyActivity::class.java)
+            startActivity(intent)
         }
         binding.PresidentDayNotic.setOnClickListener {
             var intent = Intent(this, DayNoticActivity::class.java).apply {
@@ -128,10 +134,17 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
     // 드로어 내 아이템 클릭 이벤트 처리하는 함수
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+        var intent2 = Intent(this, UserInfoChangeActivity::class.java).apply{
+            putExtra("id", id)
+            putExtra("job", "원장님")
+        }
+        var intent3 = Intent(this, MainActivity::class.java)
         when (item.itemId) {
-            R.id.menu_item1 -> Toast.makeText(this, "menu_item1 실행", Toast.LENGTH_SHORT).show()
+            R.id.menu_item1 -> startActivity(intent2)
             R.id.menu_item2 -> Toast.makeText(this, "menu_item2 실행", Toast.LENGTH_SHORT).show()
-            R.id.menu_item3 -> Toast.makeText(this, "menu_item3 실행", Toast.LENGTH_SHORT).show()
+            R.id.menu_item3 -> startActivity(intent3)
+
         }
         return false
     }

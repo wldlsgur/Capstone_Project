@@ -26,6 +26,12 @@ interface ResponseApi {
         @Body signData: SingUpInfo
     ): Call<SignUpResult>
 
+    //회원탈퇴
+    @POST("/delete/info")
+    fun DeleteInfo(
+        @Body deleteinfo: DeleteInfo
+    ): Call<SignUpResult>
+
     //id로 원장의 모든 정보
     @GET("/staff/presidentinfo/useid")
     fun GetPresidentInfo(
