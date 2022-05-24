@@ -15,6 +15,7 @@ import com.example.issueproject.databinding.ActivityDayNoticBinding
 import com.example.issueproject.databinding.ActivityDayNoticTeacherBinding
 import com.example.issueproject.dto.AddManagement
 import com.example.issueproject.dto.GetRoom
+import com.example.issueproject.dto.GetSchoolManagement
 import com.example.issueproject.res.Add.AddNoticActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -65,7 +66,7 @@ class DayNoticTeacherActivity : AppCompatActivity() {
         }
     }
 
-    private fun initRecycler(list:MutableList<AddManagement>){
+    private fun initRecycler(list:MutableList<GetSchoolManagement>){
         DayNoticAdapter = DayNoticAdapter(list)
 
         binding.DayNoticTeacherRV.apply {
@@ -76,12 +77,12 @@ class DayNoticTeacherActivity : AppCompatActivity() {
 
     private fun ShowRecycler(menu: String, school: String, room: String) {
         ResponseService().DayNoticInfoShow(menu, school, room, object :
-            RetrofitCallback<MutableList<AddManagement>> {
+            RetrofitCallback<MutableList<GetSchoolManagement>> {
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
 
-            override fun onSuccess(code: Int, responseData: MutableList<AddManagement>) {
+            override fun onSuccess(code: Int, responseData: MutableList<GetSchoolManagement>) {
                 Log.d(TAG, "onSuccess: $responseData")
                 initRecycler(responseData)
             }

@@ -1,10 +1,8 @@
 package com.example.issueproject.res.Add
 
-import android.R
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +16,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
+import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityTeacherAddBinding
 import com.example.issueproject.dto.*
 import com.example.issueproject.retrofit.RetrofitCallback
@@ -193,7 +192,7 @@ class TeacherAddActivity : AppCompatActivity() {
                     itemList.add(item.school)
                 }
 
-                val adapter = ArrayAdapter(this@TeacherAddActivity, R.layout.simple_spinner_dropdown_item, itemList)
+                val adapter = ArrayAdapter(this@TeacherAddActivity, R.layout.spinner, itemList)
                 binding.TeacherAddSpinnerSchool.adapter = adapter
 
             }
@@ -218,7 +217,7 @@ class TeacherAddActivity : AppCompatActivity() {
                     roomList.add(item.room)
                 }
 
-                val adapter = ArrayAdapter(this@TeacherAddActivity, R.layout.simple_spinner_dropdown_item, roomList)
+                val adapter = ArrayAdapter(this@TeacherAddActivity, R.layout.spinner, roomList)
                 binding.TeacherAddSpinnerRoom.adapter = adapter
             }
 

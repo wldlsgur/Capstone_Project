@@ -1,8 +1,6 @@
 package com.example.issueproject.res.DayNotic
 
 import DayNoticAdapter
-import android.R
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,10 +8,11 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityDayNoticBinding
 import com.example.issueproject.dto.AddManagement
 import com.example.issueproject.dto.GetRoom
-import com.example.issueproject.res.Add.AddNoticActivity
+import com.example.issueproject.dto.GetSchoolManagement
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
@@ -54,7 +53,7 @@ class DayNoticActivity : AppCompatActivity() {
         }
     }
 
-    private fun initRecycler(list:MutableList<AddManagement>){
+    private fun initRecycler(list:MutableList<GetSchoolManagement>){
         DayNoticAdapter = DayNoticAdapter(list)
 
         binding.DayNoticRV.apply {
@@ -64,12 +63,12 @@ class DayNoticActivity : AppCompatActivity() {
     }
 
     private fun ShowRecycler(menu: String, school: String, room: String) {
-        ResponseService().DayNoticInfoShow(menu, school, room, object : RetrofitCallback<MutableList<AddManagement>> {
+        ResponseService().DayNoticInfoShow(menu, school, room, object : RetrofitCallback<MutableList<GetSchoolManagement>> {
                 override fun onError(t: Throwable) {
                     Log.d(TAG, "onError: $t")
                 }
 
-                override fun onSuccess(code: Int, responseData: MutableList<AddManagement>) {
+                override fun onSuccess(code: Int, responseData: MutableList<GetSchoolManagement>) {
                     Log.d(TAG, "onSuccess: $responseData")
                     initRecycler(responseData)
                 }
@@ -93,7 +92,7 @@ class DayNoticActivity : AppCompatActivity() {
                     roomList.add(item.room)
                 }
 
-                val adapter = ArrayAdapter(this@DayNoticActivity, R.layout.simple_spinner_dropdown_item, roomList)
+                val adapter = ArrayAdapter(this@DayNoticActivity, R.layout.spinner, roomList)
                 binding.spinnerDayNoticSchool.adapter = adapter
             }
 

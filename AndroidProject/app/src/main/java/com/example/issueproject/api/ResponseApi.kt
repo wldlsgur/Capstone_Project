@@ -69,7 +69,7 @@ interface ResponseApi {
         @Query("menu") menu: String,
         @Query("school") school: String,
         @Query("room") room: String,
-    ): Call<MutableList<AddManagement>>
+    ): Call<MutableList<GetSchoolManagement>>
 
     //원장 추가
     @POST("/create/presidentinfo")

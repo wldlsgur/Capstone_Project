@@ -65,8 +65,8 @@ class ResponseService {
                     } else{
                         callback.onFailure(response.code())
                     }
-                }            }
-
+                }
+            }
             override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
                 Log.d(TAG, "onResponse: $t")
             }
@@ -213,11 +213,11 @@ class ResponseService {
         })
     }
 
-    fun DayNoticInfoShow(menu: String, school: String, room: String, callback: RetrofitCallback<MutableList<AddManagement>>) {
-        RetrofitBuilder.api.DayNoticInfo(menu, school, room).enqueue(object : Callback<MutableList<AddManagement>>{
+    fun DayNoticInfoShow(menu: String, school: String, room: String, callback: RetrofitCallback<MutableList<GetSchoolManagement>>) {
+        RetrofitBuilder.api.DayNoticInfo(menu, school, room).enqueue(object : Callback<MutableList<GetSchoolManagement>>{
             override fun onResponse(
-                call: Call<MutableList<AddManagement>>,
-                response: Response<MutableList<AddManagement>>
+                call: Call<MutableList<GetSchoolManagement>>,
+                response: Response<MutableList<GetSchoolManagement>>
             ) {
                 Log.d(TAG, "DayNoticInfoShow: ..")
                 if (response.code() == 200){
@@ -230,7 +230,7 @@ class ResponseService {
                 }
             }
 
-            override fun onFailure(call: Call<MutableList<AddManagement>>, t: Throwable) {
+            override fun onFailure(call: Call<MutableList<GetSchoolManagement>>, t: Throwable) {
                 Log.d(TAG, "onFailure: $t")
                 callback.onError(t)
             }

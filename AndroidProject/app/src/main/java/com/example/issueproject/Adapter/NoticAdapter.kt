@@ -4,16 +4,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.issueproject.R
-import com.example.issueproject.dto.AddManagement
+import com.example.issueproject.dto.GetSchoolManagement
 
-class NoticAdapter(var list:MutableList<AddManagement>) : RecyclerView.Adapter<NoticAdapter.NoticeViewHolder>() {
+class NoticAdapter(var list:MutableList<GetSchoolManagement>) : RecyclerView.Adapter<NoticAdapter.NoticeViewHolder>() {
 
     inner class NoticeViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView){
         private val title: TextView = itemView.findViewById(R.id.textViewNotic_item_title)
         private val date: TextView = itemView.findViewById(R.id.textViewNotic_item_date)
         private val content: TextView = itemView.findViewById(R.id.textViewNotic_item_content)
 
-        fun bindinfo(data:AddManagement){
+        fun bindinfo(data: GetSchoolManagement){
             // "${data.year}년 ${data.month}월 ${data.day}일"
             date.text = data.date
             title.text = "제목: " + data.title

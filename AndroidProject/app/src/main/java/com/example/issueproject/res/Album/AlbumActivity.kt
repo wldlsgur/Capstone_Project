@@ -1,22 +1,17 @@
 package com.example.issueproject.res.Album
 
-import android.R
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issueproject.Adapter.AlbumAdapter
+import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityAlbumBinding
-import com.example.issueproject.dto.AddManagement
-import com.example.issueproject.dto.AddManagementResult
 import com.example.issueproject.dto.AlbumResult
 import com.example.issueproject.dto.GetRoom
-import com.example.issueproject.res.submenu.SubChildMunuActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
@@ -97,7 +92,7 @@ class AlbumActivity : AppCompatActivity() {
                     roomList.add(item.room)
                 }
 
-                val adapter = ArrayAdapter(this@AlbumActivity, R.layout.simple_spinner_dropdown_item, roomList)
+                val adapter = ArrayAdapter(this@AlbumActivity, R.layout.spinner, roomList)
                 binding.spinnerAlbumRoom.adapter = adapter
             }
 

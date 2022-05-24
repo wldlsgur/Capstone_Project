@@ -1,24 +1,20 @@
 package com.example.issueproject.res.Add
 
-import android.R
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.ImageDecoder
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
+import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityChildAddBinding
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -201,7 +197,7 @@ class ChildAddActivity : AppCompatActivity() {
                 for(item in responseData) {
                     itemList.add(item.school)
                 }
-                val adapter = ArrayAdapter(this@ChildAddActivity, R.layout.simple_spinner_dropdown_item, itemList)
+                val adapter = ArrayAdapter(this@ChildAddActivity, R.layout.spinner, itemList)
                   binding.spinnerSchool.adapter = adapter
 
             }
@@ -227,7 +223,7 @@ class ChildAddActivity : AppCompatActivity() {
                     roomList.add(item.room)
                 }
 
-                val adapter = ArrayAdapter(this@ChildAddActivity, R.layout.simple_spinner_dropdown_item, roomList)
+                val adapter = ArrayAdapter(this@ChildAddActivity, R.layout.spinner, roomList)
                 binding.spinnerRoom.adapter = adapter
             }
 

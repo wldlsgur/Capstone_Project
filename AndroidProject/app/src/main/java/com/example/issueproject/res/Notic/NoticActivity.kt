@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityNoticBinding
 import com.example.issueproject.dto.AddManagement
+import com.example.issueproject.dto.GetSchoolManagement
 import com.example.issueproject.res.Add.AddNoticActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -59,7 +60,7 @@ class NoticActivity : AppCompatActivity() {
         }
     }
 
-    private fun initRecycler(list:MutableList<AddManagement>){
+    private fun initRecycler(list:MutableList<GetSchoolManagement>){
         NoticAdapter = NoticAdapter(list)
 
         binding.NoticRV.apply {
@@ -70,12 +71,12 @@ class NoticActivity : AppCompatActivity() {
 
     private fun ShowRecycler(menu: String, school: String, room: String) {
         ResponseService().DayNoticInfoShow(menu, school, room, object :
-            RetrofitCallback<MutableList<AddManagement>> {
+            RetrofitCallback<MutableList<GetSchoolManagement>> {
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
 
-            override fun onSuccess(code: Int, responseData: MutableList<AddManagement>) {
+            override fun onSuccess(code: Int, responseData: MutableList<GetSchoolManagement>) {
                 Log.d(TAG, "onSuccess: $responseData")
                 initRecycler(responseData)
             }
