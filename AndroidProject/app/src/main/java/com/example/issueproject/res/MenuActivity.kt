@@ -72,6 +72,7 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             var intent = Intent(this, AlbumActivity::class.java).apply {
                 putExtra("school", school)
                 putExtra("room", room)
+                putExtra("job", "원장님")
             }
             startActivity(intent)
         }

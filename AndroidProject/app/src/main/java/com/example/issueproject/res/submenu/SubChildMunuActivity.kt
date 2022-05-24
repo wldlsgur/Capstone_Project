@@ -53,6 +53,7 @@ class SubChildMunuActivity : AppCompatActivity() {
         ChildAdapter.setItemClickListener(object: ChildAdapter.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
                 // 클릭 시 이벤트 작성
+                Log.d(TAG, "onClick: ${ChildAdapter.ChildListViewHolder(v).childagree.toString()}")
                 if(ChildAdapter.ChildListViewHolder(v).childagree.toString() == "승인이 필요합니다."){
                     Toast.makeText(this@SubChildMunuActivity, "승인까지 기다려주세요!", Toast.LENGTH_SHORT).show()
                 }

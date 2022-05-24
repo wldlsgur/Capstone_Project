@@ -1,9 +1,13 @@
 package com.example.issueproject.res.Album
 
+import android.R
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issueproject.Adapter.AlbumAdapter
@@ -11,6 +15,7 @@ import com.example.issueproject.databinding.ActivityAlbumBinding
 import com.example.issueproject.dto.AddManagement
 import com.example.issueproject.dto.AddManagementResult
 import com.example.issueproject.dto.AlbumResult
+import com.example.issueproject.dto.GetRoom
 import com.example.issueproject.res.submenu.SubChildMunuActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -21,21 +26,34 @@ class AlbumActivity : AppCompatActivity() {
         ActivityAlbumBinding.inflate(layoutInflater)
     }
     private lateinit var albumAdapter : AlbumAdapter
+    val roomList = mutableListOf<String>()
+    var room : String = ""
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         val school = intent.getStringExtra("school")
         val room = intent.getStringExtra("room")
+        val job = intent.getStringExtra("job")
 
-        ShowRecycler(school!!, room!!)
+        binding.textViewAlbumSchool.text = school
 
-        binding.buttonAlbumAdd.setOnClickListener {
-            var intent = Intent(this, AddAlbumActivity::class.java).apply {
-                putExtra("school", school)
-                putExtra("room", room)
+
+        GetRoom(school!!)
+
+        Log.d(TAG, "school: $school")
+        Log.d(TAG, "room: $room")
+
+        binding.spinnerAlbumRoom.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
             }
-            startActivity(intent)
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val room = roomList[position]
+                ShowRecycler(school!!,room!!)
+            }
+
         }
     }
 
@@ -67,20 +85,26 @@ class AlbumActivity : AppCompatActivity() {
         })
     }
 
-//    private fun GetAlbumInfo(school: String, room: String){
-//        ResponseService().GetAlbumInfo(school, room, object: RetrofitCallback<MutableList<AlbumResult>> {
-//            override fun onError(t: Throwable) {
-//                Log.d(TAG, "onError: $t")
-//            }
-//
-//            override fun onSuccess(code: Int, responseData: MutableList<AlbumResult>) {
-//                Log.d(TAG, "onSuccess: $code")
-//            }
-//
-//            override fun onFailure(code: Int) {
-//                Log.d(TAG, "onFailure: $code")
-//            }
-//
-//        })
-//    }
+    fun GetRoom(school: String){
+        ResponseService().GetRoom(school, object: RetrofitCallback<MutableList<GetRoom>> {
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: MutableList<GetRoom>) {
+                roomList.clear()
+                for(item in responseData) {
+                    roomList.add(item.room)
+                }
+
+                val adapter = ArrayAdapter(this@AlbumActivity, R.layout.simple_spinner_dropdown_item, roomList)
+                binding.spinnerAlbumRoom.adapter = adapter
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+            }
+
+        })
+    }
 }
