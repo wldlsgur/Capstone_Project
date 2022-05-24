@@ -5,7 +5,6 @@
   "scripts": {
     "start": "pm2 start ./bin/www -- start",
     "stop": "pm2 stop ./bin/www",
-    "lint": "./node_modules/.bin/eslint ."
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
