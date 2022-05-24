@@ -47,6 +47,7 @@ class ParentsMedicineList : AppCompatActivity() {
                 putExtra("mname","NULL")
                 putExtra("school", school)
                 putExtra("room", room)
+                putExtra("img_url",img_url)
 
             }
             startActivity(intent)

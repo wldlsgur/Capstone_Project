@@ -85,7 +85,7 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             }
             startActivity(intent)
         }
-        binding.PresidentDaliy.setOnClickListener {
+        binding.menu.PresidentDaliy.setOnClickListener {
             var intent = Intent(this, DailyActivity::class.java)
             startActivity(intent)
         }
