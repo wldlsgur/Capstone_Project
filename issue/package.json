@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "pm2 start ./bin/www -- start",
-    "stop": "pm2 stop ./bin/www",
+    "stop": "pm2 stop ./bin/www"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
