@@ -35,3 +35,5 @@ router.get('/push_send', function (req, res, next) {
         console.log('Error Sending message!!! : ', err)
       })
   })
+
+  module.exports = router;
