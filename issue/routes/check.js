@@ -74,6 +74,7 @@ router.post('/delete/image', function(req, res){
     let json_data = {
         target : req.body.target,
         image_url : req.body.image_url,
+        key : req.body.key
     }
 
     if(check_element.check_require_element(json_data) === false){
@@ -81,7 +82,7 @@ router.post('/delete/image', function(req, res){
         return;
     }
 
-    fs.unlink(`uploads/${json_data.target}` + json_data.image_url, function(err){
+    fs.unlink(`uploads/${json_data.target}` + json_data.image_url, function(err){//앨범은 한번에 여라장 삭제로 수정생각
         if(err){
             res.status(400).send(err);
             return;
@@ -90,20 +91,20 @@ router.post('/delete/image', function(req, res){
             let query = ``;
             switch(json_data.target){
                 case 'parent':
-                    query = `UPDATE parentinfo SET image_url='/default' WHERE image_url = '${json_data.image_url}';`
+                    query = `UPDATE parentinfo SET image_url='default' WHERE key_id = '${json_data.key}';`
                     break;
                 case 'food':
                     query = `DELETE FROM food_list WHERE image_url = '${json_data.image_url}';`
                     break;
                 case 'teacher':
-                    query = `UPDATE teachertinfo SET image_url='/default' WHERE image_url = '${json_data.image_url}';`
+                    query = `UPDATE teachertinfo SET image_url='default' WHERE id = '${key}';`
                     break;
                 case 'president':
-                    query = `UPDATE presidentinfo SET image_url='/default' WHERE image_url = '${json_data.image_url}';`
+                    query = `UPDATE presidentinfo SET image_url='default' WHERE id = '${key}';`
                     break;
-                case 'album':
-                    query = `DELETE FROM album WHERE image_url = '${json_data.image_url}';`
-                    break;
+                // case 'album':
+                //     query = `DELETE FROM album WHERE image_url = '${json_data.image_url}';`
+                //     break;
                 default :
                     break;
 		    }

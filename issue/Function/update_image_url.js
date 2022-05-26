@@ -21,9 +21,6 @@ module.exports = {
 			case 'president':
 				query = `UPDATE presidentinfo SET image_url='${file_url}' WHERE id = '${key}';`
 				break;
-			case 'album':
-				query = `UPDATE album SET image_url='${file_url}' WHERE key_id = '${key}';`
-				break;
 		}
         console.log(query);
 		db_create_sql.UPDATE(query, function(err, result){

@@ -7,7 +7,7 @@ const multer = require('multer');
 
 const update_image_url = require('./Function/update_image_url');
 
-const storage = multer.diskStorage({
+const storage = multer.diskStorage({//사진 한장 추가
 	destination: function (req, file, cb) {
 		let target = req.params.target;
 
@@ -37,7 +37,7 @@ const storage = multer.diskStorage({
 	},
 	limits: {fileSize: 1 * 256 * 256}
 })
-const storages = multer.diskStorage({
+const storages = multer.diskStorage({//사진 여러장 추가
 	destination: function (req, file, cb) {
 		cb(null, 'uploads/album');
 	},

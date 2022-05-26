@@ -7,7 +7,7 @@ const make_query = require('../Function/make_query');
 const element_msg = "plz send require elements";
 const sucess_response = {res : true, msg : 'success'};
 const failed_response = {res : false, msg : "failed"};
-
+// 추가는 create, 삭제는 check에 사진 삭제하면서 
 router.get('/info', function(req, res){
     let json_data = {
         school : req.query.school,
