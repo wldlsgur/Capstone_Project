@@ -1,5 +1,6 @@
 package com.example.issueproject.res.Album
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -53,7 +54,7 @@ class AlbumActivity : AppCompatActivity() {
     }
 
     private fun initAdapter(lists:MutableList<AlbumResult>){
-        albumAdapter = AlbumAdapter(lists)
+        albumAdapter = AlbumAdapter(lists, this)
 
         binding.albumRv.apply {
             layoutManager = LinearLayoutManager(context)

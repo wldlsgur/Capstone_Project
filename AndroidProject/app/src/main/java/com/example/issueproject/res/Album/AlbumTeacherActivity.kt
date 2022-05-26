@@ -55,7 +55,7 @@ class AlbumTeacherActivity : AppCompatActivity() {
     }
 
     private fun initAdapter(lists:MutableList<AlbumResult>){
-        albumAdapter = AlbumAdapter(lists)
+        albumAdapter = AlbumAdapter(lists, this)
 
         binding.albumTeacherRv.apply {
             layoutManager = LinearLayoutManager(context)
