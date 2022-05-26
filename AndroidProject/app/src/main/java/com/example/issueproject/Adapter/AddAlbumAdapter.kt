@@ -8,13 +8,12 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.issueproject.R
-import com.example.issueproject.retrofit.RetrofitBuilder
 
 class AddAlbumAdapter(var list:MutableList<Uri?>) : RecyclerView.Adapter<AddAlbumAdapter.AddAlbumViewHolder>() {
 
     inner class AddAlbumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val albumimage: ImageView = itemView.findViewById(R.id.imageView_Album)
+        val albumimage: ImageView = itemView.findViewById(R.id.imageView_AlbumImageItem)
 
     }
 

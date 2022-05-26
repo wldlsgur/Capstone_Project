@@ -179,12 +179,12 @@ interface ResponseApi {
         @Part images: ArrayList<MultipartBody.Part>
     ): Call<LoginResult>
 
-//    //이미지 가져오기
-//    @GET("/image/{target}/{name}")
-//    fun  GetImageUrl(
-//        @Path("target") target: String,
-//        @Path("name") name: String
-//    ): Call<ResponseBody>
+    //이미지 가져오기
+    @GET("/image/{target}/{key}")
+    fun  GetImageUrl(
+        @Path("target") target: String,
+        @Path("key") key: String
+    ): Call<ResponseBody>
 
     //어린이집과 반에 해당하는 모든 앨범 정보
     @GET("/album/info")

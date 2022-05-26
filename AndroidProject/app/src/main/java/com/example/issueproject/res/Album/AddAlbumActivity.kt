@@ -147,7 +147,7 @@ class AddAlbumActivity : AppCompatActivity() {
             override fun onSuccess(code: Int, responseData: LoginResult) {
                 Log.d(TAG, "onSuccess: $code")
                 Log.d(TAG, "onSuccess: $responseData")
-                
+                finish()
             }
 
             override fun onFailure(code: Int) {
