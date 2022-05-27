@@ -3,29 +3,22 @@ package com.example.issueproject.res
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.Gravity
 import android.view.MenuItem
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.bumptech.glide.Glide
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityMenuNaviBinding
-import com.example.issueproject.dto.PresidentinfoResult
 import com.example.issueproject.res.Album.AlbumActivity
-import com.example.issueproject.res.Calender.Calender
 import com.example.issueproject.res.Calender.DailyActivity
 import com.example.issueproject.res.DayNotic.DayNoticActivity
 import com.example.issueproject.res.Foodlist.FoodlistActivity
-import com.example.issueproject.res.Navi.Navigation
 import com.example.issueproject.res.Notic.NoticActivity
 import com.example.issueproject.res.SchoolManager.SchoolTeacherListActivity
 import com.example.issueproject.retrofit.RetrofitBuilder
-import com.example.issueproject.retrofit.RetrofitCallback
-import com.example.issueproject.service.ResponseService
 import com.google.android.material.navigation.NavigationView
 
 private const val TAG = "MenuActivity"
@@ -133,7 +126,11 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         when (item!!.itemId) {
             android.R.id.home -> {
                 // 햄버거 버튼 클릭시 네비게이션 드로어 열기
-                drawerLayout.openDrawer(GravityCompat.START)
+                drawerLayout.openDrawer(Gravity.RIGHT)
+
+
+
+
             }
         }
         return super.onOptionsItemSelected(item)

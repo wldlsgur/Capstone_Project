@@ -13,6 +13,7 @@ import com.example.issueproject.databinding.ActivityMainParentBinding
 import com.example.issueproject.dto.ParentInfoResult
 import com.example.issueproject.res.Album.AlbumActivity
 import com.example.issueproject.res.Album.AlbumTeacherActivity
+import com.example.issueproject.res.Calender.DailyActivity
 import com.example.issueproject.res.DayNotic.DayNoticActivity
 import com.example.issueproject.res.DayNotic.DayNoticTeacherActivity
 import com.example.issueproject.res.Foodlist.FoodlistActivity
@@ -76,6 +77,10 @@ class MainParentActivity : AppCompatActivity() {
                 putExtra("name", binding.textViewName.text)
                 putExtra("menu", "알림장")
             }
+            startActivity(intent)
+        }
+        binding.ParentDaliy.setOnClickListener {
+            var intent = Intent(this, DailyActivity::class.java)
             startActivity(intent)
         }
         binding.ParentFoodList.setOnClickListener {

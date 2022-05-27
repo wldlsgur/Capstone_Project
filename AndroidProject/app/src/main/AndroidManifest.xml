@@ -127,6 +127,9 @@
             android:name=".res.Navi.Navigation"
             android:exported="false" />
         <activity
+        android:name=".res.testActivity"
+        android:exported="false" />
+        <activity
             android:name=".res.MainActivity"
             android:exported="true">
             <intent-filter>
