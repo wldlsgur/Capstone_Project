@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_room_child_list_item.xml" value="0.536" />
+        <entry key="..\:/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_school_teacher_list.xml" value="0.25364583333333335" />
+        <entry key="..\:/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_school_teacher_list_item.xml" value="0.1" />
+        <entry key="..\:/GitHub/capstone/AndroidProject/app/src/main/res/menu/activity_navigation_parents_menu_list.xml" value="0.25364583333333335" />
+        <entry key="..\:/GitHub/capstone/AndroidProject/app/src/main/res/menu/activity_navigation_president_menu_list.xml" value="0.25364583333333335" />
+        <entry key="..\:/GitHub/capstone/AndroidProject/app/src/main/res/menu/activity_navigation_teacher_menu_list.xml" value="0.25364583333333335" />
+        <entry key="..\:/GitHub/capstone/AndroidProject/app/src/main/res/menu/popup_menu.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/AndroidProject/app/src/main/res/layout/activity_album.xml" value="0.17481884057971014" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/AndroidProject/app/src/main/res/layout/activity_album_item2.xml" value="0.1816123188405797" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/AndroidProject/app/src/main/res/layout/activity_child_item.xml" value="0.4" />
