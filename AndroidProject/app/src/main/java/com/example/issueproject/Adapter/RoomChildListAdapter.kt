@@ -18,7 +18,9 @@ import com.example.issueproject.dto.SchoolteacherListResult
 import com.example.issueproject.retrofit.RetrofitBuilder
 
 private const val TAG = "RoomChildListAdapter"
-class RoomChildListAdapter(val context: Context, var list:MutableList<RoomChildListResult>) : RecyclerView.Adapter<RoomChildListAdapter.RoomListViewHolder>() {
+class RoomChildListAdapter(val context: Context) : RecyclerView.Adapter<RoomChildListAdapter.RoomListViewHolder>() {
+
+    var list:MutableList<RoomChildListResult> = mutableListOf()
 
     inner class RoomListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val name: TextView = itemView.findViewById(R.id.textViewRoom_child_list_item_name)
