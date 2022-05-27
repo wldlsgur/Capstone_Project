@@ -192,4 +192,16 @@ interface ResponseApi {
         @Query("school") school: String,
         @Query("room") room: String
     ): Call<MutableList<AlbumResult>>
+
+    //원생 리스트 승인 no > yes
+    @POST("/parentinfo/change/check")
+    fun agreechange(
+        @Body key_id: AgreeChange
+    ): Call<SignUpResult>
+
+    //원생 리스트 삭제
+    @POST("/parentinfo/delete/info")
+    fun deletechildlist(
+        @Body key_id: AgreeChange
+    ): Call<SignUpResult>
 }
