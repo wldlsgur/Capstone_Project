@@ -23,6 +23,12 @@ class RoomChildListAdapter(var list:MutableList<RoomChildListResult>) : Recycler
         private val childimage: ImageView = itemView.findViewById(R.id.imageViewChildImage)
 
         fun bindinfo(data: RoomChildListResult){
+//            if(data.agree == "no"){
+//
+//            }
+//            else if(data.agree == "yes"){
+//
+//            }
             name.text = data.child_name
             age.text = data.child_age
             parentnumber.text = data.number

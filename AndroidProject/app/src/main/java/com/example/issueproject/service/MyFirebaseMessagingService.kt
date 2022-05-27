@@ -164,11 +164,13 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     /* 토큰 생성 메서드 */
     override fun onNewToken(token: String) {
         super.onNewToken(token)
+        Log.d(TAG, "onNewToken: $token")
     }
 
     /* 메세지 수신 메서드 */
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
+
         Log.d(TAG, "onMessageReceived() - remoteMessage : $remoteMessage")
         Log.d(TAG, "onMessageReceived() - from : ${remoteMessage.from}")
         Log.d(TAG, "onMessageReceived() - notification : ${remoteMessage.notification?.body}")

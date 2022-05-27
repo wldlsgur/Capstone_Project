@@ -440,20 +440,23 @@ class ResponseService {
 
         })
     }
-//    fun GetImageUrl(target: String, name: String, callback: RetrofitCallback<ResponseBody>) {
-//        RetrofitBuilder.api.GetImageUrl(target, name).enqueue(object : Callback<ResponseBody>{
-//            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-//                Log.d(TAG, "GetImageUrl: ..")
-//                callback.onSuccess(response.code(), response.body()!!)
-//            }
-//
-//            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-//                Log.d(TAG, "onFailure: $t")
-//                callback.onError(t)
-//            }
-//
-//        })
-//    }
+    fun GetImageUrl(target: String, name: String, callback: RetrofitCallback<ResponseBody>) {
+        RetrofitBuilder.api.GetImageUrl(target, name).enqueue(object : Callback<ResponseBody>{
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                Log.d(TAG, "GetImageUrl: ..")
+                Log.d(TAG, "onResponse: ${response.code()}")
+                Log.d(TAG, "onResponse: ${response.errorBody()}")
+                Log.d(TAG, "onResponse: ${response.body()}")
+                callback.onSuccess(response.code(), response.body()!!)
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.d(TAG, "onFailure: $t")
+                callback.onError(t)
+            }
+
+        })
+    }
 
     fun GetMedcineInfo(id: String, child_name:String, m_name:String, callback: RetrofitCallback<Medicine>) {
         RetrofitBuilder.api.GetMedicineInfo(id,child_name,m_name).enqueue(object : Callback<Medicine>{

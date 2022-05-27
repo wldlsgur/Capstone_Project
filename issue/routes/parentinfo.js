@@ -57,7 +57,8 @@ router.get('/child/info', function(req, res){
 router.get('/room/allinfo', function(req, res){
 	let json_data = {
 		school : req.query.school,
-		room : req.query.room
+		room : req.query.room,
+		agree : 'yes'
 	}
 	let target_array = [
 		'*'
@@ -67,7 +68,7 @@ router.get('/room/allinfo', function(req, res){
 		res.send(element_msg);
 		return;
 	}
-	let query = make_query.SELECT(target_array, 'parentinfo', json_data, 'AND', 1);
+	let query = make_query.SELECT(target_array, 'parentinfo', json_data, 'AND', 2);
 	db_parent_sql.SELECT(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
@@ -137,6 +138,36 @@ router.post('/delete/info', function(req, res){
 			return;
 		}
 		res.send(sucess_response);
+	})
+})
+
+router.post('/update/info', function(req, res){
+	let json_data = {
+		key_id : req.body.key_id,
+		school : req.body.school,
+		room : req.body.room,
+		number : req.body.number,
+		child_name : req.body.name,
+		child_age : req.body.age,
+		spec : req.body.spec,
+	};
+	if(check_element.check_require_element(json_data) === false)	return res.send(element_msg);
+
+	let query = `UPDATE parentinfo 
+	SET school='${json_data.school}', 
+	room='${json_data.room}', 
+	number='${json_data.number}', 
+	child_name='${json_data.child_name}', 
+	child_age='${json_data.age}', 
+	spec='${json_data.spec}' 
+	WHERE key_id='${json_data.key_id}'`;
+
+	db_parent_sql.UPDATE(query, function(err, result){
+		if(err){
+			res.status(400).send(err);
+			return;
+		}
+		res.status(200).send(sucess_response);
 	})
 })
 module.exports = router;

@@ -5,6 +5,8 @@ const Promise = require('promise');
 const db_album_sql = require('../public/SQL/album_sql')();
 const check_element = require('../Function/check_require_element');
 const make_query = require('../Function/make_query');
+const fs = require('fs');
+const db = require('../DB/db');
 
 const element_msg = "plz send require elements";
 const sucess_response = {res : true, msg : 'success'};
@@ -52,6 +54,34 @@ router.get('/info', function(req, res){
         })
         .catch(function(err){
             res.status(400).send(err);
+    })
+    }
+})
+
+router.post('/delete/album', function(req, res){
+    let images = req.body.key_images.trim(); 
+    let image_array = images.split(',');
+
+    for(let i=0 ; i<image_array.length ; i++){
+        fs.unlink(`uploads/album` + image_array[i], function(err){
+            if(err){
+                res.status(400).send(err);
+                return;
+            }
+            else{
+                let query = `DELETE FROM alubm WHERE image_url='${image_array[i]}'`
+                await job(query);
+            }
+        })
+    }
+    res.send(sucess_response);
+
+    async function job(query){
+        db_album_sql.DELETE(query,function(err, result){
+            if(err){
+                res.status(400).send(err);
+                return;
+            }
         })
     }
 })

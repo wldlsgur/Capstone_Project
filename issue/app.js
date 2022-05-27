@@ -7,7 +7,7 @@ const multer = require('multer');
 
 const update_image_url = require('./Function/update_image_url');
 
-const storage = multer.diskStorage({
+const storage = multer.diskStorage({//사진 한장 추가
 	destination: function (req, file, cb) {
 		let target = req.params.target;
 
@@ -37,7 +37,7 @@ const storage = multer.diskStorage({
 	},
 	limits: {fileSize: 1 * 256 * 256}
 })
-const storages = multer.diskStorage({
+const storages = multer.diskStorage({//사진 여러장 추가
 	destination: function (req, file, cb) {
 		cb(null, 'uploads/album');
 	},
@@ -74,9 +74,10 @@ let food_listRouter = require('./routes/food_list');
 let albumRouter = require('./routes/album');
 
 //인승 추가(아래)
-var staffRouter = require('./routes/staff');
-var medicineRouter = require('./routes/medicine');
-var testRouter = require('./routes/test1');
+let staffRouter = require('./routes/staff');	// 선생, 원장 통일
+let medicineRouter = require('./routes/medicine');	//약, 약 관리 통일
+let testRouter = require('./routes/test1');
+let alarmRouter = require('./routes/alarm');	//FCM 라우터
 
 var app = express();
 
@@ -103,9 +104,10 @@ app.use('/album', albumRouter);
 app.post('/uploadimage/:target/:key', upload.single('image'), uploadimageRouter);//사진 한장
 app.post('/uploadimages/:school/:room/:title/:date', uploads.array('image'), uploadimagesRouter);//사진 배열
 //인승 추가(아래)
-app.use('/staff', staffRouter);
-app.use('/medicine', medicineRouter);
+app.use('/staff', staffRouter);	// 선생, 원장 통일
+app.use('/medicine', medicineRouter); //약, 약 관리 통일
 app.use('/test1', testRouter);
+app.use('/alarm',alarmRouter);	//FCM 라우터
 
 // catch 404 and forward to error handler
 app.get('/favicon.ico', function(req, res) { 
