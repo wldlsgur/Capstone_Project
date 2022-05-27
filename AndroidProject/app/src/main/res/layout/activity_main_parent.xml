@@ -34,9 +34,7 @@
                     android:id="@+id/button_Parent_FoodList"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/food" />
@@ -45,13 +43,13 @@
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="식단"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/button_Parent_FoodList"
-                    app:layout_constraintStart_toEndOf="@+id/button_Parent_FoodList"
-                    app:layout_constraintTop_toTopOf="@+id/button_Parent_FoodList" />
+                    app:layout_constraintEnd_toEndOf="@+id/button_Parent_FoodList"
+                    app:layout_constraintStart_toStartOf="@+id/button_Parent_FoodList"
+                    app:layout_constraintTop_toBottomOf="@+id/button_Parent_FoodList" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -67,9 +65,7 @@
                     android:id="@+id/button_Parent_Daily"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/calendar" />
@@ -78,13 +74,13 @@
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="일정"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/button_Parent_Daily"
-                    app:layout_constraintStart_toEndOf="@+id/button_Parent_Daily"
-                    app:layout_constraintTop_toTopOf="@+id/button_Parent_Daily" />
+                    app:layout_constraintEnd_toEndOf="@+id/button_Parent_Daily"
+                    app:layout_constraintStart_toStartOf="@+id/button_Parent_Daily"
+                    app:layout_constraintTop_toBottomOf="@+id/button_Parent_Daily" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </TableRow>
@@ -106,9 +102,7 @@
                     android:id="@+id/button_Parent_Notic"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/notice" />
@@ -117,13 +111,13 @@
                     android:id="@+id/textView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="공지사항"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/button_Parent_Notic"
-                    app:layout_constraintTop_toTopOf="@+id/button_Parent_Notic" />
+                    app:layout_constraintEnd_toEndOf="@+id/button_Parent_Notic"
+                    app:layout_constraintStart_toStartOf="@+id/button_Parent_Notic"
+                    app:layout_constraintTop_toBottomOf="@+id/button_Parent_Notic" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -138,21 +132,19 @@
                     android:id="@+id/textView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="앨범"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/button_Parent_Album"
-                    app:layout_constraintStart_toEndOf="@+id/button_Parent_Album"
-                    app:layout_constraintTop_toTopOf="@+id/button_Parent_Album" />
+                    app:layout_constraintEnd_toEndOf="@+id/button_Parent_Album"
+                    app:layout_constraintStart_toStartOf="@+id/button_Parent_Album"
+                    app:layout_constraintTop_toBottomOf="@+id/button_Parent_Album" />
 
                 <ImageView
                     android:id="@+id/button_Parent_Album"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/photo" />
@@ -177,9 +169,7 @@
                     android:id="@+id/button_Parent_DayNotic"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/note" />
@@ -188,13 +178,14 @@
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="알림장"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/button_Parent_DayNotic"
                     app:layout_constraintStart_toEndOf="@+id/button_Parent_DayNotic"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/button_Parent_DayNotic"
+                    app:layout_constraintTop_toBottomOf="@+id/button_Parent_DayNotic" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -209,9 +200,7 @@
                     android:id="@+id/button_Parent_SchoolManagement"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/medicine" />
@@ -220,13 +209,13 @@
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="약 관리"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/button_Parent_SchoolManagement"
-                    app:layout_constraintStart_toEndOf="@+id/button_Parent_SchoolManagement"
-                    app:layout_constraintTop_toTopOf="@+id/button_Parent_SchoolManagement" />
+                    app:layout_constraintEnd_toEndOf="@+id/button_Parent_SchoolManagement"
+                    app:layout_constraintStart_toStartOf="@+id/button_Parent_SchoolManagement"
+                    app:layout_constraintTop_toBottomOf="@+id/button_Parent_SchoolManagement" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </TableRow>
 
@@ -258,6 +247,7 @@
             android:id="@+id/imageViewChild"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:scaleType="fitXY"
