@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/buttonDayNoticAddTeacher">
+        tools:layout_editor_absoluteY="65dp">
 
         <TextView
             android:id="@+id/textView49"
@@ -86,7 +86,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonDayNoticAddTeacher"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout39"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout39">
 
@@ -113,13 +112,15 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonDayNoticAddTeacher"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:text="추가"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout38" />
+        app:srcCompat="@drawable/ic_baseline_add_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -111,10 +111,14 @@ class MainParentActivity : AppCompatActivity() {
                 binding.textViewRoom.text = responseData[position].room
                 binding.textViewName.text = responseData[position].child_name
                 img_url = responseData[position].image_url
-
+                Log.d(TAG, "onSuccess: ${img_url}")
                 if(img_url != null){
                     Glide.with(this@MainParentActivity)
                         .load("${RetrofitBuilder.servers}/image/parent/${img_url}")
+                        .into(binding.imageViewChild)
+                }else if(img_url == null || img_url == ""){
+                    Glide.with(this@MainParentActivity)
+                        .load(R.drawable.user)
                         .into(binding.imageViewChild)
                 }
                 school = binding.textViewSchool.text.toString()
