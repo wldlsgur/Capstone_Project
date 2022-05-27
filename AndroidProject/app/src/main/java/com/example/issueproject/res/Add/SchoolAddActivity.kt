@@ -23,6 +23,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.example.issueproject.dto.*
+import com.example.issueproject.res.MenuActivity
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -39,6 +40,7 @@ class SchoolAddActivity : AppCompatActivity() {
     private lateinit var getResult: ActivityResultLauncher<Intent>
     private lateinit var currentImageUri: Uri
     var id : String = ""
+    var name : String = ""
     val roomList = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +49,7 @@ class SchoolAddActivity : AppCompatActivity() {
 
         roomList.clear()
         id = intent.getStringExtra("id")!!
+        name = intent.getStringExtra("name")!!
 
         getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == RESULT_OK && it.data !=null) {
@@ -135,6 +138,8 @@ class SchoolAddActivity : AppCompatActivity() {
 
             override fun onSuccess(code: Int, responseData: LoginResult) {
                 Log.d(TAG, "onSuccess: $responseData")
+                Toast.makeText(this@SchoolAddActivity, "성공", Toast.LENGTH_SHORT).show()
+                GetPresidentInfo(id, name)
             }
 
             override fun onFailure(code: Int) {
@@ -151,9 +156,32 @@ class SchoolAddActivity : AppCompatActivity() {
             override fun onSuccess(code: Int, responseData: SignUpResult) {
                 Log.d(TAG, "onSuccess: $responseData")
                 if(responseData.msg == "success"){
-                    Toast.makeText(this@SchoolAddActivity, "성공", Toast.LENGTH_SHORT).show()
                     savaimage(currentImageUri)
                 }
+            }
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+            }
+        })
+    }
+
+    fun GetPresidentInfo(id: String, name: String) {
+        ResponseService().GetPresidentInfo(id, object : RetrofitCallback<MutableList<PresidentinfoResult>> {
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: MutableList<PresidentinfoResult>) {
+                Log.d(TAG, "onSuccess: $responseData")
+
+                var intent = Intent(this@SchoolAddActivity, MenuActivity::class.java).apply{
+                    putExtra("id", id)
+                    putExtra("name", name)
+                    putExtra("school", responseData[0].school)
+                    putExtra("room", responseData[0].room)
+                    putExtra("img_url", responseData[0].image_url)
+                }
+                startActivity(intent)
             }
             override fun onFailure(code: Int) {
                 Log.d(TAG, "onFailure: $code")
