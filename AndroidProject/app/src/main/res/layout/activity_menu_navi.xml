@@ -41,7 +41,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="right"
         android:fitsSystemWindows="true"
-        app:menu="@menu/activity_navigation_parents_menu_list"
-        app:itemTextAppearance="@style/customTextViewFontStyle"/>
+        app:itemTextAppearance="@style/customTextViewFontStyle"
+        app:menu="@menu/activity_navigation_president_menu_list" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

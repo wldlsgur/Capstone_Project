@@ -83,8 +83,8 @@ class SchoolAddActivity : AppCompatActivity() {
                 binding.editTextRoomName.text = null
                 Toast.makeText(this, "반이 추가되었습니다.", Toast.LENGTH_SHORT).show()
 
-                val adapter = ArrayAdapter(this@SchoolAddActivity, R.layout.simple_spinner_dropdown_item, roomList)
-                binding.spinnerSchoolAddRoom.adapter = adapter
+                val adapter = ArrayAdapter(this@SchoolAddActivity, R.layout.simple_list_item_1, roomList)
+                binding.classRv.adapter = adapter
             }
             else{
                 Toast.makeText(this, "반이름을 작성해주세요", Toast.LENGTH_SHORT).show()

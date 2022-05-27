@@ -63,12 +63,7 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             startActivity(intent)
         }
 
-        binding.menu.PresidentSchoolteachermanagement.setOnClickListener{
-            var intent = Intent(this, SchoolTeacherListActivity::class.java).apply {
-                putExtra("school", school)
-            }
-            startActivity(intent)
-        }
+
         binding.menu.PresidentAlbum.setOnClickListener {
             var intent = Intent(this, AlbumActivity::class.java).apply {
                 putExtra("school", school)
@@ -128,9 +123,6 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                 // 햄버거 버튼 클릭시 네비게이션 드로어 열기
                 drawerLayout.openDrawer(Gravity.RIGHT)
 
-
-
-
             }
         }
         return super.onOptionsItemSelected(item)
@@ -144,11 +136,15 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             putExtra("job", "원장님")
         }
         var intent3 = Intent(this, MainActivity::class.java)
+
+        var schoolManage = Intent(this, SchoolTeacherListActivity::class.java).apply {
+            putExtra("school",school)
+        }
         when (item.itemId) {
             R.id.menu_item1 -> startActivity(intent2)
-            R.id.menu_item2 -> Toast.makeText(this, "menu_item2 실행", Toast.LENGTH_SHORT).show()
-            R.id.menu_item3 -> startActivity(intent3)
-
+            R.id.menu_item2 -> startActivity(schoolManage)
+            R.id.menu_item3 -> Toast.makeText(this,"알림",Toast.LENGTH_SHORT).show()
+            R.id.menu_item4 -> startActivity(intent3)
         }
         return false
     }
