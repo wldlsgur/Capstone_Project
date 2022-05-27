@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.issueproject.Adapterimport.SchoolTeacherListAdapter
 import com.example.issueproject.databinding.ActivityRoomChildListBinding
 import com.example.issueproject.dto.RoomChildListResult
+import com.example.issueproject.dto.SchoolteacherListResult
 import com.example.issueproject.res.Add.ChildAddActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -34,12 +36,40 @@ class RoomChildListActivity : AppCompatActivity() {
     }
 
     private fun initRecycler(list:MutableList<RoomChildListResult>){
-        RoomChildListAdapter = RoomChildListAdapter(list)
+        RoomChildListAdapter = RoomChildListAdapter(this, list)
 
         binding.RoomChildListRV.apply {
             adapter = RoomChildListAdapter
             layoutManager = LinearLayoutManager(context)
         }
+
+        // item 승인 버튼 클릭 이벤트
+        RoomChildListAdapter.setApprovalItemClickListener(object : RoomChildListAdapter.MenuClickListener {
+            override fun onClick(position: Int, item: RoomChildListResult) {
+
+            }
+        })
+
+        // item 승인취소 버튼 클릭 이벤트
+        RoomChildListAdapter.setCancelApprovalItemClickListener(object : RoomChildListAdapter.MenuClickListener {
+            override fun onClick(position: Int, item: RoomChildListResult) {
+
+            }
+        })
+
+        // item 수정 클릭 이벤트
+        RoomChildListAdapter.setModifyItemClickListener(object : RoomChildListAdapter.MenuClickListener {
+            override fun onClick(position: Int, item: RoomChildListResult) {
+
+            }
+        })
+
+        // item 삭제 클릭 이벤트
+        RoomChildListAdapter.setDeleteItemClickListener(object : RoomChildListAdapter.MenuClickListener {
+            override fun onClick(position: Int, item: RoomChildListResult) {
+
+            }
+        })
     }
 
     private fun ShowRecycler(school: String, room: String) {

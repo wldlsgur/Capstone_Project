@@ -82,12 +82,13 @@ class SchoolTeacherListAdapter(val context: Context, var list: MutableList<Schoo
     override fun onBindViewHolder(holder: SchoolListViewHolder, position: Int) {
         val item = list[position]
 
-        holder.itemView.setOnClickListener{
-            itemClickListener.onClick(it, position)
-        }
-        holder.bindInfo(item)
-
         holder.apply {
+
+            itemView.setOnClickListener{
+                itemClickListener.onClick(it, position)
+            }
+
+            bindInfo(item)
 
             // 승인 버튼 클릭 이벤트
             approval.setOnClickListener {
