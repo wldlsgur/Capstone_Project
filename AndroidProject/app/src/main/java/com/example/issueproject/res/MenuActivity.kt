@@ -32,7 +32,6 @@ private const val TAG = "MenuActivity"
 class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener{
     private val binding by lazy{
         ActivityMenuNaviBinding.inflate(layoutInflater)
-
     }
     var id: String = ""
     var school: String = ""
@@ -107,16 +106,17 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 //            var intent = Intent(this, ::class.java)
 //            startActivity(intent)
         }
-        binding.menu.Buttontest.setOnClickListener {
-        var intent = Intent(this, testActivity::class.java)
-        startActivity(intent)
-    }
+//        binding.menu.Buttontest.setOnClickListener {
+//        var intent = Intent(this, testActivity::class.java)
+//        startActivity(intent)
+//    }
 
-        val toolbar: Toolbar = findViewById(R.id.tool) // toolBar를 통해 App Bar 생성
+        val toolbar = binding.menuAppbar.tool // toolBar를 통해 App Bar 생성
+        toolbar.setTitle("알림장")
         setSupportActionBar(toolbar) // 툴바 적용
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.more) // 홈버튼 이미지 변경
-        supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
+//        supportActionBar?.setHomeAsUpIndicator(R.drawable.menu) // 홈버튼 이미지 변경
+        supportActionBar?.setDisplayShowTitleEnabled(true) // 툴바에 타이틀 안보이게
 
         // 네비게이션 드로어 생성
         drawerLayout = findViewById(R.id.drawer_layout)

@@ -84,7 +84,7 @@ class Parents_MedicineInfo : AppCompatActivity() {
         school = intent.getStringExtra("school").toString()
         room = intent.getStringExtra("room").toString()
         img_url = intent.getStringExtra("img_url").toString()
-        binding.medicineAppbar.textViewTitle.text = "약 관리"
+//        binding.medicineAppbar.textViewTitle.text = "약 관리"
         binding.medicineSchool.text = school
         binding.medicineRoom.text = room
         binding.medicineCname.text = cname
