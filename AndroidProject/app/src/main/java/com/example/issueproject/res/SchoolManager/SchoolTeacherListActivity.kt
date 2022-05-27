@@ -35,25 +35,53 @@ class SchoolTeacherListActivity : AppCompatActivity() {
     }
 
     private fun initRecycler(list: MutableList<SchoolteacherListResult>) {
-        SchoolTeacherListAdapter = SchoolTeacherListAdapter(list)
+        SchoolTeacherListAdapter = SchoolTeacherListAdapter(this, list)
 
         binding.SchoolteacherListRV.apply {
             adapter = SchoolTeacherListAdapter
             layoutManager = LinearLayoutManager(context)
-
-            SchoolTeacherListAdapter.setItemClickListener(object: SchoolTeacherListAdapter.OnItemClickListener{
-                override fun onClick(v: View, position: Int) {
-                    var intent = Intent(this@SchoolTeacherListActivity, RoomChildListActivity::class.java).apply {
-                        Log.d(TAG, "room: ${schoollistinfo[position].room}")
-
-                        putExtra("position", position.toString())
-                        putExtra("room", schoollistinfo[position].room)
-                        putExtra("school", school)
-                    }
-                    startActivity(intent)
-                }
-            })
         }
+
+        SchoolTeacherListAdapter.setItemClickListener(object: SchoolTeacherListAdapter.OnItemClickListener{
+            override fun onClick(v: View, position: Int) {
+                val intent = Intent(this@SchoolTeacherListActivity, RoomChildListActivity::class.java).apply {
+                    Log.d(TAG, "room: ${schoollistinfo[position].room}")
+
+                    putExtra("position", position.toString())
+                    putExtra("room", schoollistinfo[position].room)
+                    putExtra("school", school)
+                }
+                startActivity(intent)
+            }
+        })
+
+        // item 승인 버튼 클릭 이벤트
+        SchoolTeacherListAdapter.setApprovalItemClickListener(object : SchoolTeacherListAdapter.MenuClickListener {
+            override fun onClick(position: Int, item: SchoolteacherListResult) {
+
+            }
+        })
+
+        // item 승인취소 버튼 클릭 이벤트
+        SchoolTeacherListAdapter.setCancelApprovalItemClickListener(object : SchoolTeacherListAdapter.MenuClickListener {
+            override fun onClick(position: Int, item: SchoolteacherListResult) {
+
+            }
+        })
+
+        // item 수정 클릭 이벤트
+        SchoolTeacherListAdapter.setModifyItemClickListener(object : SchoolTeacherListAdapter.MenuClickListener {
+            override fun onClick(position: Int, item: SchoolteacherListResult) {
+
+            }
+        })
+
+        // item 삭제 클릭 이벤트
+        SchoolTeacherListAdapter.setDeleteItemClickListener(object : SchoolTeacherListAdapter.MenuClickListener {
+            override fun onClick(position: Int, item: SchoolteacherListResult) {
+
+            }
+        })
     }
 
     private fun ShowRecycler(school: String) {

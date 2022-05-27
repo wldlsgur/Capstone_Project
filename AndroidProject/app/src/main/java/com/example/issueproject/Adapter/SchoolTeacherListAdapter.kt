@@ -1,12 +1,16 @@
 package com.example.issueproject.Adapterimport
 
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.issueproject.R
@@ -18,7 +22,7 @@ import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
 private const val TAG = "SchoolTeacherAdapter"
-class SchoolTeacherListAdapter(var list: MutableList<SchoolteacherListResult>) : RecyclerView.Adapter<SchoolTeacherListAdapter.SchoolListViewHolder>() {
+class SchoolTeacherListAdapter(val context: Context, var list: MutableList<SchoolteacherListResult>) : RecyclerView.Adapter<SchoolTeacherListAdapter.SchoolListViewHolder>() {
 
     inner class SchoolListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         //변수 설정 room, number
@@ -27,7 +31,12 @@ class SchoolTeacherListAdapter(var list: MutableList<SchoolteacherListResult>) :
         val name: TextView = itemView.findViewById(R.id.textViewSchool_teacher_list_item_name)
         private val image: ImageView = itemView.findViewById(R.id.imageViewTeacherImage)
 
-        fun bindinfo(data: SchoolteacherListResult){
+        val chkApproval : ConstraintLayout = itemView.findViewById(R.id.schoolTeacherListItem_clApproval)
+        val approval : TextView = itemView.findViewById(R.id.schoolTeacherListItem_btnApproval)
+        val cancelApproval : TextView = itemView.findViewById(R.id.schoolTeacherListItem_btnCancelApproval)
+        val moreBtn : ImageView = itemView.findViewById(R.id.schoolTeacherListItem_ivMoreBtn)
+
+        fun bindInfo(data: SchoolteacherListResult){
             room.text = data.room
             number.text = data.number
 
@@ -36,6 +45,13 @@ class SchoolTeacherListAdapter(var list: MutableList<SchoolteacherListResult>) :
             Glide.with(image.context)
                 .load("${RetrofitBuilder.servers}/image/teacher/${data.image_url}")
                 .into(image)
+
+            if(data.agree == "yes") {
+                chkApproval.visibility = View.GONE
+            } else {
+                chkApproval.visibility = View.VISIBLE
+            }
+
 
         }
 
@@ -64,18 +80,83 @@ class SchoolTeacherListAdapter(var list: MutableList<SchoolteacherListResult>) :
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: SchoolListViewHolder, position: Int) {
+        val item = list[position]
+
         holder.itemView.setOnClickListener{
             itemClickListener.onClick(it, position)
         }
-        holder.bindinfo(list[position])
+        holder.bindInfo(item)
+
+        holder.apply {
+
+            // 승인 버튼 클릭 이벤트
+            approval.setOnClickListener {
+                approvalClickListener.onClick(position, item)
+            }
+
+            // 승인취소 버튼 클릭 이벤트
+            cancelApproval.setOnClickListener {
+                cancelApprovalItemClickListener.onClick(position, item)
+            }
+
+            // 수정, 삭제 팝업 메뉴 클릭 이벤트
+            moreBtn.setOnClickListener {
+                val popup = PopupMenu(context, moreBtn)
+                MenuInflater(context).inflate(R.menu.popup_menu, popup.menu)
+
+                popup.show()
+                popup.setOnMenuItemClickListener {
+                    when (it.itemId) {
+                        R.id.modify -> {
+                            modifyItemClickListener.onClick(position, item)
+                            return@setOnMenuItemClickListener true
+                        }
+                        R.id.delete -> {
+                            deleteItemClickListener.onClick(position, item)
+                            return@setOnMenuItemClickListener true
+                        }
+                        else -> {
+                            return@setOnMenuItemClickListener false
+                        }
+                    }
+                }
+            }
+        }
     }
+
+
     interface OnItemClickListener {
         fun onClick(v: View, position: Int)
     }
-    // (3) 외부에서 클릭 시 이벤트 설정
+
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {
         this.itemClickListener = onItemClickListener
     }
-    // (4) setItemClickListener로 설정한 함수 실행
+
     private lateinit var itemClickListener : OnItemClickListener
+
+
+    interface MenuClickListener {
+        fun onClick(position: Int, item : SchoolteacherListResult)
+    }
+
+    private lateinit var modifyItemClickListener : MenuClickListener
+    fun setModifyItemClickListener(modifyClickListener: MenuClickListener) {
+        this.modifyItemClickListener = modifyClickListener
+    }
+
+    private lateinit var deleteItemClickListener : MenuClickListener
+    fun setDeleteItemClickListener(deleteClickListener: MenuClickListener) {
+        this.deleteItemClickListener = deleteClickListener
+    }
+
+    private lateinit var approvalClickListener : MenuClickListener
+    fun setApprovalItemClickListener(approvalClickListener: MenuClickListener) {
+        this.approvalClickListener = approvalClickListener
+    }
+
+    private lateinit var cancelApprovalItemClickListener : MenuClickListener
+    fun setCancelApprovalItemClickListener(cancelApprovalItemClickListener : MenuClickListener) {
+        this.cancelApprovalItemClickListener  = cancelApprovalItemClickListener
+    }
 }

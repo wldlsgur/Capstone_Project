@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
         binding.buttonLogin.setOnClickListener {
             Log.d(TAG, "onCreate: clicklogin")
             Login(binding.editTextID.text.toString(), binding.editTextPW.text.toString())
