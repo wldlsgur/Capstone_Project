@@ -22,9 +22,6 @@
             android:name=".res.Calender.DailyItem2Activity"
             android:exported="false" />
         <activity
-            android:name=".res.Calender.MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".res.Calender.DailyItemActivity"
             android:exported="false" />
         <activity
@@ -41,9 +38,6 @@
             android:exported="false" />
         <activity
             android:name=".res.DayNotic.DayNoticTeacherActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SpinnerItemActivity"
             android:exported="false" />
         <activity
             android:name=".res.submenu.SubChildMunuActivity"
@@ -133,6 +127,9 @@
             android:name=".res.Navi.Navigation"
             android:exported="false" />
         <activity
+        android:name=".res.testActivity"
+        android:exported="false" />
+        <activity
             android:name=".res.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -141,9 +138,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service
-            android:name=".service.MyFirebaseMessagingService"
-            android:exported="false">
+        <service android:name=".service.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

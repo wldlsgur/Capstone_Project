@@ -17,6 +17,14 @@ class AlbumItemAdapter(var list: List<String>) : RecyclerView.Adapter<AlbumItemA
     inner class AlbumItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         val image: ImageView = itemView.findViewById(R.id.imageView_Album)
+        
+        fun bindinfo(data: String){
+
+            Log.d(TAG, "bindinfo: $data")
+            Glide.with(image.context)
+                .load("${RetrofitBuilder.servers}/image/album/${data}")
+                .into(image)
+        }
 
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumItemViewHolder {
@@ -27,10 +35,14 @@ class AlbumItemAdapter(var list: List<String>) : RecyclerView.Adapter<AlbumItemA
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: AlbumItemViewHolder, position: Int) {
-        val imagelist = list[position]
-
-        Glide.with(holder.image.context)
-            .load("${RetrofitBuilder.servers}/image/album/${imagelist}")
-            .into(holder.image)
+        holder.bindinfo(list[position])
+        
+//        val imagelist = list[position]
+//
+//        Log.d(TAG, "image_url: ${imagelist}")
+//        Log.d(TAG, "bindinfo: ${RetrofitBuilder.servers}/image/album/${imagelist}")
+//        Glide.with(holder.image.context)
+//            .load("${RetrofitBuilder.servers}/image/album/${imagelist}")
+//            .into(holder.image)
     }
 }
