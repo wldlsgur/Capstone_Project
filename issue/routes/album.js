@@ -63,7 +63,7 @@ router.post('/delete/album', function(req, res){
     let image_array = images.split(',');
 
     for(let i=0 ; i<image_array.length ; i++){
-        fs.unlink(`uploads/album` + image_array[i], function(err){
+        fs.unlink(`uploads/album` + image_array[i], async function(err){
             if(err){
                 res.status(400).send(err);
                 return;
