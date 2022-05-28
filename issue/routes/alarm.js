@@ -13,7 +13,7 @@ admin.initializeApp({
 
 router.get('/push_send', function (req, res, next) {
     let target_token =
-      'd-S68rtJRKuyWtJfaMhCKS:APA91bEmzH7nBdlBuf6CHcYHQaxTBSHeIJmvLRsCxsfrPvRirSzvCNPbBSnxhhnRcA5Qhqcxrv2awc8XtFPcElynEmxFNhAR0Y4OKkvcv9AQlS15RtZb93jDqizls8m2VYPWuebusQOU'
+      'dqpk3CdhS0eDe098F4Z3tQ:APA91bE4x3sB_ajXJpsgYdZd6wehYsxQYwg8G-r07mGGn284qnFQKmlQYIbBOygEM7RoeuG4lGjRVNryeAJog-mG9sbBBwjbGdaVWD_lBljPfP9EAyuvTT2fe8OVSy6GEj-uSvhLTw7v'
       //target_token은 푸시 메시지를 받을 디바이스의 토큰값입니다
   
     let message = {
