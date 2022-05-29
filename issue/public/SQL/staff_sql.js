@@ -32,6 +32,29 @@ module.exports = function () {
                 })
             })
         },
+        updateTeacherinfoAgree: function (keyId,callback) {
+            pool.getConnection(function (err, con) {
+                let sql=`UPDATE teacherinfo
+                         SET agree='yes'
+                         WHERE key_id='${keyId}'`;
+                con.query(sql,function(err,result,fields){
+                    con.release();
+                    if(err) callback(err,null);
+                    else callback(null,result);
+                })
+            })
+        },
+        deleteTeacherinfo: function (keyId,callback) {
+            pool.getConnection(function (err, con) {
+                let sql=`DELETE FROM teacherinfo
+                         WHERE key_id='${keyId}'`;
+                con.query(sql,function(err,result,fields){
+                    con.release();
+                    if(err) callback(err,null);
+                    else callback(null,result);
+                })
+            })
+        },
 
 
         pool: pool

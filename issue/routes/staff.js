@@ -25,6 +25,30 @@ router.get('/teacherinfo/useid', function(req, res, next) {
     else res.send(result);
   })
 })
+router.get('/updateTeacherinfoAgree', function(req, res, next) {
+
+  let keyId = req.query.keyId;
+
+  db_staff.updateTeacherinfoAgree(keyId,function(err,result){
+    if(err){
+        console.log(err);
+        res.status(400).send(err);
+    }
+    else res.send(sucess_response);
+  })
+})
+router.get('/deleteTeacherinfo', function(req, res, next) {
+
+  let keyId = req.query.keyId;
+
+  db_staff.deleteTeacherinfo(keyId,function(err,result){
+    if(err){
+        console.log(err);
+        res.status(400).send(err);
+    }
+    else res.send(sucess_response);
+  })
+})
 
 //  teacherinfo end
 //  presidentinfo
