@@ -9,19 +9,30 @@
     tools:openDrawer="start"
     tools:context=".res.MenuActivity">
 
-
-    <include
-        layout="@layout/activity_menu"
-        android:id="@+id/menu"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content">
 
-    <include
-        layout="@layout/activity_navigation_appbar"
-        android:id="@+id/menu_appbar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <include
+            android:id="@+id/menu"
+            layout="@layout/activity_menu"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menu_appbar" />
 
+
+        <include
+            android:id="@+id/menu_appbar"
+            layout="@layout/activity_navigation_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <com.google.android.material.navigation.NavigationView
@@ -30,7 +41,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="right"
         android:fitsSystemWindows="true"
-        app:menu="@menu/activity_navigation_parents_menu_list"
-        app:headerLayout="@layout/activity_navigation_header"/>
+        app:itemTextAppearance="@style/customTextViewFontStyle"
+        app:menu="@menu/activity_navigation_president_menu_list" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -6,16 +6,6 @@
     android:layout_height="wrap_content"
     tools:context=".res.RoomManager.RoomChildListItemActivity">
 
-    <TextView
-        android:id="@+id/textViewRoom_child_list_item_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="TextView"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintStart_toStartOf="@+id/textView6" />
-
     <ImageView
         android:id="@+id/imageViewChildImage"
         android:layout_width="100dp"
@@ -29,69 +19,146 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/textViewRoom_child_list_item_parentnumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="TextView"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/textView7"
-        app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="@+id/textView7" />
 
-    <TextView
-        android:id="@+id/textViewRoom_child_list_item_age"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="TextView"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/textView6"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toTopOf="@+id/textView6" />
-
-    <TextView
-        android:id="@+id/textViewRoom_child_list_item_spec"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="TextView"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/textView8"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toTopOf="@+id/textView8" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="나이 : "
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
-        app:layout_constraintStart_toStartOf="@+id/textView7" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="부모님 전화번호 : "
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
-        app:layout_constraintStart_toStartOf="@+id/textView8" />
-
-    <TextView
-        android:id="@+id/textView8"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/roomChildListItem_clInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="8dp"
-        android:text="특이사항 : "
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewChildImage"
-        app:layout_constraintStart_toEndOf="@+id/imageViewChildImage" />
+        app:layout_constraintTop_toTopOf="@+id/imageViewChildImage"
+        app:layout_constraintStart_toEndOf="@+id/imageViewChildImage"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewChildImage">
+
+        <TextView
+            android:id="@+id/textViewRoom_child_list_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textView6"/>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="나이 : "
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/textView7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRoom_child_list_item_name" />
+
+        <TextView
+            android:id="@+id/textViewRoom_child_list_item_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/textView6"
+            app:layout_constraintTop_toTopOf="@+id/textView6"
+            app:layout_constraintBottom_toBottomOf="@+id/textView6"/>
+
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="부모님 전화번호 : "
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6"/>
+
+
+        <TextView
+            android:id="@+id/textViewRoom_child_list_item_parentnumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView7"
+            app:layout_constraintStart_toEndOf="@+id/textView7"
+            app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="특이사항 : "
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"/>
+
+        <TextView
+            android:id="@+id/textViewRoom_child_list_item_spec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView8"
+            app:layout_constraintStart_toEndOf="@+id/textView8"
+            app:layout_constraintTop_toTopOf="@+id/textView8" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/roomChildListItem_clApproval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        app:layout_constraintEnd_toStartOf="@id/roomChildListItem_ivMoreBtn"
+        app:layout_constraintStart_toEndOf="@+id/roomChildListItem_clInfo"
+        app:layout_constraintTop_toTopOf="@+id/roomChildListItem_clInfo"
+        app:layout_constraintBottom_toBottomOf="@+id/roomChildListItem_clInfo">
+
+        <TextView
+            android:id="@+id/roomChildListItem_btnApproval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="승인"
+            android:textSize="12sp"
+            android:textColor="@color/blue_500"
+            app:layout_constraintEnd_toStartOf="@+id/roomChildListItem_btnCancelApproval"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/roomChildListItem_btnCancelApproval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="승인취소"
+            android:layout_marginStart="10dp"
+            android:textSize="12sp"
+            android:textColor="@color/red"
+            app:layout_constraintStart_toEndOf="@+id/roomChildListItem_btnApproval"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ImageView
+        android:id="@+id/roomChildListItem_ivMoreBtn"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/more"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@id/roomChildListItem_clApproval"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <View
         android:id="@+id/view22"
@@ -103,4 +170,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

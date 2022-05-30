@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:elevation="8dp"
     tools:context=".res.submenu.SubChildMunuActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -18,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7"
-        tools:listitem="@layout/activity_child_item"/>
+        tools:listitem="@layout/activity_child_item" />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -38,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        app:backgroundTint="@color/main"
+        app:backgroundTint="@color/blue_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_24" />

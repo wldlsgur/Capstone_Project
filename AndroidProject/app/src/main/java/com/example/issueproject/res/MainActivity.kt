@@ -1,11 +1,16 @@
 package com.example.issueproject.res
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import com.example.issueproject.databinding.ActivityMainBinding
 import com.example.issueproject.dto.*
 import com.example.issueproject.res.Add.SchoolAddActivity
@@ -13,7 +18,10 @@ import com.example.issueproject.res.Add.TeacherAddActivity
 import com.example.issueproject.res.submenu.SubChildMunuActivity
 import com.example.issueproject.res.viewmodel.MainViewModels
 import com.example.issueproject.retrofit.RetrofitCallback
+import com.example.issueproject.service.MyFirebaseMessagingService.Companion.CHANNEL_ID
 import com.example.issueproject.service.ResponseService
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 
 private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
@@ -32,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
         binding.buttonLogin.setOnClickListener {
             Log.d(TAG, "onCreate: clicklogin")
             Login(binding.editTextID.text.toString(), binding.editTextPW.text.toString())
@@ -43,6 +50,8 @@ class MainActivity : AppCompatActivity() {
             var intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
+
+        initFcm()
     }
 
     fun Login(id: String, pw: String){
@@ -124,6 +133,7 @@ class MainActivity : AppCompatActivity() {
                 if(responseData.isEmpty()){
                     var intent = Intent(this@MainActivity, SchoolAddActivity::class.java).apply{
                         putExtra("id", id)
+                        putExtra("name", name)
                     }
                     startActivity(intent)
                 }
@@ -176,5 +186,37 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    /**
+     * FCM 토큰 수신 및 채널 생성
+     */
+    private fun initFcm() {
+        // FCM 토큰 수신
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "FCM 토큰 얻기에 실패하였습니다.", task.exception)
+                return@OnCompleteListener
+            }
+            // token log 남기기
+            Log.d(TAG, "token: ${task.result?:"task.result is null"}")
+
+            // 유저 토큰 갱신
+
+        })
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(CHANNEL_ID, "issue")
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel(id: String, name: String) {
+        val importance = NotificationManager.IMPORTANCE_DEFAULT // or IMPORTANCE_HIGH
+        val channel = NotificationChannel(id, name, importance)
+
+        val notificationManager: NotificationManager
+                = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
     }
 }

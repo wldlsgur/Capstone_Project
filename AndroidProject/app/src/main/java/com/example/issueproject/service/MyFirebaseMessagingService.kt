@@ -24,13 +24,13 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         const val TAG = "MessagingService"
         private const val CHANNEL_NAME = "Push Notification"
         private const val CHANNEL_DESCRIPTION = "Push Notification 을 위한 채널"
-        private const val CHANNEL_ID = "Channel Id"
+        const val CHANNEL_ID = "Issue"
     }
 
     /* 토큰 생성 메서드 */
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        Log.d(TAG, "onNewToken: $token")
+        Log.d(TAG, "fire onNewToken: $token")
     }
 
     /* 메세지 수신 메서드 */
