@@ -25,9 +25,9 @@ router.get('/teacherinfo/useid', function(req, res, next) {
     else res.send(result);
   })
 })
-router.get('/updateTeacherinfoAgree', function(req, res, next) {
+router.post('/updateTeacherinfoAgree', function(req, res, next) {
 
-  let keyId = req.query.keyId;
+  let keyId = req.body.keyId;
 
   db_staff.updateTeacherinfoAgree(keyId,function(err,result){
     if(err){
@@ -37,9 +37,9 @@ router.get('/updateTeacherinfoAgree', function(req, res, next) {
     else res.send(sucess_response);
   })
 })
-router.get('/deleteTeacherinfo', function(req, res, next) {
+router.post('/deleteTeacherinfo', function(req, res, next) {
 
-  let keyId = req.query.keyId;
+  let keyId = req.body.keyId;
 
   db_staff.deleteTeacherinfo(keyId,function(err,result){
     if(err){
