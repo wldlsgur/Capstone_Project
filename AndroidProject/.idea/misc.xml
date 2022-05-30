@@ -106,6 +106,30 @@
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/spinner.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/menu/activity_navigation_parents_menu_list.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/menu/activity_navigation_president_menu_list.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_add_album.xml" value="0.4" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_add_notic.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_add_room.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_album.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_album_item.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_album_teacher.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_child_add.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_child_item.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_daily.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_day_notic.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_main.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_main_parent.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_navigation.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_navigation_appbar.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_notic.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_room_child_list.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_school_add.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_school_teacher_list.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_sign_up.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_sub_child_munu.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/activity_user_info_change.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/layout/view_custom_notification.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/menu/activity_navigation_president_menu_list.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/power/Documents/GitHub/tmp/capstone/AndroidProject/app/src/main/res/menu/popup_menu.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/woo/Desktop/AndroidProject/app/src/main/res/layout/activity_album.xml" value="0.2046875" />
         <entry key="..\:/Users/woo/Desktop/AndroidProject/app/src/main/res/layout/activity_album_item.xml" value="0.2046875" />
         <entry key="..\:/Users/woo/Desktop/AndroidProject/app/src/main/res/layout/activity_album_item2.xml" value="0.2046875" />

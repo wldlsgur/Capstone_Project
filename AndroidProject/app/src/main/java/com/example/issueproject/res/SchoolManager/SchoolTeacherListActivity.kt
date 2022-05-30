@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issueproject.Adapterimport.SchoolTeacherListAdapter
 import com.example.issueproject.databinding.ActivitySchoolTeacherListBinding
 import com.example.issueproject.dto.SchoolteacherListResult
+import com.example.issueproject.dto.SignUpResult
 import com.example.issueproject.res.RoomManager.RoomChildListActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -103,5 +104,39 @@ class SchoolTeacherListActivity : AppCompatActivity() {
 
             })
 
+    }
+
+    private fun Teacheragreechange(keyId : Int){
+        ResponseService().Teacheragreechange(keyId, object : RetrofitCallback<SignUpResult>{
+            override fun onError(t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onSuccess(code: Int, responseData: SignUpResult) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onFailure(code: Int) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun deleteteacherlist(keyId: Int){
+        ResponseService().deleteteacherlist(keyId, object : RetrofitCallback<SignUpResult>{
+            override fun onError(t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onSuccess(code: Int, responseData: SignUpResult) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onFailure(code: Int) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 }

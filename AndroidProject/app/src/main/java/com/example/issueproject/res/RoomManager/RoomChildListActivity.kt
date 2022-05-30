@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issueproject.Adapterimport.SchoolTeacherListAdapter
@@ -60,8 +61,7 @@ class RoomChildListActivity : AppCompatActivity() {
         // item 승인 버튼 클릭 이벤트
         RoomChildListAdapter.setApprovalItemClickListener(object : RoomChildListAdapter.MenuClickListener {
             override fun onClick(position: Int, item: RoomChildListResult) {
-                val key_id = AgreeChange(item.key_id)
-                Agreechange(key_id)
+                Agreechange(item, position)
             }
         })
 
@@ -108,14 +108,20 @@ class RoomChildListActivity : AppCompatActivity() {
 
     }
 
-    private fun Agreechange(agreechange : AgreeChange) {
-        ResponseService().Agreechange(agreechange, object : RetrofitCallback<SignUpResult>{
+    private fun Agreechange(roomChildListResult : RoomChildListResult, position: Int) {
+
+        ResponseService().Agreechange(AgreeChange(roomChildListResult.key_id), object : RetrofitCallback<SignUpResult>{
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
 
             override fun onSuccess(code: Int, responseData: SignUpResult) {
                 Log.d(TAG, "onSuccess: $responseData")
+                Toast.makeText(this@RoomChildListActivity, "승인이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+
+                if(responseData.res == true && responseData.msg == "success") {
+                    getChildList(roomChildListResult.school, roomChildListResult.room)
+                }
             }
 
             override fun onFailure(code: Int) {
@@ -145,8 +151,6 @@ class RoomChildListActivity : AppCompatActivity() {
                 if(responseData.res == true && responseData.msg == "success") {
                     getChildList(roomChildListResult.school, roomChildListResult.room)
                 }
-
-
             }
 
             override fun onFailure(code: Int) {
