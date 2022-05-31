@@ -26,7 +26,7 @@ router.get('/push_send', function (req, res, next) {
       },
       token: target_token,
     }
-
+    console.log(target_token);
     admin
       .messaging()
       .send(message)
