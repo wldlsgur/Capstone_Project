@@ -194,15 +194,15 @@ interface ResponseApi {
     ): Call<MutableList<AlbumResult>>
 
     //선생 리스트 승인 no > yes
-    @GET("/staff/updateTeacherinfoAgree")
+    @POST("/staff/updateTeacherinfoAgree")
     fun Teacheragreechange(
-        @Query("keyId") keyId: Int
+        @Body key_id: AgreeChange
     ): Call<SignUpResult>
 
     //선생 리스트 삭제
-    @GET("/staff/deleteTeacherinfo")
+    @POST("/staff/deleteTeacherinfo")
     fun deleteteacherlist(
-        @Query("keyId") keyId: Int
+        @Body key_id: AgreeChange
     ): Call<SignUpResult>
 
     //원생 리스트 승인 no > yes
@@ -216,4 +216,14 @@ interface ResponseApi {
     fun deletechildlist(
         @Body key_id: AgreeChange
     ): Call<SignUpResult>
+
+    @POST("/create/food_list")
+    fun CreateFoodList(
+        @Body foodlist : FoodList
+    ): Call<SignUpResult>
+
+    @GET("/food_list/all/info/{school}")
+    fun FoodListInfo(
+        @Path("school") school: String
+    ): Call<MutableList<GetFoodList>>
 }

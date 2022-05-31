@@ -42,7 +42,6 @@ class RoomChildListActivity : AppCompatActivity() {
 
         initRecycler(school!!, room!!)
 
-
         binding.textViewChildListRoom.text = room
 
 

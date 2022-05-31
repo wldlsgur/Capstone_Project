@@ -87,7 +87,10 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             startActivity(intent)
         }
         binding.menu.PresidentFoodList.setOnClickListener {
-            var intent = Intent(this, FoodlistActivity::class.java)
+            var intent = Intent(this, FoodlistActivity::class.java).apply {
+                putExtra("school", school)
+                putExtra("id", id)
+            }
             startActivity(intent)
         }
         binding.menu.PresidentMedicinemanagement.setOnClickListener {

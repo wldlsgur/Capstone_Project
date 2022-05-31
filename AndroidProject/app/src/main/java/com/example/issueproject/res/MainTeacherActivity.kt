@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.issueproject.databinding.ActivityMainTeacherBinding
 import com.example.issueproject.res.Album.AlbumActivity
 import com.example.issueproject.res.Album.AlbumTeacherActivity
+import com.example.issueproject.res.Calender.DailyActivity
 import com.example.issueproject.res.DayNotic.DayNoticActivity
 import com.example.issueproject.res.DayNotic.DayNoticTeacherActivity
 import com.example.issueproject.res.Foodlist.FoodlistActivity
@@ -69,8 +70,8 @@ class MainTeacherActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.TeacherDaliy.setOnClickListener {
-//            var intent = Intent(this, CalenActivity::class.java)
-//            startActivity(intent)
+            var intent = Intent(this, DailyActivity::class.java)
+            startActivity(intent)
         }
         binding.TeacherDayNotic.setOnClickListener {
             var intent = Intent(this, DayNoticTeacherActivity::class.java).apply {
@@ -83,7 +84,10 @@ class MainTeacherActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.TeacherFoodList.setOnClickListener {
-            var intent = Intent(this, FoodlistActivity::class.java)
+            var intent = Intent(this, FoodlistActivity::class.java).apply {
+                putExtra("school", school)
+                putExtra("id", id)
+            }
             startActivity(intent)
         }
         binding.TeacherMedicinemanagement.setOnClickListener {

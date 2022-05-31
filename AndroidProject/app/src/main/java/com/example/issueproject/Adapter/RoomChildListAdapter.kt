@@ -48,10 +48,11 @@ class RoomChildListAdapter(val context: Context) : RecyclerView.Adapter<RoomChil
             parentnumber.text = data.number
             spec.text = data.spec
 
-            Glide.with(childimage.context)
-                .load("${RetrofitBuilder.servers}/image/parent/${data.image_url}")
-                .into(childimage)
-
+            if(data.image_url != ""){
+                Glide.with(childimage.context)
+                    .load("${RetrofitBuilder.servers}/image/parent/${data.image_url}")
+                    .into(childimage)
+            }
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomListViewHolder {
