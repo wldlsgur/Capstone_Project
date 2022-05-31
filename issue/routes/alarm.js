@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+const sucess_response = {res : true, msg : 'success'};
+const failed_response = {res : false, msg : "failed"};
+
 //const db_ = require('../public/SQL/medicine_sql')();
 
 const admin = require('firebase-admin')
@@ -23,15 +26,17 @@ router.get('/push_send', function (req, res, next) {
       },
       token: target_token,
     }
-  
+    console.log(target_token);
     admin
       .messaging()
       .send(message)
       .then(function (response) {
         console.log('Successfully sent message: : ', response)
+        res.send(sucess_response);
       })
       .catch(function (err) {
         console.log('Error Sending message!!! : ', err)
+        res.send(failed_response);
       })
   })
 
