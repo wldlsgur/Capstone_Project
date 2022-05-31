@@ -1,6 +1,7 @@
 {
   "name": "issue",
   "version": "0.0.0",
+  "author": "wldlsgur, dhgg321@naver.com",
   "private": true,
   "scripts": {
     "start": "pm2 start ./bin/www -- start",
