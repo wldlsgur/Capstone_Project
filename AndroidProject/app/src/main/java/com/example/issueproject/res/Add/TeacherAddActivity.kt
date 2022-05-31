@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityTeacherAddBinding
 import com.example.issueproject.dto.*
+import com.example.issueproject.res.MainTeacherActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 import okhttp3.MediaType
@@ -35,6 +36,7 @@ class TeacherAddActivity : AppCompatActivity() {
     var school : String = ""
     var room : String = ""
     var id : String = ""
+    var name: String = ""
     val itemList = mutableListOf<String>()
     val roomList = mutableListOf<String>()
     private lateinit var currentImageUri: Uri
@@ -49,7 +51,7 @@ class TeacherAddActivity : AppCompatActivity() {
 
         id = intent.getStringExtra("id")!!
         Log.d(TAG, "id: $id")
-
+        name = intent.getStringExtra("name")!!
         GetSchool()
 
         getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -151,6 +153,8 @@ class TeacherAddActivity : AppCompatActivity() {
 
             override fun onSuccess(code: Int, responseData: LoginResult) {
                 Log.d(TAG, "onSuccess: $responseData")
+                Toast.makeText(this@TeacherAddActivity, "성공", Toast.LENGTH_SHORT).show()
+                GetTeacherInfo(id, name)
             }
 
             override fun onFailure(code: Int) {
@@ -168,7 +172,6 @@ class TeacherAddActivity : AppCompatActivity() {
             override fun onSuccess(code: Int, responseData: SignUpResult) {
                 Log.d(TAG, "onSuccess: $responseData")
                 if(responseData.msg == "success"){
-                    Toast.makeText(this@TeacherAddActivity, "성공", Toast.LENGTH_SHORT).show()
                     savaimage(currentImageUri)
                 }
             }
@@ -225,6 +228,31 @@ class TeacherAddActivity : AppCompatActivity() {
                 Log.d(TAG, "onFailure: $code")
             }
 
+        })
+    }
+
+    fun GetTeacherInfo(id: String, name: String){
+        ResponseService().GetTeacherInfo(id, object :RetrofitCallback<MutableList<TeacherinfoResult>>{
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: MutableList<TeacherinfoResult>) {
+                Log.d(TAG, "onSuccess: $responseData")
+
+                var intent = Intent(this@TeacherAddActivity, MainTeacherActivity::class.java).apply{
+                    putExtra("id", id)
+                    putExtra("name", name)
+                    putExtra("school", responseData[0].school)
+                    putExtra("room", responseData[0].room)
+                    putExtra("img_url", responseData[0].image_url)
+                }
+                startActivity(intent)
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+            }
         })
     }
 }

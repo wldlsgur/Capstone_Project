@@ -22,7 +22,9 @@ import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
 private const val TAG = "SchoolTeacherAdapter"
-class SchoolTeacherListAdapter(val context: Context, var list: MutableList<SchoolteacherListResult>) : RecyclerView.Adapter<SchoolTeacherListAdapter.SchoolListViewHolder>() {
+class SchoolTeacherListAdapter(val context: Context) : RecyclerView.Adapter<SchoolTeacherListAdapter.SchoolListViewHolder>() {
+
+    var list: MutableList<SchoolteacherListResult> = mutableListOf()
 
     inner class SchoolListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         //변수 설정 room, number
@@ -35,16 +37,9 @@ class SchoolTeacherListAdapter(val context: Context, var list: MutableList<Schoo
         val approval : TextView = itemView.findViewById(R.id.schoolTeacherListItem_btnApproval)
         val cancelApproval : TextView = itemView.findViewById(R.id.schoolTeacherListItem_btnCancelApproval)
         val moreBtn : ImageView = itemView.findViewById(R.id.schoolTeacherListItem_ivMoreBtn)
+        val childbtn : ConstraintLayout = itemView.findViewById(R.id.schoolTeacherListItem_clInfo)
 
         fun bindInfo(data: SchoolteacherListResult){
-            room.text = data.room
-            number.text = data.number
-
-            GetUserInfo(data.id)
-
-            Glide.with(image.context)
-                .load("${RetrofitBuilder.servers}/image/teacher/${data.image_url}")
-                .into(image)
 
             if(data.agree == "yes") {
                 chkApproval.visibility = View.GONE
@@ -52,7 +47,16 @@ class SchoolTeacherListAdapter(val context: Context, var list: MutableList<Schoo
                 chkApproval.visibility = View.VISIBLE
             }
 
+            room.text = data.room
+            number.text = data.number
 
+            GetUserInfo(data.id)
+
+            if(data.image_url != ""){
+                Glide.with(image.context)
+                    .load("${RetrofitBuilder.servers}/image/teacher/${data.image_url}")
+                    .into(image)
+            }
         }
 
         fun GetUserInfo(id: String){
@@ -84,8 +88,8 @@ class SchoolTeacherListAdapter(val context: Context, var list: MutableList<Schoo
 
         holder.apply {
 
-            itemView.setOnClickListener{
-                itemClickListener.onClick(it, position)
+            childbtn.setOnClickListener{
+                childbtnClickListener.onClick(position, item)
             }
 
             bindInfo(item)
@@ -126,21 +130,23 @@ class SchoolTeacherListAdapter(val context: Context, var list: MutableList<Schoo
     }
 
 
-    interface OnItemClickListener {
-        fun onClick(v: View, position: Int)
-    }
-
-    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
-        this.itemClickListener = onItemClickListener
-    }
-
-    private lateinit var itemClickListener : OnItemClickListener
+//    interface OnItemClickListener {
+//        fun onClick(v: View, position: Int, item: SchoolteacherListResult)
+//    }
+//    private lateinit var itemClickListener : OnItemClickListener
+//    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
+//        this.itemClickListener = onItemClickListener
+//    }
 
 
     interface MenuClickListener {
         fun onClick(position: Int, item : SchoolteacherListResult)
     }
 
+    private lateinit var childbtnClickListener : MenuClickListener
+    fun setChildLayoutClickListener(childbtnClickListener: MenuClickListener){
+        this.childbtnClickListener = childbtnClickListener
+    }
     private lateinit var modifyItemClickListener : MenuClickListener
     fun setModifyItemClickListener(modifyClickListener: MenuClickListener) {
         this.modifyItemClickListener = modifyClickListener

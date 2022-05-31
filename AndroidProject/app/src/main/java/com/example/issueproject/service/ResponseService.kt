@@ -695,10 +695,12 @@ class ResponseService {
         })
     }
 
-    fun Teacheragreechange(keyId: Int, callback: RetrofitCallback<SignUpResult>){
+    fun Teacheragreechange(keyId: AgreeChange, callback: RetrofitCallback<SignUpResult>){
         RetrofitBuilder.api.Teacheragreechange(keyId).enqueue(object : Callback<SignUpResult>{
             override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
-                Log.d(TAG, "saveCalender: ..")
+                Log.d(TAG, "Teacheragreechange: ..")
+                Log.d(TAG, "onResponse: ${response.code()}")
+
                 if (response.code() == 200){
                     Log.d(TAG, "onResponse: 200")
                     if(response.body() != null){
@@ -717,10 +719,11 @@ class ResponseService {
         })
     }
 
-    fun deleteteacherlist(keyId: Int, callback: RetrofitCallback<SignUpResult>) {
+    fun deleteteacherlist(keyId: AgreeChange, callback: RetrofitCallback<SignUpResult>) {
         RetrofitBuilder.api.deleteteacherlist(keyId).enqueue(object : Callback<SignUpResult>{
             override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
                 Log.d(TAG, "onResponse: teacher list delete")
+                Log.d(TAG, "onResponse: ${response.code()}")
                 if (response.code() == 200){
                     Log.d(TAG, "onResponse: 200")
                     if(response.body() != null){
@@ -737,6 +740,49 @@ class ResponseService {
                 callback.onError(t)
             }
 
+        })
+    }
+
+    fun CreateFoodList(foodlist: FoodList, callback: RetrofitCallback<SignUpResult>) {
+        RetrofitBuilder.api.CreateFoodList(foodlist).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "CreateFoodList: ${response.code()}")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+        })
+    }
+
+    fun GetFoodListInfo(school: String, callback: RetrofitCallback<MutableList<GetFoodList>>){
+        RetrofitBuilder.api.FoodListInfo(school).enqueue(object : Callback<MutableList<GetFoodList>>{
+            override fun onResponse(call: Call<MutableList<GetFoodList>>, response: Response<MutableList<GetFoodList>>) {
+                Log.d(TAG, "onResponse: ${response.code()}")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }               }
+
+            override fun onFailure(call: Call<MutableList<GetFoodList>>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
         })
     }
 }

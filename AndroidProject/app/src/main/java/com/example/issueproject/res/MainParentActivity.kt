@@ -66,8 +66,8 @@ class MainParentActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.ParentDaliy.setOnClickListener {
-//            var intent = Intent(this, CalenActivity::class.java)
-//            startActivity(intent)
+            var intent = Intent(this, DailyActivity::class.java)
+            startActivity(intent)
         }
         binding.ParentDayNotic.setOnClickListener {
             var intent = Intent(this, DayNoticTeacherActivity::class.java).apply {
@@ -84,7 +84,10 @@ class MainParentActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.ParentFoodList.setOnClickListener {
-            var intent = Intent(this, FoodlistActivity::class.java)
+            var intent = Intent(this, FoodlistActivity::class.java).apply {
+                putExtra("school", school)
+                putExtra("id", id)
+            }
             startActivity(intent)
         }
         binding.ParentMedicinemanagement.setOnClickListener {

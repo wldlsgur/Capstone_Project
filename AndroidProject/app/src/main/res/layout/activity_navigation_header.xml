@@ -20,7 +20,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/FoodListImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
@@ -37,11 +37,11 @@
         android:text="이름"
         android:textColor="@color/main"
         android:textSize="50dp"
-        app:layout_constraintStart_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintStart_toStartOf="@+id/FoodListImage"
+        app:layout_constraintTop_toBottomOf="@+id/FoodListImage" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/textViewFoodListDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -57,6 +57,6 @@
         android:layout_marginStart="52dp"
         android:text="반"
         android:textColor="@color/main"
-        app:layout_constraintStart_toEndOf="@+id/textView20"
-        app:layout_constraintTop_toTopOf="@+id/textView20" />
+        app:layout_constraintStart_toEndOf="@+id/textViewFoodListDate"
+        app:layout_constraintTop_toTopOf="@+id/textViewFoodListDate" />
 </androidx.constraintlayout.widget.ConstraintLayout>
