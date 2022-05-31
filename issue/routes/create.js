@@ -131,7 +131,7 @@ router.post('/teacherinfo', function(req, res){
 
 router.post('/food_list', function(req, res){
 	let json_data = {
-		schoo : req.body.school,
+		school : req.body.school,
 		date : req.body.date,
 		image_url : 'default'
 	};
