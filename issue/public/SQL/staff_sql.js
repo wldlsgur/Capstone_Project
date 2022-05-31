@@ -36,7 +36,7 @@ module.exports = function () {
             pool.getConnection(function (err, con) {
                 let sql=`UPDATE teacherinfo
                          SET agree='yes'
-                         WHERE key_id=${keyId}`;
+                         WHERE key_id= cast('${keyId}' as unsigned)`;
                 con.query(sql,function(err,result,fields){
                     con.release();
                     if(err) callback(err,null);
@@ -47,7 +47,7 @@ module.exports = function () {
         deleteTeacherinfo: function (keyId,callback) {
             pool.getConnection(function (err, con) {
                 let sql=`DELETE FROM teacherinfo
-                         WHERE key_id=${keyId}`;
+                         WHERE key_id= cast('${keyId}' as unsigned)`;
                 con.query(sql,function(err,result,fields){
                     con.release();
                     if(err) callback(err,null);
