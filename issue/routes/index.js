@@ -2,6 +2,6 @@ var express = require('express');
 var router = express.Router ();
 
 router.get('/', function(req, res, next){
-  res.send("무중단test5!!")  
+  res.send("무중단test6!!")  
 });
 module.exports = router;
