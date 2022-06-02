@@ -1,0 +1,6 @@
+#!/bin/sh
+ssh ubuntu@3.34.45.32 <<EOF
+    cd cd /var/lib/jenkins/workspace/issue\ ci\ cd/issue/	
+    npm restart	
+    exit
+EOF
