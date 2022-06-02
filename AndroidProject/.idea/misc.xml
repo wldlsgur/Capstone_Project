@@ -160,12 +160,14 @@
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_foodlist.xml" value="0.32971014492753625" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_main.xml" value="0.17249240121580547" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_main_parent.xml" value="0.33" />
+        <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_main_parent_navi.xml" value="0.14402173913043478" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_main_teacher.xml" value="0.17249240121580547" />
+        <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_main_teacher_navi.xml" value="0.18" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_medicine.xml" value="0.33" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_medicine_list.xml" value="0.5" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_medicine_list_item.xml" value="0.5" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_menu.xml" value="0.5" />
-        <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_menu_navi.xml" value="0.30440967283072545" />
+        <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_menu_navi.xml" value="0.1" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_navigation.xml" value="0.25" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_navigation_appbar.xml" value="0.33" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/layout/activity_navigation_header.xml" value="0.25" />
@@ -194,6 +196,7 @@
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/menu/activity_navigation_teacher_menu_list.xml" value="0.1875" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/menu/actvity_navigation_menu_list.xml" value="0.1875" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/menu/menu_list.xml" value="0.33" />
+        <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/menu/popup_menu.xml" value="0.15364583333333334" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_medicine.xml" value="0.3515625" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_medicine_list.xml" value="0.3515625" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_medicine_list_item.xml" value="0.3515625" />
