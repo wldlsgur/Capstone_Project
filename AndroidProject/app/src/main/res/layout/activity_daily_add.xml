@@ -121,6 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:gravity="right"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -137,7 +138,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/calendar" />
+            app:srcCompat="@drawable/calendar" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -163,22 +165,20 @@
 
         <Spinner
             android:id="@+id/spinnerDailyAddColor"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageViewPoint"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageViewPoint"
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:tint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView91"
+            app:layout_constraintEnd_toStartOf="@+id/spinnerDailyAddColor"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/calendar_point" />
     </androidx.constraintlayout.widget.ConstraintLayout>

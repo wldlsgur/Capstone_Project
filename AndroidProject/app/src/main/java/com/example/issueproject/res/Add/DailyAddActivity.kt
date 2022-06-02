@@ -87,11 +87,11 @@ class DailyAddActivity : AppCompatActivity() {
 
         val cal = Calendar.getInstance()
 
-        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute  ->
             cal.set(Calendar.HOUR_OF_DAY, hour)
             cal.set(Calendar.MINUTE, minute)
 
-            date.text = SimpleDateFormat("HH:mm").format(cal.time)
+            date.text = SimpleDateFormat("HH : mm a").format(cal.time)
         }
 
         TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
