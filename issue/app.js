@@ -78,6 +78,7 @@ let staffRouter = require('./routes/staff');	// 선생, 원장 통일
 let medicineRouter = require('./routes/medicine');	//약, 약 관리 통일
 let testRouter = require('./routes/test1');
 let alarmRouter = require('./routes/alarm');	//FCM 라우터
+let calendarRouter = require('./routes/calendar');
 
 var app = express();
 
@@ -108,6 +109,7 @@ app.use('/staff', staffRouter);	// 선생, 원장 통일
 app.use('/medicine', medicineRouter); //약, 약 관리 통일
 app.use('/test1', testRouter);
 app.use('/alarm',alarmRouter);	//FCM 라우터
+app.use('/calendar',calendarRouter);
 
 // catch 404 and forward to error handler
 app.get('/favicon.ico', function(req, res) { 
