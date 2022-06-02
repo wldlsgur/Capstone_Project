@@ -12,6 +12,7 @@ import com.example.issueproject.databinding.ActivitySchoolTeacherListBinding
 import com.example.issueproject.dto.AgreeChange
 import com.example.issueproject.dto.SchoolteacherListResult
 import com.example.issueproject.dto.SignUpResult
+import com.example.issueproject.dto.TeacherListKeyId
 import com.example.issueproject.res.RoomManager.RoomChildListActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -124,7 +125,7 @@ class SchoolTeacherListActivity : AppCompatActivity() {
     }
 
     private fun Teacheragreechange(SchoolteacherListResult : SchoolteacherListResult, position: Int){
-        ResponseService().Teacheragreechange((AgreeChange(SchoolteacherListResult.key_id)), object : RetrofitCallback<SignUpResult>{
+        ResponseService().Teacheragreechange((TeacherListKeyId(SchoolteacherListResult.key_id)), object : RetrofitCallback<SignUpResult>{
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
@@ -144,7 +145,7 @@ class SchoolTeacherListActivity : AppCompatActivity() {
     }
 
     private fun deleteteacherlist(schoolteacherListResult: SchoolteacherListResult, position: Int){
-        ResponseService().deleteteacherlist(AgreeChange(schoolteacherListResult.key_id), object : RetrofitCallback<SignUpResult>{
+        ResponseService().deleteteacherlist(TeacherListKeyId(schoolteacherListResult.key_id), object : RetrofitCallback<SignUpResult>{
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }

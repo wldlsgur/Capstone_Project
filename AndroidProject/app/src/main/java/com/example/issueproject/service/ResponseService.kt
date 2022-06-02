@@ -695,7 +695,7 @@ class ResponseService {
         })
     }
 
-    fun Teacheragreechange(keyId: AgreeChange, callback: RetrofitCallback<SignUpResult>){
+    fun Teacheragreechange(keyId: TeacherListKeyId, callback: RetrofitCallback<SignUpResult>){
         RetrofitBuilder.api.Teacheragreechange(keyId).enqueue(object : Callback<SignUpResult>{
             override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
                 Log.d(TAG, "Teacheragreechange: ..")
@@ -719,7 +719,7 @@ class ResponseService {
         })
     }
 
-    fun deleteteacherlist(keyId: AgreeChange, callback: RetrofitCallback<SignUpResult>) {
+    fun deleteteacherlist(keyId: TeacherListKeyId, callback: RetrofitCallback<SignUpResult>) {
         RetrofitBuilder.api.deleteteacherlist(keyId).enqueue(object : Callback<SignUpResult>{
             override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
                 Log.d(TAG, "onResponse: teacher list delete")
