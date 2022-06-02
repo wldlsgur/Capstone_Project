@@ -53,14 +53,6 @@ class MainTeacherActivity : AppCompatActivity() , NavigationView.OnNavigationIte
                 .into(binding.mainTeacher.imageViewTeacher)
         }
 
-        binding.mainTeacher.TeacherRoomchildmanagement.setOnClickListener {
-            var intent = Intent(this, RoomChildListActivity::class.java).apply {
-                putExtra("school", school)
-                putExtra("room", room)
-            }
-            startActivity(intent)
-        }
-
         binding.mainTeacher.TeacherNotic.setOnClickListener {
             var intent = Intent(this, NoticActivity::class.java).apply {
                 putExtra("school", school)

@@ -166,6 +166,7 @@ class MainActivity : AppCompatActivity() {
                 if(responseData.isEmpty()){
                     var intent = Intent(this@MainActivity, TeacherAddActivity::class.java).apply{
                         putExtra("id", id)
+                        putExtra("name", name)
                     }
                     startActivity(intent)
                 }

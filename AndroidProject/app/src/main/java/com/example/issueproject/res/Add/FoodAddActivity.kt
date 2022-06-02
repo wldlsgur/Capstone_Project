@@ -38,6 +38,7 @@ import java.lang.Exception
 import java.text.DateFormatSymbols
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 private const val TAG = "FoodAddActivity"
 class FoodAddActivity : AppCompatActivity() {
@@ -60,14 +61,18 @@ class FoodAddActivity : AppCompatActivity() {
         school = intent.getStringExtra("school").toString()
         id = intent.getStringExtra("id").toString()
 
-        val yearlist = resources.getStringArray(R.drawable.yearspiiner)
+        val currentTime = System.currentTimeMillis()
+        convertTimestampToDate(currentTime)
+
+//        val yearlist = resources.getStringArray(R.drawable.yearspiiner)
+        val yearlist = arrayListOf<String>("2022년", "2021년", "2020년", "2019년", "2018년")
         val monthlist = DateFormatSymbols().months
 
         val Yearadapter = ArrayAdapter(this@FoodAddActivity, R.layout.spinner, yearlist)
         binding.spinnerYear.adapter = Yearadapter
 
         val Monthadapter = ArrayAdapter(this@FoodAddActivity, R.layout.spinner, monthlist)
-        binding.spinnerYear.adapter = Monthadapter
+        binding.spinnerMonth.adapter = Monthadapter
 
         getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == RESULT_OK && it.data !=null) {
@@ -95,6 +100,7 @@ class FoodAddActivity : AppCompatActivity() {
                 year = yearlist[position]
             }
         }
+
         binding.spinnerMonth.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
@@ -136,6 +142,15 @@ class FoodAddActivity : AppCompatActivity() {
             }
 
         })
+    }
+    private fun convertTimestampToDate(timespamp: Long){
+        val sdf = SimpleDateFormat("yyyy년 MM월")
+        val date = sdf.format(timespamp)
+
+        binding.textViewFoodAddDate.text = date
+        var year = date.substring(0,4)
+        var month = date.substring(6,8)
+        Log.d(TAG, "datetest: ${year}-${month}")
     }
 
     fun savaimage(uri: Uri){
