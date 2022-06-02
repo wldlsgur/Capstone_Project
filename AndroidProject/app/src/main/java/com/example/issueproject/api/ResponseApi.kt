@@ -154,6 +154,12 @@ interface ResponseApi {
 
     ): Call<Medicine>
 
+    @GET("/alarm/push_send")
+    fun CallAlarm(
+        @Query("target_token") target_token: String
+
+    ): Call<SignUpResult>
+
     @POST("/medicine/insert/data")
     fun PostMedicine(
         @Body PostMedicine: PostMedicine
