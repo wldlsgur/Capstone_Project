@@ -1,0 +1,6 @@
+#!/bin/sh
+ssh centOS@106.10.44.92 <<EOF
+    cd cd /var/lib/jenkins/workspace/issue\ ci\ cd/issue/	
+    pm2 restart ./bin/www	
+    exit
+EOF 
