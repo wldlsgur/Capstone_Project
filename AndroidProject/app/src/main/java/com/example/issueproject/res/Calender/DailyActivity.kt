@@ -1,5 +1,6 @@
 package com.example.issueproject.res.Calender
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,6 +10,7 @@ import com.example.issueproject.Adapter.DailyAdapter
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityDailyBinding
 import com.example.issueproject.databinding.ActivityMenuBinding
+import com.example.issueproject.res.Add.DailyAddActivity
 
 class DailyActivity : AppCompatActivity() {
     private lateinit var dailyAdapter: DailyAdapter
@@ -21,6 +23,11 @@ class DailyActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setListener()
+
+        binding.floatingActionButtonAddDaily.setOnClickListener {
+            var intent = Intent(this, DailyAddActivity::class.java)
+            startActivity(intent)
+        }
     }
     fun setListener(){
         initCalendar()

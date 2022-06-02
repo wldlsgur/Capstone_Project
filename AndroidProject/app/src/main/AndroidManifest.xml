@@ -16,6 +16,18 @@
         android:theme="@style/Theme.IssueProject"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".DailyAddSpinnerItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DailyAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailCalenderItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailCalendarActivity"
+            android:exported="false" />
+        <activity
             android:name=".res.Add.FoodAddActivity"
             android:exported="false" />
         <activity

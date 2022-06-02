@@ -23,8 +23,8 @@
 
     <ImageView
         android:id="@+id/fragment_calendar_point"
-        android:layout_width="5dp"
-        android:layout_height="5dp"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:layout_marginTop="10dp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
