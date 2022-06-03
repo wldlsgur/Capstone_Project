@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy{
         ActivityMainBinding.inflate(layoutInflater)
     }
-
+    var token : String = ""
     val name :String = ""
     val school :String = ""
     val room :String = ""
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        initFcm()
+        //initFcm()
     }
 
     fun Login(id: String, pw: String){
@@ -154,7 +154,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-    
+
     fun GetTeacherInfo(id: String, name: String){
         ResponseService().GetTeacherInfo(id, object :RetrofitCallback<MutableList<TeacherinfoResult>>{
             override fun onError(t: Throwable) {
@@ -166,6 +166,7 @@ class MainActivity : AppCompatActivity() {
                 if(responseData.isEmpty()){
                     var intent = Intent(this@MainActivity, TeacherAddActivity::class.java).apply{
                         putExtra("id", id)
+                        putExtra("name", name)
                     }
                     startActivity(intent)
                 }
@@ -187,6 +188,26 @@ class MainActivity : AppCompatActivity() {
 
         })
     }
+    //알람 토큰 통신
+    fun CallAlarm(target_token : String){
+        ResponseService().CallAlarm(
+            target_token,
+            object : RetrofitCallback<SignUpResult> {
+                override fun onError(t: Throwable) {
+                    Log.d(TAG, "token onError: $t")
+                }
+
+                override fun onSuccess(code: Int, responseData: SignUpResult) {
+                    Log.d(TAG, "token onSuccess: $responseData")
+                }
+
+                override fun onFailure(code: Int) {
+                    Log.d(TAG, "token onFailure: $code")
+                }
+
+            })
+
+    }
 
     /**
      * FCM 토큰 수신 및 채널 생성
@@ -200,9 +221,11 @@ class MainActivity : AppCompatActivity() {
             }
             // token log 남기기
             Log.d(TAG, "token: ${task.result?:"task.result is null"}")
+            Log.d(TAG, "initFcm: ${task.result}")
+            CallAlarm(task.result!!)
+            //token = task.result!!
 
-            // 유저 토큰 갱신
-
+            // 유저 토큰 갱신 update
         })
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

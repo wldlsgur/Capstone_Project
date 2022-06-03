@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.issueproject.R
 import com.example.issueproject.dto.MedicineManagementResult
+import com.example.issueproject.dto.ParentInfoResult
 import com.example.issueproject.retrofit.RetrofitBuilder
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -34,42 +35,35 @@ class MedicineListAdapter(var list:MutableList<MedicineManagementResult>) : Recy
 
 
         fun bindinfo(data: MedicineManagementResult){
-            id = data.id
             cname.text = data.child_name
             date.text = data.date
             mname.text = data.m_name
             school.text = data.school
             room.text = data.room
 
-
-
-            /*
-            if(data.image_url != "default"){
-                Glide.with(childimage.context)
-                    .load("${RetrofitBuilder.servers}/image/parent/${data.image_url}")
-                    .into(childimage)
-            }
-        */
+            ChildInfo(data.id, data.child_name)
         }
 
-//        fun GetImageUrl(target: String, name: String){
-//            ResponseService().GetImageUrl(target, name, object: RetrofitCallback<ResponseBody>{
-//                override fun onError(t: Throwable) {
-//                    Log.d(TAG, "onError: ")
-//                }
-//
-//                override fun onSuccess(code: Int, responseData: ResponseBody) {
-//                    Log.d(TAG, "onSuccess: $responseData")
-//
-//                    val bitmap: Bitmap = BitmapFactory.decodeStream(responseData.byteStream())
-//                    childimage.setImageBitmap(bitmap)
-//                }
-//
-//                override fun onFailure(code: Int) {
-//                    Log.d(TAG, "onFailure: $code")
-//                }
-//            })
-//        }
+        fun ChildInfo(id: String, name: String){
+            ResponseService().ChildInfo(id, name, object : RetrofitCallback<ParentInfoResult> {
+                override fun onError(t: Throwable) {
+                    Log.d(TAG, "onError: $t")
+                }
+                override fun onSuccess(code: Int, responseData: ParentInfoResult) {
+                    Log.d(TAG, "onSuccess: $responseData")
+
+                    if(responseData.image_url != "default"){
+                        Glide.with(childimage.context)
+                            .load("${RetrofitBuilder.servers}/image/parent/${responseData.image_url}")
+                            .into(childimage)
+                    }
+                }
+
+                override fun onFailure(code: Int) {
+                    Log.d(TAG, "onFailure: $code")
+                }
+            })
+        }
     }
 
 

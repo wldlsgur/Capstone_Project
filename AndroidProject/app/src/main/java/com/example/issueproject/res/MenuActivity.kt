@@ -41,10 +41,11 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         name = intent.getStringExtra("name").toString()
         school = intent.getStringExtra("school").toString()
         room = intent.getStringExtra("room").toString()
-        val img_url = intent.getStringExtra("img_url")
         constraintLayout = findViewById(R.id.menu)
+        val img_url = intent.getStringExtra("img_url")
         binding.menu.textViewName.text = name
         binding.menu.textViewSchool.text = school
+
 
         if(img_url != null){
             Glide.with(this)
@@ -87,10 +88,7 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             startActivity(intent)
         }
         binding.menu.PresidentFoodList.setOnClickListener {
-            var intent = Intent(this, FoodlistActivity::class.java).apply {
-                putExtra("school", school)
-                putExtra("id", id)
-            }
+            var intent = Intent(this, FoodlistActivity::class.java)
             startActivity(intent)
         }
         binding.menu.PresidentMedicinemanagement.setOnClickListener {
@@ -102,7 +100,7 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 //        startActivity(intent)
 //    }
 
-        val toolbar = binding.menuAppbar.tool // toolBar를 통해 App Bar 생성
+        val toolbar = binding.menuAppbarPresident.tool // toolBar를 통해 App Bar 생성
         toolbar.setTitle("알림장")
         setSupportActionBar(toolbar) // 툴바 적용
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
@@ -110,10 +108,10 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         supportActionBar?.setDisplayShowTitleEnabled(true) // 툴바에 타이틀 안보이게
 
         // 네비게이션 드로어 생성
-        drawerLayout = findViewById(R.id.drawer_layout)
+        drawerLayout = findViewById(R.id.drawer_layout_president)
 
         // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
-        navigationView = findViewById(R.id.nav_view)
+        navigationView = findViewById(R.id.nav_view_president)
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
     }
 
@@ -124,7 +122,7 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         when (item!!.itemId) {
             android.R.id.home -> {
                 // 햄버거 버튼 클릭시 네비게이션 드로어 열기
-                drawerLayout.openDrawer(Gravity.RIGHT)
+                drawerLayout.openDrawer(Gravity.LEFT)
 
             }
         }
