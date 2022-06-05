@@ -8,7 +8,7 @@ const failed_response = {res : false, msg : "failed"};
 
 router.post('/insertCalendarInfo', function(req, res, next) {  
     let id = req.body.id;
-    let calGroup = req.body.calGroup;
+    let school = req.body.school;
     let title = req.body.title;
     let content = req.body.content;
     let startDate = req.body.startDate;
@@ -17,7 +17,13 @@ router.post('/insertCalendarInfo', function(req, res, next) {
     let endTime = req.body.endTime;
     let color = req.body.color;
 
-    db_calendar.insertCalendarInfo(id, calGroup, title, content, startDate, endDate, startTime, endTime , color,function(err,result){
+    let date1 = new Date(startDate);
+    let date2 = new Date(endDate);
+
+    let diffDate = date1.getTime() - date2.getTime();
+    let dateDays = Math.abs(diffDate / (1000 * 3600 * 24));
+
+    db_calendar.insertCalendarInfo(id, school, title, content, startDate, dateDays, startTime, endTime , color,function(err,result){
          if(err){
                 console.log(err);
                 res.status(400).send(err);
