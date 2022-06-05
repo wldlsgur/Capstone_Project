@@ -232,4 +232,10 @@ interface ResponseApi {
     fun FoodListInfo(
         @Path("school") school: String
     ): Call<MutableList<GetFoodList>>
+
+    @GET("/food_list/info")
+    fun GetFoodList(
+        @Query("school") school: String,
+        @Query("date") date: String
+    ): Call<GetFoodList>
 }

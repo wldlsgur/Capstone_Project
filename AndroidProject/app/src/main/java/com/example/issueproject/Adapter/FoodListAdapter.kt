@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.issueproject.R
 import com.example.issueproject.dto.GetFoodList
+import com.example.issueproject.retrofit.RetrofitBuilder
 
 class FoodListAdapter(var list:MutableList<GetFoodList>) : RecyclerView.Adapter<FoodListAdapter.FoodListViewHolder>() {
 
@@ -22,10 +23,11 @@ class FoodListAdapter(var list:MutableList<GetFoodList>) : RecyclerView.Adapter<
 
             val image_url = data.image_url
 
-            Glide.with(FoodListImage.context)
-                .load(image_url)
-                .into(FoodListImage)
-
+            if(data.image_url != "default") {
+                Glide.with(FoodListImage.context)
+                    .load("${RetrofitBuilder.servers}/image/food/${image_url}")
+                    .into(FoodListImage)
+            }
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodListViewHolder {

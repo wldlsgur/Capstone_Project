@@ -33,7 +33,7 @@ class DailyActivity : AppCompatActivity() {
         initCalendar()
     }
     fun initCalendar(){
-        var date = arrayListOf<String>("2022년 05월 24일","2021년 05월 28일","2021년 05월 12일","2021년 05월 18일")
+        var date = arrayListOf<String>("2022년 05월 24일","2021년 05월 28일","2021년 05월 12일","2021년 05월 18일", "2021년 05월 19일", "2021년 05월 18일", "2021년 05월 18일")
 
         dailyAdapter = DailyAdapter(this, date)
         findViewById<RecyclerView>(R.id.customCalendar).apply {
