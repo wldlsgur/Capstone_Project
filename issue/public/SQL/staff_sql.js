@@ -44,6 +44,21 @@ module.exports = function () {
                 })
             })
         },
+        updateTeacherInfo: function (id, school, room, callback) {
+            pool.getConnection(function (err, con) {
+                let sql=`UPDATE teacherinfo
+                         SET id = '${id}',
+                             school = '${school}',
+                             room = '${room}',
+                             agree='no'  
+                         WHERE id= '${id}'`;
+                con.query(sql,function(err,result,fields){
+                    con.release();
+                    if(err) callback(err,null);
+                    else callback(null,result);
+                })
+            })
+        },
         deleteTeacherinfo: function (keyId,callback) {
             pool.getConnection(function (err, con) {
                 let sql=`DELETE FROM teacherinfo

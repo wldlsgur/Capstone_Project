@@ -37,6 +37,20 @@ router.post('/updateTeacherinfoAgree', function(req, res, next) {
     else res.send(sucess_response);
   })
 })
+router.post('/updateTeacherInfo', function(req, res, next) {
+
+  let id = req.body.id;
+  let school = req.body.school;
+  let room = req.body.room;
+
+  db_staff.updateTeacherInfo(id, school, room ,function(err,result){
+    if(err){
+        console.log(err);
+        res.status(400).send(err);
+    }
+    else res.send(sucess_response);
+  })
+})
 router.post('/deleteTeacherinfo', function(req, res, next) {
 
   let keyId = req.body.keyId;
