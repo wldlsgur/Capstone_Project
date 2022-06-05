@@ -32,7 +32,7 @@ module.exports = function () {
                 })
             })
         },
-        updateTeacherinfoAgree: function (keyId,callback) {
+        updateTeacherinfoAgree: function (id,callback) {
             pool.getConnection(function (err, con) {
                 let sql=`UPDATE teacherinfo
                          SET agree='yes'
@@ -59,7 +59,7 @@ module.exports = function () {
                 })
             })
         },
-        deleteTeacherinfo: function (keyId,callback) {
+        deleteTeacherinfo: function (id,callback) {
             pool.getConnection(function (err, con) {
                 let sql=`DELETE FROM teacherinfo
                          WHERE id = '${id}'`;
