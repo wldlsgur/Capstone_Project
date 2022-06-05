@@ -17,7 +17,7 @@ router.post('/insertCalendarInfo', function(req, res, next) {
     let endTime = req.body.endTime;
     let color = req.body.color;
 
-    let diffDate = date1.getTime() - date2.getTime();
+    let diffDate = startDate.getTime() - endDate.getTime();
     let dateDays = Math.abs(diffDate / (1000 * 3600 * 24));
 
     db_calendar.insertCalendarInfo(id, school, title, content, startDate, dateDays, startTime, endTime , color,function(err,result){
