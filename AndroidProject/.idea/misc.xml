@@ -80,7 +80,7 @@
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_daily_add.xml" value="0.4" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_daily_add_spinner_item.xml" value="0.536" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_daily_item.xml" value="0.4" />
-        <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_daily_item2.xml" value="0.2390625" />
+        <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_daily_item2.xml" value="0.4" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_day_notic.xml" value="0.536" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_day_notic_add.xml" value="0.264" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_day_notic_item.xml" value="0.4" />
@@ -93,6 +93,7 @@
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_foodlist.xml" value="0.176" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_main_parent.xml" value="0.4" />
+        <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_main_parent_navi.xml" value="0.23802083333333332" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_main_teacher.xml" value="0.264" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_medicine_list_item.xml" value="0.4" />
         <entry key="..\:/Users/power/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_menu.xml" value="0.4" />
