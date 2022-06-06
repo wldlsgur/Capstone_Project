@@ -133,6 +133,7 @@ class MainTeacherActivity : AppCompatActivity() , NavigationView.OnNavigationIte
         var intent2 = Intent(this, UserInfoChangeActivity::class.java).apply{
             putExtra("id", id)
             putExtra("job", "선생님")
+            putExtra("school", school)
         }
         var intent3 = Intent(this, MainActivity::class.java)
 
