@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.issueproject.R
 import java.util.*
 
+private const val TAG = "DailyDateAdapter"
 class DailyDateAdapter(val tmpMonth:Int, val dayList:MutableList<Date>, val date: ArrayList<String>) : RecyclerView.Adapter<DailyDateAdapter.DayViewHolder>(){
     val ROW = 6
     inner class DayViewHolder(val layout: View) : RecyclerView.ViewHolder(layout)
@@ -55,7 +56,14 @@ class DailyDateAdapter(val tmpMonth:Int, val dayList:MutableList<Date>, val date
 
             if(checkDay.equals(strDay)){
                 if(strDate.equals(comDate)){
-                    holder.itemView.findViewById<ImageView>(R.id.fragment_calendar_point).visibility = View.VISIBLE
+//                    holder.itemView.findViewById<ImageView>(R.id.fragment_calendar_point).visibility = View.VISIBLE
+                    holder.itemView.findViewById<View>(R.id.calendar_View1).visibility = View.VISIBLE
+                }
+                else if(strDate.equals(comDate) && holder.itemView.findViewById<View>(R.id.calendar_View1).visibility == View.VISIBLE){
+                    holder.itemView.findViewById<View>(R.id.calendar_View2).visibility = View.VISIBLE
+                }
+                else if(strDate.equals(comDate) && holder.itemView.findViewById<View>(R.id.calendar_View2).visibility == View.VISIBLE){
+                    holder.itemView.findViewById<View>(R.id.calendar_View3).visibility = View.VISIBLE
                 }
             }
 

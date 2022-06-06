@@ -21,10 +21,7 @@ import com.bumptech.glide.Glide
 import com.example.issueproject.Adapter.AddAlbumAdapter
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityFoodAddBinding
-import com.example.issueproject.dto.FoodList
-import com.example.issueproject.dto.LoginResult
-import com.example.issueproject.dto.Presidentinfo
-import com.example.issueproject.dto.SignUpResult
+import com.example.issueproject.dto.*
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 import okhttp3.MediaType
@@ -52,6 +49,7 @@ class FoodAddActivity : AppCompatActivity() {
     var id: String = ""
     var year: String = ""
     var month : String =""
+    var key_id : Int = 0
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,8 +63,9 @@ class FoodAddActivity : AppCompatActivity() {
         convertTimestampToDate(currentTime)
 
 //        val yearlist = resources.getStringArray(R.drawable.yearspiiner)
-        val yearlist = arrayListOf<String>("2022년", "2021년", "2020년", "2019년", "2018년")
-        val monthlist = DateFormatSymbols().months
+//        val monthlist = DateFormatSymbols().months
+        val yearlist = arrayListOf<String>("선택안함", "2022년", "2021년", "2020년", "2019년", "2018년")
+        val monthlist = arrayListOf<String>("선택안함", "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월","10월", "11월", "12월")
 
         val Yearadapter = ArrayAdapter(this@FoodAddActivity, R.layout.spinner, yearlist)
         binding.spinnerYear.adapter = Yearadapter
@@ -106,7 +105,10 @@ class FoodAddActivity : AppCompatActivity() {
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 month = monthlist[position]
-                binding.textViewFoodAddDate.text = year + month
+
+                if(position != 0){
+                    binding.textViewFoodAddDate.text = year + month
+                }
             }
         }
 
@@ -133,7 +135,9 @@ class FoodAddActivity : AppCompatActivity() {
             override fun onSuccess(code: Int, responseData: SignUpResult) {
                 Log.d(TAG, "onSuccess: $responseData")
                 if(responseData.msg == "success"){
-                    savaimage(currentImageUri)
+                    Toast.makeText(this@FoodAddActivity, "성공", Toast.LENGTH_SHORT).show()
+                    val date = binding.textViewFoodAddDate.text.toString()
+                    GetFoodList(school, date)
                 }
             }
 
@@ -169,20 +173,36 @@ class FoodAddActivity : AppCompatActivity() {
         val requestBody = RequestBody.create(MediaType.parse("image/*"),byteArrayOutputStream.toByteArray())
         val uploadFile = MultipartBody.Part.createFormData("image","${file.name}.${fileExtension?.substring(6)}",requestBody)
 
-        uploadimage("food", id, uploadFile)
+        uploadimage("food", key_id.toString(), uploadFile)
     }
 
     fun uploadimage(target: String, key: String, file: MultipartBody.Part){
         Log.d(TAG, "uploadimage: ....")
         ResponseService().uploadimage(target, key, file, object : RetrofitCallback<LoginResult>{
-
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
 
             override fun onSuccess(code: Int, responseData: LoginResult) {
                 Log.d(TAG, "onSuccess: $responseData")
-                Toast.makeText(this@FoodAddActivity, "성공", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+            }
+        })
+    }
+
+    fun GetFoodList(school: String, date: String){
+        ResponseService().GetFoodList(school, date, object : RetrofitCallback<GetFoodList>{
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: GetFoodList) {
+                Log.d(TAG, "onSuccess: $responseData")
+                key_id = responseData.key_id
+                savaimage(currentImageUri)
             }
 
             override fun onFailure(code: Int) {

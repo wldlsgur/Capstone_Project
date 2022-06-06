@@ -804,4 +804,25 @@ class ResponseService {
             }
         })
     }
+
+    fun GetFoodList(school: String, date: String, callback: RetrofitCallback<GetFoodList>){
+        RetrofitBuilder.api.GetFoodList(school, date).enqueue(object : Callback<GetFoodList>{
+            override fun onResponse(call: Call<GetFoodList>, response: Response<GetFoodList>) {
+                Log.d(TAG, "onResponse: ${response.code()}")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }              }
+
+            override fun onFailure(call: Call<GetFoodList>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+        })
+    }
 }
