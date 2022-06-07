@@ -32,11 +32,11 @@ module.exports = function () {
                 })
             })
         },
-        updateTeacherinfoAgree: function (keyId,callback) {
+        updateTeacherinfoAgree: function (id,callback) {
             pool.getConnection(function (err, con) {
                 let sql=`UPDATE teacherinfo
                          SET agree='yes'
-                         WHERE key_id= cast('${keyId}' as unsigned)`;
+                         WHERE id = '${id}'`;
                 con.query(sql,function(err,result,fields){
                     con.release();
                     if(err) callback(err,null);
@@ -44,10 +44,25 @@ module.exports = function () {
                 })
             })
         },
-        deleteTeacherinfo: function (keyId,callback) {
+        updateTeacherInfo: function (id, school, room, callback) {
+            pool.getConnection(function (err, con) {
+                let sql=`UPDATE teacherinfo
+                         SET id = '${id}',
+                             school = '${school}',
+                             room = '${room}',
+                             agree='no'  
+                         WHERE id= '${id}'`;
+                con.query(sql,function(err,result,fields){
+                    con.release();
+                    if(err) callback(err,null);
+                    else callback(null,result);
+                })
+            })
+        },
+        deleteTeacherinfo: function (id,callback) {
             pool.getConnection(function (err, con) {
                 let sql=`DELETE FROM teacherinfo
-                         WHERE key_id= cast('${keyId}' as unsigned)`;
+                         WHERE id = '${id}'`;
                 con.query(sql,function(err,result,fields){
                     con.release();
                     if(err) callback(err,null);

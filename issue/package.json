@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "pm2 start ./bin/www -- start",
-    "stop": "pm2 stop ./bin/www"
+    "test": "jest --detectOpenHandles --forceExit"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
