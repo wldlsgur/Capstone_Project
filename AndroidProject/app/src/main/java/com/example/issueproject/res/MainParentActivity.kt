@@ -140,6 +140,7 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
             putExtra("id", id)
             putExtra("job", "부모님")
             putExtra("school", school)
+            putExtra("name", binding.mainParent.textViewName.text.toString())
         }
         var intent3 = Intent(this, MainActivity::class.java)
 

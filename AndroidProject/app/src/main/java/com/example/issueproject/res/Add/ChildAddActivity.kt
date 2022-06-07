@@ -80,8 +80,8 @@ class ChildAddActivity : AppCompatActivity() {
                 school = itemList[position]
                 GetRoom(school)
             }
-
         }
+
         binding.spinnerRoom.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }

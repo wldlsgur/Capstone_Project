@@ -238,4 +238,9 @@ interface ResponseApi {
         @Query("school") school: String,
         @Query("date") date: String
     ): Call<GetFoodList>
+
+    @POST("/parentinfo/update/info")
+    fun UpdateParentinfo(
+        @Body parentinfo :ParentInfoUpdate
+    ): Call<SignUpResult>
 }
