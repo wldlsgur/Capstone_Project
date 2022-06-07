@@ -80,14 +80,15 @@ class SchoolTeacherListActivity : AppCompatActivity() {
         // item 승인 버튼 클릭 이벤트
         SchoolTeacherListAdapter.setApprovalItemClickListener(object : SchoolTeacherListAdapter.MenuClickListener {
             override fun onClick(position: Int, item: SchoolteacherListResult) {
-                Teacheragreechange(item, position)
+                Log.d(TAG, "onClick: ${item.id}")
+                Teacheragreechange(item.id, item.school, position)
             }
         })
 
         // item 승인취소 버튼 클릭 이벤트
         SchoolTeacherListAdapter.setCancelApprovalItemClickListener(object : SchoolTeacherListAdapter.MenuClickListener {
             override fun onClick(position: Int, item: SchoolteacherListResult) {
-                deleteteacherlist(item, position)
+                deleteteacherlist(item.id, item.school, position)
             }
         })
 
@@ -101,7 +102,7 @@ class SchoolTeacherListActivity : AppCompatActivity() {
         // item 삭제 클릭 이벤트
         SchoolTeacherListAdapter.setDeleteItemClickListener(object : SchoolTeacherListAdapter.MenuClickListener {
             override fun onClick(position: Int, item: SchoolteacherListResult) {
-                deleteteacherlist(item, position)
+                deleteteacherlist(item.id, item.school, position)
             }
         })
     }
@@ -124,8 +125,8 @@ class SchoolTeacherListActivity : AppCompatActivity() {
 
     }
 
-    private fun Teacheragreechange(SchoolteacherListResult : SchoolteacherListResult, position: Int){
-        ResponseService().Teacheragreechange((TeacherListKeyId(SchoolteacherListResult.key_id)), object : RetrofitCallback<SignUpResult>{
+    private fun Teacheragreechange(id: String, school: String, position: Int){
+        ResponseService().Teacheragreechange((TeacherListKeyId(id)), object : RetrofitCallback<SignUpResult>{
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
@@ -133,7 +134,7 @@ class SchoolTeacherListActivity : AppCompatActivity() {
             override fun onSuccess(code: Int, responseData: SignUpResult) {
                 Log.d(TAG, "onSuccess: $responseData")
                 if(responseData.res == true && responseData.msg == "success") {
-                    getTeacherList(SchoolteacherListResult.school)
+                    getTeacherList(school)
                 }
             }
 
@@ -144,21 +145,21 @@ class SchoolTeacherListActivity : AppCompatActivity() {
         })
     }
 
-    private fun deleteteacherlist(schoolteacherListResult: SchoolteacherListResult, position: Int){
-        ResponseService().deleteteacherlist(TeacherListKeyId(schoolteacherListResult.key_id), object : RetrofitCallback<SignUpResult>{
+    private fun deleteteacherlist(id: String, school: String, position: Int){
+        ResponseService().deleteteacherlist(TeacherListKeyId(id), object : RetrofitCallback<SignUpResult>{
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
 
             override fun onSuccess(code: Int, responseData: SignUpResult) {
-                Log.d(TAG, "onSuccess: ${schoolteacherListResult.key_id}")
+                Log.d(TAG, "onSuccess: ${id}")
                 Log.d(TAG, "onSuccess: $responseData")
                 Toast.makeText(this@SchoolTeacherListActivity, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
 
                 SchoolTeacherListAdapter.notifyItemRemoved(position)
 
                 if(responseData.res == true && responseData.msg == "success") {
-                    getTeacherList(schoolteacherListResult.school)
+                    getTeacherList(school)
                 }
             }
 
