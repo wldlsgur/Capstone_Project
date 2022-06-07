@@ -19,11 +19,14 @@ router.get('/push_send', function (req, res, next) {
       //target_token은 푸시 메시지를 받을 디바이스의 토큰값입니다
   
     let message = {
-      Notification: {
+      notification: {
         title: '테스트 데이터 발송',
-        body: '데이터가 잘 가나요?',
+        body: '데이터가 잘 가나요?'
       },
       token: target_token,
+      android: {
+        priority: "high"
+      }
     }
 
     console.log(target_token);
