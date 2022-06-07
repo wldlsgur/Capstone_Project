@@ -20,6 +20,7 @@ class UserInfoChangeActivity : AppCompatActivity() {
 
     var id: String = ""
     var job: String = ""
+    var school: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,15 +28,16 @@ class UserInfoChangeActivity : AppCompatActivity() {
 
         id = intent.getStringExtra("id").toString()
         job = intent.getStringExtra("job").toString()
+        school = intent.getStringExtra("school").toString()
 
-        binding.buttonUserOut.setOnClickListener {
-            showDialog()
-        }
+//        binding.buttonUserOut.setOnClickListener {
+//            showDialog()
+//        }
     }
 
     fun showDialog(){
         lateinit var dialog: AlertDialog
-        val deleteinfo = DeleteInfo(id, job)
+        val deleteinfo = DeleteInfo(id, job, school)
 
         val builder =  AlertDialog.Builder(this)
         builder.setTitle("회원 탈퇴")

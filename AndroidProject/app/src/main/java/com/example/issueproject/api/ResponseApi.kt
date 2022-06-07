@@ -202,13 +202,13 @@ interface ResponseApi {
     //선생 리스트 승인 no > yes
     @POST("/staff/updateTeacherinfoAgree")
     fun Teacheragreechange(
-        @Body keyId: TeacherListKeyId
+        @Body id: TeacherListKeyId
     ): Call<SignUpResult>
 
     //선생 리스트 삭제
     @POST("/staff/deleteTeacherinfo")
     fun deleteteacherlist(
-        @Body keyId: TeacherListKeyId
+        @Body id: TeacherListKeyId
     ): Call<SignUpResult>
 
     //원생 리스트 승인 no > yes

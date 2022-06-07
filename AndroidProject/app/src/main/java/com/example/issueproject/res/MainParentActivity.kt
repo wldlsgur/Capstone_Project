@@ -139,6 +139,7 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
         var intent2 = Intent(this, UserInfoChangeActivity::class.java).apply{
             putExtra("id", id)
             putExtra("job", "부모님")
+            putExtra("school", school)
         }
         var intent3 = Intent(this, MainActivity::class.java)
 
