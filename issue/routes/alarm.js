@@ -26,7 +26,6 @@ router.get('/push_send', function (req, res, next) {
     }
     else{
       aaa = result[0].token;
-      res.send(sucess_response);
     } 
   })
 
