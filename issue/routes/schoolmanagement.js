@@ -29,7 +29,7 @@ router.get('/info', function(req, res){
 
 router.post('/deleteinfo', function(req, res){
 	let json_data = {
-		keya_id : req.body.keya_id
+		key_id : req.body.key_id
 	}
 	if(check_element.check_require_element(json_data) === false) return res.send(element_msg);
 	let query = make_query.DELETE('schoolmanagement', json_data, '', 0);
