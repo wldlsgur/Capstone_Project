@@ -158,7 +158,7 @@ router.post('/update/info', function(req, res){
 	room='${json_data.room}', 
 	number='${json_data.number}', 
 	child_name='${json_data.child_name}', 
-	child_age='${json_data.age}', 
+	child_age='${json_data.child_age}', 
 	spec='${json_data.spec}' 
 	WHERE key_id='${json_data.key_id}'`;
 
