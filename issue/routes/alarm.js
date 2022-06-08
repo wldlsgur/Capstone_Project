@@ -17,7 +17,6 @@ admin.initializeApp({
 })
 
 router.get('/push_send', function (req, res, next) {
-  let aaa;
     
   db_alarm.selectTokenTest(function(err,result){
     if(err){
@@ -26,9 +25,11 @@ router.get('/push_send', function (req, res, next) {
     }
     else{
       console.log('쿼리결과 : ', result[0].token);
-      aaa = result[0].token;
+      job(result[0].token);
     } 
   })
+
+  function job(aaa){
     console.log('테스트', aaa);
     let target_token = aaa;
       //target_token은 푸시 메시지를 받을 디바이스의 토큰값입니다
@@ -57,6 +58,8 @@ router.get('/push_send', function (req, res, next) {
         console.log('Error Sending message!!! : ', err)
         res.send(failed_response);
       })
+  }
+    
   })
 
   module.exports = router;
