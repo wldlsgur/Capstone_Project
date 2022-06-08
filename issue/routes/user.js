@@ -80,6 +80,7 @@ router.post('/delete/info', function(req, res){//다른 테이블 연쇄 삭제 
 				`;
 			break;
 	}
+	console.log(query);
 	db_user_sql.DELETE(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
