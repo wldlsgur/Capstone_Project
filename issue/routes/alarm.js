@@ -25,10 +25,11 @@ router.get('/push_send', function (req, res, next) {
         res.status(400).send(err);
     }
     else{
+      console.log(result[0].token);
       aaa = result[0].token;
     } 
   })
-
+    console.log(aaa);
     let target_token = aaa;
       //target_token은 푸시 메시지를 받을 디바이스의 토큰값입니다
   
