@@ -72,12 +72,12 @@ router.post('/delete/info', function(req, res){//다른 테이블 연쇄 삭제 
 		case '원장님' :
 			query = 
 				`
-					DELETE u, p FROM user as u, presidentinfo as p WHERE u.id='${json_data.id}' AND p.id='${json_data.id}';
-				  	DELETE album, food_list, medicine, medicinemanagement, schoolmanagement, calendar
-				  	FROM album, food_list, medicine, medicinemanagement, schoolmanagement, calendar
-				  	WHERE album.school='${json_data.school}' AND food_list.school='${json_data.school}' AND medicine.school='${json_data.school}' AND
-					medicinemanagement.school='${json_data.school}' AND schoolmanagement.school='${json_data.school}' AND calendar.school='${json_data.school}';
-				`;
+				DELETE u FROM user as u WHERE u.id='${json_data.id};
+				DELETE p FROM presidentinfo as p WHERE p.id='${json_data.id};
+			  	DELETE album, food_list, medicinemanagement, schoolmanagement, calendar
+			  	FROM album, food_list, medicinemanagement, schoolmanagement, calendar
+			  	WHERE album.school='${json_data.school}' AND food_list.school='${json_data.school}' AND medicinemanagement.school='${json_data.school}' AND schoolmanagement.school='${json_data.school}' AND calendar.school='${json_data.school}';		  
+				DELETE FROM medicine WHERE child_name IN (SELECT p.child_name FROM parentinfo as p WHERE p.school='${json_data.school}');`;
 			break;
 	}
 	console.log(query);
