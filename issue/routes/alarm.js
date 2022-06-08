@@ -4,6 +4,8 @@ const router = express.Router();
 const sucess_response = {res : true, msg : 'success'};
 const failed_response = {res : false, msg : "failed"};
 
+const db_alarm = require('../public/SQL/alarm_sql')();
+
 //const db_ = require('../public/SQL/medicine_sql')();
 
 const admin = require('firebase-admin')
@@ -15,7 +17,20 @@ admin.initializeApp({
 })
 
 router.get('/push_send', function (req, res, next) {
-    let target_token = req.query.target_token;
+  let aaa;
+    
+  db_alarm.selectTokenTest(function(err,result){
+    if(err){
+        console.log(err);
+        res.status(400).send(err);
+    }
+    else{
+      aaa = result[0].token;
+      res.send(sucess_response);
+    } 
+  })
+
+    let target_token = aaa;
       //target_token은 푸시 메시지를 받을 디바이스의 토큰값입니다
   
     let message = {
