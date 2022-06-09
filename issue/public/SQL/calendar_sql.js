@@ -17,6 +17,32 @@ module.exports = function () {
                 }
             })
         },
+        selectCalendarInfo: function (school, callback) {   //title, content, date, startTime, endTime, color
+            pool.getConnection(function (err, con) {
+                let sql = `SELECT title, content, date, startTime, endTime, color
+                           FROM calendar
+                           WHERE school='${school}'`;
+                con.query(sql,function(err,result,fields){
+                    con.release();
+                    if(err) callback(err,null);
+                    else callback(null,result);
+                })
+            })
+        },
+        deleteCalendarInfo: function (id, school, title, content, callback) {
+            pool.getConnection(function (err, con) {
+                let sql=`DELETE FROM calendar
+                         WHERE id = '${id}',
+                               school = '${school}',
+                               title = '${title}',
+                               content = '${content}'`;
+                con.query(sql,function(err,result,fields){
+                    con.release();
+                    if(err) callback(err,null);
+                    else callback(null,result);
+                })
+            })
+        },
 
 
 
