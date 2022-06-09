@@ -67,7 +67,7 @@ router.get('/room/allinfo', function(req, res){
 		res.send(element_msg);
 		return;
 	}
-	let query = make_query.SELECT(target_array, 'parentinfo', json_data, 'AND', 2);
+	let query = make_query.SELECT(target_array, 'parentinfo', json_data, 'AND', 1);
 	db_parent_sql.SELECT(query, function(err, result){
 		if(err){
 			res.status(400).send(err);
