@@ -38,7 +38,8 @@ router.post('/schoolmanagement', function(req, res){
 		school : req.body.school,
 		title : req.body.title,
 		content : req.body.content,
-		date : req.body.date
+		date : req.body.date,
+		room : req.body.room
 	};
 
     if(check_element.check_require_element(json_data) === false){
