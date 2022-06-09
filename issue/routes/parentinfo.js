@@ -58,7 +58,6 @@ router.get('/room/allinfo', function(req, res){
 	let json_data = {
 		school : req.query.school,
 		room : req.query.room,
-		agree : 'yes'
 	}
 	let target_array = [
 		'*'
@@ -77,30 +76,7 @@ router.get('/room/allinfo', function(req, res){
 		res.send(result);
 	})
 })
-router.get('/agreelist', function(req, res){
-	let json_data = {
-		school : req.query.school,
-		room : req.query.room,
-		agree : 'no'
-	}
-	let target_array = [
-		'*'
-	];
 
-	if(check_element.check_require_element(json_data) === false){
-		res.send(element_msg);
-		return;
-	}
-
-	let query = make_query.SELECT(target_array, 'parentinfo', json_data, 'AND', 2);
-	db_parent_sql.SELECT(query, function(err, result){
-		if(err){
-			res.status(400).send(err);
-			return;
-		}
-		res.send(result);
-	})
-})
 router.post('/change/check', function(req, res){
 	let json_data = {
 		key_id : req.body.key_id
