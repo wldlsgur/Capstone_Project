@@ -64,53 +64,13 @@ class UserInfoChangeActivity : AppCompatActivity() {
             val spec = binding.textViewUserChangeSpec.text.toString()
 
             var presidentinfo = ParentInfoUpdate(keyId, school, room, number, name, age, spec)
+            Log.d(TAG, "onCreate: $age")
             UpdateParentinfo(presidentinfo)
         }
-        
-//        binding.buttonUserOut.setOnClickListener {
-//            showDialog()
-//        }
-    }
 
-    fun showDialog(){
-        lateinit var dialog: AlertDialog
-        val deleteinfo = DeleteInfo(id, job, school)
-
-        val builder =  AlertDialog.Builder(this)
-        builder.setTitle("회원 탈퇴")
-
-        builder.setMessage("정말 회원 탈퇴를 하시겠습니까?")
-
-        val dialogClickListener = DialogInterface.OnClickListener{ _, which ->
-            when(which){
-                DialogInterface.BUTTON_POSITIVE -> DeleteInfo(deleteinfo)  //yes 클릭시
-                //DialogInterface.BUTTON_NEGATIVE -> toast("Negative/No button clicked.") // no 클릭시
-                DialogInterface.BUTTON_NEUTRAL -> Toast.makeText(this, "취소하였습니다.", Toast.LENGTH_SHORT).show() // cancel 클릭시
-            }
+        binding.buttonUpdatePW.setOnClickListener {
+            UpdatePW(id)
         }
-        builder.setPositiveButton("예",dialogClickListener)
-        //builder.setNegativeButton("아니오",dialogClickListener)
-        builder.setNeutralButton("취소",dialogClickListener)
-        dialog = builder.create()
-        dialog.show()
-    }
-
-    fun DeleteInfo(deleteinfo: DeleteInfo){
-        ResponseService().DeleteInfo(deleteinfo, object : RetrofitCallback<SignUpResult> {
-            override fun onError(t: Throwable) {
-                Log.d(TAG, "onError: $t")
-            }
-
-            override fun onSuccess(code: Int, responseData: SignUpResult) {
-                Log.d(TAG, "onSuccess: $responseData")
-                Toast.makeText(this@UserInfoChangeActivity, "회원탈퇴가 정상적으로 이루어졌습니다.", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onFailure(code: Int) {
-                Log.d(TAG, "onFailure: $code")
-            }
-
-        })
     }
 
     fun GetSchool(){
@@ -186,6 +146,27 @@ class UserInfoChangeActivity : AppCompatActivity() {
                     Toast.makeText(this@UserInfoChangeActivity, "수정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+            }
+
+        })
+    }
+
+    fun UpdatePW(id: String){
+        ResponseService().UpdatePW(ID(id), object : RetrofitCallback<SignUpResult>{
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: SignUpResult) {
+                Log.d(TAG, "onSuccess: $code")
+                if(responseData.msg == "success"){
+                    Toast.makeText(this@UserInfoChangeActivity, "비밀번호 변경이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    binding.textViewUserChangePW.text = null
+                }
+            }
+
             override fun onFailure(code: Int) {
                 Log.d(TAG, "onFailure: $code")
             }

@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageViewChildImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
@@ -114,11 +114,10 @@
         android:id="@+id/roomChildListItem_clApproval"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        app:layout_constraintEnd_toStartOf="@id/roomChildListItem_ivMoreBtn"
-        app:layout_constraintStart_toEndOf="@+id/roomChildListItem_clInfo"
-        app:layout_constraintTop_toTopOf="@+id/roomChildListItem_clInfo"
-        app:layout_constraintBottom_toBottomOf="@+id/roomChildListItem_clInfo">
+        android:layout_marginEnd="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/roomChildListItem_clInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/roomChildListItem_clInfo">
 
         <TextView
             android:id="@+id/roomChildListItem_btnApproval"
@@ -126,7 +125,7 @@
             android:layout_height="wrap_content"
             android:text="승인"
             android:textColor="@color/blue_500"
-            android:textSize="18sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/roomChildListItem_btnCancelApproval"
             app:layout_constraintStart_toStartOf="parent"
@@ -139,24 +138,12 @@
             android:layout_marginStart="10dp"
             android:text="승인취소"
             android:textColor="@color/red"
-            android:textSize="18sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/roomChildListItem_btnApproval"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <ImageView
-        android:id="@+id/roomChildListItem_ivMoreBtn"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/more"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
     <View

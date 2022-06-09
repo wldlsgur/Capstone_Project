@@ -49,6 +49,7 @@ class AlbumTeacherActivity : AppCompatActivity() {
             var intent = Intent(this, AddAlbumActivity::class.java).apply {
                 putExtra("school", school)
                 putExtra("room", room)
+                putExtra("job", job)
             }
             startActivity(intent)
         }

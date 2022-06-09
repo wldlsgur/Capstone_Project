@@ -39,6 +39,8 @@ class TeacherAddActivity : AppCompatActivity() {
     var name: String = ""
     val itemList = mutableListOf<String>()
     val roomList = mutableListOf<String>()
+    var count :Int = 0
+    
     private lateinit var currentImageUri: Uri
 
     private val binding by lazy{
@@ -75,6 +77,8 @@ class TeacherAddActivity : AppCompatActivity() {
                                 .load(currentImageUri)
                                 .into(binding.TeacherAddImageView)
                         }
+                        count++
+                        Log.d(TAG, "onCreate: $count")
                     }
                 }catch(e:Exception) {
                     e.printStackTrace()
@@ -172,7 +176,12 @@ class TeacherAddActivity : AppCompatActivity() {
             override fun onSuccess(code: Int, responseData: SignUpResult) {
                 Log.d(TAG, "onSuccess: $responseData")
                 if(responseData.msg == "success"){
-                    savaimage(currentImageUri)
+                    if(count != 0){
+                        savaimage(currentImageUri)    
+                    }else{
+                        Toast.makeText(this@TeacherAddActivity, "성공", Toast.LENGTH_SHORT).show()
+                        GetTeacherInfo(id, name)
+                    }
                 }
             }
 

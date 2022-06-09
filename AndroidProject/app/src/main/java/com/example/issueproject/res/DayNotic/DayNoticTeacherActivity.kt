@@ -9,16 +9,17 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityDayNoticBinding
 import com.example.issueproject.databinding.ActivityDayNoticTeacherBinding
-import com.example.issueproject.dto.AddManagement
-import com.example.issueproject.dto.GetRoom
-import com.example.issueproject.dto.GetSchoolManagement
+import com.example.issueproject.dto.*
 import com.example.issueproject.res.Add.AddNoticActivity
+import com.example.issueproject.res.UpdateNoticActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
+import kotlinx.coroutines.runBlocking
 
 private const val TAG = "DayNoticTeacherActivity"
 class DayNoticTeacherActivity : AppCompatActivity() {
@@ -27,19 +28,24 @@ class DayNoticTeacherActivity : AppCompatActivity() {
     private val binding by lazy{
         ActivityDayNoticTeacherBinding.inflate(layoutInflater)
     }
-    val roomList = mutableListOf<String>()
-
+    var job : String = ""
+    var menu : String = ""
+    var school : String = ""
+    var room : String = ""
+    var id: String = ""
+    var name: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val job = intent.getStringExtra("job")
-        val id = intent.getStringExtra("id")
-        var name = intent.getStringExtra("name")
-        val school = intent.getStringExtra("school")
-        val room = intent.getStringExtra("room")
-        val menu = intent.getStringExtra("menu")
+        id = intent.getStringExtra("id").toString()
+        name = intent.getStringExtra("name").toString()
+        job = intent.getStringExtra("job").toString()
+        school = intent.getStringExtra("school").toString()
+        room = intent.getStringExtra("room").toString()
+        menu = intent.getStringExtra("menu").toString()
 
+        // 부모님과 선생님일 경우 이액티비티로
         if(job == "선생님"){
             binding.buttonDayNoticAddTeacher.visibility = View.VISIBLE
         }
@@ -49,42 +55,96 @@ class DayNoticTeacherActivity : AppCompatActivity() {
 
         binding.textViewDayNoticTeacherSchool.text = school
         binding.textViewDayNoticTeacherRoom.text = room
-        ShowRecycler(menu!!, school!!, room!!)
 
-        Log.d(TAG, "onCreate: $school")
-        Log.d(TAG, "onCreate: $menu")
+        DayNoticAdapter = DayNoticAdapter(this, job!!)
 
+        runBlocking {
+            ShowRecycler(menu!!,school!!,room!!)
+        }
+
+        initRecycler()
 
         binding.buttonDayNoticAddTeacher.setOnClickListener {
             var intent = Intent(this, AddNoticActivity::class.java).apply {
+                putExtra("job", job)
+                putExtra("id", id)
                 putExtra("name", name)
-                putExtra("menu", menu)
                 putExtra("school", school)
                 putExtra("room", room)
+                putExtra("menu", menu)
             }
             startActivity(intent)
         }
     }
 
-    private fun initRecycler(list:MutableList<GetSchoolManagement>){
-        DayNoticAdapter = DayNoticAdapter(list)
+    private fun initRecycler(){
 
         binding.DayNoticTeacherRV.apply {
             adapter = DayNoticAdapter
             layoutManager = LinearLayoutManager(context)
         }
+
+        // item 수정 클릭 이벤트
+        DayNoticAdapter.setModifyItemClickListener(object : DayNoticAdapter.MenuClickListener {
+            override fun onClick(position: Int, item: GetSchoolManagement) {
+                var intent = Intent(this@DayNoticTeacherActivity, UpdateNoticActivity::class.java).apply{
+                    putExtra("key_id", item.key_id.toString())
+                    putExtra("menu", item.menu)
+                    putExtra("content", item.content)
+                    putExtra("school", item.school)
+                    putExtra("writer", item.writer)
+                    putExtra("date", item.date)
+                    putExtra("title", item.title)
+                    putExtra("job", job)
+                    putExtra("id", id)
+                    putExtra("name", name)
+                    putExtra("room", room)
+                }
+                startActivity(intent)
+            }
+        })
+
+        // item 삭제 클릭 이벤트
+        DayNoticAdapter.setDeleteItemClickListener(object : DayNoticAdapter.MenuClickListener {
+            override fun onClick(position: Int, item: GetSchoolManagement) {
+                var key_id = AgreeChange(item.key_id)
+                deleteNoticitem(key_id, position)
+            }
+        })
     }
 
     private fun ShowRecycler(menu: String, school: String, room: String) {
-        ResponseService().DayNoticInfoShow(menu, school, room, object :
-            RetrofitCallback<MutableList<GetSchoolManagement>> {
+        ResponseService().DayNoticInfoShow(menu, school, room, object : RetrofitCallback<MutableList<GetSchoolManagement>> {
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
 
             override fun onSuccess(code: Int, responseData: MutableList<GetSchoolManagement>) {
                 Log.d(TAG, "onSuccess: $responseData")
-                initRecycler(responseData)
+                DayNoticAdapter.list = responseData
+                DayNoticAdapter.notifyDataSetChanged()
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+            }
+
+        })
+    }
+    fun deleteNoticitem(key_id : AgreeChange, position: Int){
+        ResponseService().deleteNoticItem(key_id, object : RetrofitCallback<SignUpResult>{
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: SignUpResult) {
+                Toast.makeText(this@DayNoticTeacherActivity, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
+
+                DayNoticAdapter.notifyItemRemoved(position)
+
+                if(responseData.res == true && responseData.msg == "success") {
+                    ShowRecycler(menu!!,school!!,room!!)
+                }
             }
 
             override fun onFailure(code: Int) {

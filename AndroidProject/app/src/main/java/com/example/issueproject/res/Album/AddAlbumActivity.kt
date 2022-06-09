@@ -38,7 +38,8 @@ class AddAlbumActivity : AppCompatActivity() {
     }
     var itemList = mutableListOf<Uri?>()
     var images = ArrayList<MultipartBody.Part>()
-    
+    var job : String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -48,6 +49,7 @@ class AddAlbumActivity : AppCompatActivity() {
 
         val school = intent.getStringExtra("school")!!
         val room = intent.getStringExtra("room")!!
+        job = intent.getStringExtra("job").toString()
 
         binding.imageViewAlbumdatepicker.setOnClickListener {
             showDatePicker()
@@ -147,7 +149,13 @@ class AddAlbumActivity : AppCompatActivity() {
             override fun onSuccess(code: Int, responseData: LoginResult) {
                 Log.d(TAG, "onSuccess: $code")
                 Log.d(TAG, "onSuccess: $responseData")
-                finish()
+
+                var intent = Intent(this@AddAlbumActivity, AlbumTeacherActivity::class.java).apply {
+                    putExtra("school", school)
+                    putExtra("room", room)
+                    putExtra("job", job)
+                }
+                startActivity(intent)
             }
 
             override fun onFailure(code: Int) {

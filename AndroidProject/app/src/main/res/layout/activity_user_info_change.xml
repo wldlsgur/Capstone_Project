@@ -76,12 +76,12 @@
             android:padding="10dp"
             android:textColor="@color/black"
             android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/button"
+            app:layout_constraintEnd_toStartOf="@+id/buttonUpdatePW"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView90" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonUpdatePW"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -190,6 +190,7 @@
             android:fontFamily="@font/customfont"
             android:inputType="textPersonName"
             android:textColor="@color/black"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView100" />
@@ -305,6 +306,7 @@
                 android:fontFamily="@font/customfont"
                 android:inputType="textPersonName"
                 android:textColor="@color/black"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView99"
