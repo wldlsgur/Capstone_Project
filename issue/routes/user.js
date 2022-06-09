@@ -54,7 +54,6 @@ router.post('/delete/info', function(req, res){//다른 테이블 연쇄 삭제 
 	let json_data = {
 		id : req.body.id,
 		job : req.body.job,
-		school : req.body.school
 	}
 	if(check_element.check_require_element(json_data) === false){
 		res.sned(element_msg);
@@ -72,12 +71,14 @@ router.post('/delete/info', function(req, res){//다른 테이블 연쇄 삭제 
 		case '원장님' :
 			query = 
 				`
-				DELETE u FROM user as u WHERE u.id='${json_data.id};
-				DELETE p FROM presidentinfo as p WHERE p.id='${json_data.id};
-			  	DELETE album, food_list, medicinemanagement, schoolmanagement, calendar
-			  	FROM album, food_list, medicinemanagement, schoolmanagement, calendar
-			  	WHERE album.school='${json_data.school}' AND food_list.school='${json_data.school}' AND medicinemanagement.school='${json_data.school}' AND schoolmanagement.school='${json_data.school}' AND calendar.school='${json_data.school}';		  
-				DELETE FROM medicine WHERE child_name IN (SELECT p.child_name FROM parentinfo as p WHERE p.school='${json_data.school}');`;
+					DELETE FROM album WHERE school IN (SELECT school FROM presidentinfo WHERE id='${json_data.id}');
+					DELETE FROM food_list WHERE school IN (SELECT school FROM presidentinfo WHERE id='${json_data.id}');
+					DELETE FROM medicinemanagement WHERE school IN (SELECT school FROM presidentinfo WHERE id='${json_data.id}');
+					DELETE FROM schoolmanagement WHERE school IN (SELECT school FROM presidentinfo WHERE id='${json_data.id}');
+					DELETE FROM calendar WHERE school IN (SELECT school FROM presidentinfo WHERE id='${json_data.id}');		  
+					DELETE FROM medicine WHERE child_name IN (SELECT p.child_name FROM parentinfo as p WHERE p.school='${json_data.school}');
+					DELETE u, p FROM user as u, presidentinfo as p WHERE u.id='${json_data.id}' AND p.id='${json_data.id}';
+				`;
 			break;
 	}
 	console.log(query);
