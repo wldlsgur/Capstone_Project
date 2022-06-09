@@ -2,9 +2,10 @@ const pool = require('../../DB/db_config');
 
 module.exports = function () {
     return {
-        selectTokenTest: function (callback) {
+        insertTokenInfo: function (id, school, child_name, teacher_name, token, callback) {
             pool.getConnection(function (err, con) {
-                let sql=`select token from token where id='test'`;
+                let sql=`INSERT INTO token (id, school, child_name, teacher_name, token)
+                         VALUES('${id}', '${school}', '${child_name}', '${teacher_name}', '${token}')`;
                 con.query(sql,function(err,result,fields){
                     con.release();
                     if(err) callback(err,null);
