@@ -4,6 +4,7 @@ import com.example.issueproject.dto.*
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.http.*
 
 interface ResponseApi {
@@ -27,7 +28,7 @@ interface ResponseApi {
     ): Call<SignUpResult>
 
     //회원탈퇴
-    @POST("/delete/info")
+    @POST("user/delete/info")
     fun DeleteInfo(
         @Body deleteinfo: DeleteInfo
     ): Call<SignUpResult>
@@ -205,6 +206,12 @@ interface ResponseApi {
         @Body id: TeacherListKeyId
     ): Call<SignUpResult>
 
+    //선생님 학교 반 업데이트
+    @POST("/staff/updateTeacherinfo")
+    fun updateTeacherinfo(
+        @Body updateteacherinfo: UpdateTeacherinfo
+    ): Call<SignUpResult>
+
     //선생 리스트 삭제
     @POST("/staff/deleteTeacherinfo")
     fun deleteteacherlist(
@@ -223,24 +230,52 @@ interface ResponseApi {
         @Body key_id: AgreeChange
     ): Call<SignUpResult>
 
+    // 식단표 추가
     @POST("/create/food_list")
     fun CreateFoodList(
         @Body foodlist : FoodList
     ): Call<SignUpResult>
 
+    // 어린이집에 해당하는 식단표 가져오기
     @GET("/food_list/all/info/{school}")
     fun FoodListInfo(
         @Path("school") school: String
     ): Call<MutableList<GetFoodList>>
 
+    // 어린이집과 날짜에 해당하는 푸드리스트 정보 가져옴 (key_id 가져오기위해)
     @GET("/food_list/info")
     fun GetFoodList(
         @Query("school") school: String,
         @Query("date") date: String
     ): Call<GetFoodList>
 
+    // 부모님 수정
     @POST("/parentinfo/update/info")
     fun UpdateParentinfo(
         @Body parentinfo :ParentInfoUpdate
+    ): Call<SignUpResult>
+
+    // 알림장 및 공지사할 삭제
+    @POST("schoolmanagement/deleteinfo")
+    fun deleteNoticItem(
+        @Body key_id: AgreeChange
+    ): Call<SignUpResult>
+
+    // 알림장 및 공지사항 수정
+    @POST("schoolmanagement/updateinfo")
+    fun UpdateNoticItem(
+        @Body updateNotic: UpdateNotic
+    ): Call<SignUpResult>
+
+    //아이 삭제
+    @POST("parentinfo/delete/info")
+    fun DeleteChildItem(
+        @Body key_id: AgreeChange
+    ): Call<SignUpResult>
+
+    //비밀번호 변경
+    @POST("user/update/info")
+    fun updateinfoPW(
+        @Body id: ID
     ): Call<SignUpResult>
 }

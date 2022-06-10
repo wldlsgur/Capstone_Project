@@ -19,6 +19,7 @@ import com.example.issueproject.databinding.ActivityChildAddBinding
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 import com.example.issueproject.dto.*
+import com.example.issueproject.res.submenu.SubChildMunuActivity
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -37,6 +38,7 @@ class ChildAddActivity : AppCompatActivity() {
     var key_id : String = ""
     val itemList = mutableListOf<String>()
     val roomList = mutableListOf<String>()
+    var count:Int = 0
     private lateinit var currentImageUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +58,7 @@ class ChildAddActivity : AppCompatActivity() {
                             .load(currentImageUri)
                             .into(binding.imageView2)
                     }
+                    count++
                 }catch(e:Exception) {
                     e.printStackTrace()
                 }
@@ -140,6 +143,12 @@ class ChildAddActivity : AppCompatActivity() {
 
             override fun onSuccess(code: Int, responseData: LoginResult) {
                 Log.d(TAG, "onSuccess: $responseData")
+                Toast.makeText(this@ChildAddActivity, "성공", Toast.LENGTH_SHORT).show()
+                var intent = Intent(this@ChildAddActivity, SubChildMunuActivity::class.java).apply {
+                    putExtra("id", id)
+                    Log.d(TAG, "onSuccess: $id")
+                }
+                startActivity(intent)
             }
 
             override fun onFailure(code: Int) {
@@ -156,9 +165,17 @@ class ChildAddActivity : AppCompatActivity() {
             override fun onSuccess(code: Int, responseData: SignUpResult) {
                 Log.d(TAG, "onSuccess: $responseData")
                 if(responseData.msg == "success"){
-                    Toast.makeText(this@ChildAddActivity, "성공", Toast.LENGTH_SHORT).show()
-                    val childname = binding.editTextChildName.text.toString()
-                    ChildInfo(id!!, childname!!)
+                    if(count != 0){
+                        val childname = binding.editTextChildName.text.toString()
+                        ChildInfo(id!!, childname!!)
+                    }else{
+                        Toast.makeText(this@ChildAddActivity, "성공", Toast.LENGTH_SHORT).show()
+                        var intent = Intent(this@ChildAddActivity, SubChildMunuActivity::class.java).apply {
+                            putExtra("id", id)
+                            Log.d(TAG, "onSuccess: $id")
+                        }
+                        startActivity(intent)
+                    }
                 }
             }
 

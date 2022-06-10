@@ -1,15 +1,20 @@
 package com.example.issueproject.res
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.drawerlayout.widget.DrawerLayout
 import com.bumptech.glide.Glide
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityMainTeacherNaviBinding
+import com.example.issueproject.dto.DeleteInfo
+import com.example.issueproject.dto.SignUpResult
 import com.example.issueproject.res.Album.AlbumActivity
 import com.example.issueproject.res.Album.AlbumTeacherActivity
 import com.example.issueproject.res.DayNotic.DayNoticActivity
@@ -20,8 +25,11 @@ import com.example.issueproject.res.Notic.NoticActivity
 import com.example.issueproject.res.RoomManager.RoomChildListActivity
 import com.example.issueproject.res.SchoolManager.SchoolTeacherListActivity
 import com.example.issueproject.retrofit.RetrofitBuilder
+import com.example.issueproject.retrofit.RetrofitCallback
+import com.example.issueproject.service.ResponseService
 import com.google.android.material.navigation.NavigationView
 
+private const val TAG = "MainTeacherActivity"
 class MainTeacherActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener{
     private val binding by lazy {
         ActivityMainTeacherNaviBinding.inflate(layoutInflater)
@@ -148,7 +156,52 @@ class MainTeacherActivity : AppCompatActivity() , NavigationView.OnNavigationIte
             R.id.menu_item2 -> startActivity(roomManage)
             R.id.menu_item3 -> Toast.makeText(this,"알림",Toast.LENGTH_SHORT).show()
             R.id.menu_item4 -> startActivity(intent3)
+            R.id.menu_item5 -> showDialog()
+
         }
         return false
+    }
+
+    fun showDialog(){
+        lateinit var dialog: AlertDialog
+        val deleteinfo = DeleteInfo(id, "선생님", school)
+
+        val builder =  AlertDialog.Builder(this)
+        builder.setTitle("회원 탈퇴")
+
+        builder.setMessage("정말 회원 탈퇴를 하시겠습니까?")
+
+        val dialogClickListener = DialogInterface.OnClickListener{ _, which ->
+            when(which){
+                DialogInterface.BUTTON_POSITIVE -> DeleteInfo(deleteinfo)  //yes 클릭시
+                //DialogInterface.BUTTON_NEGATIVE -> toast("Negative/No button clicked.") // no 클릭시
+                DialogInterface.BUTTON_NEUTRAL -> Toast.makeText(this, "취소하였습니다.", Toast.LENGTH_SHORT).show() // cancel 클릭시
+            }
+        }
+        builder.setPositiveButton("예",dialogClickListener)
+        //builder.setNegativeButton("아니오",dialogClickListener)
+        builder.setNeutralButton("취소",dialogClickListener)
+        dialog = builder.create()
+        dialog.show()
+    }
+
+    fun DeleteInfo(deleteinfo: DeleteInfo){
+        ResponseService().DeleteInfo(deleteinfo, object : RetrofitCallback<SignUpResult> {
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: SignUpResult) {
+                Log.d(TAG, "onSuccess: $responseData")
+                Toast.makeText(this@MainTeacherActivity, "회원탈퇴가 정상적으로 이루어졌습니다.", Toast.LENGTH_SHORT).show()
+                var intent = Intent(this@MainTeacherActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+            }
+
+        })
     }
 }

@@ -47,7 +47,7 @@ router.post('/updateinfo', function(req, res){
 		date : req.body.date
 	};
 	if(check_element.check_require_element(json_data) === false) return res.send(element_msg);
-	let query = `UPDATE 'schoolmanagement' SET title='${title}', content='${title}', date='${date}' WHERE key_id='${key_id}'`;
+	let query = `UPDATE schoolmanagement SET title='${json_data.title}', content='${json_data.content}', date='${json_data.date}' WHERE key_id='${json_data.key_id}'`;
 	db_schoolmanage_sql.UPDATE(query, function(err, result){
 		if(err) return res.status(400).send(err);
 		res.status(200).send(sucess_response);

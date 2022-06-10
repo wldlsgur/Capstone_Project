@@ -1,6 +1,7 @@
 package com.example.issueproject.res.Add
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,8 @@ import android.widget.Toast
 import com.example.issueproject.databinding.ActivityAddNoticBinding
 import com.example.issueproject.dto.AddManagement
 import com.example.issueproject.dto.AddManagementResult
+import com.example.issueproject.res.DayNotic.DayNoticTeacherActivity
+import com.example.issueproject.res.Notic.NoticActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 import java.text.SimpleDateFormat
@@ -42,13 +45,12 @@ class AddNoticActivity : AppCompatActivity() {
             var title = binding.editTextAddTitle.text.toString()
             var content = binding.editTextAddContent.text.toString()
             var date = binding.textViewDate.text.toString()
-
             var school = intent.getStringExtra("school")!!
             var room = intent.getStringExtra("room")!!
             var menu = intent.getStringExtra("menu")!!
             var writer = intent.getStringExtra("name")!!
 
-            var addManagement = AddManagement(menu, writer, school, title, content, date)
+            var addManagement = AddManagement(menu, writer, school, title, content, date, room)
             insertaddManagement(addManagement)
 
         }
@@ -96,6 +98,29 @@ class AddNoticActivity : AppCompatActivity() {
             override fun onSuccess(code: Int, responseData: AddManagementResult) {
                 Log.d(TAG, "onSuccess: $responseData")
                 Toast.makeText(this@AddNoticActivity, "성공",Toast.LENGTH_SHORT).show()
+
+                if(intent.getStringExtra("menu") == "공지사항"){
+                    var intent1 = Intent(this@AddNoticActivity, NoticActivity::class.java).apply {
+                        putExtra("job", intent.getStringExtra("job"))
+                        putExtra("id", intent.getStringExtra("id"))
+                        putExtra("name", intent.getStringExtra("name"))
+                        putExtra("school", intent.getStringExtra("school"))
+                        putExtra("room", intent.getStringExtra("room"))
+                        putExtra("menu", intent.getStringExtra("menu"))
+                    }
+                    startActivity(intent1)
+                }
+                else if(intent.getStringExtra("menu") == "알림장"){
+                    var intent2 = Intent(this@AddNoticActivity, DayNoticTeacherActivity::class.java).apply {
+                        putExtra("job", intent.getStringExtra("job"))
+                        putExtra("id", intent.getStringExtra("id"))
+                        putExtra("name", intent.getStringExtra("name"))
+                        putExtra("school", intent.getStringExtra("school"))
+                        putExtra("room", intent.getStringExtra("room"))
+                        putExtra("menu", intent.getStringExtra("menu"))
+                    }
+                    startActivity(intent2)
+                }
             }
 
             override fun onFailure(code: Int) {

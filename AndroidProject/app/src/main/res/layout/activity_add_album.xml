@@ -169,7 +169,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout51">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/imageViewAlbumImageAdd"
+            android:id="@+id/con"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -187,6 +187,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
+                android:id="@+id/imageViewAlbumImageAdd"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="10dp"

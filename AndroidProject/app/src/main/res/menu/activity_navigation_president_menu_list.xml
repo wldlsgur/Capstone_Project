@@ -3,11 +3,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     xmlns:tools="http://schemas.android.com/tools"
     <item
-        android:id="@+id/menu_item1"
-        android:title="개인정보 수정" />
-    <item
         android:id="@+id/menu_item2"
         android:title="학교 관리" />
+    <item
+        android:id="@+id/menu_item6"
+        android:title="반 추가" />
     <item
         android:id="@+id/menu_item3"
         android:title="알림" />
