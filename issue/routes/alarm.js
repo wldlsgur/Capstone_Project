@@ -46,14 +46,14 @@ function job(token, title, body){
     })
 }
 
-router.post('/insertTokenInfo', function (req, res, next) { 
+router.post('/insertTokenInfo', function (req, res, next) {   //id, school, room, target_name, token
   let id = req.body.id;
   let school = req.body.school;
-  let child_name = req.body.child_name;
-  let teacher_name = req.body.teacher_name;
+  let room = req.body.room;
+  let target_name = req.body.target_name;
   let token = req.body.token;
     
-  db_alarm.insertTokenInfo(id, school, child_name, teacher_name, token, function(err,result){
+  db_alarm.insertTokenInfo(id, school, room, target_name, token, function(err,result){
     if(err){
         console.log(err);
         res.status(400).send(err);
@@ -63,5 +63,61 @@ router.post('/insertTokenInfo', function (req, res, next) {
     } 
   })   
 })
+
+router.post('/allAlarm', function (req, res, next) {   //school, title, body
+  let school = req.body.school;
+  let title = req.body.title;
+  let body = req.body.body;
+
+  let teacher_name = req.body.teacher_name;
+    
+  db_alarm.selectTokenForAll(school, teacher_name, function(err,result){
+    if(err){
+        console.log(err);
+        res.status(400).send(err);
+    }
+    else{
+      job(result[0].token, title, body);
+    } 
+  })   
+})
+
+router.post('/approveAlarmPtoT', function (req, res, next) {   //id, school, room, target_name, title, body
+  let id = req.body.id;
+  let school = req.body.school;
+  let room = req.body.room;
+  let title = req.body.title;
+  let body = req.body.body;
+    
+  db_alarm.selectTokenForTeacher(school, room, function(err,result){
+    if(err){
+        console.log(err);
+        res.status(400).send(err);
+    }
+    else{
+      job(result[0].token, title, body);
+    } 
+  })   
+})
+
+router.post('/approveAlarmTtoP', function (req, res, next) {   //id, school, room, target_name, title, body
+  let id = req.body.id;
+  let school = req.body.school;
+  let room = req.body.room;
+  let target_name = req.body.target_name;
+  let title = req.body.title;
+  let body = req.body.body;
+    
+  db_alarm.selectTokenForStu(id, school, room, target_name, function(err,result){
+    if(err){
+        console.log(err);
+        res.status(400).send(err);
+    }
+    else{
+      job(result[0].token, title, body);
+    } 
+  })   
+})
+
 
   module.exports = router;
