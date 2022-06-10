@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        //initFcm()
+        initFcm()
     }
 
     fun Login(id: String, pw: String){
@@ -223,7 +223,6 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "token: ${task.result?:"task.result is null"}")
             Log.d(TAG, "initFcm: ${task.result}")
             CallAlarm(task.result!!)
-            //token = task.result!!
 
             // 유저 토큰 갱신 update
         })

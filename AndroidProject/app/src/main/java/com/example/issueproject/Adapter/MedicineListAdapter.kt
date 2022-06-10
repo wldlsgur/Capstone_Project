@@ -81,9 +81,9 @@ class MedicineListAdapter(var list:MutableList<MedicineManagementResult>) : Recy
         }
         holder.bindinfo(list[position])
 
-        holder.btn.setOnClickListener {
+        //holder.btn.setOnClickListener {
             //itemClickListener.onClickbtn(it, position)
-        }
+        //}
     }
     interface OnItemClickListener {
         fun onClick(v: View, position: Int)

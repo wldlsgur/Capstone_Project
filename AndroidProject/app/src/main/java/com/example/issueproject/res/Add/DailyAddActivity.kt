@@ -3,6 +3,9 @@ package com.example.issueproject.res.Add
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +14,9 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Switch
 import android.widget.TextView
+import androidx.annotation.ColorInt
+import androidx.core.graphics.drawable.toDrawable
+import androidx.core.graphics.toColor
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityDailyAddBinding
 import java.text.SimpleDateFormat
@@ -29,30 +35,29 @@ class DailyAddActivity : AppCompatActivity() {
 
         val currentTime = System.currentTimeMillis()
         convertTimestampToDate(currentTime)
-
-        var itemList = arrayListOf<String>("검정색", "빨간색", "파란색", "노란색", "초록색")
+        var itemList = arrayListOf<String>("빨간색", "파란색", "초록색", "노란색", "케인색")
 
         val adapter = ArrayAdapter(this@DailyAddActivity, R.layout.spinner, itemList)
         binding.spinnerDailyAddColor.adapter = adapter
-
         binding.spinnerDailyAddColor.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 if(position == 0){
-                    binding.imageViewPoint.setColorFilter(resources.getColor(R.color.black)); // 검정색
+                    binding.imageViewPoint.setColorFilter(Color.RED); // 검정색
                 }
                 if(position == 1){
-                    binding.imageViewPoint.setColorFilter(resources.getColor(R.color.red_)); // 빨간색
+                    //resources.getColor(R.color.red_)
+                    binding.imageViewPoint.setColorFilter(Color.BLUE); // 빨간색
                 }
                 if(position == 2){
-                    binding.imageViewPoint.setColorFilter(resources.getColor(R.color.blue_700)); // 파란색
+                    binding.imageViewPoint.setColorFilter(Color.GREEN); // 파란색
                 }
                 if(position == 3){
-                    binding.imageViewPoint.setColorFilter(resources.getColor(R.color.yellow)); // 노란색
+                    binding.imageViewPoint.setColorFilter(Color.YELLOW); // 노란색
                 }
                 if(position == 4){
-                    binding.imageViewPoint.setColorFilter(resources.getColor(R.color.green)); // 초록색
+                    binding.imageViewPoint.setColorFilter(Color.CYAN); // 초록색
                 }
             }
         }
@@ -99,6 +104,7 @@ class DailyAddActivity : AppCompatActivity() {
     }
 
     var cal = Calendar.getInstance()
+    lateinit var send_date : String
     private val dateSetListener =
         DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             cal.set(Calendar.YEAR, year)
@@ -114,9 +120,9 @@ class DailyAddActivity : AppCompatActivity() {
             cal.get(Calendar.MONTH),
             cal.get(Calendar.DAY_OF_MONTH)).show()
     }
-    private fun convertTimestampToDate(timespamp: Long){
+    private fun convertTimestampToDate(timestamp: Long){
         val sdf = SimpleDateFormat("yyyy년 MM월 dd일")
-        val date = sdf.format(timespamp)
+        val date = sdf.format(timestamp)
 
         binding.textViewDailyAddDate.text = date
         var year = date.substring(0,4)
@@ -127,6 +133,9 @@ class DailyAddActivity : AppCompatActivity() {
 
     private fun updateDateInText(){
         var formatter = SimpleDateFormat("yyyy년 MM월 dd일")
+        val send = SimpleDateFormat("yyyy-MM-dd")
+        send_date = send.format(cal.time)
         binding.textViewDailyAddDate.text = formatter.format(cal.time)
+
     }
 }

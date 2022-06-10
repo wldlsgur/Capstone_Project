@@ -114,17 +114,7 @@ interface ResponseApi {
         @Path("id") id: String
     ): Call<UserInfo>
 
-    //캘린더로 변경
-    @GET("/calenderinfo/info")
-    fun getCalender(
-        @Query("date") date: String
-    ): Call<CalenderInfo>
 
-    //캘린더로변경
-    @POST("/calenderinfo/info")
-    fun saveCalender(
-        @Body Calenderdata: CalenderInfo
-    ): Call<CalenderResult>
 
     //선생리스트
     @GET("/staff/teacherinfo/useschool")

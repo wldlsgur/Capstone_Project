@@ -583,51 +583,8 @@ class ResponseService {
         })
     }
 
-    fun getCalender(date : String, callback: RetrofitCallback<CalenderInfo>) {
-        RetrofitBuilder.api.getCalender(date).enqueue(object : Callback<CalenderInfo>{
-            override fun onResponse(
-                call: Call<CalenderInfo>,
-                response: Response<CalenderInfo>
-            ) {
-                Log.d(TAG, "getCalender: ..")
-                if (response.code() == 200){
-                    if(response.body() != null){
-                        Log.d(TAG, "onResponse: 200")
-                        callback.onSuccess(response.code(), response.body()!!)
-                    } else{
-                        callback.onFailure(response.code())
-                    }
-                }
-            }
 
-            override fun onFailure(call: Call<CalenderInfo>, t: Throwable) {
-                Log.d(TAG, "onFailure: $t")
-                callback.onError(t)
-            }
 
-        })
-    }
-
-    fun saveCalender(data: CalenderInfo, callback: RetrofitCallback<CalenderResult>){
-        RetrofitBuilder.api.saveCalender(data).enqueue(object : Callback<CalenderResult> {
-            override fun onFailure(call: Call<CalenderResult>, t: Throwable) {
-                Log.d(TAG, "onFailure: ")
-                callback.onError(t)
-            }
-            override fun onResponse(call: Call<CalenderResult>,response: Response<CalenderResult>) {
-                Log.d(TAG, "saveCalender: ..")
-                if (response.code() == 200){
-                    Log.d(TAG, "onResponse: 200")
-                    if(response.body() != null){
-                        Log.d(TAG, "onResponse: body is not null")
-                        callback.onSuccess(response.code(), response.body()!!)
-                    } else{
-                        callback.onFailure(response.code())
-                    }
-                }
-            }
-        })
-    }
     fun CallAlarm(target_token: String, callback: RetrofitCallback<SignUpResult>){
         RetrofitBuilder.api.CallAlarm(target_token).enqueue(object : Callback<SignUpResult> {
             override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
