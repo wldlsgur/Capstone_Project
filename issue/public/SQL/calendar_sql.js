@@ -32,10 +32,10 @@ module.exports = function () {
         deleteCalendarInfo: function (id, school, title, content, callback) {
             pool.getConnection(function (err, con) {
                 let sql=`DELETE FROM calendar
-                         WHERE id = '${id}',
-                               school = '${school}',
-                               title = '${title}',
-                               content = '${content}'`;
+                         WHERE id = '${id}'
+                         AND school = '${school}'
+                         AND title = '${title}',
+                         AND content = '${content}'`;
                 con.query(sql,function(err,result,fields){
                     con.release();
                     if(err) callback(err,null);
