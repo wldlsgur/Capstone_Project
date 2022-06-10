@@ -169,7 +169,7 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     }
     fun showDialog(){
         lateinit var dialog: AlertDialog
-        val deleteinfo = DeleteInfo(id, "원장님", school)
+        val deleteinfo = DeleteInfo(id, "원장님")
 
         val builder =  AlertDialog.Builder(this)
         builder.setTitle("회원 탈퇴")

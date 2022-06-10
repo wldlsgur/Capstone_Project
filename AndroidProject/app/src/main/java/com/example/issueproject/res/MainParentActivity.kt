@@ -160,7 +160,7 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
 
     fun showDialog(){
         lateinit var dialog: AlertDialog
-        val deleteinfo = DeleteInfo(id, "부모님", school)
+        val deleteinfo = DeleteInfo(id, "부모님")
 
         val builder =  AlertDialog.Builder(this)
         builder.setTitle("회원 탈퇴")

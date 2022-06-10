@@ -164,7 +164,7 @@ class MainTeacherActivity : AppCompatActivity() , NavigationView.OnNavigationIte
 
     fun showDialog(){
         lateinit var dialog: AlertDialog
-        val deleteinfo = DeleteInfo(id, "선생님", school)
+        val deleteinfo = DeleteInfo(id, "선생님")
 
         val builder =  AlertDialog.Builder(this)
         builder.setTitle("회원 탈퇴")
