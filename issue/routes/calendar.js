@@ -32,12 +32,10 @@ router.post('/insertCalendarInfo', function(req, res, next) {
   })
 })
 
-router.get('/selectCalendarInfo', function(req, res, next) {    //calGroup, title, date(년, 월 만줌)
-    let calGroup = req.query.calGroup;
-    let title = req.query.title;
-    let date = req.query.date;
+router.post('/selectCalendarInfo', function(req, res, next) {    
+    let school = req.body.school;
 
-    db_calendar.selectCalendarInfo(calGroup, title, date, function(err,result){
+    db_calendar.selectCalendarInfo(school, function(err,result){
     if(err){
         console.log(err);
         res.status(400).send(err);
@@ -46,33 +44,48 @@ router.get('/selectCalendarInfo', function(req, res, next) {    //calGroup, titl
   })
 })
 
-router.post('/updateCalendarInfo', function(req, res){  //id, calGroup, title, content, startDate, endDate, startTime, endTime , color
+router.post('/updateCalendarInfo', function(req, res){  
     let id = req.body.id;
-    let calGroup = req.body.calGroup;
+    let school = req.body.school;
     let title = req.body.title;
     let content = req.body.content;
+
+    let newTitle = req.body.newTitle;
+    let newContent = req.body.newContent;
     let startDate = req.body.startDate;
     let endDate = req.body.endDate;
     let startTime = req.body.startTime;
     let endTime = req.body.endTime;
     let color = req.body.color;
+
+    let date1 = new Date(startDate);
+    let date2 = new Date(endDate);
+
+    let diffDate = date1.getTime() - date2.getTime();
+    let dateDays = Math.abs(diffDate / (1000 * 3600 * 24));
   
-    db_medicine.deleteMedicineInfo(id, calGroup, title, content, startDate, endDate, startTime, endTime , color, function(err,result){
+    db_calendar.deleteCalendarInfo(id, school, title, content, function(err,result){
       if(err){
         res.status(400).send(err);
       } else{
-        res.send(sucess_response);
+        db_calendar.insertCalendarInfo(id, school, newTitle, newContent, startDate, dateDays, startTime, endTime , color,function(err,result){
+          if(err){
+            console.log(err);
+            res.status(400).send(err);
+          }
+          else res.send(sucess_response);
+        })
       }
     })
   })
 
-  router.post('/deleteCalendarInfo', function(req, res){    //id, calGroup, title, content
+  router.post('/deleteCalendarInfo', function(req, res){    
     let id = req.body.id;
-    let calGroup = req.body.calGroup;
+    let school = req.body.school;
     let title = req.body.title;
     let content = req.body.content;
 
-    db_medicine.deleteMedicineInfo(id, calGroup, title, content, function(err,result){
+    db_calendar.deleteCalendarInfo(id, school, title, content, function(err,result){
       if(err){
         res.status(400).send(err);
       } else{
@@ -81,5 +94,20 @@ router.post('/updateCalendarInfo', function(req, res){  //id, calGroup, title, c
     })
   })
 
+router.get('/info', function(req, res){
+  let school = req.query.id;
+  let date = req.query.date;
+
+  if(!school || !date) return res.send('plz require elements!');
+  
+  let query = `SELECT id, title, content, startTime, endTime, color FROM calender WHERE school = '${school}' AND date = '${date}'`;
+  db_calendar.detaileinfo(query, function(err, result){
+    if(err){
+      res.status(400).send(err);
+      return;
+    }
+    res.status(200).send(result);
+  })
+})
 
 module.exports = router;

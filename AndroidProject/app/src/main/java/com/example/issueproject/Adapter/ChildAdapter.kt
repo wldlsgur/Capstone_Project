@@ -1,21 +1,28 @@
 package com.example.issueproject.Adapter
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.issueproject.R
+import com.example.issueproject.dto.GetSchoolManagement
 import com.example.issueproject.dto.ParentInfoResult
+import com.example.issueproject.dto.RoomChildListResult
 import com.example.issueproject.res.MainParentActivity
 import com.example.issueproject.retrofit.RetrofitBuilder
 
 private const val TAG = "ChildAdapter"
-class ChildAdapter(var list:MutableList<ParentInfoResult>) : RecyclerView.Adapter<ChildAdapter.ChildListViewHolder>() {
+class ChildAdapter(val context: Context) : RecyclerView.Adapter<ChildAdapter.ChildListViewHolder>() {
+
+    var list: MutableList<ParentInfoResult> = mutableListOf()
 
     inner class ChildListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
@@ -24,6 +31,9 @@ class ChildAdapter(var list:MutableList<ParentInfoResult>) : RecyclerView.Adapte
         private val childname: TextView = itemView.findViewById(R.id.textViewChildItemName)
         val childagree: TextView = itemView.findViewById(R.id.textViewChildItemAgree)
         private val childimage: ImageView = itemView.findViewById(R.id.imageViewChildItemImage)
+        val deleteChildItem : ImageView = itemView.findViewById(R.id.deleteChildItem)
+
+        val childCon : ConstraintLayout = itemView.findViewById(R.id.childConstraintLayout)
 
         fun bindinfo(data: ParentInfoResult){
             childschool.text = data.school
@@ -31,11 +41,14 @@ class ChildAdapter(var list:MutableList<ParentInfoResult>) : RecyclerView.Adapte
             childname.text = data.child_name
 
             if(data.agree == "no"){
-                childagree.text = "승인이 필요합니다."
+                childagree.text = "승인 필요"
+                childagree.setTextColor(Color.parseColor("#DC143C"))
             }
             else if(data.agree == "yes"){
-                childagree.text = "승인이 완료되었습니다."
+                childagree.text = "승인 완료"
+                childagree.setTextColor(Color.parseColor("#2054B3"))
             }
+
             Log.d(TAG, "image_url: ${data.image_url}")
             Log.d(TAG, "bindinfo: ${RetrofitBuilder.servers}/image/parent/${data.image_url}")
             if(data.image_url != "default"){
@@ -54,21 +67,34 @@ class ChildAdapter(var list:MutableList<ParentInfoResult>) : RecyclerView.Adapte
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ChildListViewHolder, position: Int) {
-        holder.bindinfo(list[position])
+//        holder.bindinfo(list[position])
+        var item = list[position]
 
-        // (1) 리스트 내 항목 클릭 시 onClick() 호출
-        holder.itemView.setOnClickListener {
-            itemClickListener.onClick(it, position)
+        holder.apply {
+            bindinfo(item)
+
+            // 컨스트레인트 클릭 시
+            childCon.setOnClickListener {
+                childConClickListener.onClick(position, item)
+            }
+
+            deleteChildItem.setOnClickListener{
+                childDeleteClickListener.onClick(position, item)
+            }
         }
     }
-    // (2) 리스너 인터페이스
-    interface OnItemClickListener {
-        fun onClick(v: View, position: Int)
+
+    interface MenuClickListener {
+        fun onClick(position: Int, item : ParentInfoResult)
     }
-    // (3) 외부에서 클릭 시 이벤트 설정
-    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
-        this.itemClickListener = onItemClickListener
+
+    private lateinit var childConClickListener : MenuClickListener
+    fun setchildConClickListener(modifyClickListener: MenuClickListener) {
+        this.childConClickListener = modifyClickListener
     }
-    // (4) setItemClickListener로 설정한 함수 실행
-    private lateinit var itemClickListener : OnItemClickListener
+
+    private lateinit var childDeleteClickListener : MenuClickListener
+    fun setchildDeleteClickListener(modifyClickListener: MenuClickListener) {
+        this.childDeleteClickListener = modifyClickListener
+    }
 }

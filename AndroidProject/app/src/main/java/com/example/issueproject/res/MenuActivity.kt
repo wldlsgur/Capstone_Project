@@ -1,17 +1,23 @@
 package com.example.issueproject.res
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.drawerlayout.widget.DrawerLayout
 import com.bumptech.glide.Glide
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityMenuNaviBinding
+import com.example.issueproject.dto.DeleteInfo
+import com.example.issueproject.dto.SignUpResult
+import com.example.issueproject.res.Add.AddRoomActivity
 import com.example.issueproject.res.Album.AlbumActivity
 import com.example.issueproject.res.Calender.DailyActivity
 import com.example.issueproject.res.DayNotic.DayNoticActivity
@@ -19,6 +25,8 @@ import com.example.issueproject.res.Foodlist.FoodlistActivity
 import com.example.issueproject.res.Notic.NoticActivity
 import com.example.issueproject.res.SchoolManager.SchoolTeacherListActivity
 import com.example.issueproject.retrofit.RetrofitBuilder
+import com.example.issueproject.retrofit.RetrofitCallback
+import com.example.issueproject.service.ResponseService
 import com.google.android.material.navigation.NavigationView
 
 private const val TAG = "MenuActivity"
@@ -45,7 +53,6 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         val img_url = intent.getStringExtra("img_url")
         binding.menu.textViewName.text = name
         binding.menu.textViewSchool.text = school
-
 
         if(img_url != null){
             Glide.with(this)
@@ -144,14 +151,63 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         var schoolManage = Intent(this, SchoolTeacherListActivity::class.java).apply {
             putExtra("school",school)
         }
+
+        var roomadd = Intent(this, AddRoomActivity::class.java).apply{
+            putExtra("id", id)
+            putExtra("name", name)
+        }
+
         when (item.itemId) {
             R.id.menu_item1 -> startActivity(intent2)
             R.id.menu_item2 -> startActivity(schoolManage)
             R.id.menu_item3 -> Toast.makeText(this,"알림",Toast.LENGTH_SHORT).show()
             R.id.menu_item4 -> startActivity(intent3)
+            R.id.menu_item5 -> showDialog()
+            R.id.menu_item6 -> startActivity(roomadd)
         }
         return false
     }
+    fun showDialog(){
+        lateinit var dialog: AlertDialog
+        val deleteinfo = DeleteInfo(id, "원장님")
 
+        val builder =  AlertDialog.Builder(this)
+        builder.setTitle("회원 탈퇴")
+
+        builder.setMessage("정말 회원 탈퇴를 하시겠습니까?")
+
+        val dialogClickListener = DialogInterface.OnClickListener{ _, which ->
+            when(which){
+                DialogInterface.BUTTON_POSITIVE -> DeleteInfo(deleteinfo)  //yes 클릭시
+                //DialogInterface.BUTTON_NEGATIVE -> toast("Negative/No button clicked.") // no 클릭시
+                DialogInterface.BUTTON_NEUTRAL -> Toast.makeText(this, "취소하였습니다.", Toast.LENGTH_SHORT).show() // cancel 클릭시
+            }
+        }
+        builder.setPositiveButton("예",dialogClickListener)
+        //builder.setNegativeButton("아니오",dialogClickListener)
+        builder.setNeutralButton("취소",dialogClickListener)
+        dialog = builder.create()
+        dialog.show()
+    }
+
+    fun DeleteInfo(deleteinfo: DeleteInfo){
+        ResponseService().DeleteInfo(deleteinfo, object : RetrofitCallback<SignUpResult> {
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: SignUpResult) {
+                Log.d(TAG, "onSuccess: $responseData")
+                Toast.makeText(this@MenuActivity, "회원탈퇴가 정상적으로 이루어졌습니다.", Toast.LENGTH_SHORT).show()
+                var intent = Intent(this@MenuActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+            }
+
+        })
+    }
 
 }

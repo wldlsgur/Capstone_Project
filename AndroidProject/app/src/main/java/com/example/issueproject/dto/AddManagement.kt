@@ -6,5 +6,6 @@ data class AddManagement(
     val school: String,
     val title: String,
     val content: String,
-    val date: String
+    val date: String,
+    val room: String
 )

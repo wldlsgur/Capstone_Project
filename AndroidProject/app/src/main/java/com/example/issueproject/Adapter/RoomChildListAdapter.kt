@@ -32,7 +32,7 @@ class RoomChildListAdapter(val context: Context) : RecyclerView.Adapter<RoomChil
         val chkApproval : ConstraintLayout = itemView.findViewById(R.id.roomChildListItem_clApproval)
         val approval : TextView = itemView.findViewById(R.id.roomChildListItem_btnApproval)
         val cancelApproval : TextView = itemView.findViewById(R.id.roomChildListItem_btnCancelApproval)
-        val moreBtn : ImageView = itemView.findViewById(R.id.roomChildListItem_ivMoreBtn)
+//        val moreBtn : ImageView = itemView.findViewById(R.id.roomChildListItem_ivMoreBtn)
 
 
         fun bindinfo(data: RoomChildListResult){
@@ -78,28 +78,28 @@ class RoomChildListAdapter(val context: Context) : RecyclerView.Adapter<RoomChil
                 cancelApprovalItemClickListener.onClick(position, item)
             }
 
-            // 수정, 삭제 팝업 메뉴 클릭 이벤트
-            moreBtn.setOnClickListener {
-                val popup = PopupMenu(context, moreBtn)
-                MenuInflater(context).inflate(R.menu.popup_menu, popup.menu)
-
-                popup.show()
-                popup.setOnMenuItemClickListener {
-                    when (it.itemId) {
-                        R.id.modify -> {
-                            modifyItemClickListener.onClick(position, item)
-                            return@setOnMenuItemClickListener true
-                        }
-                        R.id.delete -> {
-                            deleteItemClickListener.onClick(position, item)
-                            return@setOnMenuItemClickListener true
-                        }
-                        else -> {
-                            return@setOnMenuItemClickListener false
-                        }
-                    }
-                }
-            }
+//            // 수정, 삭제 팝업 메뉴 클릭 이벤트
+//            moreBtn.setOnClickListener {
+//                val popup = PopupMenu(context, moreBtn)
+//                MenuInflater(context).inflate(R.menu.popup_menu, popup.menu)
+//
+//                popup.show()
+//                popup.setOnMenuItemClickListener {
+//                    when (it.itemId) {
+//                        R.id.modify -> {
+//                            modifyItemClickListener.onClick(position, item)
+//                            return@setOnMenuItemClickListener true
+//                        }
+//                        R.id.delete -> {
+//                            deleteItemClickListener.onClick(position, item)
+//                            return@setOnMenuItemClickListener true
+//                        }
+//                        else -> {
+//                            return@setOnMenuItemClickListener false
+//                        }
+//                    }
+//                }
+//            }
         }
     }
 

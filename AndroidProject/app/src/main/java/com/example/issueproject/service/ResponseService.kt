@@ -58,6 +58,8 @@ class ResponseService {
         RetrofitBuilder.api.DeleteInfo(deleteinfo).enqueue(object : Callback<SignUpResult>{
             override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
                 Log.d(TAG, "Sameid: ")
+                Log.d(TAG, "onResponse: ${response.code()}")
+                Log.d(TAG, "onResponse: ${response.errorBody()}")
                 if (response.code() == 200){
                     if(response.body() != null){
                         Log.d(TAG, "onResponse: 200")
@@ -777,6 +779,133 @@ class ResponseService {
                 }              }
 
             override fun onFailure(call: Call<GetFoodList>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+        })
+    }
+
+    fun UpdateParentinfo(ParentinfoUpdate : ParentInfoUpdate, callback: RetrofitCallback<SignUpResult>){
+        RetrofitBuilder.api.UpdateParentinfo(ParentinfoUpdate).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "onResponse: ${response.code()}")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+        })
+    }
+
+    fun deleteNoticItem(agreeChange : AgreeChange, callback: RetrofitCallback<SignUpResult>){
+        RetrofitBuilder.api.deleteNoticItem(agreeChange).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "onResponse: ${response.code()}")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+        })
+    }
+
+    fun UpdateNoticItem(updateNotic: UpdateNotic, callback: RetrofitCallback<SignUpResult>){
+        RetrofitBuilder.api.UpdateNoticItem(updateNotic).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "onResponse: ${response.code()}")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+
+        })
+    }
+
+    fun DeleteChildItem(key_id: AgreeChange, callback: RetrofitCallback<SignUpResult>){
+        RetrofitBuilder.api.DeleteChildItem(key_id).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "onResponse: ${response.code()}")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }            }
+
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+        })
+    }
+
+    fun updateTeacherinfo(updateTeacherinfo: UpdateTeacherinfo, callback: RetrofitCallback<SignUpResult>){
+        RetrofitBuilder.api.updateTeacherinfo(updateTeacherinfo).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "onResponse: ${response.code()}")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+        })
+    }
+    fun UpdatePW(id: ID, callback: RetrofitCallback<SignUpResult>){
+        RetrofitBuilder.api.updateinfoPW(id).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "onResponse: ${response.code()}")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }            }
+
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
                 Log.d(TAG, "onFailure: ")
                 callback.onError(t)
             }

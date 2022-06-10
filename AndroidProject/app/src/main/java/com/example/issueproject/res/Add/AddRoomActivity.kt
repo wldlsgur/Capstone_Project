@@ -37,12 +37,14 @@ class AddRoomActivity : AppCompatActivity() {
     var id : String = ""
     var name : String = ""
     val roomList = mutableListOf<String>()
+    val addroomList = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         roomList.clear()
+        addroomList.clear()
         id = intent.getStringExtra("id")!!
         name = intent.getStringExtra("name")!!
 
@@ -52,6 +54,7 @@ class AddRoomActivity : AppCompatActivity() {
             val roomname = binding.AddRoomName.text.toString()
             if(roomname != null){
                 roomList.add(roomname)
+                addroomList.add(roomname)
                 binding.AddRoomName.text = null
                 Toast.makeText(this, "반이 추가되었습니다.", Toast.LENGTH_SHORT).show()
 
@@ -69,8 +72,8 @@ class AddRoomActivity : AppCompatActivity() {
             val school = binding.AddRoomSchoolName.text.toString()
             val number = binding.AddRoomNumber.text.toString()
 
-            for(i in 0..roomList.size-1) {
-                val room = roomList[i]
+            for(i in 0..addroomList.size-1) {
+                val room = addroomList[i]
 
                 var presidentinfo = Presidentinfo(id, school, room, number)
                 SchoolAdd(presidentinfo)
