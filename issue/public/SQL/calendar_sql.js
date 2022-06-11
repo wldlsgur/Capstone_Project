@@ -43,7 +43,7 @@ module.exports = function () {
                 })
             })
         },
-        detaileinfo: function (query) {
+        detaileinfo: function (query, callback) {
             pool.getConnection(function (err, con) {
                 con.query(query,function(err,result,fields){
                     con.release();
