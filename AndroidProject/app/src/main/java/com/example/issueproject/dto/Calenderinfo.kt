@@ -1,13 +1,13 @@
 package com.example.issueproject.dto
 
 class Calenderinfo (
-    val id : String,
-    val school : String,
-    val title : String,
-    val content : String,
-    val startDate : String,
-    val endDate : String,
-    val startTime : String,
-    val endTime : String,
-    val color : String
+    var id : String,
+    var school : String,
+    var title : String,
+    var content : String,
+    var startDate : String,
+    var endDate : String,
+    var startTime : String,
+    var endTime : String,
+    var color : String
         )

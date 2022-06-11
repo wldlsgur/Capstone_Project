@@ -21,6 +21,7 @@ class DailyDateAdapter(val tmpMonth:Int, val dayList:MutableList<Date>, val data
     inner class DayViewHolder(val layout: View) : RecyclerView.ViewHolder(layout){
 
         var day : TextView = layout.findViewById<TextView>(R.id.fragment_calender_dayTv)
+        var school : String = "shcool"
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayViewHolder {
         var view = LayoutInflater.from(parent.context).inflate(R.layout.activity_daily_item2,parent,false)
@@ -36,6 +37,7 @@ class DailyDateAdapter(val tmpMonth:Int, val dayList:MutableList<Date>, val data
         for(l in data)
         {
             date.add(l.date)
+            school = l.school
         }
 
          */
