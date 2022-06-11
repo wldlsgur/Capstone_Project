@@ -16,15 +16,16 @@ import com.example.issueproject.Adapterimport.MedicineListAdapter
 import com.example.issueproject.R
 import com.example.issueproject.dto.CalenderResult
 import com.example.issueproject.dto.Calenderinfo
+import com.example.issueproject.dto.GetSchoolManagement
 import com.example.issueproject.res.Calender.DailyActivity
 import com.example.issueproject.res.Calender.DetailCalendarActivity
 import com.example.issueproject.res.Medicine.Parents_MedicineInfo
 import java.util.*
 
 private const val TAG = "DailyAdapter"
-class DailyAdapter(var context: Context, val data:MutableList<CalenderResult>) : RecyclerView.Adapter<DailyAdapter.MonthViewHolder>(){
+class DailyAdapter(var context: Context, val school : String) : RecyclerView.Adapter<DailyAdapter.MonthViewHolder>(){
 
-
+    var data: MutableList<CalenderResult> = mutableListOf()
     //lateinit var dayAdapter : DailyDateAdapter
     val center = Int.MAX_VALUE/2
     private var calendar = Calendar.getInstance()
@@ -75,8 +76,17 @@ class DailyAdapter(var context: Context, val data:MutableList<CalenderResult>) :
             override fun onClick(v: View, position: Int) {
                 var intent = Intent(context, DetailCalendarActivity::class.java).apply {
                     //putExtra("day", dailyAdapter.dayAdapter.DayViewHolder(v).day.text.toString())
-                    putExtra("date", dayAdapter.DayViewHolder(v).day.text.toString())
-                    putExtra("school", dayAdapter.DayViewHolder(v).school)
+                    var year = calendar.get(Calendar.YEAR).toString()
+                    var month = calendar.get(Calendar.MONTH).toString()
+                    var day = dayAdapter.DayViewHolder(v).day.text
+                    if(month.length == 1){
+                        month = "0${month}"
+                    }
+                    if(day.length == 1){
+                        day = "0${day}"
+                    }
+                    putExtra("date", "${year}-${month}-${day}".toString())
+                    putExtra("school", school)
                     //putExtra("content", content)
                 }
 

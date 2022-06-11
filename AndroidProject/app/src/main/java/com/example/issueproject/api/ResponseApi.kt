@@ -153,7 +153,7 @@ interface ResponseApi {
 
     @GET("/calendar/info")
     fun GetCalenderInfo(
-        @Query("id") school: String,
+        @Query("school") school: String,
         @Query("date") date: String
 
     ): Call<MutableList<GetCalenderDetail>>
@@ -176,6 +176,26 @@ interface ResponseApi {
     @POST("/calendar/deleteCalendarInfo")
     fun deleteCalender(
         @Body deleteCalender: deleteCalender
+    ): Call<SignUpResult>
+
+    @POST("/alarm/insertTokenInfo")
+    fun insertToken(
+        @Body inserttoken: inserttoken
+    ): Call<SignUpResult>
+
+    @POST("/alarm/allAlarm")
+    fun sendallalarm(
+        @Body allalarm: allalarm
+    ): Call<SignUpResult>
+
+    @POST("/alarm/approveAlarmPtoT")
+    fun parentsendalarm(
+        @Body alarmParent : alarmParent
+    ): Call<SignUpResult>
+
+    @POST("/alarm/approveAlarmTtoP")
+    fun teachersendalarm(
+        @Body alarmTeacher: alarmTeacher
     ): Call<SignUpResult>
 
     @POST("/medicine/insert/data")

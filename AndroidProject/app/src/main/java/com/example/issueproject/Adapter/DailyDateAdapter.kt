@@ -14,14 +14,17 @@ import com.example.issueproject.Adapterimport.MedicineListAdapter
 import com.example.issueproject.R
 import com.example.issueproject.dto.CalenderResult
 import java.util.*
+import kotlin.collections.ArrayList
 
 private const val TAG = "DailyDateAdapter"
 class DailyDateAdapter(val tmpMonth:Int, val dayList:MutableList<Date>, val data:MutableList<CalenderResult>) : RecyclerView.Adapter<DailyDateAdapter.DayViewHolder>(){
     val ROW = 6
+
     inner class DayViewHolder(val layout: View) : RecyclerView.ViewHolder(layout){
 
         var day : TextView = layout.findViewById<TextView>(R.id.fragment_calender_dayTv)
-        var school : String = "shcool"
+        var school : String = "school"
+        var strDay : String = "06"
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayViewHolder {
         var view = LayoutInflater.from(parent.context).inflate(R.layout.activity_daily_item2,parent,false)
@@ -29,16 +32,15 @@ class DailyDateAdapter(val tmpMonth:Int, val dayList:MutableList<Date>, val data
     }
 
     override fun onBindViewHolder(holder: DayViewHolder, position: Int) {
-        val title: ArrayList<String>
-        val color: ArrayList<String>
+        var title: ArrayList<String> = ArrayList()
+        var color: ArrayList<String> = ArrayList()
         lateinit var date : ArrayList<String>
         date = arrayListOf()
         for(l in data)
         {
-            Log.d(TAG, l.date)
+            //Log.d(TAG, l.date)
             date.add(l.date)
         }
-
         //holder.day = holder.layout.findViewById<TextView>(R.id.fragment_calender_dayTv)
         holder.day.text = dayList[position].date.toString()
         holder.day.setTextColor(when(position%7){
@@ -51,48 +53,47 @@ class DailyDateAdapter(val tmpMonth:Int, val dayList:MutableList<Date>, val data
         }
         //2022-03-11 2022년 1월 33일
         //추가적으로 일정이 있는지 확인하는 구간
-        for(i in 0..date.size-1){
-            var month = date[i].substring(5,6).trim()
-            Log.d(TAG, month)
-            var monthOfday = date[i].substring(9,date[i].length).trim()
-            Log.d(TAG, monthOfday)
+        for(i in data){
+            var month = i.date.substring(5,7).trim()
+            //Log.d(TAG, "month : ${month}")
+            var monthOfday = i.date.substring(8,i.date.length).trim()
+            //Log.d(TAG, "mothofday : ${monthOfday}")
             var strMonth = (dayList[position].month+1).toString()
-            var strDay = holder.day.text.toString()
-
+            holder.strDay = holder.day.text.toString()
             if(dayList[position].month.toString().length == 1){
                 strMonth = "0${strMonth}"
             }
             if(holder.day.text.toString().length == 1){
-                strDay = "0${strDay}"
+                holder.strDay = "0${holder.strDay}"
             }
-            var strDate = "${strMonth}월 ${strDay}일"
+            var strDate = "${strMonth}월 ${holder.strDay}일"
             var comDate = "${month}월 ${monthOfday}일"
             var checkDay = holder.day.text.toString()
             if(checkDay.length == 1) {
                 checkDay = "0${checkDay}"
             }
 
+            //Log.d(TAG, "i : ${date[i]}")
+            //Log.d(TAG, "day : ${holder.day.text.toString()}")
 
-            Log.d(TAG, holder.day.text.toString())
-            var printadapter = DailyItemAdapter(data, holder.day.text.toString())
-            holder.layout.findViewById<RecyclerView>(R.id.fragment_calender_itemRv).apply {
-                layoutManager = LinearLayoutManager(holder.layout.context)
-                adapter = printadapter
+
+            if(strDate.equals(comDate)){
+
+                Log.d(TAG, "strDate : ${strDate}")
+                Log.d(TAG, "comDate : ${comDate}")
+                Log.d(TAG, "title : ${i.title}")
+                Log.d(TAG, "color : ${i.color}")
+                title.add(i.title)
+                color.add(i.color)
+
             }
-/*
-            if(checkDay.equals(strDay)){
-                if(strDate.equals(comDate)){
-//                    holder.itemView.findViewById<ImageView>(R.id.fragment_calendar_point).visibility = View.VISIBLE
-                    holder.itemView.findViewById<View>(R.id.calendar_View1).visibility = View.VISIBLE
-                }
-                else if(strDate.equals(comDate) && holder.itemView.findViewById<View>(R.id.calendar_View1).visibility == View.VISIBLE){
-                    holder.itemView.findViewById<View>(R.id.calendar_View2).visibility = View.VISIBLE
-                }
-                else if(strDate.equals(comDate) && holder.itemView.findViewById<View>(R.id.calendar_View2).visibility == View.VISIBLE){
-                    holder.itemView.findViewById<View>(R.id.calendar_View3).visibility = View.VISIBLE
-                }
-            }
-            */
+
+        }
+        var printadapter = DailyItemAdapter(data, title, color)
+        holder.layout.findViewById<RecyclerView>(R.id.fragment_calender_itemRv).apply {
+            layoutManager = LinearLayoutManager(holder.layout.context)
+            adapter = printadapter
+            Log.d(TAG, "어댑터실행 ${printadapter.itemCount}")
 
         }
         holder.layout.setOnClickListener{

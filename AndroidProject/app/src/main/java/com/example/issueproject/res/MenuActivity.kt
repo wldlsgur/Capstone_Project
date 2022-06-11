@@ -1,13 +1,18 @@
 package com.example.issueproject.res
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -17,6 +22,7 @@ import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityMenuNaviBinding
 import com.example.issueproject.dto.DeleteInfo
 import com.example.issueproject.dto.SignUpResult
+import com.example.issueproject.dto.inserttoken
 import com.example.issueproject.res.Add.AddRoomActivity
 import com.example.issueproject.res.Album.AlbumActivity
 import com.example.issueproject.res.Calender.DailyActivity
@@ -26,8 +32,11 @@ import com.example.issueproject.res.Notic.NoticActivity
 import com.example.issueproject.res.SchoolManager.SchoolTeacherListActivity
 import com.example.issueproject.retrofit.RetrofitBuilder
 import com.example.issueproject.retrofit.RetrofitCallback
+import com.example.issueproject.service.MyFirebaseMessagingService
 import com.example.issueproject.service.ResponseService
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.messaging.FirebaseMessaging
 
 private const val TAG = "MenuActivity"
 class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener{
@@ -38,6 +47,7 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     var school: String = ""
     var room: String = ""
     var name: String = ""
+    var token : String = ""
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
     lateinit var constraintLayout : ConstraintLayout
@@ -53,6 +63,9 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         val img_url = intent.getStringExtra("img_url")
         binding.menu.textViewName.text = name
         binding.menu.textViewSchool.text = school
+        var tk : inserttoken = inserttoken(id,school,room,name, token)
+        initFcm(tk)
+
 
         if(img_url != null){
             Glide.with(this)
@@ -114,7 +127,7 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 //    }
 
         val toolbar = binding.menuAppbarPresident.tool // toolBar를 통해 App Bar 생성
-        toolbar.setTitle("알림장")
+        toolbar.setTitle("원장님")
         setSupportActionBar(toolbar) // 툴바 적용
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
 //        supportActionBar?.setHomeAsUpIndicator(R.drawable.menu) // 홈버튼 이미지 변경
@@ -212,6 +225,55 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             }
 
         })
+    }
+    fun InsertToken(data: inserttoken){
+
+        Log.d(TAG, "see : ${data.token}")
+        ResponseService().insertToken(data, object : RetrofitCallback<SignUpResult> {
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "InsertToken onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: SignUpResult) {
+                Log.d(TAG, "InsertToken onSuccess: $responseData")
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "InsertToken onFailure: $code")
+            }
+
+        })
+    }
+    private fun initFcm(tk : inserttoken) {
+        // FCM 토큰 수신
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "FCM 토큰 얻기에 실패하였습니다.", task.exception)
+                return@OnCompleteListener
+            }
+            // token log 남기기
+            Log.d(TAG, "see token: ${task.result?:"task.result is null"}")
+            Log.d(TAG, "initFcm: ${task.result}")
+            //CallAlarm(task.result!!)
+            tk.token= task.result.toString()
+            Log.d(TAG, "toooooo : ${tk.token}")
+            InsertToken(tk)
+            // 유저 토큰 갱신 update
+        })
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(MyFirebaseMessagingService.CHANNEL_ID, "issue")
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel(id: String, name: String) {
+        val importance = NotificationManager.IMPORTANCE_DEFAULT // or IMPORTANCE_HIGH
+        val channel = NotificationChannel(id, name, importance)
+
+        val notificationManager: NotificationManager
+                = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
     }
 
 }

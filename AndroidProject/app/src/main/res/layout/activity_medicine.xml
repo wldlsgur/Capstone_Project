@@ -5,42 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/drawer_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout777"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:openDrawer="start">
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-
-        <include
-            layout="@layout/activity_navigation_appbar"
-            android:id="@+id/medicine_appbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/nav_view"
+        <TextView
+            android:id="@+id/textView777"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="true"
-            app:menu="@menu/activity_navigation_parents_menu_list"
-            app:headerLayout="@layout/activity_navigation_header"/>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="투약정보"
+            android:textColor="@color/main_500"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    </androidx.drawerlayout.widget.DrawerLayout>
+        <View
+            android:id="@+id/view777"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/main_500"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout777">
 
         <ImageView
             android:id="@+id/imageViewmedicine"
@@ -61,6 +66,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:text="이름"
             app:layout_constraintStart_toEndOf="@+id/imageViewmedicine"
             app:layout_constraintTop_toTopOf="@+id/imageViewmedicine" />
@@ -70,6 +77,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:text="반 이름"
             app:layout_constraintStart_toEndOf="@+id/textView33"
             app:layout_constraintTop_toTopOf="@+id/textView33" />
@@ -79,6 +88,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:text="반 :"
             app:layout_constraintStart_toStartOf="@+id/textView36"
             app:layout_constraintTop_toBottomOf="@+id/textView36" />
@@ -88,6 +99,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:text="학교 : "
             app:layout_constraintStart_toStartOf="@+id/medicine_cname"
             app:layout_constraintTop_toBottomOf="@+id/medicine_cname" />
@@ -97,6 +110,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:text="학교 이름"
             app:layout_constraintStart_toEndOf="@+id/textView36"
             app:layout_constraintTop_toTopOf="@+id/textView36" />
@@ -136,17 +151,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:text="증상"
             app:layout_constraintStart_toStartOf="@+id/textView17"
             app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
         <EditText
             android:id="@+id/Edit_medicine_content"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/edittext_background"
             android:hint="증상을 입력해주세요"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView17"
             app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
@@ -157,6 +177,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="증상"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -185,6 +207,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 android:text="보관방법"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -195,7 +219,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="8dp"
+                android:fadingEdge="none"
+                android:fontFamily="@font/customfont"
                 android:text="실온"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView37"
                 app:layout_constraintTop_toBottomOf="@+id/textView37"
@@ -208,7 +235,10 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="8dp"
+                android:fontFamily="@font/customfont"
                 android:text="냉장"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/checkBoxOn"
                 app:layout_constraintTop_toBottomOf="@+id/textView37"
@@ -230,6 +260,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="아침"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
@@ -248,6 +280,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 android:text="저녁"
                 app:layout_constraintStart_toEndOf="@+id/textView29"
                 app:layout_constraintTop_toBottomOf="@+id/textView16" />
@@ -268,6 +302,8 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
                 android:text="점심"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/textView27"
                 app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
@@ -288,6 +324,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 android:text="투약시기"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -311,7 +349,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:text="약 이름"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -323,7 +363,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/edittext_background"
             android:hint="약 이름을 입력해주세요"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView18"
             app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
@@ -350,6 +393,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@color/main_500"
+
             android:src="@android:drawable/ic_menu_my_calendar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -365,6 +409,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="투약 기간"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -374,6 +420,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:text="TextViewDate"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/textView55"
             app:layout_constraintTop_toTopOf="@+id/textView55" />
 
@@ -384,6 +432,8 @@
             android:layout_marginTop="12dp"
             android:layout_marginBottom="8dp"
             android:text="시간 :"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/medicine_date"
             app:layout_constraintTop_toBottomOf="@+id/medicine_date" />

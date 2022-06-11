@@ -67,20 +67,24 @@ class DetailCalendarActivity : AppCompatActivity() {
         })
     }
     private fun ShowRecycler(school: String, date: String) {
+
+        Log.d(TAG, school)
+        Log.d(TAG, date)
         ResponseService().GetCalenderInfo(school, date, object : RetrofitCallback<MutableList<GetCalenderDetail>> {
+
             override fun onError(t: Throwable) {
-                Log.d(TAG, "onError: $t")
+                Log.d(TAG, "ShowRecycler onError: $t")
             }
 
             override fun onSuccess(code: Int, responseData: MutableList<GetCalenderDetail>) {
-                Log.d(TAG, "onSuccess: $responseData")
+                Log.d(TAG, "ShowRecycler onSuccess: $responseData")
                 calenderinfo = responseData
                 DailyDetailAdapter = DailyDetailAdapter(this@DetailCalendarActivity, responseData)
                 initRecycler()
             }
 
             override fun onFailure(code: Int) {
-                Log.d(TAG, "onFailure: $code")
+                Log.d(TAG, "ShowRecycler onFailure: $code")
             }
         })
     }

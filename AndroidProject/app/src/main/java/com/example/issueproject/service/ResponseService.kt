@@ -787,11 +787,11 @@ class ResponseService {
     fun GetCalenderInfo(school: String, date: String, callback: RetrofitCallback<MutableList<GetCalenderDetail>>){
         RetrofitBuilder.api.GetCalenderInfo(school, date).enqueue(object : Callback<MutableList<GetCalenderDetail>>{
             override fun onResponse(call: Call<MutableList<GetCalenderDetail>>, response: Response<MutableList<GetCalenderDetail>>) {
-                Log.d(TAG, "onResponse: ${response.code()}")
+                Log.d(TAG, "GetCalenderInfo onResponse: ${response.code()}")
                 if (response.code() == 200){
-                    Log.d(TAG, "onResponse: 200")
+                    Log.d(TAG, "GetCalenderInfo onResponse: 200")
                     if(response.body() != null){
-                        Log.d(TAG, "onResponse: body is not null")
+                        Log.d(TAG, "GetCalenderInfo onResponse: body is not null")
                         callback.onSuccess(response.code(), response.body()!!)
                     } else{
                         callback.onFailure(response.code())
@@ -887,6 +887,90 @@ class ResponseService {
                     callback.onError(t)
                 }
             })
+    }
+
+    fun insertToken(data : inserttoken, callback: RetrofitCallback<SignUpResult>){
+        RetrofitBuilder.api.insertToken(data).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "InsertToken onResponse: ${response.code()}")
+                if (response.code() == 200){
+                    Log.d(TAG, "InsertToken onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "InsertToken onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }              }
+
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "InsertToken onFailure: ")
+                callback.onError(t)
+            }
+        })
+    }
+
+    fun sendallalarm(data : allalarm, callback: RetrofitCallback<SignUpResult>){
+        RetrofitBuilder.api.sendallalarm(data).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "sendallalarm onResponse: ${response.code()}")
+                if (response.code() == 200){
+                    Log.d(TAG, "sendallalarm onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "sendallalarm onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }              }
+
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+        })
+    }
+
+    fun teachersendalarm(data : alarmTeacher, callback: RetrofitCallback<SignUpResult>){
+        RetrofitBuilder.api.teachersendalarm(data).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "onResponse: ${response.code()}")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }              }
+
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+        })
+    }
+
+    fun parentsendalarm(data : alarmParent, callback: RetrofitCallback<SignUpResult>){
+        RetrofitBuilder.api.parentsendalarm(data).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "onResponse: ${response.code()}")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }              }
+
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+        })
     }
 
     fun UpdateParentinfo(ParentinfoUpdate : ParentInfoUpdate, callback: RetrofitCallback<SignUpResult>){

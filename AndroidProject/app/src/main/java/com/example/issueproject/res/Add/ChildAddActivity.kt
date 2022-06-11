@@ -109,6 +109,8 @@ class ChildAddActivity : AppCompatActivity() {
                 var parentinfo = ParentInfo(id, schoolname, roomname, parentnum, childname, childage, childspec)
                 Log.d(TAG, "onCreate: $parentinfo")
                 ChildAdd(parentinfo)
+                var data : alarmParent = alarmParent(id,school,room,"승인 완료","${school}학교 ${room}반의 승인이 요청이 있습니다")
+                alarmtoparent(data)
             }
         }
     }
@@ -176,6 +178,23 @@ class ChildAddActivity : AppCompatActivity() {
                         }
                         startActivity(intent)
                     }
+                }
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+            }
+        })
+    }
+    fun alarmtoparent(info: alarmParent){
+        ResponseService().parentsendalarm(info, object: RetrofitCallback<SignUpResult> {
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: SignUpResult) {
+                Log.d(TAG, "onSuccess: $responseData")
+                if(responseData.msg == "success"){
                 }
             }
 

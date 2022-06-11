@@ -29,6 +29,7 @@ class ParentsMedicineList : AppCompatActivity() {
     var id : String = ""
     var cname : String = ""
     var img_url : String = ""
+    var job : String = "학부모"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -62,13 +63,13 @@ class ParentsMedicineList : AppCompatActivity() {
         img_url = intent.getStringExtra("img_url").toString()
 
 
-        binding.textViewRoomName.text = school + room
+
         binding.buttonMor.visibility = View.INVISIBLE
         binding.buttonLun.visibility = View.INVISIBLE
         binding.buttonDin.visibility = View.INVISIBLE
     }
     private fun initRecycler(list: MutableList<MedicineManagementResult>) {
-        MedicineListAdapter = MedicineListAdapter(list)
+        MedicineListAdapter = MedicineListAdapter(list,job)
         binding.RoomMedicineListRV.apply {
             adapter = MedicineListAdapter
             layoutManager = LinearLayoutManager(context)

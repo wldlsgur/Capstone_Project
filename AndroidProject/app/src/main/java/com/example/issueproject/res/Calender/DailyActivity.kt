@@ -19,6 +19,7 @@ import com.example.issueproject.res.Add.DailyAddActivity
 import com.example.issueproject.res.Medicine.Parents_MedicineInfo
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
+import kotlinx.coroutines.runBlocking
 
 private const val TAG = "DailyActivity"
 class DailyActivity : AppCompatActivity() {
@@ -34,7 +35,11 @@ class DailyActivity : AppCompatActivity() {
         school = intent.getStringExtra("school").toString()
         id = intent.getStringExtra("id").toString()
         var data : CalenderSelect = CalenderSelect(school)
-        selectCalender(data)
+        dailyAdapter = DailyAdapter(this, school)
+        runBlocking {
+            selectCalender(data)
+        }
+        initCalendar()
 
         binding.floatingActionButtonAddDaily.setOnClickListener {
             var intent = Intent(this, DailyAddActivity::class.java).apply{
@@ -47,12 +52,9 @@ class DailyActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    fun initCalendar(data : MutableList<CalenderResult>){
-        var date = arrayListOf<String>("2022년 05월 24일","2021년 05월 28일","2021년 05월 12일")
-        var title = arrayListOf<String>("일정1","일정2","일정3")
-        var content = arrayListOf<String>("red","blue","green")
-        dailyAdapter = DailyAdapter(this, data)
-        findViewById<RecyclerView>(R.id.customCalendar).apply {
+    fun initCalendar(){
+
+        binding.customCalendar.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
             adapter = dailyAdapter
             scrollToPosition(Int.MAX_VALUE/2)
@@ -91,7 +93,8 @@ class DailyActivity : AppCompatActivity() {
                     Log.d(TAG, "selectCalender onSuccess: ${l.startTime}")
 
                 }
-                initCalendar(responseData)
+                dailyAdapter.data = responseData
+                dailyAdapter.notifyDataSetChanged()
             }
 
             override fun onFailure(code: Int) {

@@ -1,10 +1,12 @@
 package com.example.issueproject.res.Medicine
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issueproject.Adapterimport.MedicineListAdapter
@@ -28,6 +30,7 @@ class TeacherMedicineList : AppCompatActivity() {
     var mo : Boolean = true;
     var lu : Boolean = true;
     var di : Boolean = true;
+    var job : String = "선생님"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.medicinelistButtonAdd.visibility = View.INVISIBLE
@@ -44,46 +47,69 @@ class TeacherMedicineList : AppCompatActivity() {
             mo = true
             lu = false
             di = false
+            binding.buttonMor.background.setTint(Color.YELLOW)
+            binding.buttonLun.background.setTint(Color.WHITE)
+            binding.buttonDin.background.setTint(Color.WHITE)
             ShowRecycler(school, room)
         }
         binding.buttonLun.setOnClickListener{
             mo = false
             lu = true
             di = false
+            binding.buttonLun.background.setTint(Color.YELLOW)
+            binding.buttonMor.background.setTint(Color.WHITE)
+            binding.buttonDin.background.setTint(Color.WHITE)
             ShowRecycler(school, room)
         }
         binding.buttonDin.setOnClickListener{
             mo = false
             lu = false
             di = true
+            binding.buttonDin.background.setTint(Color.YELLOW)
+            binding.buttonLun.background.setTint(Color.WHITE)
+            binding.buttonMor.background.setTint(Color.WHITE)
             ShowRecycler(school, room)
         }
     }
 
     private fun initRecycler(list: MutableList<MedicineManagementResult>) {
-        MedicineListAdapter = MedicineListAdapter(list)
+        MedicineListAdapter = MedicineListAdapter(list, job)
         binding.RoomMedicineListRV.apply {
             adapter = MedicineListAdapter
             layoutManager = LinearLayoutManager(context)
 
-            MedicineListAdapter.setItemClickListener(object: MedicineListAdapter.OnItemClickListener{
+            MedicineListAdapter.setItemClickListener(object :
+                MedicineListAdapter.OnItemClickListener {
                 override fun onClick(v: View, position: Int) {
-                    var intent = Intent(this@TeacherMedicineList, Teacher_MedicineInfo::class.java).apply {
-                        putExtra("img_url",img_url)
-                        putExtra(
-                            "id",
-                            MedicineListAdapter.MedicineListViewHolder(v).id.toString()
-                        )
-                        putExtra(
-                            "cname",
-                            MedicineListAdapter.MedicineListViewHolder(v).cname.toString()
-                        )
-                        putExtra(
-                            "mname",
-                            MedicineListAdapter.MedicineListViewHolder(v).mname.toString()
-                        )
-                    }
+                    var intent =
+                        Intent(this@TeacherMedicineList, Teacher_MedicineInfo::class.java).apply {
+                            putExtra("img_url", img_url)
+                            putExtra(
+                                "id",
+                                MedicineListAdapter.MedicineListViewHolder(v).id.toString()
+                            )
+                            putExtra(
+                                "cname",
+                                MedicineListAdapter.MedicineListViewHolder(v).cname.toString()
+                            )
+                            putExtra(
+                                "mname",
+                                MedicineListAdapter.MedicineListViewHolder(v).mname.toString()
+                            )
+                        }
                     startActivity(intent)
+                }
+            })
+            MedicineListAdapter.setItemClickListener(object :
+                MedicineListAdapter.OnItemClickListener {
+                override fun onClick(v: View, position: Int) {
+                    var mlist : MutableList<MedicineManagementResult> = mutableListOf<MedicineManagementResult>()
+                    //MedicineListAdapter.inv = true
+                    if(mo == true) Toast.makeText(this@TeacherMedicineList, "아침약을 복용하였습니다.", Toast.LENGTH_SHORT).show()
+                    else if(lu == true) Toast.makeText(this@TeacherMedicineList, "점심약을 복용하였습니다.", Toast.LENGTH_SHORT).show()
+                    else if(di == true) Toast.makeText(this@TeacherMedicineList, "저녁약을 복용하였습니다.", Toast.LENGTH_SHORT).show()
+
+                //initRecycler(mlist)
                 }
             })
         }

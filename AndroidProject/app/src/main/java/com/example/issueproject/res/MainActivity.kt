@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        initFcm()
+        //initFcm()
     }
 
     fun Login(id: String, pw: String){
@@ -189,6 +189,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
     //알람 토큰 통신
+    /*
     fun CallAlarm(target_token : String){
         ResponseService().CallAlarm(
             target_token,
@@ -209,9 +210,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+     */
     /**
      * FCM 토큰 수신 및 채널 생성
      */
+    /*
     private fun initFcm() {
         // FCM 토큰 수신
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
@@ -222,7 +226,7 @@ class MainActivity : AppCompatActivity() {
             // token log 남기기
             Log.d(TAG, "token: ${task.result?:"task.result is null"}")
             Log.d(TAG, "initFcm: ${task.result}")
-            CallAlarm(task.result!!)
+            //CallAlarm(task.result!!)
 
             // 유저 토큰 갱신 update
         })
@@ -241,4 +245,6 @@ class MainActivity : AppCompatActivity() {
                 = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
     }
+
+     */
 }

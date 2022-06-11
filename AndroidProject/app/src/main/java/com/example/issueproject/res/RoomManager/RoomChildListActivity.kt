@@ -10,10 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issueproject.Adapterimport.SchoolTeacherListAdapter
 import com.example.issueproject.databinding.ActivityRoomChildListBinding
-import com.example.issueproject.dto.AgreeChange
-import com.example.issueproject.dto.RoomChildListResult
-import com.example.issueproject.dto.SchoolteacherListResult
-import com.example.issueproject.dto.SignUpResult
+import com.example.issueproject.dto.*
 import com.example.issueproject.res.Add.ChildAddActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -61,6 +58,9 @@ class RoomChildListActivity : AppCompatActivity() {
         RoomChildListAdapter.setApprovalItemClickListener(object : RoomChildListAdapter.MenuClickListener {
             override fun onClick(position: Int, item: RoomChildListResult) {
                 Agreechange(item, position)
+
+                var data : alarmTeacher = alarmTeacher(item.id,school,room,item.child_name,"승인 완료","${school}학교 ${room}반의 승인이 완료되었습니다")
+                alarmtoteacher(data)
             }
         })
 
@@ -129,7 +129,23 @@ class RoomChildListActivity : AppCompatActivity() {
 
         })
     }
+    fun alarmtoteacher(info: alarmTeacher){
+        ResponseService().teachersendalarm(info, object: RetrofitCallback<SignUpResult> {
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "onError: $t")
+            }
 
+            override fun onSuccess(code: Int, responseData: SignUpResult) {
+                Log.d(TAG, "onSuccess: $responseData")
+                if(responseData.msg == "success"){
+                }
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "onFailure: $code")
+            }
+        })
+    }
     private fun Deletechildlist(roomChildListResult: RoomChildListResult, position: Int) {
 
         ResponseService().Deletechildlist(AgreeChange(roomChildListResult.key_id), object : RetrofitCallback<SignUpResult>{

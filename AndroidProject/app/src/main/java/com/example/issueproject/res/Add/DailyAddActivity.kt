@@ -3,26 +3,23 @@ package com.example.issueproject.res.Add
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
-import androidx.annotation.ColorInt
-import androidx.core.graphics.drawable.toDrawable
-import androidx.core.graphics.toColor
+import androidx.appcompat.app.AppCompatActivity
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityDailyAddBinding
-import com.example.issueproject.dto.Calenderinfo
-import com.example.issueproject.dto.SignUpResult
-import com.example.issueproject.dto.deleteCalender
+import com.example.issueproject.dto.*
+import com.example.issueproject.res.Calender.DailyActivity
+import com.example.issueproject.res.MainActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 private const val TAG = "DailyAddActivity"
 class DailyAddActivity : AppCompatActivity() {
@@ -76,6 +73,27 @@ class DailyAddActivity : AppCompatActivity() {
         binding.textViewDailyAddBtn.setOnClickListener {
             bindinfo(Calenderinfo)
             insertDaily(Calenderinfo)
+            var data : allalarm = allalarm(school,"일정이 등록", "${school}의 일정이 등록되었습니다. 일정 확인 바랍니다")
+            sendallalarm(data)
+
+            //stopPlay() //이 액티비티에서 종료되어야 하는 활동 종료시켜주는 함수
+
+            Toast.makeText(this@DailyAddActivity, "알림이 등록되었습니다.", Toast.LENGTH_SHORT)
+                .show() //토스트 메시지
+
+            val intent = Intent(
+                this@DailyAddActivity, DailyActivity::class.java) .apply{
+                putExtra("id",id)
+                putExtra("school",school)
+            }//지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정
+
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP //인텐트 플래그 설정
+
+            startActivity(intent) //인텐트 이동
+
+            finish() //현재 액티비티 종료
+
+
         }
 
         //DatePicker 클릭시
@@ -130,8 +148,7 @@ class DailyAddActivity : AppCompatActivity() {
             }
 
             override fun onSuccess(code: Int, responseData: SignUpResult) {
-                Toast.makeText(this@DailyAddActivity, "추가되었습니다.", Toast.LENGTH_SHORT).show()
-
+                Toast.makeText(this@DailyAddActivity, "알림이 추가되었습니다.", Toast.LENGTH_SHORT).show()
 
                 if(responseData.res == true && responseData.msg == "success") {
                 }
@@ -143,18 +160,34 @@ class DailyAddActivity : AppCompatActivity() {
 
         })
     }
+    fun sendallalarm(data: allalarm){
+
+        Log.d(TAG, "sendallalarm school : ${data.school}")
+        ResponseService().sendallalarm(data, object : RetrofitCallback<SignUpResult> {
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "sendallalarm onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: SignUpResult) {
+                Log.d(TAG, "sendallalarm onSuccess: $responseData")
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "sendallalarm onFailure: $code")
+            }
+
+        })
+    }
 
 
     fun getTime(date: TextView, context: Context){
 
         val cal = Calendar.getInstance()
-
         val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute  ->
             cal.set(Calendar.HOUR_OF_DAY, hour)
             cal.set(Calendar.MINUTE, minute)
             date.text = SimpleDateFormat("HH : mm a").format(cal.time)
         }
-
         TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
 
     }

@@ -20,27 +20,30 @@ import com.example.issueproject.service.ResponseService
 import okhttp3.ResponseBody
 
 private const val TAG = "MedicineListAdapter"
-class MedicineListAdapter(var list:MutableList<MedicineManagementResult>) : RecyclerView.Adapter<MedicineListAdapter.MedicineListViewHolder>() {
-
+class MedicineListAdapter(var list:MutableList<MedicineManagementResult>, var job : String) : RecyclerView.Adapter<MedicineListAdapter.MedicineListViewHolder>() {
+    var inv : Boolean = false
     inner class MedicineListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val cname: TextView = itemView.findViewById(R.id.stu_cname)
         private val date: TextView = itemView.findViewById(R.id.stu_date)
         val mname: TextView = itemView.findViewById(R.id.stu_mname)
-        private val childimage: ImageView = itemView.findViewById(R.id.imageViewmedicinelist)
+         val childimage: ImageView = itemView.findViewById(R.id.imageViewmedicinelist)
         private val school: TextView = itemView.findViewById(R.id.stu_school)
         private val room: TextView = itemView.findViewById(R.id.stu_room)
         private val con : ConstraintLayout = itemView.findViewById(R.id.ConstraintLayoutmlist)
         val btn: Button = itemView.findViewById(R.id.button_apply)
         var id : String = ""
+        val layout : ConstraintLayout = itemView.findViewById(R.id.ConstraintLayoutmlist)
+
 
 
         fun bindinfo(data: MedicineManagementResult){
+            if(inv == true) layout.visibility = View.INVISIBLE
             cname.text = data.child_name
             date.text = data.date
             mname.text = data.m_name
             school.text = data.school
             room.text = data.room
-
+            if(job=="학부모") btn.visibility = View.INVISIBLE
             ChildInfo(data.id, data.child_name)
         }
 
@@ -76,14 +79,14 @@ class MedicineListAdapter(var list:MutableList<MedicineManagementResult>) : Recy
 
     override fun onBindViewHolder(holder: MedicineListViewHolder, position: Int) {
 
-        holder.itemView.setOnClickListener{
+        holder.childimage.setOnClickListener{
             itemClickListener.onClick(it, position)
         }
         holder.bindinfo(list[position])
 
-        //holder.btn.setOnClickListener {
-            //itemClickListener.onClickbtn(it, position)
-        //}
+        holder.btn.setOnClickListener {
+            buttonclickListener.onClick(it, position)
+        }
     }
     interface OnItemClickListener {
         fun onClick(v: View, position: Int)
@@ -93,7 +96,13 @@ class MedicineListAdapter(var list:MutableList<MedicineManagementResult>) : Recy
     // (3) 외부에서 클릭 시 이벤트 설정
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {
         this.itemClickListener = onItemClickListener
-    }
-    // (4) setItemClickListener로 설정한 함수 실행
+    }// (4) setItemClickListener로 설정한 함수 실행
     private lateinit var itemClickListener : OnItemClickListener
+
+
+    private lateinit var buttonclickListener : OnItemClickListener
+    fun setButtonClickListener(onButtonClickListener: OnItemClickListener) {
+        this.buttonclickListener = onButtonClickListener
+    }// (4) setItemClickListener로 설정한 함수 실행
 }
+

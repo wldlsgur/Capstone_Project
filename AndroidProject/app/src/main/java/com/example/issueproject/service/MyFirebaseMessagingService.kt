@@ -100,11 +100,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         //val pendingIntent = PendingIntent.getActivity(this, (System.currentTimeMillis()/100).toInt(), intent, FLAG_UPDATE_CURRENT)  //알림이 여러개 표시되도록 requestCode 를 추가
 
         val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.more) //icon 변경 필요
+            .setSmallIcon(R.drawable.logo) //icon 변경 필요
             .setContentTitle(title)
             .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            //.setContentIntent(pendingIntent)  //알림 눌렀을 때 실행할 Intent 설정
+           // .setContentIntent(pendingIntent)  //알림 눌렀을 때 실행할 Intent 설정
             .setAutoCancel(true)  //클릭 시 자동으로 삭제되도록 설정
 
         //type 에 따라 style 설정

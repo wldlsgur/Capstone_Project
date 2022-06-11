@@ -10,6 +10,8 @@ import android.widget.Toast
 import com.example.issueproject.databinding.ActivityAddNoticBinding
 import com.example.issueproject.dto.AddManagement
 import com.example.issueproject.dto.AddManagementResult
+import com.example.issueproject.dto.SignUpResult
+import com.example.issueproject.dto.allalarm
 import com.example.issueproject.res.DayNotic.DayNoticTeacherActivity
 import com.example.issueproject.res.Notic.NoticActivity
 import com.example.issueproject.retrofit.RetrofitCallback
@@ -52,6 +54,8 @@ class AddNoticActivity : AppCompatActivity() {
 
             var addManagement = AddManagement(menu, writer, school, title, content, date, room)
             insertaddManagement(addManagement)
+            var data : allalarm = allalarm(school,"공지 등록", "${school}의 공지사항이 등록되었습니다. 일정 확인 바랍니다")
+            sendallalarm(data)
 
         }
     }
@@ -126,6 +130,24 @@ class AddNoticActivity : AppCompatActivity() {
             override fun onFailure(code: Int) {
                 Log.d(TAG, "onFailure: $code")
             }
+        })
+    }
+    fun sendallalarm(data: allalarm){
+
+        Log.d(TAG, "sendallalarm school : ${data.school}")
+        ResponseService().sendallalarm(data, object : RetrofitCallback<SignUpResult> {
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "sendallalarm onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: SignUpResult) {
+                Log.d(TAG, "sendallalarm onSuccess: $responseData")
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "sendallalarm onFailure: $code")
+            }
+
         })
     }
 }

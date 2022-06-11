@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityMedicineBinding
 import com.example.issueproject.dto.*
+import com.example.issueproject.res.Calender.DailyActivity
 import com.example.issueproject.res.MainActivity
 import com.example.issueproject.res.viewmodel.MainViewModels
 import com.example.issueproject.retrofit.RetrofitBuilder
@@ -202,15 +203,17 @@ class Parents_MedicineInfo : AppCompatActivity() {
             override fun onSuccess(code: Int, responseData: SignUpResult) {
                 Log.d(TAG, "onSuccess: $code")
                 if(responseData.msg == "success"){
-
+                    Toast.makeText(this@Parents_MedicineInfo, "투약 현황이 등록되었습니다.", Toast.LENGTH_SHORT)
+                        .show() //토스트 메시지
                     var intent = Intent(this@Parents_MedicineInfo, ParentsMedicineList::class.java).apply{
                         putExtra("id",id)
                         putExtra("cname", cname)
                         putExtra("school",school)
                         putExtra("room",room)
                     }
-
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP //인텐트 플래그 설정
                     startActivity(intent)
+                    finish()
                 }else if(responseData.msg == "failed"){
                 }
             }
