@@ -1,6 +1,5 @@
-package com.example.issueproject.Adapterimport
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+package com.example.issueproject.Adapter
+
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,12 +23,12 @@ class MedicineListAdapter(var list:MutableList<MedicineManagementResult>, var jo
 
     inner class MedicineListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val cname: TextView = itemView.findViewById(R.id.stu_cname)
-        private val date: TextView = itemView.findViewById(R.id.stu_date)
+        val date: TextView = itemView.findViewById(R.id.stu_date)
         val mname: TextView = itemView.findViewById(R.id.stu_mname)
-         val childimage: ImageView = itemView.findViewById(R.id.imageViewmedicinelist)
-        private val school: TextView = itemView.findViewById(R.id.stu_school)
-        private val room: TextView = itemView.findViewById(R.id.stu_room)
-        private val con : ConstraintLayout = itemView.findViewById(R.id.ConstraintLayoutmlist)
+        val childimage: ImageView = itemView.findViewById(R.id.imageViewmedicinelist)
+        val school: TextView = itemView.findViewById(R.id.stu_school)
+        val room: TextView = itemView.findViewById(R.id.stu_room)
+        val con : ConstraintLayout = itemView.findViewById(R.id.ConstraintLayoutmlist)
         val btn: Button = itemView.findViewById(R.id.button_apply)
         var id : String = ""
         val layout : ConstraintLayout = itemView.findViewById(R.id.ConstraintLayoutmlist)
@@ -45,7 +44,10 @@ class MedicineListAdapter(var list:MutableList<MedicineManagementResult>, var jo
             school.text = data.school
             room.text = data.room
             if(job=="학부모") btn.visibility = View.INVISIBLE
+
             ChildInfo(data.id, data.child_name)
+            Log.d(TAG, "bindinfo: ${data.child_name}")
+            Log.d(TAG, "bindinfo: ${data.id}")
         }
 
         fun ChildInfo(id: String, name: String){
@@ -59,6 +61,10 @@ class MedicineListAdapter(var list:MutableList<MedicineManagementResult>, var jo
                     if(responseData.image_url != "default"){
                         Glide.with(childimage.context)
                             .load("${RetrofitBuilder.servers}/image/parent/${responseData.image_url}")
+                            .into(childimage)
+                    }else{
+                        Glide.with(childimage.context)
+                            .load(R.drawable.user)
                             .into(childimage)
                     }
                 }

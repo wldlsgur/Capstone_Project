@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.core.graphics.toColor
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.issueproject.Adapterimport.MedicineListAdapter
+import com.example.issueproject.Adapter.MedicineListAdapter
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityMedicineListBinding
 import com.example.issueproject.dto.GetMedicineManagement

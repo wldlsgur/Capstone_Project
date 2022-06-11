@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.issueproject.Adapterimport.MedicineListAdapter
+import com.example.issueproject.Adapter.MedicineListAdapter
 import com.example.issueproject.databinding.ActivityMedicineListBinding
 import com.example.issueproject.dto.MedicineManage
 import com.example.issueproject.dto.MedicineManagementResult
