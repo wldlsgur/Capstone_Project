@@ -133,6 +133,7 @@ class SchoolTeacherListActivity : AppCompatActivity() {
 
             override fun onSuccess(code: Int, responseData: SignUpResult) {
                 Log.d(TAG, "onSuccess: $responseData")
+                Toast.makeText(this@SchoolTeacherListActivity, "승인이 완료되었습니다.", Toast.LENGTH_SHORT).show()
                 if(responseData.res == true && responseData.msg == "success") {
                     getTeacherList(school)
                 }

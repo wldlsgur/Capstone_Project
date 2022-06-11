@@ -16,6 +16,8 @@ import com.example.issueproject.databinding.ActivityDayNoticBinding
 import com.example.issueproject.databinding.ActivityDayNoticTeacherBinding
 import com.example.issueproject.dto.*
 import com.example.issueproject.res.Add.AddNoticActivity
+import com.example.issueproject.res.MainParentActivity
+import com.example.issueproject.res.MainTeacherActivity
 import com.example.issueproject.res.UpdateNoticActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -34,6 +36,31 @@ class DayNoticTeacherActivity : AppCompatActivity() {
     var room : String = ""
     var id: String = ""
     var name: String = ""
+    var img_url: String = ""
+    var position: String = ""
+
+    override fun onBackPressed() {
+        if(job == "선생님"){
+            var intent = Intent(this@DayNoticTeacherActivity, MainTeacherActivity::class.java).apply {
+                putExtra("id", id)
+                putExtra("name", name)
+                putExtra("school", school)
+                putExtra("room", room)
+                putExtra("img_url", img_url)
+            }
+            startActivity(intent)
+            finish()
+        }
+        else{
+            var intent = Intent(this@DayNoticTeacherActivity, MainParentActivity::class.java).apply {
+                putExtra("id", id)
+                putExtra("position", position)
+            }
+            startActivity(intent)
+            finish()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -44,6 +71,8 @@ class DayNoticTeacherActivity : AppCompatActivity() {
         school = intent.getStringExtra("school").toString()
         room = intent.getStringExtra("room").toString()
         menu = intent.getStringExtra("menu").toString()
+        img_url = intent.getStringExtra("img_url").toString()
+        position = intent.getStringExtra("position").toString()
 
         // 부모님과 선생님일 경우 이액티비티로
         if(job == "선생님"){
@@ -72,6 +101,7 @@ class DayNoticTeacherActivity : AppCompatActivity() {
                 putExtra("school", school)
                 putExtra("room", room)
                 putExtra("menu", menu)
+                putExtra("img_url", img_url)
             }
             startActivity(intent)
         }

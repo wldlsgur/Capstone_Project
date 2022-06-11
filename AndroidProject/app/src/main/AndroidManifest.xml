@@ -16,9 +16,6 @@
         android:theme="@style/Theme.IssueProject"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".TeacherInfoChangeActivity"
-            android:exported="false" />
-        <activity
             android:name=".res.UpdateNoticActivity"
             android:exported="false" />
         <activity

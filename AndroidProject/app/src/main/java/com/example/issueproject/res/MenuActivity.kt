@@ -77,6 +77,8 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                 putExtra("school", school)
                 putExtra("room", room)
                 putExtra("job", "원장님")
+                putExtra("id", id)
+                putExtra("name", name)
             }
             startActivity(intent)
         }

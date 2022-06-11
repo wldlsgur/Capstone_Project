@@ -36,21 +36,23 @@ class MainTeacherActivity : AppCompatActivity() , NavigationView.OnNavigationIte
         ActivityMainTeacherNaviBinding.inflate(layoutInflater)
     }
 
-    lateinit var id: String
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
-    lateinit var school : String
-    lateinit var room : String
+    var id: String = ""
+    var school : String = ""
+    var room : String = ""
+    var name: String = ""
+    var img_url: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        id = intent.getStringExtra("id")!!
-        val name = intent.getStringExtra("name")
-        school = intent.getStringExtra("school")!!
-        room = intent.getStringExtra("room")!!
-        val img_url = intent.getStringExtra("img_url")
+        id = intent.getStringExtra("id").toString()
+        name = intent.getStringExtra("name").toString()
+        school = intent.getStringExtra("school").toString()
+        room = intent.getStringExtra("room").toString()
+        img_url = intent.getStringExtra("img_url").toString()
 
         binding.mainTeacher.textViewName.text = name
         binding.mainTeacher.textViewSchool.text = school
@@ -78,6 +80,9 @@ class MainTeacherActivity : AppCompatActivity() , NavigationView.OnNavigationIte
                 putExtra("school", school)
                 putExtra("room", room)
                 putExtra("job", "선생님")
+                putExtra("id", id)
+                putExtra("img_url", img_url)
+                putExtra("name", name)
             }
             startActivity(intent)
         }
@@ -92,6 +97,8 @@ class MainTeacherActivity : AppCompatActivity() , NavigationView.OnNavigationIte
             var intent = Intent(this, DayNoticTeacherActivity::class.java).apply {
                 putExtra("school", school)
                 putExtra("room", room)
+                putExtra("id", id)
+                putExtra("img_url", img_url)
                 putExtra("job", "선생님")
                 putExtra("name", name)
                 putExtra("menu", "알림장")
