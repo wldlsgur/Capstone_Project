@@ -91,8 +91,11 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
             startActivity(intent)
         }
         binding.mainParent.ParentDaliy.setOnClickListener {
-            var intent = Intent(this, DailyActivity::class.java)
-            startActivity(intent)
+            var intent = Intent(this, DailyActivity::class.java).apply {
+                putExtra("school", school)
+                putExtra("id", id)
+                putExtra("job", "원장님")
+            }
         }
         binding.mainParent.ParentFoodList.setOnClickListener {
             var intent = Intent(this, FoodlistActivity::class.java).apply {

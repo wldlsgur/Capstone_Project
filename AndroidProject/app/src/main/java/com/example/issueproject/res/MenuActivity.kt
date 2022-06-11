@@ -81,7 +81,11 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             startActivity(intent)
         }
         binding.menu.PresidentDaliy.setOnClickListener {
-            var intent = Intent(this, DailyActivity::class.java)
+            var intent = Intent(this, DailyActivity::class.java).apply{
+                putExtra("school",school)
+                putExtra("id",id)
+                putExtra("job","원장님")
+            }
             startActivity(intent)
         }
         binding.menu.PresidentDayNotic.setOnClickListener {

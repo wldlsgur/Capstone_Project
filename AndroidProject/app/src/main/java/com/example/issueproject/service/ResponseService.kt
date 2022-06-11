@@ -829,11 +829,11 @@ class ResponseService {
     fun SelectCalender(data : CalenderSelect, callback: RetrofitCallback<MutableList<CalenderResult>>){
         RetrofitBuilder.api.selectCalender(data).enqueue(object : Callback<MutableList<CalenderResult>>{
             override fun onResponse(call: Call<MutableList<CalenderResult>>, response: Response<MutableList<CalenderResult>>) {
-                Log.d(TAG, "onResponse: ${response.code()}")
+                Log.d(TAG, "SelectCalender onResponse: ${response.body()!!}")
                 if (response.code() == 200){
-                    Log.d(TAG, "onResponse: 200")
+                    Log.d(TAG, "SelectCalender onResponse: 200")
                     if(response.body() != null){
-                        Log.d(TAG, "onResponse: body is not null")
+                        Log.d(TAG, "SelectCalender onResponse: body is not null")
                         callback.onSuccess(response.code(), response.body()!!)
                     } else{
                         callback.onFailure(response.code())
@@ -841,7 +841,7 @@ class ResponseService {
                 }              }
 
             override fun onFailure(call: Call<MutableList<CalenderResult>>, t: Throwable) {
-                Log.d(TAG, "onFailure: ")
+                Log.d(TAG, "SelectCalender onFailure: ")
                 callback.onError(t)
             }
         })

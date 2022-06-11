@@ -6,6 +6,6 @@ import android.os.Bundle
 class TeacherInfoChangeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_teacher_info_change)
+        //setContentView(R.layout.activity_teacher_info_change)
     }
 }

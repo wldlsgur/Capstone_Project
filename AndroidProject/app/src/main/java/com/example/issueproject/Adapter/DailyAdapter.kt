@@ -75,7 +75,7 @@ class DailyAdapter(var context: Context, val data:MutableList<CalenderResult>) :
             override fun onClick(v: View, position: Int) {
                 var intent = Intent(context, DetailCalendarActivity::class.java).apply {
                     //putExtra("day", dailyAdapter.dayAdapter.DayViewHolder(v).day.text.toString())
-                    putExtra("day", dayAdapter.DayViewHolder(v).day.text.toString())
+                    putExtra("date", dayAdapter.DayViewHolder(v).day.text.toString())
                     putExtra("school", dayAdapter.DayViewHolder(v).school)
                     //putExtra("content", content)
                 }

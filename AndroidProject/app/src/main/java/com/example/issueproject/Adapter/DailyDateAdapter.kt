@@ -32,15 +32,13 @@ class DailyDateAdapter(val tmpMonth:Int, val dayList:MutableList<Date>, val data
         val title: ArrayList<String>
         val color: ArrayList<String>
         lateinit var date : ArrayList<String>
-        date = arrayListOf("2022-06-11", "2022-06-15", "2022-06-16")
-        /*
+        date = arrayListOf()
         for(l in data)
         {
+            Log.d(TAG, l.date)
             date.add(l.date)
-            school = l.school
         }
 
-         */
         //holder.day = holder.layout.findViewById<TextView>(R.id.fragment_calender_dayTv)
         holder.day.text = dayList[position].date.toString()
         holder.day.setTextColor(when(position%7){
@@ -55,7 +53,9 @@ class DailyDateAdapter(val tmpMonth:Int, val dayList:MutableList<Date>, val data
         //추가적으로 일정이 있는지 확인하는 구간
         for(i in 0..date.size-1){
             var month = date[i].substring(5,6).trim()
+            Log.d(TAG, month)
             var monthOfday = date[i].substring(9,date[i].length).trim()
+            Log.d(TAG, monthOfday)
             var strMonth = (dayList[position].month+1).toString()
             var strDay = holder.day.text.toString()
 
@@ -73,6 +73,7 @@ class DailyDateAdapter(val tmpMonth:Int, val dayList:MutableList<Date>, val data
             }
 
 
+            Log.d(TAG, holder.day.text.toString())
             var printadapter = DailyItemAdapter(data, holder.day.text.toString())
             holder.layout.findViewById<RecyclerView>(R.id.fragment_calender_itemRv).apply {
                 layoutManager = LinearLayoutManager(holder.layout.context)

@@ -27,16 +27,23 @@ class DailyActivity : AppCompatActivity() {
         ActivityDailyBinding.inflate(layoutInflater)
     }
     lateinit var school : String
+    lateinit var id : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         school = intent.getStringExtra("school").toString()
-        lateinit var data : CalenderSelect
-        data.school = school
+        id = intent.getStringExtra("id").toString()
+        var data : CalenderSelect = CalenderSelect(school)
         selectCalender(data)
 
         binding.floatingActionButtonAddDaily.setOnClickListener {
-            var intent = Intent(this, DailyAddActivity::class.java)
+            var intent = Intent(this, DailyAddActivity::class.java).apply{
+                putExtra("school",school)
+                putExtra("id",id)
+                Log.d(TAG, id)
+                Log.d(TAG, school)
+
+            }
             startActivity(intent)
         }
     }
@@ -69,17 +76,26 @@ class DailyActivity : AppCompatActivity() {
     fun selectCalender(data : CalenderSelect){
         ResponseService().SelectCalender(data, object : RetrofitCallback<MutableList<CalenderResult>> {
             override fun onError(t: Throwable) {
-                Log.d(TAG, "onError: $t")
+                Log.d(TAG, "selectCalender onError: $t")
             }
 
             override fun onSuccess(code: Int, responseData: MutableList<CalenderResult>) {
 
-                Log.d(TAG, "onSuccess: $responseData")
+                Log.d(TAG, "selectCalender onSuccess: $responseData")
+                for(l in responseData){
+                    Log.d(TAG, "selectCalender onSuccess: ${l.title}")
+                    Log.d(TAG, "selectCalender onSuccess: ${l.content}")
+                    Log.d(TAG, "selectCalender onSuccess: ${l.color}")
+                    Log.d(TAG, "selectCalender onSuccess: ${l.date}")
+                    Log.d(TAG, "selectCalender onSuccess: ${l.endTime}")
+                    Log.d(TAG, "selectCalender onSuccess: ${l.startTime}")
+
+                }
                 initCalendar(responseData)
             }
 
             override fun onFailure(code: Int) {
-                Log.d(TAG, "onFailure: $code")
+                Log.d(TAG, "selectCalender onFailure: $code")
             }
 
         })
