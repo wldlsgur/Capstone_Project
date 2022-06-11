@@ -23,7 +23,6 @@
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_main_parent.xml" value="0.5" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_main_teacher.xml" value="0.21145833333333333" />
-        <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_medicine_list_item.xml" value="0.5" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_menu.xml" value="0.33" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_notic.xml" value="0.3038949275362319" />
         <entry key="..\:/Users/leehyun/Documents/GitHub/capstone/AndroidProject/app/src/main/res/layout/activity_notic_item.xml" value="0.3038949275362319" />
@@ -208,6 +207,7 @@
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/menu/menu_list.xml" value="0.33" />
         <entry key="..\:/android/capstone/AndroidProject/app/src/main/res/menu/popup_menu.xml" value="0.15364583333333334" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1905" />
+        <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/drawable/bg_spinner.xml" value="0.1835" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/drawable/border_layout.xml" value="0.1905" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/drawable/button_round.xml" value="0.1905" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/drawable/calender_list.xml" value="0.1795" />

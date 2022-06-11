@@ -150,7 +150,7 @@ class DailyAddActivity : AppCompatActivity() {
             }
 
             override fun onSuccess(code: Int, responseData: SignUpResult) {
-                Toast.makeText(this@DailyAddActivity, "알림이 추가되었습니다.", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this@DailyAddActivity, "알림이 추가되었습니다.", Toast.LENGTH_SHORT).show()
 
                 if(responseData.res == true && responseData.msg == "success") {
                 }
