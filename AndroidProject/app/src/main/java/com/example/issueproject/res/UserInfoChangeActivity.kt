@@ -74,7 +74,7 @@ class UserInfoChangeActivity : AppCompatActivity() {
         }
 
         binding.buttonUpdatePW.setOnClickListener {
-            UpdatePW(id)
+            UpdatePW(id, binding.textViewUserChangePW.text.toString())
         }
     }
 
@@ -132,11 +132,11 @@ class UserInfoChangeActivity : AppCompatActivity() {
                 binding.textViewUserChangeSpec.setText("${responseData.spec}")
                 binding.textViewUserChangeNum.setText("${responseData.number}")
 
-                if(responseData.image_url != null){
+                if(responseData.image_url != "default"){
                     Glide.with(this@UserInfoChangeActivity)
                         .load("${RetrofitBuilder.servers}/image/parent/${responseData.image_url}")
                         .into(binding.imageViewChildImg)
-                }else if(responseData.image_url == null || responseData.image_url == ""){
+                }else{
                     Glide.with(this@UserInfoChangeActivity)
                         .load(R.drawable.addimage)
                         .into(binding.imageViewChildImg)
@@ -174,8 +174,8 @@ class UserInfoChangeActivity : AppCompatActivity() {
         })
     }
 
-    fun UpdatePW(id: String){
-        ResponseService().UpdatePW(ID(id), object : RetrofitCallback<SignUpResult>{
+    fun UpdatePW(id: String, pw: String){
+        ResponseService().UpdatePW(ID(id, pw), object : RetrofitCallback<SignUpResult>{
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }

@@ -100,12 +100,14 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
             var intent = Intent(this, DailyActivity::class.java).apply {
                 putExtra("school", school)
                 putExtra("id", id)
-                putExtra("job", "원장님")
+                putExtra("job", "부모님")
             }
+            startActivity(intent)
         }
         binding.mainParent.ParentFoodList.setOnClickListener {
             var intent = Intent(this, FoodlistActivity::class.java).apply {
                 putExtra("school", school)
+                putExtra("job", "부모님")
             }
             startActivity(intent)
         }
@@ -224,11 +226,11 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
                 binding.mainParent.textViewName.text = responseData[position].child_name
                 img_url = responseData[position].image_url
                 Log.d(TAG, "onSuccess: ${img_url}")
-                if(img_url != null){
+                if(img_url != "default"){
                     Glide.with(this@MainParentActivity)
                         .load("${RetrofitBuilder.servers}/image/parent/${img_url}")
                         .into(binding.mainParent.imageViewChild)
-                }else if(img_url == null || img_url == ""){
+                }else{
                     Glide.with(this@MainParentActivity)
                         .load(R.drawable.user)
                         .into(binding.mainParent.imageViewChild)

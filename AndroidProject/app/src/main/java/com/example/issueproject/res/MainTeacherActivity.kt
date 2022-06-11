@@ -58,9 +58,13 @@ class MainTeacherActivity : AppCompatActivity() , NavigationView.OnNavigationIte
         binding.mainTeacher.textViewSchool.text = school
         binding.mainTeacher.textViewRoom.text = room
 
-        if (img_url != null) {
+        if (img_url != "default") {
             Glide.with(this)
                 .load("${RetrofitBuilder.servers}/image/teacher/${img_url}")
+                .into(binding.mainTeacher.imageViewTeacher)
+        }else{
+            Glide.with(this)
+                .load(R.drawable.user)
                 .into(binding.mainTeacher.imageViewTeacher)
         }
 
@@ -108,6 +112,7 @@ class MainTeacherActivity : AppCompatActivity() , NavigationView.OnNavigationIte
         binding.mainTeacher.TeacherFoodList.setOnClickListener {
             var intent = Intent(this, FoodlistActivity::class.java).apply {
                 putExtra("school", school)
+                putExtra("job", "선생님")
             }
             startActivity(intent)
         }
