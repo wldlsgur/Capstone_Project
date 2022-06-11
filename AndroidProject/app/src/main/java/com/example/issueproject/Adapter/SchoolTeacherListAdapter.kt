@@ -52,9 +52,13 @@ class SchoolTeacherListAdapter(val context: Context) : RecyclerView.Adapter<Scho
 
             GetUserInfo(data.id)
 
-            if(data.image_url != ""){
+            if(data.image_url != "default"){
                 Glide.with(image.context)
                     .load("${RetrofitBuilder.servers}/image/teacher/${data.image_url}")
+                    .into(image)
+            }else{
+                Glide.with(image.context)
+                    .load(R.drawable.user)
                     .into(image)
             }
         }

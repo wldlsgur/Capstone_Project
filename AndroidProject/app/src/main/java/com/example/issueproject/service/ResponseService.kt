@@ -934,11 +934,11 @@ class ResponseService {
     fun teachersendalarm(data : alarmTeacher, callback: RetrofitCallback<SignUpResult>){
         RetrofitBuilder.api.teachersendalarm(data).enqueue(object : Callback<SignUpResult>{
             override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
-                Log.d(TAG, "onResponse: ${response.code()}")
+                Log.d(TAG, "alarmtoteacher onResponse: ${response.code()}")
                 if (response.code() == 200){
-                    Log.d(TAG, "onResponse: 200")
+                    Log.d(TAG, "alarmtoteacher onResponse: 200")
                     if(response.body() != null){
-                        Log.d(TAG, "onResponse: body is not null")
+                        Log.d(TAG, "alarmtoteacher onResponse: body is not null")
                         callback.onSuccess(response.code(), response.body()!!)
                     } else{
                         callback.onFailure(response.code())

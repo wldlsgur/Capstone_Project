@@ -105,8 +105,9 @@ class TeacherMedicineList : AppCompatActivity() {
             MedicineListAdapter.setItemClickListener(object :
                 MedicineListAdapter.OnItemClickListener {
                 override fun onClick(v: View, position: Int) {
-                    var mlist : MutableList<MedicineManagementResult> = mutableListOf<MedicineManagementResult>()
+                   // var mlist : MutableList<MedicineManagementResult> = mutableListOf<MedicineManagementResult>()
                     //MedicineListAdapter.inv = true
+                    MedicineListAdapter.MedicineListViewHolder(v).checktext.visibility = View.VISIBLE
                     if(mo == true) Toast.makeText(this@TeacherMedicineList, "아침약을 복용하였습니다.", Toast.LENGTH_SHORT).show()
                     else if(lu == true) Toast.makeText(this@TeacherMedicineList, "점심약을 복용하였습니다.", Toast.LENGTH_SHORT).show()
                     else if(di == true) Toast.makeText(this@TeacherMedicineList, "저녁약을 복용하였습니다.", Toast.LENGTH_SHORT).show()

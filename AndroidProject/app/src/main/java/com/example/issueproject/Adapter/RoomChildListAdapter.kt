@@ -48,9 +48,13 @@ class RoomChildListAdapter(val context: Context) : RecyclerView.Adapter<RoomChil
             parentnumber.text = data.number
             spec.text = data.spec
 
-            if(data.image_url != ""){
+            if(data.image_url != "default"){
                 Glide.with(childimage.context)
                     .load("${RetrofitBuilder.servers}/image/parent/${data.image_url}")
+                    .into(childimage)
+            }else{
+                Glide.with(childimage.context)
+                    .load(R.drawable.user)
                     .into(childimage)
             }
         }

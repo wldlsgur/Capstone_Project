@@ -59,7 +59,7 @@ class RoomChildListActivity : AppCompatActivity() {
             override fun onClick(position: Int, item: RoomChildListResult) {
                 Agreechange(item, position)
 
-                var data : alarmTeacher = alarmTeacher(item.id,school,room,item.child_name,"승인 완료","${school}학교 ${room}반의 승인이 완료되었습니다")
+                var data : alarmTeacher = alarmTeacher(item.id,school,room,item.child_name,"승인 완료","${item.child_name}님 ${school}학교 ${room}반의 승인이 완료되었습니다")
                 alarmtoteacher(data)
             }
         })
@@ -132,12 +132,12 @@ class RoomChildListActivity : AppCompatActivity() {
     fun alarmtoteacher(info: alarmTeacher){
         ResponseService().teachersendalarm(info, object: RetrofitCallback<SignUpResult> {
             override fun onError(t: Throwable) {
-                Log.d(TAG, "onError: $t")
+                Log.d(TAG, "alarmtoteacher onError: $t")
             }
 
             override fun onSuccess(code: Int, responseData: SignUpResult) {
-                Log.d(TAG, "onSuccess: $responseData")
-                if(responseData.msg == "success"){
+                Log.d(TAG, "alarmtoteacher onSuccess: $responseData")
+                if(responseData.msg == "alarmtoteacher success"){
                 }
             }
 

@@ -21,7 +21,7 @@ import okhttp3.ResponseBody
 
 private const val TAG = "MedicineListAdapter"
 class MedicineListAdapter(var list:MutableList<MedicineManagementResult>, var job : String) : RecyclerView.Adapter<MedicineListAdapter.MedicineListViewHolder>() {
-    var inv : Boolean = false
+
     inner class MedicineListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val cname: TextView = itemView.findViewById(R.id.stu_cname)
         private val date: TextView = itemView.findViewById(R.id.stu_date)
@@ -33,11 +33,12 @@ class MedicineListAdapter(var list:MutableList<MedicineManagementResult>, var jo
         val btn: Button = itemView.findViewById(R.id.button_apply)
         var id : String = ""
         val layout : ConstraintLayout = itemView.findViewById(R.id.ConstraintLayoutmlist)
+        var checktext : TextView = itemView.findViewById((R.id.textCheck))
 
 
 
         fun bindinfo(data: MedicineManagementResult){
-            if(inv == true) layout.visibility = View.INVISIBLE
+            checktext.visibility = View.INVISIBLE
             cname.text = data.child_name
             date.text = data.date
             mname.text = data.m_name
