@@ -52,6 +52,7 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
     var room : String = ""
     var img_url : String = ""
     var position: Int = 0
+    var name : String = ""
 
     lateinit var id : String
     lateinit var navigationView: NavigationView
@@ -62,13 +63,9 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
 
         position = intent.getStringExtra("position")!!.toInt()
         id = intent.getStringExtra("id")!!
-        var name : String = binding.mainParent.textViewName.text.toString()
-        var tk : inserttoken = inserttoken(id,school,room, name, "token")
-        initFcm(tk)
         GetParentInfo(id, position)
-        Log.d(TAG, "name ::: ${binding.mainParent.textViewName.text}")
-        Log.d(TAG, "school: $school")
-        Log.d(TAG, "room: $room")
+
+
         binding.mainParent.ParentNotic.setOnClickListener{
             var intent = Intent(this, NoticActivity::class.java).apply {
                 putExtra("school", school)
@@ -247,6 +244,14 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
                 }
                 school = binding.mainParent.textViewSchool.text.toString()
                 room = binding.mainParent.textViewRoom.text.toString()
+                name = binding.mainParent.textViewName.text.toString()
+
+                var tk : inserttoken = inserttoken(id,school,room, name, "token")
+                initFcm(tk)
+
+                Log.d(TAG, "name ::: ${binding.mainParent.textViewName.text}")
+                Log.d(TAG, "school: $school")
+                Log.d(TAG, "room: $room")
             }
 
             override fun onFailure(code: Int) {

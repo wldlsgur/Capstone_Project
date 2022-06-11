@@ -100,9 +100,13 @@ class Parents_MedicineInfo : AppCompatActivity() {
             binding.medicineButtonDelete.visibility = View.INVISIBLE
         }
 
-        if(img_url != null){
+        if(img_url != "default"){
             Glide.with(this)
                 .load("${RetrofitBuilder.servers}/image/parent/${img_url}")
+                .into(binding.imageViewmedicine)
+        }else{
+            Glide.with(this)
+                .load(R.drawable.user)
                 .into(binding.imageViewmedicine)
         }
     }
