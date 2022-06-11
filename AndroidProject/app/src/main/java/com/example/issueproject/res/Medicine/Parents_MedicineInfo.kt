@@ -73,9 +73,9 @@ class Parents_MedicineInfo : AppCompatActivity() {
         if(binding.CheckMorning.isChecked == true) morning = "true"
         else morning = "false"
         if(binding.CheckLunch.isChecked == true) lunch = "true"
-        else morning = "false"
+        else lunch = "false"
         if(binding.CheckDinner.isChecked == true) dinner = "true"
-        else morning = "false"
+        else dinner = "false"
         if(binding.checkBoxOn.isChecked == true) mplace = "실온"
         else if(binding.checkBoxOn.isChecked == false)mplace = "냉장"
     }
