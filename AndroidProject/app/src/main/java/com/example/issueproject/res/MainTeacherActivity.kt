@@ -17,6 +17,7 @@ import com.example.issueproject.dto.DeleteInfo
 import com.example.issueproject.dto.SignUpResult
 import com.example.issueproject.res.Album.AlbumActivity
 import com.example.issueproject.res.Album.AlbumTeacherActivity
+import com.example.issueproject.res.Calender.DailyActivity
 import com.example.issueproject.res.DayNotic.DayNoticActivity
 import com.example.issueproject.res.DayNotic.DayNoticTeacherActivity
 import com.example.issueproject.res.Foodlist.FoodlistActivity
@@ -86,8 +87,11 @@ class MainTeacherActivity : AppCompatActivity() , NavigationView.OnNavigationIte
             startActivity(intent)
         }
         binding.mainTeacher.TeacherDaliy.setOnClickListener {
-//            var intent = Intent(this, CalenActivity::class.java)
-//            startActivity(intent)
+            var intent = Intent(this, DailyActivity::class.java).apply {
+                putExtra("school", school)
+                putExtra("id", id)
+                putExtra("job", "원장님")
+            }
         }
         binding.mainTeacher.TeacherDayNotic.setOnClickListener {
             var intent = Intent(this, DayNoticTeacherActivity::class.java).apply {
@@ -171,7 +175,7 @@ class MainTeacherActivity : AppCompatActivity() , NavigationView.OnNavigationIte
 
     fun showDialog(){
         lateinit var dialog: AlertDialog
-        val deleteinfo = DeleteInfo(id, "선생님", school)
+        val deleteinfo = DeleteInfo(id, "선생님")
 
         val builder =  AlertDialog.Builder(this)
         builder.setTitle("회원 탈퇴")

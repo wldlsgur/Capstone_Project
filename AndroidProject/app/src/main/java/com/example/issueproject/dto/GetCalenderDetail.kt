@@ -1,9 +1,9 @@
 package com.example.issueproject.dto
 
-class CalenderResult(
+class GetCalenderDetail (
+    val id : String,
     val title : String,
     val content : String,
-    val date : String,
     val startTime : String,
     val endTime : String,
     val color : String

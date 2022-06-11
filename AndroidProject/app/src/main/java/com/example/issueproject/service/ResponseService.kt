@@ -585,51 +585,8 @@ class ResponseService {
         })
     }
 
-    fun getCalender(date : String, callback: RetrofitCallback<CalenderInfo>) {
-        RetrofitBuilder.api.getCalender(date).enqueue(object : Callback<CalenderInfo>{
-            override fun onResponse(
-                call: Call<CalenderInfo>,
-                response: Response<CalenderInfo>
-            ) {
-                Log.d(TAG, "getCalender: ..")
-                if (response.code() == 200){
-                    if(response.body() != null){
-                        Log.d(TAG, "onResponse: 200")
-                        callback.onSuccess(response.code(), response.body()!!)
-                    } else{
-                        callback.onFailure(response.code())
-                    }
-                }
-            }
 
-            override fun onFailure(call: Call<CalenderInfo>, t: Throwable) {
-                Log.d(TAG, "onFailure: $t")
-                callback.onError(t)
-            }
 
-        })
-    }
-
-    fun saveCalender(data: CalenderInfo, callback: RetrofitCallback<CalenderResult>){
-        RetrofitBuilder.api.saveCalender(data).enqueue(object : Callback<CalenderResult> {
-            override fun onFailure(call: Call<CalenderResult>, t: Throwable) {
-                Log.d(TAG, "onFailure: ")
-                callback.onError(t)
-            }
-            override fun onResponse(call: Call<CalenderResult>,response: Response<CalenderResult>) {
-                Log.d(TAG, "saveCalender: ..")
-                if (response.code() == 200){
-                    Log.d(TAG, "onResponse: 200")
-                    if(response.body() != null){
-                        Log.d(TAG, "onResponse: body is not null")
-                        callback.onSuccess(response.code(), response.body()!!)
-                    } else{
-                        callback.onFailure(response.code())
-                    }
-                }
-            }
-        })
-    }
     fun CallAlarm(target_token: String, callback: RetrofitCallback<SignUpResult>){
         RetrofitBuilder.api.CallAlarm(target_token).enqueue(object : Callback<SignUpResult> {
             override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
@@ -826,6 +783,110 @@ class ResponseService {
                 callback.onError(t)
             }
         })
+    }
+    fun GetCalenderInfo(school: String, date: String, callback: RetrofitCallback<MutableList<GetCalenderDetail>>){
+        RetrofitBuilder.api.GetCalenderInfo(school, date).enqueue(object : Callback<MutableList<GetCalenderDetail>>{
+            override fun onResponse(call: Call<MutableList<GetCalenderDetail>>, response: Response<MutableList<GetCalenderDetail>>) {
+                Log.d(TAG, "onResponse: ${response.code()}")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }              }
+
+            override fun onFailure(call: Call<MutableList<GetCalenderDetail>>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+        })
+    }
+    fun InsertCalenderInfo(data : Calenderinfo, callback: RetrofitCallback<SignUpResult>) {
+        RetrofitBuilder.api.insertCalender(data).enqueue(object : Callback<SignUpResult> {
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "onResponse: ${response.code()}")
+                if (response.code() == 200) {
+                    Log.d(TAG, "onResponse: 200")
+                    if (response.body() != null) {
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else {
+                        callback.onFailure(response.code())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+        })
+    }
+
+    fun SelectCalender(data : CalenderSelect, callback: RetrofitCallback<MutableList<CalenderResult>>){
+        RetrofitBuilder.api.selectCalender(data).enqueue(object : Callback<MutableList<CalenderResult>>{
+            override fun onResponse(call: Call<MutableList<CalenderResult>>, response: Response<MutableList<CalenderResult>>) {
+                Log.d(TAG, "SelectCalender onResponse: ${response.body()!!}")
+                if (response.code() == 200){
+                    Log.d(TAG, "SelectCalender onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "SelectCalender onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }              }
+
+            override fun onFailure(call: Call<MutableList<CalenderResult>>, t: Throwable) {
+                Log.d(TAG, "SelectCalender onFailure: ")
+                callback.onError(t)
+            }
+        })
+    }
+
+    fun UpdateCalenderInfo(data : updateCalender, callback: RetrofitCallback<SignUpResult>){
+        RetrofitBuilder.api.updateCalender(data).enqueue(object : Callback<SignUpResult>{
+            override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                Log.d(TAG, "onResponse: ${response.code()}")
+                if (response.code() == 200){
+                    Log.d(TAG, "onResponse: 200")
+                    if(response.body() != null){
+                        Log.d(TAG, "onResponse: body is not null")
+                        callback.onSuccess(response.code(), response.body()!!)
+                    } else{
+                        callback.onFailure(response.code())
+                    }
+                }              }
+
+            override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                Log.d(TAG, "onFailure: ")
+                callback.onError(t)
+            }
+        })
+    }
+
+    fun DeleteCalenderInfo(data : deleteCalender, callback: RetrofitCallback<SignUpResult>){
+            RetrofitBuilder.api.deleteCalender(data).enqueue(object : Callback<SignUpResult>{
+                override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {
+                    Log.d(TAG, "onResponse: ${response.code()}")
+                    if (response.code() == 200){
+                        Log.d(TAG, "onResponse: 200")
+                        if(response.body() != null){
+                            Log.d(TAG, "onResponse: body is not null")
+                            callback.onSuccess(response.code(), response.body()!!)
+                        } else{
+                            callback.onFailure(response.code())
+                        }
+                    }              }
+
+                override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
+                    Log.d(TAG, "onFailure: ")
+                    callback.onError(t)
+                }
+            })
     }
 
     fun UpdateParentinfo(ParentinfoUpdate : ParentInfoUpdate, callback: RetrofitCallback<SignUpResult>){

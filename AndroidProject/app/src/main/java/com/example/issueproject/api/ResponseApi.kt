@@ -115,17 +115,7 @@ interface ResponseApi {
         @Path("id") id: String
     ): Call<UserInfo>
 
-    //캘린더로 변경
-    @GET("/calenderinfo/info")
-    fun getCalender(
-        @Query("date") date: String
-    ): Call<CalenderInfo>
 
-    //캘린더로변경
-    @POST("/calenderinfo/info")
-    fun saveCalender(
-        @Body Calenderdata: CalenderInfo
-    ): Call<CalenderResult>
 
     //선생리스트
     @GET("/staff/teacherinfo/useschool")
@@ -159,6 +149,33 @@ interface ResponseApi {
     fun CallAlarm(
         @Query("target_token") target_token: String
 
+    ): Call<SignUpResult>
+
+    @GET("/calendar/info")
+    fun GetCalenderInfo(
+        @Query("id") school: String,
+        @Query("date") date: String
+
+    ): Call<MutableList<GetCalenderDetail>>
+
+    @POST("/calendar/insertCalendarInfo")
+    fun insertCalender(
+        @Body Calenderinfo: Calenderinfo
+    ): Call<SignUpResult>
+
+    @POST("/calendar/selectCalendarInfo")
+    fun selectCalender(
+        @Body CalenderSelect: CalenderSelect
+    ): Call<MutableList<CalenderResult>>
+
+    @POST("/calendar/updateCalendarInfo")
+    fun updateCalender(
+        @Body updateCalender: updateCalender
+    ): Call<SignUpResult>
+
+    @POST("/calendar/deleteCalendarInfo")
+    fun deleteCalender(
+        @Body deleteCalender: deleteCalender
     ): Call<SignUpResult>
 
     @POST("/medicine/insert/data")
