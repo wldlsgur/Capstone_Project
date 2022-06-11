@@ -38,11 +38,11 @@ function job(token, title, body){
     .send(message)
     .then(function (response) {
       console.log('Successfully sent message: : ', response)
-      res.send(sucess_response);
+      return true;
     })
     .catch(function (err) {
       console.log('Error Sending message!!! : ', err)
-      res.send(failed_response);
+      return false;
     })
 }
 
@@ -77,7 +77,10 @@ router.post('/allAlarm', function (req, res, next) {   //school, title, body
         res.status(400).send(err);
     }
     else{
-      job(result[0].token, title, body);
+      if(job(result[0].token, title, body) === false){
+        res.send(failed_response);
+      }
+      res.send(sucess_response);
     } 
   })   
 })
@@ -95,7 +98,10 @@ router.post('/approveAlarmPtoT', function (req, res, next) {   //id, school, roo
         res.status(400).send(err);
     }
     else{
-      job(result[0].token, title, body);
+      if(job(result[0].token, title, body) === false){
+        res.send(failed_response);
+      }
+      res.send(sucess_response);
     } 
   })   
 })
@@ -114,7 +120,10 @@ router.post('/approveAlarmTtoP', function (req, res, next) {   //id, school, roo
         res.status(400).send(err);
     }
     else{
-      job(result[0].token, title, body);
+      if(job(result[0].token, title, body) === false){
+        res.send(failed_response);
+      }
+      res.send(sucess_response);
     } 
   })   
 })

@@ -67,9 +67,13 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         initFcm(tk)
 
 
-        if(img_url != null){
+        if(img_url != "default"){
             Glide.with(this)
                 .load("${RetrofitBuilder.servers}/image/president/${img_url}")
+                .into(binding.menu.imageViewPresident)
+        }else{
+            Glide.with(this)
+                .load(R.drawable.user)
                 .into(binding.menu.imageViewPresident)
         }
 
@@ -90,6 +94,8 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                 putExtra("school", school)
                 putExtra("room", room)
                 putExtra("job", "원장님")
+                putExtra("id", id)
+                putExtra("name", name)
             }
             startActivity(intent)
         }
@@ -114,6 +120,7 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         binding.menu.PresidentFoodList.setOnClickListener {
             var intent = Intent(this, FoodlistActivity::class.java).apply {
                 putExtra("school", school)
+                putExtra("job", "원장님")
             }
             startActivity(intent)
         }

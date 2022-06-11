@@ -111,6 +111,7 @@ class AddNoticActivity : AppCompatActivity() {
                         putExtra("school", intent.getStringExtra("school"))
                         putExtra("room", intent.getStringExtra("room"))
                         putExtra("menu", intent.getStringExtra("menu"))
+                        putExtra("img_url", intent.getStringExtra("img_url"))
                     }
                     startActivity(intent1)
                 }
@@ -122,6 +123,7 @@ class AddNoticActivity : AppCompatActivity() {
                         putExtra("school", intent.getStringExtra("school"))
                         putExtra("room", intent.getStringExtra("room"))
                         putExtra("menu", intent.getStringExtra("menu"))
+                        putExtra("img_url", intent.getStringExtra("img_url"))
                     }
                     startActivity(intent2)
                 }

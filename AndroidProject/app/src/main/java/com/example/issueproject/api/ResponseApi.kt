@@ -315,4 +315,10 @@ interface ResponseApi {
     fun updateinfoPW(
         @Body id: ID
     ): Call<SignUpResult>
+
+    //사진삭제
+    @POST("check/delete/image")
+    fun imgdelete(
+        @Body imgdelete :DeleteImage
+    ): Call<SignUpResult>
 }

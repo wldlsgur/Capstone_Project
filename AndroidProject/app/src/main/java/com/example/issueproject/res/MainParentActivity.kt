@@ -51,13 +51,16 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
     var school : String = ""
     var room : String = ""
     var img_url : String = ""
+    var position: Int = 0
+
     lateinit var id : String
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val position = intent.getStringExtra("position")!!.toInt()
+
+        position = intent.getStringExtra("position")!!.toInt()
         id = intent.getStringExtra("id")!!
         var name : String = binding.mainParent.textViewName.text.toString()
         var tk : inserttoken = inserttoken(id,school,room, name, "token")
@@ -82,6 +85,8 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
                 putExtra("school", school)
                 putExtra("room", room)
                 putExtra("job", "부모님")
+                putExtra("id", id)
+                putExtra("position", position.toString())
             }
             startActivity(intent)
         }
@@ -96,6 +101,8 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
                 putExtra("job", "부모님")
                 putExtra("name", binding.mainParent.textViewName.text)
                 putExtra("menu", "알림장")
+                putExtra("id", id)
+                putExtra("position", position.toString())
             }
             startActivity(intent)
         }
@@ -110,6 +117,7 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
         binding.mainParent.ParentFoodList.setOnClickListener {
             var intent = Intent(this, FoodlistActivity::class.java).apply {
                 putExtra("school", school)
+                putExtra("job", "부모님")
             }
             startActivity(intent)
         }
@@ -158,6 +166,8 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
             putExtra("job", "부모님")
             putExtra("school", school)
             putExtra("name", binding.mainParent.textViewName.text.toString())
+            putExtra("img_url", img_url)
+            putExtra("position", position.toString())
         }
         var intent3 = Intent(this, MainActivity::class.java)
 
@@ -226,11 +236,11 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
                 binding.mainParent.textViewName.text = responseData[position].child_name
                 img_url = responseData[position].image_url
                 Log.d(TAG, "onSuccess: ${img_url}")
-                if(img_url != null){
+                if(img_url != "default"){
                     Glide.with(this@MainParentActivity)
                         .load("${RetrofitBuilder.servers}/image/parent/${img_url}")
                         .into(binding.mainParent.imageViewChild)
-                }else if(img_url == null || img_url == ""){
+                }else{
                     Glide.with(this@MainParentActivity)
                         .load(R.drawable.user)
                         .into(binding.mainParent.imageViewChild)

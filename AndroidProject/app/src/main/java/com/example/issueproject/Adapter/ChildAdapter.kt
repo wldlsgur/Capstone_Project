@@ -55,6 +55,10 @@ class ChildAdapter(val context: Context) : RecyclerView.Adapter<ChildAdapter.Chi
                 Glide.with(childimage.context)
                     .load("${RetrofitBuilder.servers}/image/parent/${data.image_url}")
                     .into(childimage)
+            }else{
+                Glide.with(childimage.context)
+                    .load(R.drawable.user)
+                    .into(childimage)
             }
         }
     }

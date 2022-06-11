@@ -1,6 +1,7 @@
 package com.example.issueproject.res
 
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,9 +10,11 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.bumptech.glide.Glide
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityUserInfoChangeBinding
 import com.example.issueproject.dto.*
+import com.example.issueproject.retrofit.RetrofitBuilder
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
@@ -24,6 +27,7 @@ class UserInfoChangeActivity : AppCompatActivity() {
     var id: String = ""
     var job: String = ""
     var school: String = ""
+    var position: String = ""
     var room : String = ""
     var name : String = ""
     val itemList = mutableListOf<String>()
@@ -37,6 +41,7 @@ class UserInfoChangeActivity : AppCompatActivity() {
         job = intent.getStringExtra("job").toString()
         school = intent.getStringExtra("school").toString()
         name = intent.getStringExtra("name").toString()
+        position = intent.getStringExtra("position").toString()
 
         ChildInfo(id, name)
         GetSchool()
@@ -69,7 +74,7 @@ class UserInfoChangeActivity : AppCompatActivity() {
         }
 
         binding.buttonUpdatePW.setOnClickListener {
-            UpdatePW(id)
+            UpdatePW(id, binding.textViewUserChangePW.text.toString())
         }
     }
 
@@ -126,6 +131,16 @@ class UserInfoChangeActivity : AppCompatActivity() {
                 binding.textViewUserChangeAge.setText("${responseData.child_age}")
                 binding.textViewUserChangeSpec.setText("${responseData.spec}")
                 binding.textViewUserChangeNum.setText("${responseData.number}")
+
+                if(responseData.image_url != "default"){
+                    Glide.with(this@UserInfoChangeActivity)
+                        .load("${RetrofitBuilder.servers}/image/parent/${responseData.image_url}")
+                        .into(binding.imageViewChildImg)
+                }else{
+                    Glide.with(this@UserInfoChangeActivity)
+                        .load(R.drawable.addimage)
+                        .into(binding.imageViewChildImg)
+                }
             }
 
             override fun onFailure(code: Int) {
@@ -144,6 +159,12 @@ class UserInfoChangeActivity : AppCompatActivity() {
                 Log.d(TAG, "onSuccess: $code")
                 if(responseData.msg == "success"){
                     Toast.makeText(this@UserInfoChangeActivity, "수정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+
+                    var intent = Intent(this@UserInfoChangeActivity, MainParentActivity::class.java).apply {
+                        putExtra("id", id)
+                        putExtra("position", position)
+                    }
+                    startActivity(intent)
                 }
             }
             override fun onFailure(code: Int) {
@@ -153,8 +174,8 @@ class UserInfoChangeActivity : AppCompatActivity() {
         })
     }
 
-    fun UpdatePW(id: String){
-        ResponseService().UpdatePW(ID(id), object : RetrofitCallback<SignUpResult>{
+    fun UpdatePW(id: String, pw: String){
+        ResponseService().UpdatePW(ID(id, pw), object : RetrofitCallback<SignUpResult>{
             override fun onError(t: Throwable) {
                 Log.d(TAG, "onError: $t")
             }
