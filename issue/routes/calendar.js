@@ -95,7 +95,7 @@ router.post('/updateCalendarInfo', function(req, res){
   })
 
 router.get('/info', function(req, res){
-  let school = req.query.id;
+  let school = req.query.school;
   let date = req.query.date;
 
   if(!school || !date) return res.send('plz require elements!');
