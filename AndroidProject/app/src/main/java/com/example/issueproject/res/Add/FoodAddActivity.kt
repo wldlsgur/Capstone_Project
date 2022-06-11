@@ -22,6 +22,7 @@ import com.example.issueproject.Adapter.AddAlbumAdapter
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityFoodAddBinding
 import com.example.issueproject.dto.*
+import com.example.issueproject.res.Foodlist.FoodlistActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 import okhttp3.MediaType
@@ -185,6 +186,11 @@ class FoodAddActivity : AppCompatActivity() {
 
             override fun onSuccess(code: Int, responseData: LoginResult) {
                 Log.d(TAG, "onSuccess: $responseData")
+                var intent = Intent(this@FoodAddActivity, FoodlistActivity::class.java).apply {
+                    putExtra("school", school)
+                    putExtra("job", intent.getStringExtra("job"))
+                }
+                startActivity(intent)
             }
 
             override fun onFailure(code: Int) {

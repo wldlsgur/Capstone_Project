@@ -54,6 +54,7 @@ class FoodlistActivity : AppCompatActivity() {
         binding.foodListAddBtn.setOnClickListener{
             var intent = Intent(this, FoodAddActivity::class.java).apply {
                 putExtra("school", school)
+                putExtra("job", job)
             }
             startActivity(intent)
         }
