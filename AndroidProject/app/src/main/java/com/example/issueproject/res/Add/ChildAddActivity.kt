@@ -109,7 +109,7 @@ class ChildAddActivity : AppCompatActivity() {
                 var parentinfo = ParentInfo(id, schoolname, roomname, parentnum, childname, childage, childspec)
                 Log.d(TAG, "onCreate: $parentinfo")
                 ChildAdd(parentinfo)
-                var data : alarmParent = alarmParent(id,school,room,"승인 완료","${school}학교 ${room}반의 승인이 요청이 있습니다")
+                var data : alarmParent = alarmParent(id,school,room,"승인 완료","${school} ${room}의 승인요청이 있습니다")
                 alarmtoparent(data)
             }
         }

@@ -58,6 +58,8 @@ class Parents_MedicineInfo : AppCompatActivity() {
             makedata()
             var medicine = PostMedicine(id,cname,mname,morning,lunch,dinner,date,mplace,content,school,room)
             CreateMedicine(medicine)
+            var data : alarmParent = alarmParent(id,school,room,"투약 등록","${room} ${cname} 어린이의 투약의뢰가 있습니다")
+            alarmtoparent(data)
         }
         binding.buttonDatePicker.setOnClickListener {
             showDatePicker()
@@ -224,6 +226,24 @@ class Parents_MedicineInfo : AppCompatActivity() {
 
             override fun onFailure(code: Int) {
                 Log.d(TAG, "onFailure: $code")
+            }
+        })
+    }
+
+    fun alarmtoparent(info: alarmParent){
+        ResponseService().parentsendalarm(info, object: RetrofitCallback<SignUpResult> {
+            override fun onError(t: Throwable) {
+                Log.d(TAG, "parentsendalarm onError: $t")
+            }
+
+            override fun onSuccess(code: Int, responseData: SignUpResult) {
+                Log.d(TAG, "parentsendalarm onSuccess: $responseData")
+                if(responseData.msg == "success"){
+                }
+            }
+
+            override fun onFailure(code: Int) {
+                Log.d(TAG, "parentsendalarm onFailure: $code")
             }
         })
     }
