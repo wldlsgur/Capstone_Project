@@ -54,7 +54,7 @@ class AddNoticActivity : AppCompatActivity() {
 
             var addManagement = AddManagement(menu, writer, school, title, content, date, room)
             insertaddManagement(addManagement)
-            var data : allalarm = allalarm(school,"공지 등록", "${school}의 공지사항이 등록되었습니다. 일정 확인 바랍니다")
+            var data : allalarm = allalarm(school,"${menu} 등록", "${school}의 ${menu} 등록되었습니다. 일정 확인 바랍니다")
             sendallalarm(data)
 
         }
