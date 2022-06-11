@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="이름 :"
+            android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/imageViewmedicinelist"
             app:layout_constraintTop_toTopOf="@+id/imageViewmedicinelist" />
 
@@ -33,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="학교"
+            android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/textView57"
             app:layout_constraintTop_toTopOf="@+id/textView57" />
 
@@ -55,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="반"
+            android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/textView38"
             app:layout_constraintTop_toTopOf="@+id/textView38" />
 
@@ -65,7 +68,8 @@
             android:layout_marginTop="16dp"
             android:text="등록 시간 :"
             app:layout_constraintStart_toStartOf="@+id/imageViewmedicinelist"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/textView58"
@@ -73,6 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="약 이름 :"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/textView38"
             app:layout_constraintTop_toBottomOf="@+id/textView38" />
 
@@ -82,6 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="약 이름"
+            android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/textView58"
             app:layout_constraintTop_toTopOf="@+id/textView58" />
 
@@ -91,6 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="학생 이름"
+            android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/textView59"
             app:layout_constraintTop_toTopOf="@+id/textView59" />
 
@@ -110,6 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="시간"
+            android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/textView56"
             app:layout_constraintTop_toTopOf="@+id/textView56" />
 
@@ -119,6 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="반 :"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/textView57"
             app:layout_constraintTop_toBottomOf="@+id/textView57" />
 
@@ -128,6 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="학교 :"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/textView59"
             app:layout_constraintTop_toBottomOf="@+id/textView59" />
 
