@@ -49,13 +49,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val type = remoteMessage.data["type"]?.let { NotificationType.valueOf(it) } ?: kotlin.run {
             NotificationType.NORMAL  //type 이 null 이면 NORMAL type 으로 처리
         }
-        val title = remoteMessage.data["title"]
-        val message = remoteMessage.data["message"]
+        val title = remoteMessage.notification?.title
+        val message = remoteMessage.notification?.body
 
         Log.d(TAG, "onMessageReceived() - type : $type")
         Log.d(TAG, "onMessageReceived() - title : $title")
         Log.d(TAG, "onMessageReceived() - message : $message")
 
+        Log.d(TAG,"aaaa ${title}")
+        Log.d(TAG,"aaaa ${message}")
         sendNotification(type, title, message)
     }
 
@@ -79,7 +81,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             channel.description = CHANNEL_DESCRIPTION
             notificationManager.createNotificationChannel(channel)
         }
-
+        Log.d(TAG,"aaaa ${title}")
+        Log.d(TAG,"aaaa ${message}")
         //알림 생성
         NotificationManagerCompat.from(this)
             .notify((System.currentTimeMillis()/100).toInt(), createNotification(type, title, message))  //알림 여러개 표시되도록 requestCode 를 추가이
@@ -98,7 +101,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         }
         //val pendingIntent = PendingIntent.getActivity(this, (System.currentTimeMillis()/100).toInt(), intent, FLAG_UPDATE_CURRENT)  //알림이 여러개 표시되도록 requestCode 를 추가
-
+        Log.d(TAG,"aaaa ${title}")
+        Log.d(TAG,"aaaa ${message}")
         val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.logo) //icon 변경 필요
             .setContentTitle(title)

@@ -7,9 +7,11 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.graphics.toColor
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issueproject.Adapterimport.MedicineListAdapter
+import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityMedicineListBinding
 import com.example.issueproject.dto.GetMedicineManagement
 import com.example.issueproject.dto.MedicineManage
@@ -47,7 +49,7 @@ class TeacherMedicineList : AppCompatActivity() {
             mo = true
             lu = false
             di = false
-            binding.buttonMor.background.setTint(Color.YELLOW)
+            binding.buttonMor.background.setTint(R.color.main_500.toInt())
             binding.buttonLun.background.setTint(Color.WHITE)
             binding.buttonDin.background.setTint(Color.WHITE)
             ShowRecycler(school, room)
@@ -56,7 +58,7 @@ class TeacherMedicineList : AppCompatActivity() {
             mo = false
             lu = true
             di = false
-            binding.buttonLun.background.setTint(Color.YELLOW)
+            binding.buttonLun.background.setTint(R.color.main_500.toInt())
             binding.buttonMor.background.setTint(Color.WHITE)
             binding.buttonDin.background.setTint(Color.WHITE)
             ShowRecycler(school, room)
@@ -65,7 +67,7 @@ class TeacherMedicineList : AppCompatActivity() {
             mo = false
             lu = false
             di = true
-            binding.buttonDin.background.setTint(Color.YELLOW)
+            binding.buttonDin.background.setTint(R.color.main_500.toInt())
             binding.buttonLun.background.setTint(Color.WHITE)
             binding.buttonMor.background.setTint(Color.WHITE)
             ShowRecycler(school, room)

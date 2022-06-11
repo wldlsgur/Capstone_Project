@@ -85,6 +85,8 @@ class DailyAddActivity : AppCompatActivity() {
                 this@DailyAddActivity, DailyActivity::class.java) .apply{
                 putExtra("id",id)
                 putExtra("school",school)
+                Log.d(TAG, "dddddd ${id}")
+                Log.d(TAG, "dddddd ${school}")
             }//지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정
 
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP //인텐트 플래그 설정

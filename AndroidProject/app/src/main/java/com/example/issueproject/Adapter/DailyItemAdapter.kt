@@ -42,7 +42,7 @@ class DailyItemAdapter(val data: MutableList<CalenderResult>, val title : ArrayL
         else if(color[position] =="blue") holder.tit.background.setTint(Color.BLUE)
         else if(color[position] =="green") holder.tit.background.setTint(Color.GREEN)
         else if(color[position] =="yellow") holder.tit.background.setTint(Color.YELLOW)
-        else if(color[position] =="cyan") holder.tit.setBackgroundColor(Color.CYAN)
+        else if(color[position] =="cyan") holder.tit.background.setTint(Color.CYAN)
 
 
 
