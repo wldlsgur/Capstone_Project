@@ -77,11 +77,17 @@ class MenuActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                 putExtra("school", school)
                 putExtra("room", room)
                 putExtra("job", "원장님")
+                putExtra("id", id)
+                putExtra("name", name)
             }
             startActivity(intent)
         }
         binding.menu.PresidentDaliy.setOnClickListener {
-            var intent = Intent(this, DailyActivity::class.java)
+            var intent = Intent(this, DailyActivity::class.java).apply{
+                putExtra("school",school)
+                putExtra("id",id)
+                putExtra("job","원장님")
+            }
             startActivity(intent)
         }
         binding.menu.PresidentDayNotic.setOnClickListener {

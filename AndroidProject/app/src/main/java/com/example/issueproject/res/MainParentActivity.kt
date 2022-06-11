@@ -43,6 +43,8 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
     var school : String = ""
     var room : String = ""
     var img_url : String = ""
+    var position: Int = 0
+
     lateinit var id : String
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
@@ -50,7 +52,7 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val position = intent.getStringExtra("position")!!.toInt()
+        position = intent.getStringExtra("position")!!.toInt()
         id = intent.getStringExtra("id")!!
 
         GetParentInfo(id, position)
@@ -73,6 +75,8 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
                 putExtra("school", school)
                 putExtra("room", room)
                 putExtra("job", "부모님")
+                putExtra("id", id)
+                putExtra("position", position.toString())
             }
             startActivity(intent)
         }
@@ -87,12 +91,17 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
                 putExtra("job", "부모님")
                 putExtra("name", binding.mainParent.textViewName.text)
                 putExtra("menu", "알림장")
+                putExtra("id", id)
+                putExtra("position", position.toString())
             }
             startActivity(intent)
         }
         binding.mainParent.ParentDaliy.setOnClickListener {
-            var intent = Intent(this, DailyActivity::class.java)
-            startActivity(intent)
+            var intent = Intent(this, DailyActivity::class.java).apply {
+                putExtra("school", school)
+                putExtra("id", id)
+                putExtra("job", "원장님")
+            }
         }
         binding.mainParent.ParentFoodList.setOnClickListener {
             var intent = Intent(this, FoodlistActivity::class.java).apply {
@@ -145,6 +154,8 @@ class MainParentActivity : AppCompatActivity() , NavigationView.OnNavigationItem
             putExtra("job", "부모님")
             putExtra("school", school)
             putExtra("name", binding.mainParent.textViewName.text.toString())
+            putExtra("img_url", img_url)
+            putExtra("position", position.toString())
         }
         var intent3 = Intent(this, MainActivity::class.java)
 

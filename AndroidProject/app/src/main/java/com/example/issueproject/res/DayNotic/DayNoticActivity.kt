@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityDayNoticBinding
 import com.example.issueproject.dto.*
+import com.example.issueproject.res.MenuActivity
 import com.example.issueproject.res.UpdateNoticActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
@@ -30,7 +31,12 @@ class DayNoticActivity : AppCompatActivity() {
     var school: String =""
     var menu: String = ""
     var job: String = "원장님"
-    
+
+    override fun onBackPressed() {
+        startActivity(Intent(this@DayNoticActivity, MenuActivity::class.java))
+        finish()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)

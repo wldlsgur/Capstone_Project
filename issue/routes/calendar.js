@@ -95,12 +95,12 @@ router.post('/updateCalendarInfo', function(req, res){
   })
 
 router.get('/info', function(req, res){
-  let school = req.query.id;
+  let school = req.query.school;
   let date = req.query.date;
 
   if(!school || !date) return res.send('plz require elements!');
   
-  let query = `SELECT id, title, content, startTime, endTime, color FROM calender WHERE school = '${school}' AND date = '${date}'`;
+  let query = `SELECT id, title, content, startTime, endTime, color FROM calendar WHERE school = '${school}' AND date = '${date}'`;
   db_calendar.detaileinfo(query, function(err, result){
     if(err){
       res.status(400).send(err);
