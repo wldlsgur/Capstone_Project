@@ -1,5 +1,6 @@
 package com.example.issueproject.Adapter
-
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +21,7 @@ import okhttp3.ResponseBody
 
 private const val TAG = "MedicineListAdapter"
 class MedicineListAdapter(var list:MutableList<MedicineManagementResult>, var job : String) : RecyclerView.Adapter<MedicineListAdapter.MedicineListViewHolder>() {
-
+    var inv : Boolean = false
     inner class MedicineListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val cname: TextView = itemView.findViewById(R.id.stu_cname)
         val date: TextView = itemView.findViewById(R.id.stu_date)
@@ -37,6 +38,7 @@ class MedicineListAdapter(var list:MutableList<MedicineManagementResult>, var jo
 
 
         fun bindinfo(data: MedicineManagementResult){
+            if(inv == true) layout.visibility = View.INVISIBLE
             checktext.visibility = View.INVISIBLE
             cname.text = data.child_name
             date.text = data.date
