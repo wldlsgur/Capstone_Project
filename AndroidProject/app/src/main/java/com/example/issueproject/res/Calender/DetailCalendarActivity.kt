@@ -27,6 +27,7 @@ class DetailCalendarActivity : AppCompatActivity() {
         setContentView(binding.root)
          school = intent.getStringExtra("school").toString()
          date = intent.getStringExtra("date").toString()
+        binding.textViewDayte.text = date
         ShowRecycler(school, date)
 
         //GetAlarmInfo
