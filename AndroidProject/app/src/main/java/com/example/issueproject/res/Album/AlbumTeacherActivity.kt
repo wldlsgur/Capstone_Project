@@ -14,6 +14,9 @@ import com.example.issueproject.databinding.ActivityAlbumBinding
 import com.example.issueproject.databinding.ActivityAlbumTeacherBinding
 import com.example.issueproject.dto.AlbumResult
 import com.example.issueproject.dto.GetRoom
+import com.example.issueproject.res.MainParentActivity
+import com.example.issueproject.res.MainTeacherActivity
+import com.example.issueproject.res.MenuActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 
@@ -24,14 +27,46 @@ class AlbumTeacherActivity : AppCompatActivity() {
     }
 
     private lateinit var albumAdapter : AlbumAdapter
+    var job : String = ""
+    var school : String = ""
+    var room : String = ""
+    var id: String = ""
+    var name: String = ""
+    var img_url: String = ""
+    var position: String = ""
 
+    override fun onBackPressed() {
+        if(job == "선생님"){
+            var intent = Intent(this@AlbumTeacherActivity, MainTeacherActivity::class.java).apply {
+                putExtra("id", id)
+                putExtra("name", name)
+                putExtra("school", school)
+                putExtra("room", room)
+                putExtra("img_url", img_url)
+            }
+            startActivity(intent)
+            finish()
+        }
+        else if(job == "부모님"){
+            var intent = Intent(this@AlbumTeacherActivity, MainParentActivity::class.java).apply {
+                putExtra("id", id)
+                putExtra("position", position)
+            }
+            startActivity(intent)
+            finish()
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val school = intent.getStringExtra("school")
-        val room = intent.getStringExtra("room")
-        val job = intent.getStringExtra("job")
+        job = intent.getStringExtra("job").toString()
+        school = intent.getStringExtra("school").toString()
+        room = intent.getStringExtra("room").toString()
+        id = intent.getStringExtra("id").toString()
+        name = intent.getStringExtra("name").toString()
+        img_url = intent.getStringExtra("img_url").toString()
+        position = intent.getStringExtra("position").toString()
 
         if(job == "선생님"){
             binding.buttonAlbumTeacherAdd.visibility = View.VISIBLE
@@ -50,6 +85,9 @@ class AlbumTeacherActivity : AppCompatActivity() {
                 putExtra("school", school)
                 putExtra("room", room)
                 putExtra("job", job)
+                putExtra("id", id)
+                putExtra("name", name)
+                putExtra("img_url", img_url)
             }
             startActivity(intent)
         }
