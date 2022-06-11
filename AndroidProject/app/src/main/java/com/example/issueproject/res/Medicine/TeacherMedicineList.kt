@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.core.graphics.toColor
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.issueproject.Adapterimport.MedicineListAdapter
+import com.example.issueproject.Adapter.MedicineListAdapter
 import com.example.issueproject.R
 import com.example.issueproject.databinding.ActivityMedicineListBinding
 import com.example.issueproject.dto.GetMedicineManagement
@@ -30,8 +30,9 @@ class TeacherMedicineList : AppCompatActivity() {
 
     var img_url : String = ""
     var mo : Boolean = true;
-    var lu : Boolean = true;
-    var di : Boolean = true;
+    var lu : Boolean = false;
+    var di : Boolean = false;
+
     var job : String = "선생님"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +42,10 @@ class TeacherMedicineList : AppCompatActivity() {
         val school = intent.getStringExtra("school").toString()
         val room = intent.getStringExtra("room").toString()
         img_url = intent.getStringExtra("img_url").toString()
+
+        binding.buttonMor.background.setTint(R.color.main_700.toInt())
+        binding.buttonLun.background.setTint(Color.WHITE)
+        binding.buttonDin.background.setTint(Color.WHITE)
         //binding.textViewRoomName.text = room
         ShowRecycler(school, room)
 
@@ -49,7 +54,7 @@ class TeacherMedicineList : AppCompatActivity() {
             mo = true
             lu = false
             di = false
-            binding.buttonMor.background.setTint(R.color.main_500.toInt())
+            binding.buttonMor.background.setTint(R.color.main_700.toInt())
             binding.buttonLun.background.setTint(Color.WHITE)
             binding.buttonDin.background.setTint(Color.WHITE)
             ShowRecycler(school, room)
@@ -58,7 +63,7 @@ class TeacherMedicineList : AppCompatActivity() {
             mo = false
             lu = true
             di = false
-            binding.buttonLun.background.setTint(R.color.main_500.toInt())
+            binding.buttonLun.background.setTint(R.color.main_700.toInt())
             binding.buttonMor.background.setTint(Color.WHITE)
             binding.buttonDin.background.setTint(Color.WHITE)
             ShowRecycler(school, room)
@@ -67,7 +72,7 @@ class TeacherMedicineList : AppCompatActivity() {
             mo = false
             lu = false
             di = true
-            binding.buttonDin.background.setTint(R.color.main_500.toInt())
+            binding.buttonDin.background.setTint(R.color.main_700.toInt())
             binding.buttonLun.background.setTint(Color.WHITE)
             binding.buttonMor.background.setTint(Color.WHITE)
             ShowRecycler(school, room)
@@ -102,12 +107,12 @@ class TeacherMedicineList : AppCompatActivity() {
                     startActivity(intent)
                 }
             })
-            MedicineListAdapter.setItemClickListener(object :
+            MedicineListAdapter.setButtonClickListener(object :
                 MedicineListAdapter.OnItemClickListener {
                 override fun onClick(v: View, position: Int) {
                    // var mlist : MutableList<MedicineManagementResult> = mutableListOf<MedicineManagementResult>()
                     //MedicineListAdapter.inv = true
-                    MedicineListAdapter.MedicineListViewHolder(v).checktext.visibility = View.VISIBLE
+                    //MedicineListAdapter.MedicineListViewHolder(v).checktext.visibility = View.VISIBLE
                     if(mo == true) Toast.makeText(this@TeacherMedicineList, "아침약을 복용하였습니다.", Toast.LENGTH_SHORT).show()
                     else if(lu == true) Toast.makeText(this@TeacherMedicineList, "점심약을 복용하였습니다.", Toast.LENGTH_SHORT).show()
                     else if(di == true) Toast.makeText(this@TeacherMedicineList, "저녁약을 복용하였습니다.", Toast.LENGTH_SHORT).show()

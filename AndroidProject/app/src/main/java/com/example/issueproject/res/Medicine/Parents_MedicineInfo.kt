@@ -127,7 +127,7 @@ class Parents_MedicineInfo : AppCompatActivity() {
         val sdf = SimpleDateFormat("yyyy년 MM월 dd일")
         val date = sdf.format(timespamp)
 
-        binding.TextViewDate.text = date
+        binding.TextViewDate.text = date + "까지"
         var year = date.substring(0,4)
         var month = date.substring(6,8)
         var day = date.substring(10,12)
@@ -136,7 +136,7 @@ class Parents_MedicineInfo : AppCompatActivity() {
 
     private fun updateDateInText(){
         var formatter = SimpleDateFormat("yyyy년 MM월 dd일")
-        binding.TextViewDate.text = formatter.format(cal.time)
+        binding.TextViewDate.text = formatter.format(cal.time) + "까지"
     }
 
     fun bindinfo(data: Medicine) {

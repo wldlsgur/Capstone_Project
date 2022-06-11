@@ -189,17 +189,17 @@ class ChildAddActivity : AppCompatActivity() {
     fun alarmtoparent(info: alarmParent){
         ResponseService().parentsendalarm(info, object: RetrofitCallback<SignUpResult> {
             override fun onError(t: Throwable) {
-                Log.d(TAG, "onError: $t")
+                Log.d(TAG, "parentsendalarm onError: $t")
             }
 
             override fun onSuccess(code: Int, responseData: SignUpResult) {
-                Log.d(TAG, "onSuccess: $responseData")
+                Log.d(TAG, "parentsendalarm onSuccess: $responseData")
                 if(responseData.msg == "success"){
                 }
             }
 
             override fun onFailure(code: Int) {
-                Log.d(TAG, "onFailure: $code")
+                Log.d(TAG, "parentsendalarm onFailure: $code")
             }
         })
     }

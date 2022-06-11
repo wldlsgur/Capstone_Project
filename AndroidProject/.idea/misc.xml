@@ -217,7 +217,7 @@
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1905" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/drawable/shape.xml" value="0.1905" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_add_album.xml" value="0.184375" />
-        <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_add_notic.xml" value="0.15780141843971632" />
+        <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_add_notic.xml" value="0.5" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_album.xml" value="0.18229166666666666" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_daily.xml" value="0.20729166666666668" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_daily_add.xml" value="0.33" />
@@ -230,7 +230,7 @@
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_detail_calender_item.xml" value="0.25" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_foodlist.xml" value="0.184375" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_main_parent_navi.xml" value="0.175" />
-        <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_medicine.xml" value="0.3515625" />
+        <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_medicine.xml" value="0.5" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_medicine_list.xml" value="0.3510506798516687" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_medicine_list_item.xml" value="0.5" />
         <entry key="..\:/capstone/capstone/AndroidProject/app/src/main/res/layout/activity_menu.xml" value="0.184375" />

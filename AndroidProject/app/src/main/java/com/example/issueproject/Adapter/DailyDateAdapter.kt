@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.issueproject.Adapterimport.MedicineListAdapter
+import com.example.issueproject.Adapter.MedicineListAdapter
 import com.example.issueproject.R
 import com.example.issueproject.dto.CalenderResult
 import java.util.*
