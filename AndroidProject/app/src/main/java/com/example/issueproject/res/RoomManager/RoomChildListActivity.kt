@@ -59,8 +59,8 @@ class RoomChildListActivity : AppCompatActivity() {
             override fun onClick(position: Int, item: RoomChildListResult) {
                 Agreechange(item, position)
 
-                var data : alarmTeacher = alarmTeacher(item.id,school,room,item.child_name,"승인 완료","${item.child_name}님 ${school}학교 ${room}반의 승인이 완료되었습니다")
-                alarmtoteacher(data)
+//                var data : alarmTeacher = alarmTeacher(item.id,school,room,item.child_name,"승인 완료","${item.child_name}님 ${school}학교 ${room}반의 승인이 완료되었습니다")
+//                alarmtoteacher(data)
             }
         })
 
