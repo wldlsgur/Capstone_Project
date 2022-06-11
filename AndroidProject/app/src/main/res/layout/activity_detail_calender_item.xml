@@ -60,35 +60,6 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewStartTime" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewContentColor"
-        app:layout_constraintStart_toEndOf="@+id/viewContentColor"
-        app:layout_constraintTop_toTopOf="@+id/viewContentColor">
-
-        <TextView
-            android:id="@+id/textViewCalenderTitle"
-            android:layout_width="22dp"
-            android:layout_height="15dp"
-            android:text="제목"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textViewCalenderContent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="내용"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="@+id/textViewCalenderTitle"
-            app:layout_constraintTop_toBottomOf="@+id/textViewCalenderTitle" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <View
         android:id="@+id/view29"
         android:layout_width="0dp"
@@ -99,4 +70,24 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewCalenderContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="내용"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/viewContentColor"
+        app:layout_constraintStart_toEndOf="@+id/viewContentColor" />
+
+    <TextView
+        android:id="@+id/textViewCalenderTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="제목"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/viewContentColor"
+        app:layout_constraintTop_toTopOf="@+id/viewContentColor" />
 </androidx.constraintlayout.widget.ConstraintLayout>

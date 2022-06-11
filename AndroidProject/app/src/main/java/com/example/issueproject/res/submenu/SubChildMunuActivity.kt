@@ -16,7 +16,9 @@ import com.example.issueproject.dto.ParentInfoResult
 import com.example.issueproject.dto.RoomChildListResult
 import com.example.issueproject.dto.SignUpResult
 import com.example.issueproject.res.Add.ChildAddActivity
+import com.example.issueproject.res.MainActivity
 import com.example.issueproject.res.MainParentActivity
+import com.example.issueproject.res.MenuActivity
 import com.example.issueproject.retrofit.RetrofitCallback
 import com.example.issueproject.service.ResponseService
 import kotlinx.coroutines.runBlocking
@@ -29,6 +31,11 @@ class SubChildMunuActivity : AppCompatActivity() {
         ActivitySubChildMunuBinding.inflate(layoutInflater)
     }
     var id: String =""
+
+    override fun onBackPressed() {
+        startActivity(Intent(this@SubChildMunuActivity, MainActivity::class.java))
+        finish()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
